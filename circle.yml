@@ -1,0 +1,13 @@
+machine:
+  node:
+    version: 0.12
+
+dependencies:
+  pre:
+    - sudo pip install closure-linter awscli
+
+deployment:
+  staging:
+    branch: master
+    commands:
+      - npm run deploy:staging

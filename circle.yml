@@ -6,6 +6,10 @@ dependencies:
   pre:
     - sudo pip install closure-linter awscli
 
+test:
+  pre:
+    - bower install
+
 deployment:
   staging:
     branch: master

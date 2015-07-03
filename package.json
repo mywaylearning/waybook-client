@@ -94,8 +94,8 @@
     "waybook-api": "git://github@github.com:mywaylearning/waybook-api.git"
   },
   "scripts": {
-    "deploy:dev": "aws s3 sync www/ s3://uidev.way.me --delete --acl public-read --profile way",
-    "deploy:staging": "aws s3 sync www/ s3://uidev.way.me --delete --acl public-read",
+    "deploy:dev": "aws s3 sync www/ s3://uidev.way.me.s3.amazonaws.com --delete --acl public-read --profile way",
+    "deploy:staging": "aws s3 sync www/ s3://uidev.way.me.s3.amazonaws.com --delete --acl public-read",
     "build-js:dev": "./scripts/import-api-spec && npm run build-lodash && browserify www/app/app.js --debug | exorcist www/app/waybook-min.js.map > www/app/waybook-min.js",
     "build-js": "./scripts/import-api-spec && npm run build-lodash && browserify www/app/app.js > www/app/waybook-min.js",
     "build-styles:dev": "node-sass --precision 10 --linefeed cr --output-style compressed --source-map www/css/waybook.css.map scss/ionic.app.scss www/css/waybook.css && autoprefixer www/css/waybook.css",

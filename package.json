@@ -28,6 +28,9 @@
     },
     "ObjectPath": "ObjectPath",
     "tv4": "tv4",
+    "angular-schema-form": {
+      "depends": "ObjectPath:objectpath"
+    },
     "lodash": "_",
     "moment": "moment",
     "restangular": {

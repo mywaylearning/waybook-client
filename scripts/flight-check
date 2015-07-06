@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+var chalk = require('chalk');
+var fs = require('fs');
+var p = require('path');
+var exec = require('child_process').execSync;
+var result;
+
+var symbols = {
+  ok: '✓',
+  err: '✖',
+  dot: '․'
+};
+
+var errs = 0;
+
+var fix = function(str) {
+  console.log(chalk.magenta('      ➠') + ' ' + chalk.white(str));
+  nl();
+};
+
+var info = function(str) {
+  console.log(chalk.yellow(str));
+};
+
+var ok = function(str) {
+  console.log(chalk.green('  ' + symbols.ok + '  ') + chalk.white(str));
+};
+var err = function(str) {
+  console.log(chalk.red('  ' + symbols.err + '  ') + chalk.white(str));
+  errs++;
+};
+var nl = function() {
+  console.log('');
+};
+var pgrep = function(proc) {
+  try {
+    result = exec('/usr/bin/pgrep ' + proc, { encoding: 'utf8' });
+    ok(proc + ' is running');
+    return true;
+  } catch (e) {
+    err(proc + ' is not running!');
+    return false;
+  }
+};
+var which = function(cmd) {
+  try {
+    result = exec('/usr/bin/which ' + cmd, { env: { PATH: process.env.PATH }, encoding: 'utf8' });
+    ok(cmd + ' found: ' + chalk.blue(result));
+    return true;
+  } catch (e) {
+    err(cmd + ' command not found!');
+    return false;
+  }
+}
+var checkFile = function(path, strings) {
+  try {
+    result = fs.readFileSync(path, { encoding: 'utf8' });
+
+    strings.forEach(function(str) {
+      if (result.indexOf(str) !== -1) {
+        ok(path + ' contains ' + str);
+      } else {
+        err(path + ' does not contain ' + str);
+      }
+    });
+
+  } catch (e) {
+    err(path + ' not found!');
+    return false;
+  }
+}
+
+
+nl();
+info('testing, testing, 1... 2... 3...');
+nl();
+
+
+pgrep('nginx');
+pgrep('mysql');
+pgrep('waybook-api');
+checkFile('.env', [
+  'WAYBOOK_DB_PASSWORD',
+  'WAYBOOK_DB_USER',
+  'WAYBOOK_DB_HOST',
+  'WAYBOOK_DB_SSL',
+  'API_URL',
+  'AUTH_URL'
+]);
+
+// if (!which('watchman')) {
+//   fix('Install watchman with: ' + chalk.bold('brew install --HEAD watchman'));
+// }
+
+if (errs > 0) {
+  nl();nl();
+  console.log(chalk.red('Too many errors to continue!'));
+  process.exit(1);
+} else {
+  nl();
+  console.log(chalk.green('You\'re good to go!'));
+}

@@ -16,11 +16,6 @@
   require('moment');
   require('angular-moment');
 
-  require('ObjectPath');
-  require('tv4');
-
-  require('angular-schema-form');
-
   window.debug = require('debug');
 
   //var _ = require('lodash');
@@ -35,7 +30,6 @@
     'ui.router',
     'ui.gravatar',
     'restangular',
-    'schemaForm',
     'angularMoment'
   ])
 

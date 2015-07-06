@@ -14,9 +14,6 @@
     "moment": "./node_modules/angular-moment/node_modules/moment/min/moment.min.js",
     "angular-moment": "./node_modules/angular-moment/angular-moment.min.js",
     "store": "./node_modules/store/store.min.js",
-    "angular-schema-form": "./www/lib/angular-schema-form/dist/schema-form.min.js",
-    "ObjectPath": "./www/lib/objectpath/lib/ObjectPath.js",
-    "tv4": "./www/lib/tv4/tv4.js",
     "angular-gravatar": "./www/lib/angular-gravatar/build/angular-gravatar.min.js",
     "ionic-ion-showWhen": "./www/lib/ionic-ion-showWhen/index.js",
     "ion-wizard": "./www/lib/ion-wizard/index.js"
@@ -25,11 +22,6 @@
     "angular": "angular",
     "angular-sanitize": {
       "depends": "angular"
-    },
-    "ObjectPath": "ObjectPath",
-    "tv4": "tv4",
-    "angular-schema-form": {
-      "depends": "ObjectPath:objectpath"
     },
     "lodash": "_",
     "moment": "moment",
@@ -40,6 +32,7 @@
   "browserify": {
     "transform": [
       "browserify-shim",
+      "browserify-ngannotate",
       [
         "localenvify",
         {
@@ -55,6 +48,7 @@
       [
         "uglifyify",
         {
+          "global": false,
           "mangle": false,
           "compress": {
             "sequences": true,
@@ -82,12 +76,16 @@
     "autoprefixer": "^5.2.0",
     "bower": "^1.4.1",
     "browserify": "^10.2.1",
+    "browserify-ngannotate": "^1.0.1",
     "browserify-shim": "^3.8.7",
+    "chalk": "^1.1.0",
     "exorcist": "^0.4.0",
+    "ionic": "^1.6.1",
     "js-beautify": "^1.5.6",
     "jsonfile": "^2.2.1",
     "localenvify": "^1.0.1",
     "lodash-cli": "^3.9.1",
+    "ng-annotate": "^1.0.1",
     "node-sass": "^3.1.1",
     "postcss-cli": "^1.3.1",
     "shelljs": "^0.5.0",
@@ -95,16 +93,35 @@
     "waybook-api": "git://github@github.com:mywaylearning/waybook-api.git"
   },
   "scripts": {
+    "-deploy-": "",
     "deploy:dev": "aws s3 sync www/ s3://uidev.way.me --delete --acl public-read --profile way",
     "deploy:staging": "aws s3 sync www/ s3://uidev.way.me --delete --acl public-read --region us-west-2",
-    "build-js:dev": "./scripts/import-api-spec && npm run build-lodash && browserify www/app/app.js --debug | exorcist www/app/waybook-min.js.map > www/app/waybook-min.js",
-    "build-js": "./scripts/import-api-spec && npm run build-lodash && browserify www/app/app.js > www/app/waybook-min.js",
-    "build-styles:dev": "node-sass --precision 10 --linefeed cr --output-style compressed --source-map www/css/waybook.css.map scss/ionic.app.scss www/css/waybook.css && autoprefixer www/css/waybook.css",
-    "build-lodash": "grep -o -C 0 '_\\.[^(]*' www/lib/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o www/app/components/lodash.custom.min.js -p include={}",
+    "-js-": "",
+    "build:import-api-spec": "./scripts/import-api-spec",
+    "build:lodash": "grep -o -C 0 '_\\.[^(]*' www/lib/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o www/app/components/lodash.custom.min.js -p include={}",
+    "build:browserify:dev": "BROWSERIFYSHIM_DIAGNOSTICS=0 browserify www/app/app.js --debug | exorcist www/app/waybook-min.js.map > www/app/waybook-min.js",
+    "build:browserify": "browserify www/app/app.js > www/app/waybook-min.js",
+    "build-js:dev": "npm run build:import-api-spec && npm run build:lodash && npm run build:browserify:dev",
+    "build-js": "npm run build:import-api-spec && npm run build:lodash && npm run build:browserify",
+    "-css-": "",
+    "build:saas:dev": "node-sass --precision 10 --linefeed cr --output-style compressed --source-map www/css/waybook.css.map scss/ionic.app.scss www/css/waybook.css",
+    "build:saas": "node-sass --precision 10 --linefeed cr --output-style compressed scss/ionic.app.scss www/css/waybook.css",
+    "build:autoprefix": "autoprefixer www/css/waybook.css",
+    "build-styles:dev": "npm run build:saas:dev && npm run build:autoprefix",
+    "build-styles": "npm run build:saas",
+    "-dev-": "",
     "localdev-setup": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm run localdev-setup",
     "test": "npm run build-styles:dev && npm run build-js",
+    "update-api": "rm -rf node_modules/waybook-api && npm install",
+    "-watch-": "",
+    "watch:package-json": "",
+    "watch:api-spec": "",
+    "watch:browserify": "",
+    "watch:styles": "",
+    "-runtime-": "",
+    "preflight": "./scripts/flight-check",
+    "serve": "ionic serve --nogulp",
     "start": "npm run build-styles:dev && npm run build-js:dev && ionic serve --nogulp",
-    "start-api": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm start",
-    "update-api": "rm -rf node_modules/waybook-api && npm install"
+    "start-api": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm start"
   }
 }

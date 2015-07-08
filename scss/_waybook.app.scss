@@ -8,7 +8,6 @@ ion-view.pane {
   background-color: $royal;
 }
 
-
 /* platform-specific alterations */
 
 //#App {
@@ -25,3 +24,21 @@ ion-view.pane {
 //    }
 //  }
 //}
+
+//.button-waybook-post {
+//  font-weight: bold;
+//  line-height: $button-small-height - $button-border-width - 3;
+//}
+
+
+.intro .slider {
+    height: 100%;
+}
+.intro .slider-slide {
+    padding-top: 80px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}

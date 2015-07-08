@@ -2,7 +2,9 @@
   "name": "client",
   "app_id": "me.way.waybook",
   "watchPatterns": [
-    "www/app/waybook-min.js"
+    "www/app/waybook-min.js",
+    "www/css/waybook.css",
+    "www/**/*.html"
   ],
   "defaultBrowser": "chrome",
   "nogulp": true

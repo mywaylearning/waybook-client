@@ -1,22 +1,63 @@
-<div class="inner-content">
-<form name="postForm">
-  <label class="item item-input" name="ctrl.model.content">
-      <textarea ng-model="ctrl.model.content" name="content" placeholder="How's it going today?">How's it going today?</textarea>
-  </label>
-  <div class="spacer" style="width: 300px; height: 10px;"></div>
-  <div class="button-bar">
-      <button class="button button-icon button-waybook-post icon ion-edit balanced"><span class="clearfix dark">Text</span></button>
-      <button class="button button-icon button-waybook-post icon ion-camera"><span class="clearfix dark">Photos</span></button>
-      <button class="button button-icon button-waybook-post icon ion-link"><span class="clearfix dark">Link</span></button>
-      <button class="button button-icon button-waybook-post icon ion-upload"><span class="clearfix dark">Files</span></button>
-  </div>
-  <label class="item item-input">
-      <span class="input-label">Share</span>
-      <input type="text" placeholder="">
-  </label>
+<div class="post inner-content">
+  <div class="list card">
+    <div ng-show="!ctrl.postMode" class="item item-text-wrap">
+      <div class="textarea" ng-click="ctrl.postMode = 'text'">{{ctrl.placeHolder}}</div>
+      <div class="button-bar">
+          <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
+          <button class="button button-icon button-waybook-post icon ion-camera" ng-click="ctrl.postMode = 'photo'"><span class="clearfix dark">Photos</span></button>
+          <button class="button button-icon button-waybook-post icon ion-link" ng-click="ctrl.postMode = 'link'"><span class="clearfix dark">Link</span></button>
+          <button class="button button-icon button-waybook-post icon ion-upload" ng-click="ctrl.postMode = 'file'"><span class="clearfix dark">Files</span></button>
+      </div>
+    </div>
+    <form ng-show="ctrl.postMode" name="postForm">
+      <label class="item item-input">
+          <textarea ng-model="ctrl.model.content" name="content" placeholder="{{ctrl.placeHolder}}"></textarea>
+      </label>
 
-  <div class="buttons clear">
-    <button class="button" ng-click="ctrl.save()">Post</button>
+      <!-- Begin of photos embed/upload -->
+      <div ngf-drop ng-model="files" ng-if="ctrl.postMode == 'photo'" class="attach-photo item item-input"
+        ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+        ngf-accept="'image/*,application/pdf'">
+        <i class="icon ion-images"></i>
+        <p>Drag your photos or click/tap here to select from your device</p>
+      </div>
+      <!-- End of photos embed/upload -->
+
+      <!-- Begin of link extraction -->
+      <div ng-if="ctrl.postMode == 'link'">
+        <div ng-if="!ctrl.extractResult" class="item item-input-inset link-extraction">
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="ctrl.extractLinkUrl" placeholder="Enter the URL">
+          </label>
+          <button ng-click="ctrl.extractLink()" class="button button-small">Add</button>
+        </div>
+        <div ng-if="ctrl.extractResult" class="extract-result">
+          <div class="row responsive-sm">
+            <div class="col col-50 col-offset-25">
+              <button class="button-remove-link button button-icon icon icon-left button-small assertive ion-close-circled" ng-click="ctrl.extractResult = null">Remove</button>
+              <a href="{{ctrl.extractResult.url}}" target="_blank" class="extract-result-link" ng-class="{'extract-result-image-landscape': ctrl.extractResult.imageLandscape}">
+                <span ng-if="ctrl.extractResult.image" ng-class="{'extract-result-image-container': ctrl.extractResult.imageType == 'image', 'extract-result-icon-container': ctrl.extractResult.imageType == 'icon'}">
+                  <img ng-src="{{ctrl.extractResult.image}}" class="extract-result-image" border="0" />
+                </span>
+                <span class="extract-result-text-container">
+                  <h4 class="extract-result-title">{{ctrl.extractResult.title}}</h4>
+                  <p class="extract-result-description">{{ctrl.extractResult.description}}</p>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <label class="item item-input">
+          <span class="input-label">Share with:</span>
+          <input type="text" placeholder="">
+      </label>
+
+      <div class="buttons padding">
+        <button class="button button-positive" ng-click="ctrl.save()">Post</button>
+        <button class="button button-stable" ng-click="ctrl.postMode = false">Cancel</button>
+      </div>
+    </form>
   </div>
-</form>
 </div>

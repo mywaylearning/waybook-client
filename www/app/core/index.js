@@ -8,6 +8,7 @@
     .factory('router', require('./router/router.service.js'))
 
     .factory('api', require('./restangular/rest-api.service.js'))
+    .factory('embedly', require('./restangular/rest-embedly.service.js'))
     .config(require('./restangular/restangular.config.js'))
     .run(require('./restangular/restangular.run.js'))
 
@@ -32,6 +33,8 @@
     .factory('errorHandler', require('./errors/error-handler.service.js'))
     .factory('utils', require('./utils/utils.service.js'))
 
-    .factory('goal', require('./goal/goal.service.js'));
+    .factory('goal', require('./goal/goal.service.js'))
+
+    .factory('PostService', require('./post/post.service.js'));
 
 }());

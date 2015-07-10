@@ -11,6 +11,11 @@
   //.constant('_', require('lodash'))
   //.constant('$', require('jquery'))
 
+  .constant('EMBEDLY_CONFIG', {
+    'url': 'http://api.embed.ly/1/',
+    'key': '10b9be7b0643436f845cbde48fcffdd9'
+  })
+
   .constant('ROLES', {
     'guest': 'way.guest',
     'user': 'way.user'

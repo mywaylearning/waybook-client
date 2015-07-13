@@ -20,6 +20,7 @@
     this.feed = {
       items: goal.collection().$object
     };
+
   }
 
   module.exports = ['$scope', 'goal', FeedController];

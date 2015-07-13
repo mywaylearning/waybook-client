@@ -1,10 +1,10 @@
 <div class="feed">
   <h3>Feed listing</h3>
-  <div class="list card" ng-repeat="item in fctrl.feed.items">
+  <div class="list card" ng-repeat="item in fctrl.feed.items | orderBy: '-created'">
     <div class="item item-avatar">
       <img src="/img/joshk.jpg">
       <h2>Josh Kopelman {{item.title}}</h2>
-      <p>Shared privately - May 1, 2015</p>
+      <p>Shared privately - <span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
     </div>
     <div class="item item-body">
       <p ng-bind-html="item.content"></p>

@@ -3,11 +3,12 @@
   <div class="list card" ng-repeat="item in fctrl.feed.items | orderBy: '-created'">
     <div class="item item-avatar">
       <img src="/img/joshk.jpg">
-      <h2>Josh Kopelman {{item.title}}</h2>
+      <h2>Josh Kopelman - {{item.title}}</h2>
       <p>Shared privately - <span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
     </div>
     <div class="item item-body">
-      <p ng-bind-html="item.content"></p>
+      <!-- <h3 class="post-title">{{item.title}}</h3> -->
+      <p class="post-content" ng-bind-html="item.content"></p>
       <p>
         <a href="#" class="subdued">531 Likes</a>
         <a href="#" class="subdued">2 Comments</a>

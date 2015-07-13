@@ -4,12 +4,26 @@
 
   .placeholder {
     position: absolute;
-    top: 26px;
-    left: 28px;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    color: #a4a4a4;
+  }
 
-    &.active {
-      color: #afafaf;
-    }
+  .post-content-container {
+    position: relative;
+    width: 100%;
+    margin-right: 5px;
+    font-size: 90%;
+  }
+
+  .post-content {
+    width: 100%;
+    max-height: 120px;
+    min-height: 70px;
+    overflow-y: scroll;
+    cursor: text;
+    word-wrap: break-word;
   }
 
   .textarea {
@@ -17,40 +31,31 @@
     padding: 10px;
     position: relative;
     cursor: text;
-    word-wrap: break-word;
     border-radius: 3px;
-    max-height: 178px;
-    min-height: 58px;
-    overflow-y: scroll;
 
-    &.inactive {
-      max-height: 40px;
-      min-height: 40px;
-      overflow: visible;
-      &::after, &::before {
-        top: 100%;
-      	left: 13%;
-      	border: solid transparent;
-      	content: " ";
-      	height: 0;
-      	width: 0;
-      	position: absolute;
-      	pointer-events: none;
-      }
+    &::after, &::before {
+      top: 100%;
+    	left: 13%;
+    	border: solid transparent;
+    	content: " ";
+    	height: 0;
+    	width: 0;
+    	position: absolute;
+    	pointer-events: none;
+    }
 
-      &::after {
-        border-color: rgba(255, 255, 255, 0);
-      	border-top-color: #ffffff;
-      	border-width: 10px;
-      	margin-left: -10px;
-      }
+    &::after {
+      border-color: rgba(255, 255, 255, 0);
+    	border-top-color: #ffffff;
+    	border-width: 10px;
+    	margin-left: -10px;
+    }
 
-      &::before {
-        border-color: #ffffff;
-      	border-top-color: #d4d4d4;
-      	border-width: 11px;
-      	margin-left: -11px;
-      }
+    &::before {
+      border-color: #ffffff;
+    	border-top-color: #d4d4d4;
+    	border-width: 11px;
+    	margin-left: -11px;
     }
   }
 
@@ -60,7 +65,12 @@
 
   // Photo attached
   .photo-attached {
-    
+  }
+
+  .remove-photo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 
   // Link extraction result
@@ -136,11 +146,11 @@
     margin: 0 10px 5px;
     display: inline-block;
     cursor: pointer;
+    position: relative;
+    top: 4px;
 
     i {
-      font-size: 140%;
-      position: relative;
-      top: 2px;
+      font-size: 150%;
     }
   }
 

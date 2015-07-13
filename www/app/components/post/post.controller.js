@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostController');
 
-  function PostController($scope, router, goal, SWAGGER, PostService) {
+  function PostController($scope, $state, router, goal, SWAGGER, PostService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -24,7 +24,6 @@
 
     ctrl.attachPhotos = function() {
       ctrl.postMode = 'photo';
-      console.log(ctrl);
       filepicker.pick(
         {
           mimetype: 'image/*',
@@ -35,7 +34,29 @@
           $scope.$apply();
         },
         function(FPError){
-          ctrl.postMode = false;
+          ctrl.postMode = 'text';
+          $scope.$apply();
+          console.log(FPError.toString());
+        });
+    };
+
+    ctrl.attachFiles = function() {
+      ctrl.postMode = 'files';
+      filepicker.pickMultiple(
+        {
+          extensions: ['.pdf', '.doc', '.txt', '.docx'],
+          services: ['COMPUTER', 'DROPBOX', 'GMAIL', 'GOOGLE_DRIVE'],
+          maxFiles: 3
+        },
+        function(Blobs){
+          ctrl.model.files = [];
+          angular.forEach(Blobs, function(blob){
+            // TODO: Add files info (url, mimetype, name?)
+          });
+          $scope.$apply();
+        },
+        function(FPError){
+          ctrl.postMode = 'text';
           $scope.$apply();
           console.log(FPError.toString());
         });
@@ -45,7 +66,6 @@
       if (newValue === false) {
         ctrl.extractLinkUrl = null;
         ctrl.extractResult = null;
-        ctrl.model = false;
       }
     });
 
@@ -82,27 +102,32 @@
           imageLandscape: imageLandscape,
           url: result.url
         };
+
+        ctrl.model.link = result.url;
       });
     };
 
 
-
-
-    ctrl.model = {
-      title: 'New Goal',
-      content: ''
+    ctrl.removePhoto = function() {
+      ctrl.model.image = null;
+      ctrl.postMode = 'text';
     };
 
+    ctrl.reset = function() {
+      ctrl.model = {};
+    };
 
-
+    ctrl.reset();
 
     ctrl.save = function() {
       debug('saving...', ctrl.model);
-      goal.create(ctrl.model);
+      goal.create(ctrl.model).then(function(result){
+        $state.reload();
+      });
     };
 
   }
 
-  module.exports = ['$scope', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
+  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
 
 }());

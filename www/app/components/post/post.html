@@ -1,30 +1,40 @@
 <div class="post inner-content">
   <div class="list card">
-    <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="!ctrl.model || ctrl.model.content == ''" ng-class="{'active': ctrl.postMode}">{{ctrl.placeHolder}}</div>
-      <div class="textarea" ng-click="ctrl.postMode ? null : ctrl.postMode = 'text'" ng-model="ctrl.model.content" contenteditable="plaintext-only" ng-class="{'inactive': !ctrl.postMode}"></div>
-      <div ng-show="!ctrl.postMode" class="button-bar">
+    <div ng-if="ctrl.postMode">
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input class="post-title" type="text" ng-model="ctrl.model.title" placeholder="Type here your post title (required)" />
+      </label>
+      <div class="item item-input">
+        <span class="input-label">Content</span>
+        <div class="post-content-container">
+          <div class="placeholder" ng-show="!ctrl.model.content">{{ctrl.placeHolder}}</div>
+          <div class="post-content" contenteditable="plaintext-only" ng-model="ctrl.model.content"></div>
+        </div>
+      </div>
+    </div>
+    <div ng-show="!ctrl.postMode" class="item item-text-wrap">
+      <div class="textarea" ng-click="ctrl.postMode = 'text'">{{ctrl.placeHolder}}</div>
+      <div class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
           <button class="button button-icon button-waybook-post icon ion-camera" ng-click="ctrl.attachPhotos()"><span class="clearfix dark">Photos</span></button>
           <button class="button button-icon button-waybook-post icon ion-link" ng-click="ctrl.postMode = 'link'"><span class="clearfix dark">Link</span></button>
-          <button class="button button-icon button-waybook-post icon ion-document-text" ng-click="ctrl.postMode = 'file'"><span class="clearfix dark">Files</span></button>
-      </div>
-      <div ng-show="ctrl.postMode == 'text'" class="attach-actions">
-        <p>Attach:
-          <span class="attach-action" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photos</span>
-          <span class="attach-action" ng-click="ctrl.postMode = 'link'"><i class="assertive ion-link"></i> Link</span>
-          <span class="attach-action" ng-click="ctrl.postMode = 'file'"><i class="energized ion-document-text"></i> Files</span>
-        </p>
+          <button class="button button-icon button-waybook-post icon ion-document-text" ng-click="ctrl.attachFiles()"><span class="clearfix dark">Files</span></button>
       </div>
     </div>
+    <div ng-show="ctrl.postMode == 'text'" class="item item-input attach-actions">
+      Attach:
+        <button class="button button-clear attach-action" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photos</button>
+        <button class="button button-clear attach-action" ng-click="ctrl.postMode = 'link'"><i class="assertive ion-link"></i> Link</button>
+        <button class="button button-clear attach-action" ng-click="ctrl.attachFiles()"><i class="energized ion-document-text"></i> Files</button>
+    </div>
     <div ng-show="ctrl.postMode">
-      <!-- <label class="item item-input">
-          <textarea ng-model="ctrl.model.content" name="content" placeholder="{{ctrl.placeHolder}}"></textarea>
-      </label> -->
-
       <!-- Begin of photos embed/upload -->
-      <div ng-if="ctrl.postMode == 'photo'" class="item item-image">
+      <div ng-if="ctrl.postMode == 'photo' && ctrl.model.image" class="item item-image">
         <img ng-src="{{ctrl.model.image}}" />
+        <button class="button button-stable remove-photo" ng-click="ctrl.removePhoto()">
+          <i class="ion-close-circled assertive"></i> Remove
+        </button>
       </div>
       <!-- End of photos embed/upload -->
 
@@ -63,8 +73,8 @@
       </label>
 
       <div class="buttons padding">
-        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.content">Post</button>
-        <button class="button button-stable" ng-click="ctrl.postMode = false; ctrl.model.content = ''">Cancel</button>
+        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.title">Post</button>
+        <button class="button button-stable" ng-click="ctrl.postMode = false; ctrl.reset()">Cancel</button>
       </div>
     </div>
   </div>

@@ -63,7 +63,7 @@
       </label>
 
       <div class="buttons padding">
-        <button class="button button-positive" ng-click="ctrl.save()">Post</button>
+        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.content">Post</button>
         <button class="button button-stable" ng-click="ctrl.postMode = false; ctrl.model.content = ''">Cancel</button>
       </div>
     </div>

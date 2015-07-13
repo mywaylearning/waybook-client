@@ -13,7 +13,7 @@
 
     function init() {
       // Define type of post mode (show form)
-      ctrl.postMode = 'link';
+      ctrl.postMode = false;
 
       // Other definitions
       ctrl.placeHolder = "Share something...";
@@ -22,15 +22,40 @@
     }
     init();
 
+    ctrl.attachPhotos = function() {
+      ctrl.postMode = 'photo';
+      console.log(ctrl);
+      filepicker.pick(
+        {
+          mimetype: 'image/*',
+          services: ['COMPUTER', 'WEBCAM', 'IMAGE_SEARCH', 'FACEBOOK', 'INSTAGRAM', 'FLICKR', 'DROPBOX']
+        },
+        function(Blob){
+          ctrl.model.image = Blob.url;
+          $scope.$apply();
+        },
+        function(FPError){
+          ctrl.postMode = false;
+          $scope.$apply();
+          console.log(FPError.toString());
+        });
+    };
+
     $scope.$watch('ctrl.postMode', function(newValue) {
       if (newValue === false) {
         ctrl.extractLinkUrl = null;
         ctrl.extractResult = null;
+        ctrl.model = false;
       }
     });
 
     ctrl.extractLink = function() {
+      if (!ctrl.extractLinkUrl) {
+        return;
+      }
+      ctrl.linkExtractionStarted = true;
       PostService.extractLink(ctrl.extractLinkUrl).then(function(result){
+        ctrl.linkExtractionStarted = false;
         ctrl.extractLinkUrl = '';
         var image, imageType, imageLandscape = false;
 
@@ -64,7 +89,8 @@
 
 
     ctrl.model = {
-      title: 'New Goal'
+      title: 'New Goal',
+      content: ''
     };
 
 

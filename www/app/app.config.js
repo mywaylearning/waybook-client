@@ -16,6 +16,8 @@
     'key': '10b9be7b0643436f845cbde48fcffdd9'
   })
 
+  .constant('FILEPICKER_API_KEY', 'AHVaoDU9JRwao92AZiuRpz')
+
   .constant('ROLES', {
     'guest': 'way.guest',
     'user': 'way.user'
@@ -55,12 +57,14 @@
 
   .config(AppConfig);
 
-  function AppConfig($sceDelegateProvider) {
+  function AppConfig($sceDelegateProvider, FILEPICKER_API_KEY) {
     $sceDelegateProvider.resourceUrlWhitelist([
       'self'
     ]);
+
+    filepicker.setKey(FILEPICKER_API_KEY);
   }
 
-  AppConfig.$inject = ['$sceDelegateProvider'];
+  AppConfig.$inject = ['$sceDelegateProvider', 'FILEPICKER_API_KEY'];
 
 }());

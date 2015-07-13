@@ -2,56 +2,65 @@
 
   $placeholder-border-color: #d4d4d4;
 
+  .placeholder {
+    position: absolute;
+    top: 26px;
+    left: 28px;
+
+    &.active {
+      color: #afafaf;
+    }
+  }
+
   .textarea {
     border: 1px solid $placeholder-border-color;
     padding: 10px;
     position: relative;
     cursor: text;
-    margin-bottom: 20px;
+    word-wrap: break-word;
     border-radius: 3px;
+    max-height: 178px;
+    min-height: 58px;
+    overflow-y: scroll;
 
-    &::after, &::before {
-      top: 100%;
-    	left: 13%;
-    	border: solid transparent;
-    	content: " ";
-    	height: 0;
-    	width: 0;
-    	position: absolute;
-    	pointer-events: none;
-    }
+    &.inactive {
+      max-height: 40px;
+      min-height: 40px;
+      overflow: visible;
+      &::after, &::before {
+        top: 100%;
+      	left: 13%;
+      	border: solid transparent;
+      	content: " ";
+      	height: 0;
+      	width: 0;
+      	position: absolute;
+      	pointer-events: none;
+      }
 
-    &::after {
-      border-color: rgba(255, 255, 255, 0);
-    	border-top-color: #ffffff;
-    	border-width: 10px;
-    	margin-left: -10px;
-    }
+      &::after {
+        border-color: rgba(255, 255, 255, 0);
+      	border-top-color: #ffffff;
+      	border-width: 10px;
+      	margin-left: -10px;
+      }
 
-    &::before {
-      border-color: #ffffff;
-    	border-top-color: #d4d4d4;
-    	border-width: 11px;
-    	margin-left: -11px;
+      &::before {
+        border-color: #ffffff;
+      	border-top-color: #d4d4d4;
+      	border-width: 11px;
+      	margin-left: -11px;
+      }
     }
   }
 
-  // Attach photos
-  .attach-photo {
-    display: block;
-    background-color: #d4d4d4;
+  .button-bar {
+    margin-top: 20px;
+  }
 
-    p {
-      white-space: normal;
-    }
-
-    i {
-      font-size: 120px;
-      display: block;
-      margin-right: 20px;
-      text-align: center;
-      color: #b0b0b0;
-    }
+  // Photo attached
+  .photo-attached {
+    
   }
 
   // Link extraction result
@@ -120,6 +129,18 @@
   .button-remove-link {
     &::before {
       font-size: 16px;
+    }
+  }
+
+  .attach-action {
+    margin: 0 10px 5px;
+    display: inline-block;
+    cursor: pointer;
+
+    i {
+      font-size: 140%;
+      position: relative;
+      top: 2px;
     }
   }
 

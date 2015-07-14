@@ -1,6 +1,6 @@
 <div class="post inner-content">
   <div class="list card">
-    <div ng-if="ctrl.postMode">
+    <div ng-show="ctrl.postMode">
       <label class="item item-input">
         <span class="input-label">Title</span>
         <input class="post-title" type="text" ng-model="ctrl.model.title" placeholder="Type here your post title (required)" />
@@ -74,7 +74,7 @@
 
       <div class="buttons padding">
         <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.title">Post</button>
-        <button class="button button-stable" ng-click="ctrl.postMode = false; ctrl.reset()">Cancel</button>
+        <button class="button button-light" ng-click="ctrl.postMode = false; ctrl.reset()">Cancel</button>
       </div>
     </div>
   </div>

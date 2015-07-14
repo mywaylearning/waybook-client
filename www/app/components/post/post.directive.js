@@ -18,7 +18,10 @@
         var postTitle = el.find('.post-title');
 
         placeholderEl.bind('click', function(e) {
-          postTitle.focus();
+          setTimeout(function(){
+            postTitle.focus();
+          });
+
         });
 
       }

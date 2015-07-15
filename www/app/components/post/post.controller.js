@@ -49,16 +49,17 @@
           maxFiles: 3
         },
         function(Blobs){
-          ctrl.model.files = [];
+          console.log(Blobs);
+          ctrl.model.files = Blobs;
           angular.forEach(Blobs, function(blob){
             // TODO: Add files info (url, mimetype, name?)
           });
           $scope.$apply();
         },
         function(FPError){
+          console.log('aqui');
           ctrl.postMode = 'text';
           $scope.$apply();
-          console.log(FPError.toString());
         });
     };
 

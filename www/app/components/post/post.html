@@ -66,6 +66,19 @@
         </div>
       </div>
       <!-- End of link extraction -->
+      <div ng-if="ctrl.postMode == 'files'">
+        <div class="item item-divider">
+          Files
+        </div>
+        <div class="list">
+          <div class="item" ng-repeat="file in ctrl.model.files">
+              <h2>{{file.filename}}</h2>
+              <p>{{file.mimetype}}</p>
+          </div>
+        </div>
+      </div>
+      <!-- Files attachment -->
+
 
       <label class="item item-input">
           <span class="input-label">Share with:</span>

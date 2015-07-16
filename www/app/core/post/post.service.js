@@ -3,7 +3,7 @@
 
   var debug = require('debug')('waybook:PostService');
 
-  function PostService(api, auth, router, utils, EVENTS, API_URL, POST_TYPES) {
+  function PostService(api, POST_TYPES, embedly) {
 
     var svcInterface, Posts, postType, User, userObj;
 
@@ -15,9 +15,10 @@
      */
     svcInterface = {
       setPostType: _setPostType,
-      create: _create,
-      collection: _collection,
-      reset: _reset
+      // create: _create,
+      // collection: _collection,
+      // reset: _reset,
+      extractLink: _extractLink
     };
     return svcInterface;
 
@@ -34,7 +35,13 @@
       postType = type;
     }
 
+    function _extractLink(url) {
+      return embedly.one('extract').get({'url': url});
+    }
+
 
   }
+
+  module.exports = ['api', 'POST_TYPES', 'embedly', PostService];
 
 }());

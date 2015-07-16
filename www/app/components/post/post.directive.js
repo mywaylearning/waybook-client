@@ -12,7 +12,19 @@
       controller: 'PostController',
       controllerAs: 'ctrl',
       bindToController: true,
-      templateUrl: '/app/components/post/post.html'
+      templateUrl: '/app/components/post/post.html',
+      link: function(scope, el, attrs) {
+        var placeholderEl = el.find('.textarea');
+        var postTitle = el.find('.post-title');
+
+        placeholderEl.bind('click', function(e) {
+          setTimeout(function(){
+            postTitle.focus();
+          });
+
+        });
+
+      }
     };
   }
 

@@ -43,6 +43,7 @@ npm-debug.log
 # --------------------
 # App Files
 # --------------------
+scss/.sass-cache/
 www/lib/
 www/app/waybook-min.js*
 www/css/waybook.css*

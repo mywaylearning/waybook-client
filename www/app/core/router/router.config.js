@@ -164,6 +164,7 @@
     })
 
     .state('app.plan', {
+      cache: false,
       url: '^/plan',
       views: {
         'bodyContent': { controller: 'PlanController' }

@@ -8,10 +8,13 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-    <script src="/app/waybook-min.js"></script>
   </head>
 
   <body id="App" ng-controller="AppController as app" ng-class="{'android': platform == 'android', 'ios': platform == 'ios', 'mac': platform.indexOf('mac') !== -1}">
     <ion-nav-view></ion-nav-view>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//api.filepicker.io/v2/filepicker.js"></script>
+    <script src="/app/waybook-min.js"></script>
   </body>
 </html>

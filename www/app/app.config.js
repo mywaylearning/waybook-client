@@ -11,6 +11,13 @@
   //.constant('_', require('lodash'))
   //.constant('$', require('jquery'))
 
+  .constant('EMBEDLY_CONFIG', {
+    'url': process.env.EMBEDLY_URL,
+    'key': process.env.EMBEDLY_KEY
+  })
+
+  .constant('FILEPICKER_API_KEY', 'AHVaoDU9JRwao92AZiuRpz')
+
   .constant('ROLES', {
     'guest': 'way.guest',
     'user': 'way.user'
@@ -50,12 +57,14 @@
 
   .config(AppConfig);
 
-  function AppConfig($sceDelegateProvider) {
+  function AppConfig($sceDelegateProvider, FILEPICKER_API_KEY) {
     $sceDelegateProvider.resourceUrlWhitelist([
       'self'
     ]);
+
+    filepicker.setKey(FILEPICKER_API_KEY);
   }
 
-  AppConfig.$inject = ['$sceDelegateProvider'];
+  AppConfig.$inject = ['$sceDelegateProvider', 'FILEPICKER_API_KEY'];
 
 }());

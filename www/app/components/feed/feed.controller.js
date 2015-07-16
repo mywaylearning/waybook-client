@@ -4,8 +4,14 @@
 
   var debug = require('debug')('waybook:FeedController');
 
-  function FeedController($scope, goal) {
+  function FeedController($scope, goal, $ionicPopover) {
     debug('here we are (directive controller)');
+
+    $ionicPopover.fromTemplateUrl('app/components/feed/post-actions.html', {
+      scope: $scope,
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
 
     // $scope.planData = {};
     //
@@ -20,8 +26,9 @@
     this.feed = {
       items: goal.collection().$object
     };
+
   }
 
-  module.exports = ['$scope', 'goal', FeedController];
+  module.exports = ['$scope', 'goal', '$ionicPopover', FeedController];
 
 }());

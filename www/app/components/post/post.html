@@ -1,22 +1,94 @@
-<div class="inner-content">
-<form name="postForm">
-  <label class="item item-input" name="ctrl.model.content">
-      <textarea ng-model="ctrl.model.content" name="content" placeholder="How's it going today?">How's it going today?</textarea>
-  </label>
-  <div class="spacer" style="width: 300px; height: 10px;"></div>
-  <div class="button-bar">
-      <button class="button button-icon button-waybook-post icon ion-edit balanced"><span class="clearfix dark">Text</span></button>
-      <button class="button button-icon button-waybook-post icon ion-camera"><span class="clearfix dark">Photos</span></button>
-      <button class="button button-icon button-waybook-post icon ion-link"><span class="clearfix dark">Link</span></button>
-      <button class="button button-icon button-waybook-post icon ion-upload"><span class="clearfix dark">Files</span></button>
-  </div>
-  <label class="item item-input">
-      <span class="input-label">Share</span>
-      <input type="text" placeholder="">
-  </label>
+<div class="post inner-content">
+  <div class="list card">
+    <div ng-show="ctrl.postMode">
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input class="post-title" type="text" ng-model="ctrl.model.title" placeholder="Type here your post title (required)" />
+      </label>
+      <div class="item item-input">
+        <span class="input-label">Content</span>
+        <div class="post-content-container">
+          <div class="placeholder" ng-show="!ctrl.model.content">{{ctrl.placeHolder}}</div>
+          <div class="post-content" contenteditable="plaintext-only" ng-model="ctrl.model.content"></div>
+        </div>
+      </div>
+    </div>
+    <div ng-show="!ctrl.postMode" class="item item-text-wrap">
+      <div class="textarea" ng-click="ctrl.postMode = 'text'">{{ctrl.placeHolder}}</div>
+      <div class="button-bar">
+          <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
+          <button class="button button-icon button-waybook-post icon ion-camera" ng-click="ctrl.attachPhotos()"><span class="clearfix dark">Photos</span></button>
+          <button class="button button-icon button-waybook-post icon ion-link" ng-click="ctrl.postMode = 'link'"><span class="clearfix dark">Link</span></button>
+          <button class="button button-icon button-waybook-post icon ion-document-text" ng-click="ctrl.attachFiles()"><span class="clearfix dark">Files</span></button>
+      </div>
+    </div>
+    <div ng-show="ctrl.postMode == 'text'" class="item item-input attach-actions">
+      Attach:
+        <button class="button button-clear attach-action" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photos</button>
+        <button class="button button-clear attach-action" ng-click="ctrl.postMode = 'link'"><i class="assertive ion-link"></i> Link</button>
+        <button class="button button-clear attach-action" ng-click="ctrl.attachFiles()"><i class="energized ion-document-text"></i> Files</button>
+    </div>
+    <div ng-show="ctrl.postMode">
+      <!-- Begin of photos embed/upload -->
+      <div ng-if="ctrl.postMode == 'photo' && ctrl.model.image" class="item item-image">
+        <img ng-src="{{ctrl.model.image}}" />
+        <button class="button button-stable remove-photo" ng-click="ctrl.removePhoto()">
+          <i class="ion-close-circled assertive"></i> Remove
+        </button>
+      </div>
+      <!-- End of photos embed/upload -->
 
-  <div class="buttons clear">
-    <button class="button" ng-click="ctrl.save()">Post</button>
+      <!-- Begin of link extraction -->
+      <div ng-if="ctrl.postMode == 'link'">
+        <div ng-if="!ctrl.extractResult" class="item item-input-inset link-extraction">
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="ctrl.extractLinkUrl" ng-blur="ctrl.extractLink()" placeholder="Type or paste a link">
+          </label>
+          <button ng-click="ctrl.extractLink()" class="button button-balanced button-small" ng-show="!ctrl.linkExtractionStarted">Add</button>
+          <button ng-click="ctrl.model.content ? ctrl.postMode = 'text' : ctrl.postMode = false" class="button button-light button-small icon ion-ios-close" ng-show="!ctrl.linkExtractionStarted"></button>
+          <ion-spinner ng-show="ctrl.linkExtractionStarted"></ion-spinner>
+        </div>
+        <div ng-if="ctrl.extractResult" class="extract-result">
+          <div class="row responsive-sm">
+            <div class="col col-50 col-offset-25">
+              <button class="button-remove-link button button-icon icon icon-left button-small assertive ion-close-circled" ng-click="ctrl.extractResult = null">Remove</button>
+              <a href="{{ctrl.extractResult.url}}" target="_blank" class="extract-result-link" ng-class="{'extract-result-image-landscape': ctrl.extractResult.imageLandscape}">
+                <span ng-if="ctrl.extractResult.image" ng-class="{'extract-result-image-container': ctrl.extractResult.imageType == 'image', 'extract-result-icon-container': ctrl.extractResult.imageType == 'icon'}">
+                  <img ng-src="{{ctrl.extractResult.image}}" class="extract-result-image" border="0" />
+                </span>
+                <span class="extract-result-text-container">
+                  <h4 class="extract-result-title">{{ctrl.extractResult.title}}</h4>
+                  <p class="extract-result-description">{{ctrl.extractResult.description}}</p>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of link extraction -->
+      <div ng-if="ctrl.postMode == 'files'">
+        <div class="item item-divider">
+          Files
+        </div>
+        <div class="list">
+          <div class="item" ng-repeat="file in ctrl.model.files">
+              <h2>{{file.filename}}</h2>
+              <p>{{file.mimetype}}</p>
+          </div>
+        </div>
+      </div>
+      <!-- Files attachment -->
+
+
+      <label class="item item-input">
+          <span class="input-label">Share with:</span>
+          <input type="text" placeholder="">
+      </label>
+
+      <div class="buttons padding">
+        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.title">Post</button>
+        <button class="button button-light" ng-click="ctrl.postMode = false; ctrl.reset()">Cancel</button>
+      </div>
+    </div>
   </div>
-</form>
 </div>

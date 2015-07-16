@@ -2,4 +2,14 @@
   .post-title {
     margin-top: 0;
   }
+
+  .post-actions {
+    position: absolute;
+    top: 0;
+    right: 8px;
+
+    button {
+      font-size: 110%;;
+    }
+  }
 }

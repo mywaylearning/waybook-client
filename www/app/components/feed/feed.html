@@ -5,6 +5,12 @@
       <img src="/img/joshk.jpg">
       <h2>Josh Kopelman - {{item.title}}</h2>
       <p>Shared privately - <span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
+      <div class="post-actions">
+        <button class="button button-icon ion-chevron-down" ng-click="popover.show($event)"></button>
+      </div>
+    </div>
+    <div ng-if="item.image" class="item item-image">
+      <img ng-src="{{item.image}}" />
     </div>
     <div class="item item-body">
       <!-- <h3 class="post-title">{{item.title}}</h3> -->

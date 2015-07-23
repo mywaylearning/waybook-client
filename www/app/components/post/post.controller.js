@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostController');
 
-  function PostController($scope, $state, router, goal, SWAGGER, PostService) {
+  function PostController($scope, $state, $http, $ionicModal, router, goal, SWAGGER, PostService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -21,6 +21,55 @@
       debug('type...? ' + ctrl.postType);
     }
     init();
+
+    // Mocking contacts
+    $http.get('app/components/post/test.json').success(function(result) {
+      // angular.forEach(result, function(contact){
+      //   contact.checked = false;
+      // })
+      ctrl.allContacts = result;
+    });
+
+
+    ctrl.validateTag = function($tag) {
+      if (!$tag.id) {
+        // must validade if it's an e-mail
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test($tag.name);
+      }
+
+      return true;
+    };
+
+
+    ctrl.addContacts = function(contacts) {
+      if (contacts && contacts.length) {
+        angular.forEach(contacts, function(contact) {
+          var exist = false;
+          angular.forEach(ctrl.selectedContacts, function(selectedContact){
+            if (contact.id === selectedContact.id) {
+              exist = true;
+            }
+          });
+          if (!exist) {
+            ctrl.selectedContacts.push(contact);
+          }
+        });
+      }
+    };
+
+    ctrl.selectedContacts = [
+      { id: 0, name: 'Self' }
+    ];
+
+    ctrl.loadTags = function($query) {
+      return $http.get('app/components/post/test.json', { cache: true}).then(function(response) {
+        var contacts = response.data;
+        return contacts.filter(function(contact) {
+          return contact.name.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
+        });
+      });
+    };
 
     ctrl.attachPhotos = function() {
       ctrl.postMode = 'photo';
@@ -129,6 +178,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
+  module.exports = ['$scope', '$state', '$http', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
 
 }());

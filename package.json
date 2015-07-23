@@ -16,7 +16,8 @@
     "store": "./node_modules/store/store.min.js",
     "angular-gravatar": "./www/lib/angular-gravatar/build/angular-gravatar.min.js",
     "ionic-ion-showWhen": "./www/lib/ionic-ion-showWhen/index.js",
-    "ion-wizard": "./www/lib/ion-wizard/index.js"
+    "ion-wizard": "./www/lib/ion-wizard/index.js",
+    "ng-tags-input": "./www/lib/ng-tags-input/ng-tags-input.min.js"
   },
   "browserify-shim": {
     "angular": "angular",

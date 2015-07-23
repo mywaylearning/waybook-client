@@ -1,21 +1,9 @@
 <div class="post inner-content">
-  <div class="list card">
-    <div ng-show="ctrl.postMode">
-      <label class="item item-input">
-        <span class="input-label">Title</span>
-        <input class="post-title" type="text" ng-model="ctrl.model.title" placeholder="Type here your post title (required)" />
-      </label>
-      <div class="item item-input">
-        <span class="input-label">Content</span>
-        <div class="post-content-container">
-          <div class="placeholder" ng-show="!ctrl.model.content">{{ctrl.placeHolder}}</div>
-          <div class="post-content" contenteditable="plaintext-only" ng-model="ctrl.model.content"></div>
-        </div>
-      </div>
-    </div>
-    <div ng-show="!ctrl.postMode" class="item item-text-wrap">
-      <div class="textarea" ng-click="ctrl.postMode = 'text'">{{ctrl.placeHolder}}</div>
-      <div class="button-bar">
+  <div class="list card cancel-overlay">
+    <div class="item item-text-wrap">
+      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': ctrl.postMode}">{{ctrl.placeHolder}}</div>
+      <div class="textarea" ng-click="ctrl.postMode ? null : ctrl.postMode = 'text'" ng-model="ctrl.model.content" contenteditable="plaintext-only" ng-class="{'inactive': !ctrl.postMode}"></div>
+      <div ng-show="!ctrl.postMode" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
           <button class="button button-icon button-waybook-post icon ion-camera" ng-click="ctrl.attachPhotos()"><span class="clearfix dark">Photos</span></button>
           <button class="button button-icon button-waybook-post icon ion-link" ng-click="ctrl.postMode = 'link'"><span class="clearfix dark">Link</span></button>
@@ -79,11 +67,36 @@
       </div>
       <!-- Files attachment -->
 
-
-      <label class="item item-input">
+      <!-- Share options -->
+      <div class="item item-input cancel-overlay">
           <span class="input-label">Share with:</span>
-          <input type="text" placeholder="">
-      </label>
+          <tags-input
+            class="share-with"
+            placeholder="Add people"
+            ng-model="ctrl.selectedContacts"
+            on-tag-adding="ctrl.validateTag($tag)"
+            display-property="name"
+            template="tag-template">
+            <auto-complete
+              source="ctrl.loadTags($query)"
+              load-on-focus="true"
+              load-on-empty="true"
+              min-length="0"
+              template="autocomplete-template"></auto-complete>
+          </tags-input>
+          <multiple-select-modal header-text="Choose the contacts"
+                              allow-empty='true'
+                              items="ctrl.allContacts"
+                              callback="ctrl.addContacts"
+                              multi-select="true" />
+      </div>
+      <ion-toggle
+          ng-checked="false"
+          ng-model="ctrl.model.resharing"
+          class="item item-text-wrap re-share">
+        Re-sharing:
+      </ion-toggle>
+      <!-- End of share options -->
 
       <div class="buttons padding">
         <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.title">Post</button>
@@ -92,3 +105,27 @@
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="tag-template">
+  <div class="tag-template">
+    <div class="left-panel">
+      <i class="icon" ng-class="{'ion-person': data.id || data.id == 0, 'ion-email': !data.id}"></i>
+    </div>
+    <div class="right-panel">
+      <span>{{data.name}}</span>
+      <a class="remove-button" ng-click="$removeTag()"><i class="icon ion-close"></i></a>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="autocomplete-template">
+  <div class="autocomplete-template">
+    <div class="left-panel">
+      <i class="icon ion-person"></i>
+    </div>
+    <div class="right-panel">
+      <span class="name" ng-bind-html="$highlight(data.name)"></span>
+      <span class="email" ng-bind-html="$highlight(data.email)"></span>
+    </div>
+  </div>
+</script>

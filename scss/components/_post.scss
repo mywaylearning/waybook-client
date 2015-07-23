@@ -1,14 +1,61 @@
+@import '../lib/ng-tags-input/ng-tags-input.min.css';
+
 .post {
 
   $placeholder-border-color: #d4d4d4;
 
   .placeholder {
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    color: #a4a4a4;
+    top: 26px;
+    left: 28px;
+
+    &.active {
+      color: #afafaf;
+    }
   }
+
+  .textarea {
+    border: 1px solid $placeholder-border-color;
+    padding: 10px;
+    position: relative;
+    cursor: text;
+    word-wrap: break-word;
+    border-radius: 3px;
+    max-height: 178px;
+    min-height: 58px;
+    overflow-y: scroll;
+
+    &.inactive {
+      max-height: 40px;
+      min-height: 40px;
+      overflow: visible;
+      &::after, &::before {
+        top: 100%;
+      	left: 13%;
+      	border: solid transparent;
+      	content: " ";
+      	height: 0;
+      	width: 0;
+      	position: absolute;
+      	pointer-events: none;
+      }
+
+      &::after {
+        border-color: rgba(255, 255, 255, 0);
+      	border-top-color: #ffffff;
+      	border-width: 10px;
+      	margin-left: -10px;
+      }
+
+      &::before {
+        border-color: #ffffff;
+      	border-top-color: #d4d4d4;
+      	border-width: 11px;
+      	margin-left: -11px;
+      }
+    }
+  }
+
 
   .post-content-container {
     position: relative;
@@ -153,5 +200,87 @@
       font-size: 150%;
     }
   }
+
+  .share-with {
+    width: 100%;
+    margin-right: 8px;
+
+    input {
+      padding-right: 0 !important;
+    }
+  }
+
+  .tags {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .cancel-overlay {
+    overflow: visible;
+  }
+
+  .button-add-contact {
+    padding: 0 12px 0 10px;
+    margin-right: 8px;
+  }
+
+  .re-share {
+    z-index: 1;
+  }
+
+  .tag-template div:first-child {
+    float: left;
+  }
+
+  .tag-template div:first-child img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
+
+  .tag-template div:last-child {
+    float: left;
+    margin-left: 5px;
+  }
+
+  .autocomplete-template {
+    .left-panel {
+      float: left;
+
+      img {
+        width: 48px;
+        height: 48px;
+        vertical-align: middle;
+      }
+    }
+
+    .right-panel {
+      float: left;
+      margin-left: 5px;
+
+      .name {
+      }
+
+      .email {
+        color: #a2a2a2;
+        font-size: 70%;
+
+        em {
+          font-size: 110%;
+        }
+      }
+    }
+
+  }
+
+  .autocomplete {
+    .selected {
+      .email {
+        color: #FFF;
+      }
+    }
+  }
+
+
 
 }

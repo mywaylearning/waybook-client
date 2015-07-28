@@ -228,6 +228,18 @@
     z-index: 1;
   }
 
+  .tags {
+    .tag-item {
+      background: $balanced;
+      color: #FFF;
+      border-color: darken($balanced, 10);
+    }
+
+    .ion-close-circled {
+      color: darken($balanced, 25);
+    }
+  }
+
   .tag-template div:first-child {
     float: left;
   }

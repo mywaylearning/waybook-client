@@ -13,6 +13,8 @@
       $scope.popover = popover;
     });
 
+    this.test = 'test';
+
     // $scope.planData = {};
     //
     // $scope.doRefresh = function() {

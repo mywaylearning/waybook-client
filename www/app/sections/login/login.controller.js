@@ -1,75 +1,69 @@
-(function() {
+'use strict';
 
-  'use strict';
+var LoginController = function($scope, router, auth, user, errorHandler) {
 
-  var debug = require('debug')('waybook:LoginController');
+  $scope.loginData = {};
 
-  function LoginController($scope, router, auth, user, errorHandler) {
-    // var scope = this,
-    //     errors;
-
-    //errors = errorHandler.getInstance(scope);
-
-    $scope.loginData = {};
-
-    // if (invitation) {
-    //   scope.invitation = invitation.invitation;
-    //   scope.receiverEmail = scope.invitation.receiverEmail;
-    //   debug(invitation);
-    // }
+  /**
+   * Handle login form submission and validation. Once the use has successfully
+   * authenticated they will be redirected to appropriate page.
+   */
+  $scope.doLogin = function() {
+    var email = $scope.loginData.email;
+    var password = $scope.loginData.password;
 
     /**
-     * Handle login form submission and validation.
-     * Once the use has successfully authenticated
-     * they will be redirected to appropriate page.
-     * @param  {controller} form Angular Formcontroller
+     * Do nothing unless valid email and password content
      */
-    $scope.doLogin = function() {
-      debug('in doLogin');
-      //errors.reset();
-      //errors.setFormController(form);
+    if (!email || !password) {
+      // TODO: Display error messages properly
+      return;
+    }
 
-      //if (!form.$valid) { return false; }
-
-      //fieldset.disable(loginForm);
-
-      auth.authenticate($scope.loginData.email.toLowerCase(), $scope.loginData.password)
-        .then(onAuthenticated)
-        .then(onGetUserSuccess)
-        .catch(handleError);
-    };
 
     /**
-     * On successful user authentication
-     * make a call to get user object.
-     * @return {Promise}
+     * Authenticate user with provided credentials
+     * Then, if success, get user information
+     * If there's an error, handle it with corresponding handler
      */
-    function onAuthenticated() {
-      debug('in onAuthenticated');
-      return user.getSelf();
-    }
+    auth
+      .authenticate(email.toLowerCase(), password)
+      .then(onAuthenticated)
+      .then(onGetUserSuccess)
+      .catch(handleError);
+  };
 
-    /**
-     * Once the user object has been received
-     * upate the AppController user object.
-     * Then redirect to logged in state.
-     * @param  {Object} userData
-     */
-    function onGetUserSuccess(userData) {
-      debug('in onGetUserSuccess');
-      // update app controller user instance
-      $scope.app.user = userData;
+  /**
+   * On successful user authentication make a call to get user object.
+   * @return {Promise}
+   */
+  function onAuthenticated() {
+    return user.getSelf();
+  };
 
-      router.goToLoggedIn();
-    }
+  /**
+   * Once the user object has been received upate the AppController user object.
+   * Then redirect to logged in state.
+   */
+  function onGetUserSuccess(userData) {
+    $scope.app.user = userData;
+    router.goToLoggedIn();
+  };
 
-    function handleError(err) {
-      errors.handle(err);
+  /**
+   * Handle invalid credentials or token expiration errors
+   */
+  var handleError = function(error) {
+    errorHandler.getInstance(this).handle(error);
+  }.bind(this);
 
-      //fieldset.enable(loginForm);
-    }
-  }
+};
 
-  module.exports = ['$scope', 'router', 'auth', 'user', 'errorHandler', LoginController];
-
-}());
+module.exports = [
+  '$scope',
+  'router',
+  'auth',
+  'user',
+  'errorHandler',
+  LoginController
+];

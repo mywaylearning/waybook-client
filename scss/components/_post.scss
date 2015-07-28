@@ -233,6 +233,15 @@
       background: $balanced;
       color: #FFF;
       border-color: darken($balanced, 10);
+
+      &.selected {
+        background: $assertive;
+        border-color: darken($assertive, 10);
+
+        .ion-close-circled {
+          color: darken($assertive, 25);
+        }
+      }
     }
 
     .ion-close-circled {

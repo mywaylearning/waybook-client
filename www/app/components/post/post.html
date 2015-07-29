@@ -99,7 +99,7 @@
       <!-- End of share options -->
 
       <div class="buttons padding">
-        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.title">Post</button>
+        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.content">Post</button>
         <button class="button button-light" ng-click="ctrl.postMode = false; ctrl.reset()">Cancel</button>
       </div>
     </div>
@@ -113,7 +113,7 @@
     </div>
     <div class="right-panel">
       <span>{{data.name}}</span>
-      <a class="remove-button" ng-click="$removeTag()"><i class="icon ion-close"></i></a>
+      <a class="remove-button" ng-click="$removeTag()"><i class="icon ion-close-circled"></i></a>
     </div>
   </div>
 </script>

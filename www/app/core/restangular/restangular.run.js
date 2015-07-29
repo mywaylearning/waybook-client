@@ -19,34 +19,32 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
    * see https://github.com/mgonto/restangular#seterrorinterceptor
    */
   Restangular.setErrorInterceptor(function(response, deferred) {
-   var stopErrorPropagation = false;
+    var stopErrorPropagation = false;
 
-   //console.log('error interceptor called', response);
+    switch (response.status) {
+      case 401:
+        handleUnauthorized(response, deferred);
+        stopErrorPropagation = true;
+        break;
 
-   switch (response.status) {
-     case 401:
-       handleUnauthorized(response, deferred);
-       stopErrorPropagation = true;
-     break;
+      case 403:
+        handleExpiredToken(response, deferred);
+        stopErrorPropagation = true;
+        break;
 
-     case 403:
-       handleExpiredToken(response, deferred);
-       stopErrorPropagation = true;
-     break;
+      case 400:
+      case 409:
+        handleKnownErrors(response, deferred);
+        stopErrorPropagation = false;
+        break;
 
-     case 400:
-     case 409:
-       handleKnownErrors(response, deferred);
-       stopErrorPropagation = false;
-     break;
+      default:
+        handleUnknownErrors(response, deferred);
+        stopErrorPropagation = false;
+        break;
+    }
 
-     default:
-       handleUnknownErrors(response, deferred);
-       stopErrorPropagation = false;
-     break;
-   }
-
-   return !stopErrorPropagation;
+    return !stopErrorPropagation;
   });
 
   /**
@@ -64,7 +62,9 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
     // deferred.reject();
 
     // create a custom ui-router error for 401 unauthorized
-    error = { type: ERROR.unauthorizedRequest };
+    error = {
+      type: ERROR.unauthorizedRequest
+    };
 
     // manually trigger ui-router state change event passing in custom error
     $rootScope.$broadcast('$stateChangeError', null, null, null, null, error);
@@ -81,20 +81,36 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
   function handleExpiredToken(response, deferred) {
     var restangularizedResponse;
 
-    console.log('handleExpiredToken', response);
+    var accessToken = authStore.getAccessToken();
+
+    /**
+     * If no accessToken, then reject handleExpiredToken, it hapens on invalid
+     * user credentials
+     */
+    if (!accessToken) {
+      return deferred.reject({});
+    }
 
     auth.authRefresh().then(function() {
-      // update the headers with the new access token
-      // we have to do this because we're using $http restangular request interceptors won't be called
-      response.config.headers['Authorization'] = 'Bearer ' + authStore.getAccessToken();
 
-      // Repeat the request and then call the handlers the usual way.
-      $http(response.config)
-        .then(function(httpResponse) {
-          restangularizedResponse = Restangular.restangularizeElement(null, httpResponse.data, 'expiredToken');
-          deferred.resolve(restangularizedResponse);
-        })
-        .catch(deferred.reject);
+      /**
+       * We have to do this because we're using $http restangular request
+       * interceptors won't be called. Udate the headers with the new access token
+       */
+      response.config.headers.Authorization = 'Bearer ' + accessToken;
+
+      /**
+       * Repeat the request and then call the handlers the usual way.
+       */
+      $http(response.config).then(function(httpResponse) {
+
+        restangularizedResponse = Restangular.restangularizeElement(
+          null, httpResponse.data, 'expiredToken'
+        );
+
+        deferred.resolve(restangularizedResponse);
+      }).catch(deferred.reject);
+
     });
   }
 
@@ -106,7 +122,9 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
   function handleUnknownErrors(response, deferred) {
     console.log('handleUnknownErrors', response);
   }
-
 }
 
-module.exports = ['$rootScope', '$http', 'Restangular', 'auth', 'authStore', 'ERROR', RestangularRun];
+module.exports = [
+  '$rootScope', '$http', 'Restangular', 'auth', 'authStore',
+  'ERROR', RestangularRun
+];

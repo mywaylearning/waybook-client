@@ -1,0 +1,35 @@
+<ion-view cache-view="false" title="Waybook">
+  <ion-content padding="true" class="has-header">
+    <form name="loginForm" ng-submit="onRegister()">
+      <ion-list>
+
+        <label class="item item-input">
+          <input type="text" ng-model="register.name" placeholder="first name">
+        </label>
+
+        <label class="item item-input">
+          <input type="text" ng-model="register.lastName" placeholder="last name">
+        </label>
+
+        <label class="item item-input">
+          <input type="email" ng-model="register.email" placeholder="email">
+        </label>
+
+        <label class="item item-input">
+          <input type="password" ng-model="register.password" placeholder="Create a password">
+        </label>
+      </ion-list>
+
+      <div class="spacer" style="height: 40px;"></div>
+
+      <button class="button button-stable button-block" type="submit">
+        Sign Up
+      </button>
+
+      Already have an account? <a href="#!/login" class="">
+      Log in now
+      </a>
+
+    </form>
+  </ion-content>
+</ion-view>

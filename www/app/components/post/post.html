@@ -2,7 +2,26 @@
   <div class="list card cancel-overlay">
     <div class="item item-text-wrap">
       <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': ctrl.postMode}">{{ctrl.placeHolder}}</div>
-      <div class="textarea" ng-click="ctrl.postMode ? null : ctrl.postMode = 'text'" ng-model="ctrl.model.content" contenteditable="plaintext-only" ng-class="{'inactive': !ctrl.postMode}"></div>
+      <div class="textarea"
+        ng-click="ctrl.postMode ? null : ctrl.postMode = 'text'"
+        ng-model="ctrl.model.content"
+        contenteditable
+        mentio
+        id="hashtag"
+        mentio-typed-term="typedTerm"
+        mentio-select-not-found="true"
+        mentio-items="ctrl.hashtags"
+
+        ng-class="{'inactive': !ctrl.postMode}"></div>
+
+        <mentio-menu
+              mentio-for="'hashtag'"
+              mentio-trigger-char="'#'"
+              mentio-items="ctrl.hashtags"
+              mentio-template-url="/hashtags.tpl"
+              mentio-search="ctrl.searchHashtag(term)"
+              mentio-select="ctrl.getHashtagText(item)"
+              ></mentio-menu>
       <div ng-show="!ctrl.postMode" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
           <button class="button button-icon button-waybook-post icon ion-camera" ng-click="ctrl.attachPhotos()"><span class="clearfix dark">Photos</span></button>
@@ -74,14 +93,16 @@
             class="share-with"
             placeholder="Add people"
             ng-model="ctrl.selectedContacts"
+            replace-spaces-with-dashes="false"
             on-tag-adding="ctrl.validateTag($tag)"
+            key-property="id"
             display-property="name"
             template="tag-template">
             <auto-complete
               source="ctrl.loadTags($query)"
+              min-length="0"
               load-on-focus="true"
               load-on-empty="true"
-              min-length="0"
               template="autocomplete-template"></auto-complete>
           </tags-input>
           <multiple-select-modal header-text="Choose the contacts"
@@ -128,4 +149,12 @@
       <span class="email" ng-bind-html="$highlight(data.email)"></span>
     </div>
   </div>
+</script>
+
+<script type="text/ng-template" id="/hashtags.tpl">
+<ul class="list-group hashtag-search">
+    <li mentio-menu-item="hashtag" ng-repeat="hashtag in items" class="list-group-item">
+        <span class="text-primary" ng-bind-html="hashtag.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+    </li>
+</ul>
 </script>

@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostController');
 
-  function PostController($scope, $state, $http, $ionicModal, router, goal, SWAGGER, PostService) {
+  function PostController($scope, $state, $http, $q, $ionicModal, router, goal, SWAGGER, PostService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -29,6 +29,27 @@
       // })
       ctrl.allContacts = result;
     });
+
+    // Hashtag Mocking
+    ctrl.hashtags = [];
+
+    ctrl.searchHashtag = function(term) {
+        debugger;
+        var hashtagList = [];
+        return $http.get('app/components/post/hashtags.json').then(function (response) {
+            angular.forEach(response.data, function(item) {
+                if (item.name.toUpperCase().indexOf(term.toUpperCase()) >= 0) {
+                    hashtagList.push(item);
+                }
+            });
+            ctrl.hashtags = hashtagList;
+            return $q.when(hashtagList);
+        });
+    };
+
+    ctrl.getHashtagText = function(item) {
+        return '<span class="hashtag">#' + item.name + '</span>';
+    };
 
 
     ctrl.validateTag = function($tag) {
@@ -120,9 +141,14 @@
     });
 
     ctrl.extractLink = function() {
+      var pattern = /(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
+      var regex = new RegExp(pattern);
       if (!ctrl.extractLinkUrl) {
         return;
+      } else if (!regex.test(ctrl.extractLinkUrl)) {
+        return;
       }
+
       ctrl.linkExtractionStarted = true;
       PostService.extractLink(ctrl.extractLinkUrl).then(function(result){
         ctrl.linkExtractionStarted = false;
@@ -178,6 +204,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', '$http', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
+  module.exports = ['$scope', '$state', '$http', '$q', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
 
 }());

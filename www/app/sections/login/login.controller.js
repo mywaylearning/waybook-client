@@ -59,6 +59,11 @@ var LoginController = function($scope, router, auth, user, errorHandler) {
      */
     auth.destroy();
     errorHandler.getInstance(this).handle(error);
+
+    /**
+     * Redirect to login page
+     */
+    router.goToLoggedOut();
   }.bind(this);
 
 };

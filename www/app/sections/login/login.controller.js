@@ -54,6 +54,10 @@ var LoginController = function($scope, router, auth, user, errorHandler) {
    * Handle invalid credentials or token expiration errors
    */
   var handleError = function(error) {
+    /**
+     * Clean auth data stored
+     */
+    auth.destroy();
     errorHandler.getInstance(this).handle(error);
   }.bind(this);
 

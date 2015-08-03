@@ -16,6 +16,7 @@
   require('moment');
   require('angular-moment');
   require('ng-tags-input');
+  require('mentio');
 
   window.debug = require('debug');
 
@@ -32,7 +33,8 @@
     'ui.gravatar',
     'restangular',
     'angularMoment',
-    'ngTagsInput'
+    'ngTagsInput',
+    'mentio'
   ])
 
   .controller('AppController', require('./app.controller.js'))

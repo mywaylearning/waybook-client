@@ -1,13 +1,5 @@
-(function() {
+'use strict';
 
-  'use strict';
+function DashboardController($scope) {}
 
-  var debug = require('debug')('waybook:DashboardController');
-
-  function DashboardController($scope, $stateParams) {
-    debug('here we are');
-  }
-
-  module.exports = ['$scope', '$stateParams', DashboardController];
-
-}());
+module.exports = ['$scope', DashboardController];

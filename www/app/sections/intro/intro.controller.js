@@ -1,32 +1,28 @@
-(function() {
+'use strict';
 
-  'use strict';
+function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_STORAGE_KEYS) {
 
-  var debug = require('debug')('waybook:IntroController');
+  var key = LOCAL_STORAGE_KEYS.introSeen;
 
-  function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_STORAGE_KEYS) {
-    debug('here we are');
+  $scope.startApp = function() {
+    store.set(key, true);
+    return $state.go('public.login');
+  };
 
-    var key = LOCAL_STORAGE_KEYS.introSeen;
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
 
-    $scope.startApp = function() {
-      store.set(key, true);
-      $state.go('app.dashboard');
-    };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
 
-    $scope.next = function() {
-      $ionicSlideBoxDelegate.next();
-    };
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
+}
 
-    $scope.previous = function() {
-      $ionicSlideBoxDelegate.previous();
-    };
-
-    $scope.slideChanged = function(index) {
-      $scope.slideIndex = index;
-    };
-  }
-
-  module.exports = ['$scope', '$state', '$ionicSlideBoxDelegate', 'store', 'LOCAL_STORAGE_KEYS', IntroController];
-
-}());
+module.exports = [
+  '$scope', '$state', '$ionicSlideBoxDelegate', 'store', 'LOCAL_STORAGE_KEYS',
+  IntroController
+];

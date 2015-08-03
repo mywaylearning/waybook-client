@@ -180,6 +180,8 @@
         };
 
         ctrl.model.link = result.url;
+        ctrl.model.linkTitle = result.title;
+        ctrl.model.linkDescription = result.description;
       });
     };
 

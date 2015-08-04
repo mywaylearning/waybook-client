@@ -151,7 +151,7 @@
             '200': {
               description: 'OK',
               examples: {
-                'application/json': '{\n  "access_token": "2YotnFZFEjr1zCsicMWpAA",\n  "token_type": "bearer",\n  "expires_in": 900,\n  "refresh_token": "tGzv3JOkF0XG5Qx2TlKWIA",\n  "example_parameter": "example_value"\n}\n'
+                'application/json': '{\n  "access_token": "2YotnFZFEjr1zCsicMWpAA",\n  "token_type": "bearer",\n  "expires_in": 9,\n  "refresh_token": "tGzv3JOkF0XG5Qx2TlKWIA",\n  "example_parameter": "example_value"\n}\n'
               },
               schema: {
                 '$ref': '#/definitions/AccessToken'
@@ -161,6 +161,37 @@
               description: 'Error response',
               schema: {
                 '$ref': '#/definitions/OAuthError'
+              }
+            }
+          }
+        }
+      },
+      '/tags': {
+        get: {
+          operationId: 'tagsIndex',
+          'x-loopback-model': 'Tag',
+          description: 'Returns a collection of tags for the authenticated user',
+          summary: 'Fetch a list of goals based on text provided',
+          tags: ['tags'],
+          parameters: [{
+            name: 'search',
+            'in': 'query',
+            description: 'Text to search tags that starts with',
+            required: true,
+            type: 'string'
+          }],
+          produces: ['application/json'],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Collection'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
               }
             }
           }
@@ -188,25 +219,24 @@
               }
             }
           }
-        },
+        }
+      },
+      '/users': {
         post: {
-          operationId: 'createNewUserViaPost',
+          operationId: 'createUser',
           'x-loopback-model': 'WaybookUser',
           summary: 'Creates a new user via post',
           description: 'Creates a new user via post',
           tags: ['users'],
-          consumes: ['application/x-www-form-urlencoded'],
+          consumes: ['application/json'],
           produces: ['application/json'],
           parameters: [{
-            name: 'email',
+            name: 'user',
             required: true,
-            'in': 'formData',
-            type: 'string'
-          }, {
-            name: 'password',
-            required: true,
-            'in': 'formData',
-            type: 'string'
+            'in': 'body',
+            schema: {
+              '$ref': '#/definitions/User'
+            }
           }],
           responses: {
             '201': {
@@ -317,6 +347,18 @@
             type: 'integer',
             readOnly: true
           },
+          link: {
+            type: 'string',
+            description: 'store link when user shares a link on a post'
+          },
+          linkTitle: {
+            type: 'string',
+            description: 'Short description of posted link'
+          },
+          linkDescription: {
+            type: 'string',
+            description: 'Long description of shared link'
+          },
           title: {
             type: 'string',
             description: 'Short description of this goal'
@@ -378,23 +420,6 @@
           path: {
             type: 'string',
             pattern: '^(/[^/~]*(~[01][^/~]*)*)*$'
-          },
-          value: {
-            anyOf: [{
-              type: 'array'
-            }, {
-              type: 'boolean'
-            }, {
-              type: 'integer'
-            }, {
-              type: null
-            }, {
-              type: 'number'
-            }, {
-              type: 'object'
-            }, {
-              type: 'string'
-            }]
           },
           from: {
             type: 'string',

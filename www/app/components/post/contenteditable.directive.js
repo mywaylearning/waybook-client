@@ -23,7 +23,7 @@
         // Specify how UI should be updated
         ngModel.$render = function() {
             if (ngModel.$viewValue !== element.html()) {
-                element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+              element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
             }
         };
 

@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostController');
 
-  function PostController($scope, $state, $http, $q, $ionicModal, router, goal, SWAGGER, PostService) {
+  function PostController($scope, $state, $http, $q, $ionicModal, router, goal, SWAGGER, PostService, TagService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -24,35 +24,42 @@
 
     // Mocking contacts
     $http.get('app/components/post/test.json').success(function(result) {
-      // angular.forEach(result, function(contact){
-      //   contact.checked = false;
-      // })
       ctrl.allContacts = result;
     });
 
-    // Hashtag Mocking
-    ctrl.hashtags = [];
+    // Tags holder
+    ctrl.tags = [];
 
-    ctrl.searchHashtag = function(term) {
-        debugger;
-        var hashtagList = [];
-        return $http.get('app/components/post/hashtags.json').then(function (response) {
-            angular.forEach(response.data, function(item) {
-                if (item.name.toUpperCase().indexOf(term.toUpperCase()) >= 0) {
-                    hashtagList.push(item);
-                }
-            });
-            ctrl.hashtags = hashtagList;
-            return $q.when(hashtagList);
-        });
-    };
+    var detectTags = function(text) {
+      var tags = text.match(/(^|\W)(#[a-z\d][\w-]*)/ig)
+      var tagsArr = [];
+      if (tags) {
+        angular.forEach(tags, function(tag) {
+          tagsArr.push(tag.replace('#', '').replace(' ', '').replace('>', '').replace(';', ''));
+        })
+      }
 
-    ctrl.getHashtagText = function(item) {
-        return '<span class="hashtag">#' + item.name + '</span>';
+      return tagsArr;
     };
 
 
-    ctrl.validateTag = function($tag) {
+
+    ctrl.searchTag = function(term) {
+      if (!term.length) {
+        return;
+      }
+      var hashtagList = [];
+      return TagService.collection(term).then(function(response) {
+        ctrl.tags = response;
+      });
+    };
+
+    ctrl.getTagText = function(item) {
+        return '<span>#' + item.text + '</span>';
+    };
+
+
+    ctrl.validateContact = function($tag) {
       if (!$tag.id) {
         // must validade if it's an e-mail
         var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -83,7 +90,7 @@
       { id: 0, name: 'Self' }
     ];
 
-    ctrl.loadTags = function($query) {
+    ctrl.loadContacts = function($query) {
       return $http.get('app/components/post/test.json', { cache: true}).then(function(response) {
         var contacts = response.data;
         return contacts.filter(function(contact) {
@@ -199,6 +206,8 @@
 
     ctrl.save = function() {
       debug('saving...', ctrl.model);
+      // define tags
+      ctrl.model.tags = detectTags(ctrl.model.content);
       goal.create(ctrl.model).then(function(result){
         $state.reload();
       });
@@ -206,6 +215,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', '$http', '$q', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', PostController];
+  module.exports = ['$scope', '$state', '$http', '$q', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', PostController];
 
 }());

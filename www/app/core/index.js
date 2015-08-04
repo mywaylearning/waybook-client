@@ -35,6 +35,8 @@
 
     .factory('goal', require('./goal/goal.service.js'))
 
+    .factory('TagService', require('./tag/tag.service.js'))
+
     .factory('PostService', require('./post/post.service.js'));
 
 }());

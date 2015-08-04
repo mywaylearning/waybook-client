@@ -7,16 +7,18 @@
         ng-model="ctrl.model.content"
         contenteditable
         mentio
-        id="hashtag"
+        id="tags"
+        mentio-typedTerm="typedTerm"
+        mentio-require-leading-space="true"
         ng-class="{'inactive': !ctrl.postMode}"></div>
 
         <mentio-menu
-              mentio-for="'hashtag'"
+              mentio-for="'tags'"
               mentio-trigger-char="'#'"
-              mentio-items="ctrl.hashtags"
-              mentio-template-url="/hashtags.tpl"
-              mentio-search="ctrl.searchHashtag(term)"
-              mentio-select="ctrl.getHashtagText(item)"
+              mentio-items="ctrl.tags"
+              mentio-template-url="/tags.tpl"
+              mentio-search="ctrl.searchTag(term)"
+              mentio-select="ctrl.getTagText(item)"
               ></mentio-menu>
       <div ng-show="!ctrl.postMode" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
@@ -90,12 +92,12 @@
             placeholder="Add people"
             ng-model="ctrl.selectedContacts"
             replace-spaces-with-dashes="false"
-            on-tag-adding="ctrl.validateTag($tag)"
+            on-tag-adding="ctrl.validateContact($tag)"
             key-property="id"
             display-property="name"
             template="tag-template">
             <auto-complete
-              source="ctrl.loadTags($query)"
+              source="ctrl.loadContacts($query)"
               min-length="0"
               load-on-focus="true"
               load-on-empty="true"
@@ -147,10 +149,10 @@
   </div>
 </script>
 
-<script type="text/ng-template" id="/hashtags.tpl">
+<script type="text/ng-template" id="/tags.tpl">
 <ul class="list-group hashtag-search">
     <li mentio-menu-item="hashtag" ng-repeat="hashtag in items" class="list-group-item">
-        <span class="text-primary" ng-bind-html="hashtag.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+        <span class="text-primary" ng-bind-html="hashtag.text | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
     </li>
 </ul>
 </script>

@@ -7,6 +7,7 @@
   app.controller('PostController', require('./post/post.controller.js'));
   app.directive('wayPost', require('./post/post.directive.js'));
   app.directive('contenteditable', require('./post/contenteditable.directive.js'));
+  app.directive('linkPreview', require('./shared/linkPreview.directive.js'));
   app.directive('multipleSelectModal', require('./post/multiple-select.directive.js'));
 
   app.controller('FeedController', require('./feed/feed.controller.js'));

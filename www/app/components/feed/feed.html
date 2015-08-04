@@ -17,6 +17,11 @@
     </div>
     <div class="item item-body">
       <p class="post-content" ng-bind-html="item.content"></p>
+      <div ng-if="item.link" class="row responsive-sm">
+        <div class="col col-50 col-offset-25">
+          <link-preview link="item.link"></link-preview>
+        </div>
+      </div>
       <p>
         <a href="#" class="subdued">2 Comments</a>
       </p>

@@ -147,19 +147,23 @@
       }
     });
 
+    ctrl.linkExtraction = {
+      url: null
+    };
+
     ctrl.extractLink = function() {
       var pattern = /(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
       var regex = new RegExp(pattern);
-      if (!ctrl.extractLinkUrl) {
+      if (!ctrl.linkExtraction.url) {
         return;
-      } else if (!regex.test(ctrl.extractLinkUrl)) {
+      } else if (!regex.test(ctrl.linkExtraction.url)) {
         return;
       }
 
-      ctrl.linkExtractionStarted = true;
-      PostService.extractLink(ctrl.extractLinkUrl).then(function(result){
-        ctrl.linkExtractionStarted = false;
-        ctrl.extractLinkUrl = '';
+      ctrl.linkExtraction.started = true;
+      PostService.extractLink(ctrl.linkExtraction.url).then(function(result){
+        ctrl.linkExtraction.started = false;
+        ctrl.linkExtraction.url = '';
         var image, imageType, imageLandscape = false;
 
         if (result.images.length) {
@@ -177,19 +181,26 @@
         } else {
           image = false;
         }
-        ctrl.extractResult = {
+
+        ctrl.model.link = {
+          url: result.url,
           title: result.title,
           description: result.description,
-          image: image,
+          landscape: imageLandscape,
           imageType: imageType,
-          imageLandscape: imageLandscape,
-          url: result.url
+          image: image
         };
 
-        ctrl.model.link = result.url;
-        ctrl.model.linkTitle = result.title;
-        ctrl.model.linkDescription = result.description;
+      }, function(err) {
+        ctrl.linkExtraction.started = false;
+        ctrl.linkExtraction.url = '';
+        ctrl.linkExtraction.result = null;
       });
+    };
+
+    ctrl.removeLink = function() {
+      ctrl.linkExtraction.result = null;
+      delete ctrl.model.link;
     };
 
 

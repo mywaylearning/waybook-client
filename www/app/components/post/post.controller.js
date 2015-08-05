@@ -126,11 +126,7 @@
           maxFiles: 3
         },
         function(Blobs){
-          console.log(Blobs);
           ctrl.model.files = Blobs;
-          angular.forEach(Blobs, function(blob){
-            // TODO: Add files info (url, mimetype, name?)
-          });
           $scope.$apply();
         },
         function(FPError){

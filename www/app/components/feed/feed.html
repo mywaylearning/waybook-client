@@ -23,8 +23,19 @@
         </div>
       </div>
       <p>
-        <a href="#" class="subdued">2 Comments</a>
+        <strong ng-if="item.files.length" ng-click="item.showFiles = ! item.showFiles" class="subdued"><span ng-bind="item.showFiles ? 'Hide' : 'Show'"></span> {{item.files.length}} files attached</strong>
       </p>
+    </div>
+    <div ng-if="item.showFiles">
+      <div class="item item-divider">
+        Files
+      </div>
+      <div class="list">
+        <a href="{{file.url}}" target="_blank" class="item" ng-repeat="file in item.files">
+            <h2>{{file.filename}}</h2>
+            <p>{{file.mimetype}} | {{file.size / 1000 | number:2}} kB</p>
+        </a>
+      </div>
     </div>
     <div class="item item-comments">
       <div class="comment-list">

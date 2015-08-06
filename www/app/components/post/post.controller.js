@@ -104,7 +104,8 @@
       filepicker.pick(
         {
           mimetype: 'image/*',
-          services: ['IMAGE_SEARCH', 'COMPUTER', 'WEBCAM', 'FACEBOOK', 'INSTAGRAM', 'FLICKR', 'DROPBOX']
+          services: ['IMAGE_SEARCH', 'COMPUTER', 'WEBCAM', 'FACEBOOK', 'INSTAGRAM', 'FLICKR', 'DROPBOX'],
+          openTo: 'IMAGE_SEARCH'
         },
         function(Blob){
           ctrl.model.image = Blob.url;

@@ -1,16 +1,16 @@
 <div class="post inner-content">
   <div class="list card cancel-overlay">
     <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': ctrl.postMode}">{{ctrl.placeHolder}}</div>
+      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.postType}">{{ctrl.placeHolder}}</div>
       <div class="textarea"
-        ng-click="ctrl.postMode ? null : ctrl.postMode = 'text'"
+        ng-click="ctrl.handleContentClick()"
         ng-model="ctrl.model.content"
         contenteditable
         mentio
         id="tags"
         mentio-typedTerm="typedTerm"
         mentio-require-leading-space="true"
-        ng-class="{'inactive': !ctrl.postMode}"></div>
+        ng-class="{'inactive': !ctrl.postType}"></div>
 
         <mentio-menu
               mentio-for="'tags'"
@@ -20,102 +20,105 @@
               mentio-search="ctrl.searchTag(term)"
               mentio-select="ctrl.getTagText(item)"
               ></mentio-menu>
-      <div ng-show="!ctrl.postMode" class="button-bar">
-          <button class="button button-icon button-waybook-post icon ion-edit balanced" ng-click="ctrl.postMode = 'text'"><span class="clearfix dark">Text</span></button>
-          <button class="button button-icon button-waybook-post icon ion-camera" ng-click="ctrl.attachPhotos()"><span class="clearfix dark">Photo</span></button>
-          <button class="button button-icon button-waybook-post icon ion-link" ng-click="ctrl.postMode = 'link'"><span class="clearfix dark">Link</span></button>
-          <button class="button button-icon button-waybook-post icon ion-document-text" ng-click="ctrl.attachFiles()"><span class="clearfix dark">Files</span></button>
+      <div ng-if="!ctrl.postType" class="button-bar">
+          <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.thought"><span class="clearfix dark">Thought</span></button>
+          <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.goal"><span class="clearfix dark">Goal</span></button>
+          <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.discovery"><span class="clearfix dark">Discovery</span></button>
+          <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.resource"><span class="clearfix dark">Resource</span></button>
       </div>
     </div>
-    <div ng-show="ctrl.postMode == 'text'" class="item item-input attach-actions">
+    <div ng-if="ctrl.postType" class="item item-input attach-actions">
       Attach:
-        <button class="button button-clear attach-action" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</button>
-        <button class="button button-clear attach-action" ng-click="ctrl.postMode = 'link'"><i class="assertive ion-link"></i> Link</button>
-        <button class="button button-clear attach-action" ng-click="ctrl.attachFiles()"><i class="energized ion-document-text"></i> Files</button>
+        <button class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</button>
+        <button class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</button>
+        <button class="button button-clear attach-action" ng-if="!ctrl.model.files" ng-click="ctrl.attachFiles()"><i class="energized ion-document-text"></i> Files</button>
     </div>
-    <div ng-show="ctrl.postMode">
-      <!-- Begin of photos embed/upload -->
-      <div ng-if="ctrl.postMode == 'photo' && ctrl.model.image" class="item item-image">
-        <img ng-src="{{ctrl.model.image}}" />
-        <button class="button button-stable remove-photo" ng-click="ctrl.removePhoto()">
-          <i class="ion-close-circled assertive"></i> Remove
-        </button>
-      </div>
-      <!-- End of photos embed/upload -->
 
-      <!-- Begin of link extraction -->
-      <div ng-if="ctrl.postMode == 'link'">
-        <div ng-if="!ctrl.linkExtraction.result" class="item item-input-inset link-extraction">
-          <label class="item-input-wrapper">
-            <input type="text" ng-model="ctrl.linkExtraction.url" ng-blur="ctrl.extractLink()" placeholder="Type or paste a link">
-          </label>
-          <button ng-click="ctrl.extractLink()" class="button button-balanced button-small" ng-show="!ctrl.linkExtractionStarted">Add</button>
-          <button ng-click="ctrl.postMode = 'text'" class="button button-light button-small icon ion-ios-close" ng-show="!ctrl.linkExtraction.started"></button>
-          <ion-spinner ng-show="ctrl.linkExtraction.started"></ion-spinner>
-        </div>
-        <div ng-if="ctrl.model.link" class="extract-result">
-          <div class="row responsive-sm">
-            <div class="col col-50 col-offset-25">
-              <button class="button-remove-link button button-icon icon icon-left button-small assertive ion-close-circled" ng-click="ctrl.removeLink()">Remove</button>
-              <link-preview link="ctrl.model.link"></link-preview>
-            </div>
+    <!-- Begin of link extraction -->
+    <div ng-if="ctrl.addLink">
+      <div ng-if="!ctrl.model.link" class="item item-input-inset link-extraction">
+        <label class="item-input-wrapper">
+          <input type="text" ng-model="ctrl.linkExtraction.url" ng-blur="ctrl.extractLink()" placeholder="Type or paste a link">
+        </label>
+        <button ng-click="ctrl.extractLink()" class="button button-balanced button-small" ng-show="!ctrl.linkExtraction.started">Add</button>
+        <button ng-click="ctrl.addLink = false" class="button button-light button-small icon ion-ios-close" ng-show="!ctrl.linkExtraction.started"></button>
+        <ion-spinner ng-show="ctrl.linkExtraction.started"></ion-spinner>
+      </div>
+      <div ng-if="ctrl.model.link" class="extract-result">
+        <div class="row responsive-sm">
+          <div class="col col-50 col-offset-25">
+            <button class="button-remove-link button button-icon icon icon-left button-small assertive ion-close-circled" ng-click="ctrl.removeLink()">Remove</button>
+            <link-preview link="ctrl.model.link"></link-preview>
           </div>
         </div>
       </div>
-      <!-- End of link extraction -->
+    </div>
+    <!-- End of link extraction -->
 
-      <!-- Begin of files attachment -->
-      <div ng-if="ctrl.postMode == 'files'">
-        <div class="item item-divider">
-          Files
-        </div>
-        <div class="list">
-          <div class="item" ng-repeat="file in ctrl.model.files">
-              <h2>{{file.filename}}</h2>
-              <p>{{file.mimetype}}</p>
-          </div>
-        </div>
+    <!-- Begin of photos embed/upload -->
+    <div ng-if="ctrl.model.image" class="item item-image">
+      <img ng-src="{{ctrl.model.image}}" />
+      <button class="button button-stable remove-photo" ng-click="ctrl.removePhoto()">
+        <i class="ion-close-circled assertive"></i> Remove
+      </button>
+    </div>
+    <!-- End of photos embed/upload -->
+
+    <!-- Begin of files attachment -->
+    <div ng-if="ctrl.model.files.length">
+      <div class="item item-divider">
+        Files
       </div>
-      <!-- End of files attachment -->
-
-      <!-- Share options -->
-      <div class="item item-input cancel-overlay">
-          <span class="input-label">Share with:</span>
-          <tags-input
-            class="share-with"
-            placeholder="Add people"
-            ng-model="ctrl.selectedContacts"
-            replace-spaces-with-dashes="false"
-            on-tag-adding="ctrl.validateContact($tag)"
-            key-property="id"
-            display-property="name"
-            template="tag-template">
-            <auto-complete
-              source="ctrl.loadContacts($query)"
-              min-length="0"
-              load-on-focus="true"
-              load-on-empty="true"
-              template="autocomplete-template"></auto-complete>
-          </tags-input>
-          <multiple-select-modal header-text="Choose the contacts"
-                              allow-empty='true'
-                              items="ctrl.allContacts"
-                              callback="ctrl.addContacts"
-                              multi-select="true" />
-      </div>
-      <ion-toggle
-          ng-checked="false"
-          ng-model="ctrl.model.resharing"
-          class="item item-text-wrap re-share">
-        Re-sharing:
-      </ion-toggle>
-      <!-- End of share options -->
-
-      <div class="buttons padding">
-        <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.content">Post</button>
-        <button class="button button-light" ng-click="ctrl.postMode = false; ctrl.reset()">Cancel</button>
+      <div class="list">
+        <div class="item" ng-repeat="file in ctrl.model.files">
+            <h2>{{file.filename}}</h2>
+            <p>{{file.mimetype}}</p>
+        </div>
       </div>
     </div>
+    <!-- End of files attachment -->
+
+    <!-- Share options -->
+    <div ng-if="ctrl.postType" class="item item-input cancel-overlay">
+        <span class="input-label">Share with:</span>
+        <tags-input
+          class="share-with"
+          placeholder="Add people"
+          ng-model="ctrl.selectedContacts"
+          replace-spaces-with-dashes="false"
+          on-tag-adding="ctrl.validateContact($tag)"
+          key-property="id"
+          display-property="name"
+          template="tag-template">
+          <auto-complete
+            source="ctrl.loadContacts($query)"
+            min-length="0"
+            load-on-focus="true"
+            load-on-empty="true"
+            template="autocomplete-template"></auto-complete>
+        </tags-input>
+        <multiple-select-modal header-text="Choose the contacts"
+                            allow-empty='true'
+                            items="ctrl.allContacts"
+                            callback="ctrl.addContacts"
+                            multi-select="true" />
+    </div>
+    <ion-toggle
+        ng-if="ctrl.postType"
+        ng-checked="false"
+        ng-model="ctrl.model.resharing"
+        class="item item-text-wrap re-share">
+      Re-sharing:
+    </ion-toggle>
+    <!-- End of share options -->
+
+    <!-- Begin of post button actions -->
+    <div ng-if="ctrl.postType" class="buttons padding">
+      <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.content">Post</button>
+      <button class="button button-light" ui-sref="app.main">Cancel</button>
+    </div>
+    <!-- Begin of post button actions -->
+
   </div>
 </div>
 

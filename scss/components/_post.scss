@@ -8,9 +8,10 @@
     position: absolute;
     top: 26px;
     left: 28px;
+    color: #afafaf;
 
     &.active {
-      color: #afafaf;
+      color: #000;
     }
   }
 

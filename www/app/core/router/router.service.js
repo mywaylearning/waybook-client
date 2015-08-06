@@ -27,11 +27,8 @@
      * @return {Promise} A promise representing the state of the new transition
      */
     function _goToLoggedIn() {
-      debug('routing to app.dashboard');
-      foo = $state.go('app.dashboard');
-      //return $state.go('app.dashboard');
-      debug(foo);
-      return foo;
+      debug('routing to app.main');
+      return $state.go('app.main');
     }
 
     function _goToLoggedOut() {

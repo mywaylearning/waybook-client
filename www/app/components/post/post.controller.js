@@ -9,12 +9,18 @@
 
     debug(SWAGGER);
 
+    console.log($scope);
+
     var ctrl = this;
 
-    function init() {
-      // Define type of post mode (show form)
-      ctrl.postMode = false;
+    // Handle content editable click based on type of post
+    ctrl.handleContentClick = function() {
+      if (!ctrl.postType) {
+        $state.go('app.main.thought');
+      }
+    };
 
+    function init() {
       // Other definitions
       ctrl.placeHolder = "Share something...";
 
@@ -48,7 +54,6 @@
       if (!term.length) {
         return;
       }
-      var hashtagList = [];
       return TagService.collection(term).then(function(response) {
         ctrl.tags = response;
       });
@@ -57,7 +62,6 @@
     ctrl.getTagText = function(item) {
         return '<span>#' + item.text + '</span>';
     };
-
 
     ctrl.validateContact = function($tag) {
       if (!$tag.id) {
@@ -100,7 +104,6 @@
     };
 
     ctrl.attachPhotos = function() {
-      ctrl.postMode = 'photo';
       filepicker.pick(
         {
           mimetype: 'image/*',
@@ -112,14 +115,12 @@
           $scope.$apply();
         },
         function(FPError){
-          ctrl.postMode = 'text';
           $scope.$apply();
           console.log(FPError.toString());
         });
     };
 
     ctrl.attachFiles = function() {
-      ctrl.postMode = 'files';
       filepicker.pickMultiple(
         {
           extensions: ['.pdf', '.doc', '.txt', '.docx'],
@@ -131,18 +132,9 @@
           $scope.$apply();
         },
         function(FPError){
-          console.log('aqui');
-          ctrl.postMode = 'text';
           $scope.$apply();
         });
     };
-
-    $scope.$watch('ctrl.postMode', function(newValue) {
-      if (newValue === false) {
-        ctrl.extractLinkUrl = null;
-        ctrl.extractResult = null;
-      }
-    });
 
     ctrl.linkExtraction = {
       url: null
@@ -203,7 +195,6 @@
 
     ctrl.removePhoto = function() {
       ctrl.model.image = null;
-      ctrl.postMode = 'text';
     };
 
     ctrl.reset = function() {

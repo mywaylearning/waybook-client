@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function wayPost() {
+  function wayPost($timeout) {
 
     return {
       restrict: 'EA',
@@ -14,20 +14,18 @@
       bindToController: true,
       templateUrl: '/app/components/post/post.html',
       link: function(scope, el, attrs) {
-        var placeholderEl = el.find('.textarea');
-        var postTitle = el.find('.post-title');
+        var contentElement = el.find('.textarea');
 
-        placeholderEl.bind('click', function(e) {
-          setTimeout(function(){
-            postTitle.focus();
+        if (scope.ctrl.postType) {
+          $timeout(function(){
+            contentElement[0].focus();
           });
-
-        });
+        }
 
       }
     };
   }
 
-  module.exports = wayPost;
+  module.exports = ['$timeout', wayPost];
 
 }());

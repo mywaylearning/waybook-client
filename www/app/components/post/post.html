@@ -86,7 +86,7 @@
       </div>
 
     </div>
-    <div ng-if="ctrl.postType" class="item item-input attach-actions">
+    <div ng-if="ctrl.postType || (!ctrl.model.image && !ctrl.model.link && !ctrl.model.files)" class="item item-input attach-actions">
       Attach:
         <button class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</button>
         <button class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</button>
@@ -95,6 +95,9 @@
 
     <!-- Begin of link extraction -->
     <div ng-if="ctrl.addLink">
+      <div class="item item-divider">
+        Link
+      </div>
       <div ng-if="!ctrl.model.link" class="item item-input-inset link-extraction">
         <label class="item-input-wrapper">
           <input type="text" ng-model="ctrl.linkExtraction.url" ng-blur="ctrl.extractLink()" placeholder="Type or paste a link">
@@ -115,6 +118,9 @@
     <!-- End of link extraction -->
 
     <!-- Begin of photos embed/upload -->
+    <div ng-if="ctrl.model.image" class="item item-divider">
+      Photo
+    </div>
     <div ng-if="ctrl.model.image" class="item item-image">
       <img ng-src="{{ctrl.model.image}}" />
       <button class="button button-stable remove-photo" ng-click="ctrl.removePhoto()">

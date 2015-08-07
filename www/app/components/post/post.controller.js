@@ -226,6 +226,7 @@
       // define tags
       ctrl.model.tags = detectTags(ctrl.model.content);
       goal.create(ctrl.model).then(function(result){
+        ctrl.reset();
         $state.go('app.main', {}, {reload: true});
       });
     };

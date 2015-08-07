@@ -86,7 +86,7 @@
       </div>
 
     </div>
-    <div ng-if="ctrl.postType || (!ctrl.model.image && !ctrl.model.link && !ctrl.model.files)" class="item item-input attach-actions">
+    <div ng-if="ctrl.postType" class="item item-input attach-actions">
       Attach:
         <button class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</button>
         <button class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</button>

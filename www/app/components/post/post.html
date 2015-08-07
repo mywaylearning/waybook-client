@@ -1,7 +1,7 @@
 <div class="post inner-content">
   <div class="list card cancel-overlay">
     <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.postType}">{{ctrl.placeHolder}}</div>
+      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.postType}" ng-bind-html="ctrl.placeHolder"></div>
       <div class="textarea"
         ng-click="ctrl.handleContentClick()"
         ng-model="ctrl.model.content"
@@ -26,6 +26,65 @@
           <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.discovery"><span class="clearfix dark">Discovery</span></button>
           <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.resource"><span class="clearfix dark">Resource</span></button>
       </div>
+    </div>
+    <div ng-if="ctrl.postType == 'goal'">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Importance:
+        </div>
+        <select>
+          <option>Must Complete</option>
+          <option selected>Should Complete</option>
+          <option>Nice to Complete</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Start date:</span>
+        <input type="date">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Deadline:</span>
+        <input type="date">
+      </label>
+      <ion-toggle
+          ng-if="ctrl.postType"
+          ng-checked="false"
+          ng-model="ctrl.model.habit"
+          class="item item-text-wrap habit">
+          This recurs, and is really a goal to form a habit
+      </ion-toggle>
+      <div ng-show="ctrl.model.habit" class="list">
+        <div class="item item-divider">
+          Habit
+        </div>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Recurrence (the period):
+          </div>
+          <select>
+            <option value="" selected>Daily</option>
+            <option value="">Weekly</option>
+            <option value="">Bi-weekly</option>
+            <option value="">Monthly</option>
+            <option value="">Quarterly</option>
+            <option value="">Semi-annual</option>
+            <option value="">Yearly</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Occurrences in the period:</span>
+          <input type="number" min="1" step="1" pattern="\d*">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cues:</span>
+          <input type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Rewards:</span>
+          <input type="text">
+        </label>
+      </div>
+
     </div>
     <div ng-if="ctrl.postType" class="item item-input attach-actions">
       Attach:

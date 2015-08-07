@@ -20,13 +20,31 @@
       }
     };
 
-    function init() {
-      // Other definitions
-      ctrl.placeHolder = "Share something...";
+    switch (ctrl.postType) {
+      case 'thought':
+        ctrl.placeHolder = "This is the default text for a thought..."
+        break;
+      case 'goal':
+        ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
+        break;
+      case 'discovery':
+        ctrl.placeHolder = "#discovery<br>What did you learn about yourself, or how you engage with others and the world around you?"
+        break;
+      case 'resource':
+        ctrl.placeHolder = "#resource<br>What will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
+        ctrl.addLink = true;
+        break;
 
-      debug('type...? ' + ctrl.postType);
+
+
+      default:
+        ctrl.placeHolder = "Share something...";
     }
-    init();
+
+    // function init() {
+    //   debug('type...? ' + ctrl.postType);
+    // }
+    // init();
 
     // Mocking contacts
     $http.get('app/components/post/test.json').success(function(result) {

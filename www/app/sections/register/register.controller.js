@@ -29,7 +29,7 @@ function RegisterController($scope, router, user, errorHandler) {
     user
       .register(model)
       .then(function(data) {
-        router.goToLoggedOut();
+        router.goTo('public.emailSent');
       })
       .catch(function(error) {
         console.log('on error', error);

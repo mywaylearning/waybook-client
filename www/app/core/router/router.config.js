@@ -102,6 +102,16 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('public.verify', {
+    url: '^/verify',
+    views: {
+      'publicContent': {
+        templateUrl: 'app/sections/verify/verify.publicContent.html',
+        controller: 'VerifyController'
+      }
+    }
+  })
+
   .state('public.register', {
     url: '^/register',
     views: {

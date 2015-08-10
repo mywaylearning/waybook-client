@@ -18,7 +18,7 @@ function VerifyController($scope, router, user, errorHandler) {
       router.goToLoggedOut();
     })
     .catch(function(error) {
-      console.log('on error', error);
+      router.goToLoggedOut();
     });
 };
 

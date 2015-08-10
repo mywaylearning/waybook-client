@@ -112,6 +112,18 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  /**
+   * Not sure about the name of the route
+   */
+  .state('public.emailSent', {
+    url: '^/emailSent',
+    views: {
+      'publicContent': {
+        templateUrl: 'app/sections/public/verify.html',
+      }
+    }
+  })
+
   .state('public.register', {
     url: '^/register',
     views: {

@@ -9,7 +9,7 @@
         <button class="button button-icon ion-chevron-down" ng-click="popover.show($event)"></button>
       </div>
       <div class="item-tags">
-        <span class="item-tag" ng-repeat="tag in item.tags">#{{tag}}</span>
+        <span class="item-tag" ng-repeat="tag in item.tags track by $index">#{{tag}}</span>
       </div>
     </div>
     <div ng-if="item.image" class="item item-image">

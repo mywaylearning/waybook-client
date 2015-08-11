@@ -2,24 +2,25 @@
   <div class="list card cancel-overlay">
     <div class="item item-text-wrap">
       <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.postType}" ng-bind-html="ctrl.placeHolder"></div>
-      <div class="textarea"
-        ng-click="ctrl.handleContentClick()"
-        ng-model="ctrl.model.content"
-        contenteditable
-        mentio
-        id="tags"
-        mentio-typedTerm="typedTerm"
-        mentio-require-leading-space="true"
-        ng-class="{'inactive': !ctrl.postType}"></div>
+      <div ng-if="!ctrl.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
+      <div ng-if="ctrl.postType">
+        <div class="textarea"
+          ng-model="ctrl.model.content"
+          contenteditable
+          mentio
+          id="tags"
+          mentio-typedTerm="typedTerm"
+          mentio-require-leading-space="true"></div>
 
-        <mentio-menu
-              mentio-for="'tags'"
-              mentio-trigger-char="'#'"
-              mentio-items="ctrl.tagsView"
-              mentio-template-url="/tags.tpl"
-              mentio-search="ctrl.searchTag(term)"
-              mentio-select="ctrl.getTagText(item)"
-              ></mentio-menu>
+          <mentio-menu
+                mentio-for="'tags'"
+                mentio-trigger-char="'#'"
+                mentio-items="ctrl.tagsView"
+                mentio-template-url="/tags.tpl"
+                mentio-search="ctrl.searchTag(term)"
+                mentio-select="ctrl.getTagText(item)"
+                ></mentio-menu>
+      </div>
       <div ng-if="!ctrl.postType" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.thought"><span class="clearfix dark">Thought</span></button>
           <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.goal"><span class="clearfix dark">Goal</span></button>
@@ -213,8 +214,8 @@
 
 <script type="text/ng-template" id="/tags.tpl">
 <ul class="list-group hashtag-search">
-    <li mentio-menu-item="hashtag" ng-repeat="hashtag in items" class="list-group-item">
-        <span class="text-primary" ng-bind-html="hashtag.text | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+    <li mentio-menu-item="tag" ng-repeat="tag in items" class="list-group-item">
+        <span class="text-primary" ng-bind-html="tag.text | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
     </li>
 </ul>
 </script>

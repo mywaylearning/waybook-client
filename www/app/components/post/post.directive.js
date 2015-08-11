@@ -14,12 +14,11 @@
       bindToController: true,
       templateUrl: '/app/components/post/post.html',
       link: function(scope, el, attrs) {
-        var contentElement = el.find('.textarea');
-
         if (scope.ctrl.postType) {
           $timeout(function(){
+            var contentElement = el.find('#tags');
             contentElement[0].focus();
-          });
+          }, 100);
         }
 
       }

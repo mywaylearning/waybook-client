@@ -12,10 +12,8 @@
     var ctrl = this;
 
     // Handle content editable click based on type of post
-    ctrl.handleContentClick = function() {
-      if (!ctrl.postType) {
-        $state.go('app.main.thought');
-      }
+    ctrl.goToThought = function() {
+      $state.go('app.main.thought');
     };
 
 
@@ -63,7 +61,17 @@
         return;
       }
       return TagService.collection(term).then(function(response) {
-        ctrl.tagsView = response;
+        var count = 0;
+        ctrl.tagsView = [];
+        angular.forEach(response, function(tag){
+          if (count > 10) {
+            return;
+          }
+          if (tag.text) {
+            ctrl.tagsView.push(tag);
+            count++;
+          }
+        })
       });
     };
 

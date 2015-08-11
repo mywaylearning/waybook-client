@@ -242,6 +242,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     cache: false,
     url: '/main',
     views: {
+      'way-post': {
+        template: '<way-post></way-post>',
+      },
       'bodyContent': {
         controller: 'MainController'
       }

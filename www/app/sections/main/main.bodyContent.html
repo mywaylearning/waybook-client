@@ -1,0 +1,10 @@
+<ion-view view-title="Main">
+  <ion-content padding="true" class="has-header">
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    <div ui-view="way-post">
+      <way-post></way-post>
+    </div>
+
+    <way-feed></way-feed>
+  </ion-content>
+</ion-view>

@@ -8,9 +8,10 @@
     position: absolute;
     top: 26px;
     left: 28px;
+    color: #afafaf;
 
     &.active {
-      color: #afafaf;
+      color: #000;
     }
   }
 
@@ -21,8 +22,8 @@
     cursor: text;
     word-wrap: break-word;
     border-radius: 3px;
-    max-height: 178px;
-    min-height: 58px;
+    max-height: 198px;
+    min-height: 88px;
     overflow-y: scroll;
 
     &.inactive {

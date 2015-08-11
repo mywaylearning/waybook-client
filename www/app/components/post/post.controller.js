@@ -9,18 +9,42 @@
 
     debug(SWAGGER);
 
+    console.log($scope);
+
     var ctrl = this;
 
-    function init() {
-      // Define type of post mode (show form)
-      ctrl.postMode = false;
+    // Handle content editable click based on type of post
+    ctrl.handleContentClick = function() {
+      if (!ctrl.postType) {
+        $state.go('app.main.thought');
+      }
+    };
 
-      // Other definitions
-      ctrl.placeHolder = "Share something...";
+    switch (ctrl.postType) {
+      case 'thought':
+        ctrl.placeHolder = "This is the default text for a thought..."
+        break;
+      case 'goal':
+        ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
+        break;
+      case 'discovery':
+        ctrl.placeHolder = "#discovery<br>What did you learn about yourself, or how you engage with others and the world around you?"
+        break;
+      case 'resource':
+        ctrl.placeHolder = "#resource<br>What will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
+        ctrl.addLink = true;
+        break;
 
-      debug('type...? ' + ctrl.postType);
+
+
+      default:
+        ctrl.placeHolder = "Share something...";
     }
-    init();
+
+    // function init() {
+    //   debug('type...? ' + ctrl.postType);
+    // }
+    // init();
 
     // Mocking contacts
     $http.get('app/components/post/test.json').success(function(result) {
@@ -48,7 +72,6 @@
       if (!term.length) {
         return;
       }
-      var hashtagList = [];
       return TagService.collection(term).then(function(response) {
         ctrl.tags = response;
       });
@@ -57,7 +80,6 @@
     ctrl.getTagText = function(item) {
         return '<span>#' + item.text + '</span>';
     };
-
 
     ctrl.validateContact = function($tag) {
       if (!$tag.id) {
@@ -100,7 +122,6 @@
     };
 
     ctrl.attachPhotos = function() {
-      ctrl.postMode = 'photo';
       filepicker.pick(
         {
           mimetype: 'image/*',
@@ -112,14 +133,12 @@
           $scope.$apply();
         },
         function(FPError){
-          ctrl.postMode = 'text';
           $scope.$apply();
           console.log(FPError.toString());
         });
     };
 
     ctrl.attachFiles = function() {
-      ctrl.postMode = 'files';
       filepicker.pickMultiple(
         {
           extensions: ['.pdf', '.doc', '.txt', '.docx'],
@@ -131,18 +150,9 @@
           $scope.$apply();
         },
         function(FPError){
-          console.log('aqui');
-          ctrl.postMode = 'text';
           $scope.$apply();
         });
     };
-
-    $scope.$watch('ctrl.postMode', function(newValue) {
-      if (newValue === false) {
-        ctrl.extractLinkUrl = null;
-        ctrl.extractResult = null;
-      }
-    });
 
     ctrl.linkExtraction = {
       url: null
@@ -203,7 +213,6 @@
 
     ctrl.removePhoto = function() {
       ctrl.model.image = null;
-      ctrl.postMode = 'text';
     };
 
     ctrl.reset = function() {
@@ -217,7 +226,8 @@
       // define tags
       ctrl.model.tags = detectTags(ctrl.model.content);
       goal.create(ctrl.model).then(function(result){
-        $state.reload();
+        ctrl.reset();
+        $state.go('app.main', {}, {reload: true});
       });
     };
 

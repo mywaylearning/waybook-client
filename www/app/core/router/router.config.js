@@ -15,7 +15,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   userResolve = {
     userGrant: function(grant) {
-      return grant.only([ROLES.user], ['app.dashboard']);
+      return grant.only([ROLES.user], ['app.main']);
     }
   };
 
@@ -164,6 +164,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.discover', {
     abstract: true,
+    url: '/discover',
     views: {
       'bodyContent': {
         template: '<ion-nav-view name="discover-bodyContent"></ion-nav-view>'
@@ -172,7 +173,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.discover.entry', {
-    url: '^/discover',
+    url: '',
     views: {
       'discover-bodyContent': {
         templateUrl: 'app/sections/discover/discover.bodyContent.html',
@@ -182,7 +183,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.discover.exploration', {
-    url: '^/discover/:category/:exploration',
+    url: '/:category/:exploration',
     views: {
       'discover-bodyContent': {
         templateUrl: 'app/sections/discover/exploration.bodyContent.html',
@@ -192,8 +193,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan', {
-    cache: false,
-    url: '^/plan',
+    url: '/plan',
     views: {
       'bodyContent': {
         controller: 'PlanController'
@@ -203,7 +203,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
 
   .state('app.unite', {
-    url: '^/unite',
+    url: '/unite',
     views: {
       'bodyContent': {
         controller: 'UniteController'
@@ -212,7 +212,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.me', {
-    url: '^/me',
+    url: '/me',
     views: {
       'bodyContent': {
         controller: 'MeController'
@@ -221,7 +221,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.help-feedback', {
-    url: '^/help-feedback',
+    url: '/help-feedback',
     views: {
       'bodyContent': {
         controller: 'HelpFeedbackController'
@@ -230,7 +230,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.about', {
-    url: '^/about',
+    url: '/about',
     views: {
       'bodyContent': {
         controller: 'AboutController'
@@ -238,11 +238,48 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
-  .state('app.dashboard', {
-    url: '^/dashboard',
+  .state('app.main', {
+    cache: false,
+    url: '/main',
     views: {
       'bodyContent': {
-        controller: 'DashboardController'
+        controller: 'MainController'
+      }
+    }
+  })
+
+  .state('app.main.thought', {
+    url: '/thought',
+    views: {
+      'way-post': {
+        template: '<way-post type="thought"></way-post>',
+      }
+    }
+  })
+
+  .state('app.main.goal', {
+    url: '/goal',
+    views: {
+      'way-post': {
+        template: '<way-post type="goal"></way-post>',
+      }
+    }
+  })
+
+  .state('app.main.discovery', {
+    url: '/discovery',
+    views: {
+      'way-post': {
+        template: '<way-post type="discovery"></way-post>',
+      }
+    }
+  })
+
+  .state('app.main.resource', {
+    url: '/resource',
+    views: {
+      'way-post': {
+        template: '<way-post type="resource"></way-post>',
       }
     }
   });

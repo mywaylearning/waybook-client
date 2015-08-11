@@ -9,17 +9,15 @@
 
     debug(SWAGGER);
 
-    console.log($scope);
-
     var ctrl = this;
 
     // Handle content editable click based on type of post
-    ctrl.handleContentClick = function() {
-      if (!ctrl.postType) {
-        $state.go('app.main.thought');
-      }
+    ctrl.goToThought = function() {
+      $state.go('app.main.thought');
     };
 
+
+    // Define default options based on type of post
     switch (ctrl.postType) {
       case 'thought':
         ctrl.placeHolder = "This is the default text for a thought..."
@@ -34,56 +32,57 @@
         ctrl.placeHolder = "#resource<br>What will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
         ctrl.addLink = true;
         break;
-
-
-
       default:
         ctrl.placeHolder = "Share something...";
     }
 
-    // function init() {
-    //   debug('type...? ' + ctrl.postType);
-    // }
-    // init();
-
-    // Mocking contacts
+    // Mocking contacts. TODO: Use API endpoint.
     $http.get('app/components/post/test.json').success(function(result) {
       ctrl.allContacts = result;
     });
 
-    // Tags holder
-    ctrl.tags = [];
 
+    // Parse content to detect tags
     var detectTags = function(text) {
-      var tags = text.match(/(^|\W)(#[a-z\d][\w-]*)/ig)
-      var tagsArr = [];
+      var tags = text.match(/(^|\W)(#[a-z\d][\w-]*)/ig);
+      var _tags = []
       if (tags) {
         angular.forEach(tags, function(tag) {
-          tagsArr.push(tag.replace('#', '').replace(' ', '').replace('>', '').replace(';', ''));
-        })
+          _tags.push(tag.substr(tag.indexOf('#') + 1));
+        });
       }
 
-      return tagsArr;
+      return _tags;
     };
 
-
-
+    // Search for tags on API based on user input
     ctrl.searchTag = function(term) {
       if (!term.length) {
         return;
       }
       return TagService.collection(term).then(function(response) {
-        ctrl.tags = response;
+        var count = 0;
+        ctrl.tagsView = [];
+        angular.forEach(response, function(tag){
+          if (count > 10) {
+            return;
+          }
+          if (tag.text) {
+            ctrl.tagsView.push(tag);
+            count++;
+          }
+        })
       });
     };
 
+    // Add tag to div contenteditable with the #
     ctrl.getTagText = function(item) {
         return '<span>#' + item.text + '</span>';
     };
 
+    // Validates each item added as contact to share. If there's no ID, it's an e-mail and we must validade it.
     ctrl.validateContact = function($tag) {
       if (!$tag.id) {
-        // must validade if it's an e-mail
         var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         return re.test($tag.name);
       }
@@ -225,6 +224,9 @@
       debug('saving...', ctrl.model);
       // define tags
       ctrl.model.tags = detectTags(ctrl.model.content);
+
+      // Append the post type to tags
+      ctrl.model.tags.push(ctrl.postType);
       goal.create(ctrl.model).then(function(result){
         ctrl.reset();
         $state.go('app.main', {}, {reload: true});

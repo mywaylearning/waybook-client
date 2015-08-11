@@ -1,5 +1,6 @@
 'use strict';
 
-function MainController($scope) {}
+function MainController($scope) {
+}
 
 module.exports = ['$scope', MainController];

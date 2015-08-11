@@ -22,33 +22,42 @@
         </ion-item>
 
 
-        <ion-item nav-clear menu-close href="#!/dashboard" class="item item-dark">
+        <div class="item item-input-inset item-dark">
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="search" placeholder="Search">
+          </label>
+          <button class="button button-stable button-small">Search</button>
+        </div>
+
+
+        <a nav-clear menu-close ui-sref="app.main" class="item item-dark">
            Main
-        </ion-item>
-        <ion-item nav-clear menu-close href="#!/discover" class="item item-dark">
+        </a>
+
+        <a nav-clear menu-close ui-sref="app.discover" class="item item-dark">
           Discover
-        </ion-item>
-        <ion-item nav-clear menu-close href="#!/plan" class="item item-dark">
+        </a>
+        <a nav-clear menu-close ui-sref="app.plan" class="item item-dark">
           Plan
-        </ion-item>
-        <ion-item nav-clear menu-close href="#!/unite" class="item item-dark">
+        </a>
+        <a nav-clear menu-close ui-sref="app.unite" class="item item-dark">
           Unite
-        </ion-item>
-        <ion-item nav-clear menu-close href="#!/me" class="item item-dark">
+        </a>
+        <a nav-clear menu-close ui-sref="app.me" class="item item-dark">
           Me
-        </ion-item>
+        </a>
 
         <div class="spacer" style="height: 40px;"></div>
-        <ion-item nav-clear menu-close href="#!/help-feedback" class="item item-dark">
-          Help &amp; Feedback
-        </ion-item>
-        <ion-item nav-clear menu-close href="#!/about" class="item item-dark">
+        <a nav-clear menu-close ui-sref="app.help-feedback" class="item item-dark">
+          Feedback
+        </a>
+        <a nav-clear menu-close ui-sref="app.about" class="item item-dark">
           About
-        </ion-item>
+        </a>
 
-        <ion-item nav-clear menu-close ng-click="app.logout()" class="item item-dark">
+        <a nav-clear menu-close ng-click="app.logout()" class="item item-dark">
           Log Out
-        </ion-item>
+        </a>
       </ion-list>
     </ion-content>
     <ion-footer-bar class="bar-positive">

@@ -1,21 +1,25 @@
-<ion-view cache-view="false" title="Waybook">
+<ion-view cache-view="false" view-title="Register">
   <ion-content padding="true" class="has-header">
     <form name="loginForm" ng-submit="onRegister()">
       <ion-list>
 
         <label class="item item-input">
-          <input type="text" ng-model="register.name" placeholder="first name">
+          <span class="input-label">First name:</span>
+          <input type="text" ng-model="register.name" placeholder="First name">
         </label>
 
         <label class="item item-input">
-          <input type="text" ng-model="register.lastName" placeholder="last name">
+          <span class="input-label">Last name:</span>
+          <input type="text" ng-model="register.lastName" placeholder="Last name">
         </label>
 
         <label class="item item-input">
-          <input type="email" ng-model="register.email" placeholder="email">
+          <span class="input-label">E-mail:</span>
+          <input type="email" ng-model="register.email" placeholder="E-mail">
         </label>
 
         <label class="item item-input">
+          <span class="input-label">Password:</span>
           <input type="password" ng-model="register.password" placeholder="Create a password">
         </label>
       </ion-list>
@@ -26,9 +30,7 @@
         Sign Up
       </button>
 
-      Already have an account? <a href="#!/login" class="">
-      Log in now
-      </a>
+      <a href="#!/login" class="button button-positive button-clear button-block">Already have an account? Log in now</a>
 
     </form>
   </ion-content>

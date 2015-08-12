@@ -22,7 +22,7 @@
     cursor: text;
     word-wrap: break-word;
     border-radius: 3px;
-    max-height: 198px;
+    max-height: 138px;
     min-height: 88px;
     overflow-y: scroll;
 
@@ -30,6 +30,7 @@
       max-height: 40px;
       min-height: 40px;
       overflow: visible;
+
       &::after, &::before {
         top: 100%;
       	left: 13%;
@@ -72,39 +73,6 @@
     overflow-y: scroll;
     cursor: text;
     word-wrap: break-word;
-  }
-
-  .textarea {
-    border: 1px solid $placeholder-border-color;
-    padding: 10px;
-    position: relative;
-    cursor: text;
-    border-radius: 3px;
-
-    &::after, &::before {
-      top: 100%;
-    	left: 13%;
-    	border: solid transparent;
-    	content: " ";
-    	height: 0;
-    	width: 0;
-    	position: absolute;
-    	pointer-events: none;
-    }
-
-    &::after {
-      border-color: rgba(255, 255, 255, 0);
-    	border-top-color: #ffffff;
-    	border-width: 10px;
-    	margin-left: -10px;
-    }
-
-    &::before {
-      border-color: #ffffff;
-    	border-top-color: #d4d4d4;
-    	border-width: 11px;
-    	margin-left: -11px;
-    }
   }
 
   .button-bar {

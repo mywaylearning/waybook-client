@@ -16,6 +16,13 @@
       $state.go('app.main.thought');
     };
 
+    // Reset model
+    ctrl.reset = function() {
+      ctrl.model = {};
+    };
+
+    ctrl.reset();
+
 
     // Define default options based on type of post
     switch (ctrl.postType) {
@@ -23,6 +30,13 @@
         ctrl.placeHolder = "This is the default text for a thought..."
         break;
       case 'goal':
+        // Define default properties of goal
+        ctrl.model = {
+          gImportance: 'Should Complete',
+          gRecurringEnabled: false,
+          gRecurringRecurrence: 'Daily'
+        };
+
         ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
         break;
       case 'discovery':
@@ -212,13 +226,8 @@
 
     ctrl.removePhoto = function() {
       ctrl.model.image = null;
+      delete ctrl.model.image;
     };
-
-    ctrl.reset = function() {
-      ctrl.model = {};
-    };
-
-    ctrl.reset();
 
     ctrl.save = function() {
       debug('saving...', ctrl.model);
@@ -227,6 +236,12 @@
 
       // Append the post type to tags
       ctrl.model.tags.push(ctrl.postType);
+
+      // Add tag habit if it's one
+      if (ctrl.model.gRecurringEnabled) {
+        ctrl.model.tags.push('habit');
+      }
+      
       goal.create(ctrl.model).then(function(result){
         ctrl.reset();
         $state.go('app.main', {}, {reload: true});

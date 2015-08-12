@@ -1,4 +1,5 @@
 <div class="post inner-content">
+  <form name="postForm" novalidate ng-submit="ctrl.save()" >
   <div class="list card cancel-overlay">
     <div class="item item-text-wrap">
       <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.postType}" ng-bind-html="ctrl.placeHolder"></div>
@@ -10,7 +11,7 @@
           mentio
           id="tags"
           mentio-typedTerm="typedTerm"
-          mentio-require-leading-space="true"></div>
+          mentio-require-leading-space="true" required></div>
 
           <mentio-menu
                 mentio-for="'tags'"
@@ -33,28 +34,28 @@
         <div class="input-label">
           Importance:
         </div>
-        <select>
-          <option>Must Complete</option>
-          <option selected>Should Complete</option>
-          <option>Nice to Complete</option>
+        <select ng-model="ctrl.model.gImportance">
+          <option value="Must Complete">Must Complete</option>
+          <option value="Should Complete">Should Complete</option>
+          <option value="Nice to Complete">Nice to Complete</option>
         </select>
       </label>
       <label class="item item-input">
         <span class="input-label">Start date:</span>
-        <input type="date">
+        <input type="date" ng-model="ctrl.model.gStartDate">
       </label>
       <label class="item item-input">
         <span class="input-label">Deadline:</span>
-        <input type="date">
+        <input type="date" ng-model="ctrl.model.gEndDate" required>
       </label>
       <ion-toggle
           ng-if="ctrl.postType"
           ng-checked="false"
-          ng-model="ctrl.model.habit"
+          ng-model="ctrl.model.gRecurringEnabled"
           class="item item-text-wrap habit">
           This recurs, and is really a goal to form a habit
       </ion-toggle>
-      <div ng-show="ctrl.model.habit" class="list">
+      <div ng-show="ctrl.model.gRecurringEnabled" class="list">
         <div class="item item-divider">
           Habit
         </div>
@@ -62,19 +63,19 @@
           <div class="input-label">
             Recurrence (the period):
           </div>
-          <select>
-            <option value="" selected>Daily</option>
-            <option value="">Weekly</option>
-            <option value="">Bi-weekly</option>
-            <option value="">Monthly</option>
-            <option value="">Quarterly</option>
-            <option value="">Semi-annual</option>
-            <option value="">Yearly</option>
+          <select ng-model="ctrl.model.gRecurringRecurrence">
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Bi-weekly">Bi-weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Semi-annual">Semi-annual</option>
+            <option value="Yearly">Yearly</option>
           </select>
         </label>
         <label class="item item-input">
           <span class="input-label">Occurrences in the period:</span>
-          <input type="number" min="1" step="1" pattern="\d*">
+          <input type="number" min="1" step="1" pattern="\d*" ng-model="ctrl.model.gRecurringRepeatsEvery" ng-required="ctrl.model.gRecurringEnabled">
         </label>
         <label class="item item-input">
           <span class="input-label">Cues:</span>
@@ -180,11 +181,11 @@
 
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.postType" class="buttons padding">
-      <button class="button button-positive" ng-click="ctrl.save()" ng-disabled="!ctrl.model.content">Post</button>
+      <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid">Post</button>
       <button class="button button-light" ui-sref="app.main">Cancel</button>
     </div>
     <!-- Begin of post button actions -->
-
+  </form>
   </div>
 </div>
 

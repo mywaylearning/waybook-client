@@ -3,7 +3,7 @@
   <div class="list card" ng-repeat="item in feed.items | orderBy: '-created'">
     <div class="item item-avatar">
       <img gravatar-src="'{{item.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
-      <h2>{{item.WaybookUser.email}}</h2>
+      <h2>{{item.WaybookUser.firstName}} {{item.WaybookUser.lastName}}</h2>
       <p>Shared privately - <span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
       <div class="post-actions">
         <button class="button button-icon ion-chevron-down" ng-click="showPopover($event, item)"></button>

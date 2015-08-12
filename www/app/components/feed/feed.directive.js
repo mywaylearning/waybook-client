@@ -6,10 +6,6 @@
 
     return {
       restrict: 'EA',
-      scope: {
-        type: '=',
-        feed: '=?'
-      },
       controller: 'FeedController',
       templateUrl: '/app/components/feed/feed.html'
     };

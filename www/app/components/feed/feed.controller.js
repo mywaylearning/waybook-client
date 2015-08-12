@@ -4,10 +4,8 @@
 
   var debug = require('debug')('waybook:FeedController');
 
-  function FeedController($scope, goal, $ionicPopover, user) {
+  function FeedController($scope, goal, $ionicPopover) {
     debug('here we are (directive controller)');
-
-    $scope.user = user.currentUser().$object;
 
     $scope.popover = {};
 
@@ -47,6 +45,6 @@
 
   }
 
-  module.exports = ['$scope', 'goal', '$ionicPopover', 'user', FeedController];
+  module.exports = ['$scope', 'goal', '$ionicPopover', FeedController];
 
 }());

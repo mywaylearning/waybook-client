@@ -12,7 +12,7 @@
     "restangular": "~1.5.1",
     "angular-gravatar": "~0.3.1",
     "jquery": "~2.1.4",
-    "ng-tags-input": "~3.0.0",
+    "ng-tags-input": "https://github.com/igorprado/ngTagsInput-bower/archive/v3.0.2.tar.gz",
     "ment.io": "~0.9.23"
   },
   "resolutions": {

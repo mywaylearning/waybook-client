@@ -1,21 +1,21 @@
 <ion-popover-view>
   <ion-content>
     <div class="list">
-      <a class="item item-icon-left" href="" target="_blank">
+      <a ng-if="user.id == popover.item.userId" class="item item-icon-left" href="" ng-click="editPost(popover.item)">
         <i class="icon ion-edit"></i> Edit
       </a>
-      <a class="item item-icon-left" href="" target="_blank">
+      <a ng-if="user.id == popover.item.userId" class="item item-icon-left" href="" ng-click="deletePost(popover.item)">
         <i class="icon ion-close"></i> Delete
       </a>
       <a class="item item-icon-left" href="" target="_blank">
         <i class="icon ion-link"></i> Link to this post
       </a>
-      <a class="item item-icon-left" href="" target="_blank">
+      <!-- <a class="item item-icon-left" href="" target="_blank">
         <i class="icon ion-volume-mute"></i> Mute
       </a>
       <a class="item item-icon-left" href="" target="_blank">
         <i class="icon ion-flag"></i> Report
-      </a>
+      </a> -->
     </div>
   </ion-content>
 </ion-popover-view>

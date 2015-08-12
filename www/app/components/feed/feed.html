@@ -1,12 +1,12 @@
 <div class="feed">
   <h3>Feed listing</h3>
-  <div class="list card" ng-repeat="item in fctrl.feed.items | orderBy: '-created'">
+  <div class="list card" ng-repeat="item in feed.items | orderBy: '-created'">
     <div class="item item-avatar">
-      <img src="/img/joshk.jpg">
-      <h2>Josh Kopelman</h2>
+      <img gravatar-src="'{{item.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
+      <h2>{{item.WaybookUser.email}}</h2>
       <p>Shared privately - <span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
       <div class="post-actions">
-        <button class="button button-icon ion-chevron-down" ng-click="popover.show($event)"></button>
+        <button class="button button-icon ion-chevron-down" ng-click="showPopover($event, item)"></button>
       </div>
       <div class="item-tags">
         <span class="item-tag" ng-repeat="tag in item.tags track by $index">#{{tag}}</span>

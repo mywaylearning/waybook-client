@@ -11,8 +11,6 @@
         feed: '=?'
       },
       controller: 'FeedController',
-      controllerAs: 'fctrl',
-      bindToController: true,
       templateUrl: '/app/components/feed/feed.html'
     };
   }

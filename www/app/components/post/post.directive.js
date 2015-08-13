@@ -7,6 +7,7 @@
     return {
       restrict: 'EA',
       scope: {
+        post: '=',
         postType: '@type'
       },
       controller: 'PostController',

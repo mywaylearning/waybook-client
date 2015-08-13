@@ -11,18 +11,32 @@
 
     var ctrl = this;
 
+    // Check if it's updating a post
+    if (ctrl.post) {
+      ctrl.model = ctrl.post;
+    } else {
+      ctrl.model = {
+        postType: ctrl.postType
+      };
+    }
+
     // Handle content editable click based on type of post
     ctrl.goToThought = function() {
       $state.go('app.main.thought');
     };
 
-
     // Define default options based on type of post
-    switch (ctrl.postType) {
+    switch (ctrl.model.postType) {
       case 'thought':
         ctrl.placeHolder = "This is the default text for a thought..."
         break;
       case 'goal':
+        // Define default properties of goal
+        if (!ctrl.post) {
+          ctrl.model.gImportance = 'Should Complete';
+          ctrl.model.gRecurringEnabled = false;
+          ctrl.model.gRecurringRecurrence = 'Daily';
+        }
         ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
         break;
       case 'discovery':
@@ -212,24 +226,28 @@
 
     ctrl.removePhoto = function() {
       ctrl.model.image = null;
+      delete ctrl.model.image;
     };
-
-    ctrl.reset = function() {
-      ctrl.model = {};
-    };
-
-    ctrl.reset();
 
     ctrl.save = function() {
-      if (!ctrl.model.id) {
-        debug('saving...', ctrl.model);
-        // define tags
-        ctrl.model.tags = detectTags(ctrl.model.content);
+      // define tags
+      ctrl.model.tags = detectTags(ctrl.model.content);
 
-        // Append the post type to tags
-        ctrl.model.tags.push(ctrl.postType);
+      // Append the post type to tags
+      ctrl.model.tags.push(ctrl.model.postType);
+
+      // Add tag habit if it's one
+      if (ctrl.model.gRecurringEnabled) {
+        ctrl.model.tags.push('habit');
+      }
+      if (!ctrl.model.id) {
+        debug('saving new post', ctrl.model);
         goal.create(ctrl.model).then(function(result){
-          ctrl.reset();
+          $state.go('app.main', {}, {reload: true});
+        });
+      } else {
+        debug('updating a post...', ctrl.model);
+        ctrl.model.save().then(function() {
           $state.go('app.main', {}, {reload: true});
         });
       }

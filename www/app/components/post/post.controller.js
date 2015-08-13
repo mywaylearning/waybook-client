@@ -241,7 +241,7 @@
       if (ctrl.model.gRecurringEnabled) {
         ctrl.model.tags.push('habit');
       }
-      
+
       goal.create(ctrl.model).then(function(result){
         ctrl.reset();
         $state.go('app.main', {}, {reload: true});

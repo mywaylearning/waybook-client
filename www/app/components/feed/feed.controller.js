@@ -23,7 +23,7 @@
 
     $scope.deletePost = function(post) {
       $scope.popover.hide();
-      
+
       var confirmPopup = $ionicPopup.confirm({
         title: 'Delete post',
         template: 'Are you sure you want to delete this post?'
@@ -37,6 +37,10 @@
          });
        }
      });
+    };
+
+    $scope.editPost = function(post) {
+      console.log(post);
     };
 
     // $scope.planData = {};

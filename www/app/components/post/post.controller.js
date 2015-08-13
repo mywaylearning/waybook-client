@@ -221,16 +221,18 @@
     ctrl.reset();
 
     ctrl.save = function() {
-      debug('saving...', ctrl.model);
-      // define tags
-      ctrl.model.tags = detectTags(ctrl.model.content);
+      if (!ctrl.model.id) {
+        debug('saving...', ctrl.model);
+        // define tags
+        ctrl.model.tags = detectTags(ctrl.model.content);
 
-      // Append the post type to tags
-      ctrl.model.tags.push(ctrl.postType);
-      goal.create(ctrl.model).then(function(result){
-        ctrl.reset();
-        $state.go('app.main', {}, {reload: true});
-      });
+        // Append the post type to tags
+        ctrl.model.tags.push(ctrl.postType);
+        goal.create(ctrl.model).then(function(result){
+          ctrl.reset();
+          $state.go('app.main', {}, {reload: true});
+        });
+      }
     };
 
   }

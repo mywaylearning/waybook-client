@@ -273,6 +273,22 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         template: '<way-post type="resource"></way-post>',
       }
     }
+  })
+
+  .state('app.main.edit', {
+    cache: false,
+    url: '/edit',
+    params: {
+      post: false
+    },
+    views: {
+      'way-post': {
+        template: '<way-post post="post"></way-post>',
+        controller: function($scope, $stateParams) {
+          $scope.post = $stateParams.post;
+        }
+      }
+    }
   });
 
   // .state('app.search', {

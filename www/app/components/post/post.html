@@ -2,9 +2,9 @@
   <form name="postForm" novalidate ng-submit="ctrl.save()" >
   <div class="list card cancel-overlay">
     <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.postType}" ng-bind-html="ctrl.placeHolder"></div>
-      <div ng-if="!ctrl.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
-      <div ng-if="ctrl.postType">
+      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType}" ng-bind-html="ctrl.placeHolder"></div>
+      <div ng-if="!ctrl.model.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
+      <div ng-if="ctrl.model.postType">
         <div class="textarea"
           ng-model="ctrl.model.content"
           contenteditable
@@ -22,14 +22,14 @@
                 mentio-select="ctrl.getTagText(item)"
                 ></mentio-menu>
       </div>
-      <div ng-if="!ctrl.postType" class="button-bar">
+      <div ng-if="!ctrl.model.postType" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.thought"><span class="clearfix dark">Thought</span></button>
           <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.goal"><span class="clearfix dark">Goal</span></button>
           <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.discovery"><span class="clearfix dark">Discovery</span></button>
           <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.resource"><span class="clearfix dark">Resource</span></button>
       </div>
     </div>
-    <div ng-if="ctrl.postType == 'goal'">
+    <div ng-if="ctrl.model.postType == 'goal'">
       <label class="item item-input item-select">
         <div class="input-label">
           Importance:
@@ -49,7 +49,7 @@
         <input type="date" ng-model="ctrl.model.gEndDate" required>
       </label>
       <ion-toggle
-          ng-if="ctrl.postType"
+          ng-if="ctrl.model.postType"
           ng-checked="false"
           ng-model="ctrl.model.gRecurringEnabled"
           class="item item-text-wrap habit">
@@ -88,7 +88,7 @@
       </div>
 
     </div>
-    <div ng-if="ctrl.postType" class="item item-input attach-actions">
+    <div ng-if="ctrl.model.postType" class="item item-input attach-actions">
       Attach:
         <button class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</button>
         <button class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</button>
@@ -146,7 +146,7 @@
     <!-- End of files attachment -->
 
     <!-- Share options -->
-    <div ng-if="ctrl.postType" class="item item-input cancel-overlay">
+    <div ng-if="ctrl.model.postType" class="item item-input cancel-overlay">
         <span class="input-label">Share with:</span>
         <tags-input
           class="share-with"
@@ -171,7 +171,7 @@
                             multi-select="true" />
     </div>
     <ion-toggle
-        ng-if="ctrl.postType"
+        ng-if="ctrl.model.postType"
         ng-checked="false"
         ng-model="ctrl.model.resharing"
         class="item item-text-wrap re-share">
@@ -180,8 +180,8 @@
     <!-- End of share options -->
 
     <!-- Begin of post button actions -->
-    <div ng-if="ctrl.postType" class="buttons padding">
-      <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid">Post</button>
+    <div ng-if="ctrl.model.postType" class="buttons padding">
+      <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
       <button class="button button-light" ui-sref="app.main">Cancel</button>
     </div>
     <!-- Begin of post button actions -->

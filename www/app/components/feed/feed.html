@@ -37,37 +37,6 @@
         </a>
       </div>
     </div>
-    <div class="item item-comments">
-      <div class="comment-list">
-        <div class="comment">
-          <div class="item item-avatar">
-            <img src="/img/joshk.jpg">
-            <h2>Josh Kopelman</h2>
-            <p><span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
-          </div>
-          <div class="item comment-body">
-            <p class="post-content">This is the content of the comment</p>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="item item-avatar">
-            <img src="/img/joshk.jpg">
-            <h2>Josh Kopelman</h2>
-            <p><span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
-          </div>
-          <div class="item comment-body">
-            <p class="post-content">This is the content of the comment</p>
-          </div>
-        </div>
-      </div>
-      <div class="comment-form">
-        <div class="placeholder" ng-show="!item.userCommentFocus">Add a comment</div>
-        <div class="comment-input" contenteditable="plaintext-only" ng-click="item.userCommentFocus = true" ng-model="item.userComment" ng-class="{'inactive': !item.userCommentFocus}" />
-        <div ng-show="item.userCommentFocus">
-          <button class="button button-balanced button-small">Comment</button>
-          <button class="button button-stable button-small" ng-click="item.userCommentFocus = false; item.userComment = ''">Cancel</button>
-        </div>
-      </div>
-    </div>
+    <way-comment post="item" user="app.user"></way-comment>
   </div>
 </div>

@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:FeedController');
 
-  function FeedController($scope, goal, $ionicPopover) {
+  function FeedController($scope, goal, $ionicPopover, $ionicPopup, $state) {
     debug('here we are (directive controller)');
 
     $scope.popover = {};
@@ -22,11 +22,26 @@
     };
 
     $scope.deletePost = function(post) {
-      post.remove().then(function() {
-        var index = $scope.feed.items.indexOf(post);
-        if (index > -1) $scope.feed.items.splice(index, 1);
-        $scope.popover.hide();
+      $scope.popover.hide();
+
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Delete post',
+        template: 'Are you sure you want to delete this post?'
       });
+
+     confirmPopup.then(function(res) {
+       if(res) {
+         post.remove().then(function() {
+           var index = $scope.feed.items.indexOf(post);
+           if (index > -1) $scope.feed.items.splice(index, 1);
+         });
+       }
+     });
+    };
+
+    $scope.editPost = function(post) {
+      $scope.popover.hide();
+      $state.go('app.main.edit', {post: post});
     };
 
     // $scope.planData = {};
@@ -45,6 +60,6 @@
 
   }
 
-  module.exports = ['$scope', 'goal', '$ionicPopover', FeedController];
+  module.exports = ['$scope', 'goal', '$ionicPopover', '$ionicPopup', '$state', FeedController];
 
 }());

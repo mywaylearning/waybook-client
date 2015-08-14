@@ -1,0 +1,28 @@
+<div class="item item-comments">
+  <button class="button button-small button-clear button-dark button-toggle-comments" ng-if="!options.showAll" ng-click="options.showAll = !options.showAll">Show all comments</button>
+  <div class="comment-list">
+    <div class="comment" ng-repeat="comment in post.Comment | limitTo: options.showAll ? post.Comment.length : -2">
+      <div class="item item-avatar">
+        <img gravatar-src="'{{comment.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
+        <h2>{{comment.WaybookUser.firstName}} {{comment.WaybookUser.lastName}}</h2>
+        <p><span title="{{comment.created | date: 'medium'}}">{{comment.created | date: 'MMM d, y'}}</span></p>
+      </div>
+      <div class="item comment-body">
+        <p class="post-content" ng-bind-html="comment.comment"></p>
+      </div>
+    </div>
+  </div>
+  <div class="comment-form">
+    <form name="commentForm" ng-submit="createComment()" novalidate>
+      <div class="comment-input-holder">
+        <div class="placeholder" ng-show="!options.userCommentFocus">Add a comment</div>
+        <div class="comment-input" contenteditable="plaintext-only" ng-click="options.userCommentFocus = true" ng-model="model.comment" ng-class="{'inactive': !options.userCommentFocus}" required />
+      </div>
+      <div ng-show="options.userCommentFocus">
+        <button class="button button-balanced button-small" ng-disabled="!commentForm.$valid" type="submit">Comment</button>
+        <button class="button button-stable button-small" ng-click="options.userCommentFocus = false; model.comment = ''">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

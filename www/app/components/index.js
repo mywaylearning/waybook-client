@@ -13,4 +13,7 @@
   app.controller('FeedController', require('./feed/feed.controller.js'));
   app.directive('wayFeed', require('./feed/feed.directive.js'));
 
+  app.controller('CommentController', require('./comment/comment.controller.js'));
+  app.directive('wayComment', require('./comment/comment.directive.js'));
+
 }());

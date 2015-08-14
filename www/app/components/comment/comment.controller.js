@@ -9,7 +9,8 @@
 
     $scope.options = {
       userCommentFocus: false,
-      showAll: false
+      showAll: false,
+      minCommentsToShow: 2
     };
 
     $scope.model = {

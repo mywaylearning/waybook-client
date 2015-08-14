@@ -19,7 +19,7 @@
               <div class="comment-input" contenteditable="plaintext-only" ng-model="comment.comment" ng-focus="comment.editMode" required />
             </div>
             <button class="button button-balanced button-small" ng-disabled="!singleCommentForm.$valid">Update</button>
-            <a href="" class="button button-stable button-small" ng-click="comment.editMode = false">Cancel</a>
+            <a href="" class="button button-stable button-small" ng-click="cancelUpdate(comment)">Cancel</a>
           </form>
 
         </div>

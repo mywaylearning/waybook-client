@@ -47,6 +47,12 @@
 
     $scope.showUpdateComment = function(comment) {
       comment.editMode = true;
+      comment.copyComment = angular.copy(comment.comment);
+    };
+
+    $scope.cancelUpdate = function(comment) {
+      comment.editMode = false;
+      comment.comment = comment.copyComment;
     };
 
     $scope.updateComment = function(comment) {

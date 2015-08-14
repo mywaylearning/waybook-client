@@ -7,7 +7,8 @@
     return {
       restrict: 'E',
       scope: {
-        
+        post: '=',
+        user: '='
       },
       controller: 'CommentController',
       templateUrl: '/app/components/comment/comment.html'

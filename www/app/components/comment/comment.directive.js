@@ -11,7 +11,9 @@
         user: '='
       },
       controller: 'CommentController',
-      templateUrl: '/app/components/comment/comment.html'
+      templateUrl: '/app/components/comment/comment.html',
+      link: function(scope, el, attrs) {
+      }
     };
   }
 

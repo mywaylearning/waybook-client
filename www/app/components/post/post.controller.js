@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostController');
 
-  function PostController($scope, $state, $http, $q, $ionicModal, router, goal, SWAGGER, PostService, TagService) {
+  function PostController($scope, $state, router, goal, SWAGGER, PostService, TagService, ContactService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -13,6 +13,14 @@
 
     // Check if it's updating a post
     if (ctrl.post) {
+      // Prepare dates first
+      if (ctrl.post.postType === 'goal') {
+        ctrl.post.gStartDate = new Date(ctrl.post.gStartDate);
+        ctrl.post.gEndDate = new Date(ctrl.post.gEndDate);
+      }
+
+      console.log(ctrl.post);
+
       ctrl.model = ctrl.post;
     } else {
       ctrl.model = {
@@ -28,7 +36,7 @@
     // Define default options based on type of post
     switch (ctrl.model.postType) {
       case 'thought':
-        ctrl.placeHolder = "This is the default text for a thought..."
+        ctrl.placeHolder = "Share what's in your mind..."
         break;
       case 'goal':
         // Define default properties of goal
@@ -49,12 +57,6 @@
       default:
         ctrl.placeHolder = "Share something...";
     }
-
-    // Mocking contacts. TODO: Use API endpoint.
-    $http.get('app/components/post/test.json').success(function(result) {
-      ctrl.allContacts = result;
-    });
-
 
     // Parse content to detect tags
     var detectTags = function(text) {
@@ -96,9 +98,9 @@
 
     // Validates each item added as contact to share. If there's no ID, it's an e-mail and we must validade it.
     ctrl.validateContact = function($tag) {
-      if (!$tag.id) {
+      if (!$tag.userId) {
         var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test($tag.name);
+        return re.test($tag.email);
       }
 
       return true;
@@ -116,21 +118,23 @@
           });
           if (!exist) {
             ctrl.selectedContacts.push(contact);
+            console.log(selectedContacts);
           }
         });
       }
     };
 
     ctrl.selectedContacts = [
-      { id: 0, name: 'Self' }
+      { id: 0, firstName: 'Self' }
     ];
 
+    ctrl.allContacts = ContactService.all().$object;
+
     ctrl.loadContacts = function($query) {
-      return $http.get('app/components/post/test.json', { cache: true}).then(function(response) {
-        var contacts = response.data;
+      return ContactService.all().then(function(contacts){
         return contacts.filter(function(contact) {
-          return contact.name.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
-        });
+            return contact.firstName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.lastName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
+          });
       });
     };
 
@@ -230,6 +234,17 @@
     };
 
     ctrl.save = function() {
+
+      ctrl.model.share = [];
+
+      angular.forEach(ctrl.selectedContacts, function(contact){
+        if (contact.id === 0) {
+          return;
+        }
+        var _contact = contact.createdAt ? contact.plain() : contact;
+        ctrl.model.share.push(_contact);
+      });
+
       // define tags
       ctrl.model.tags = detectTags(ctrl.model.content);
 
@@ -255,6 +270,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', '$http', '$q', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', PostController];
+  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostController];
 
 }());

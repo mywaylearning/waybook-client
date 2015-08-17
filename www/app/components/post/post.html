@@ -155,13 +155,11 @@
           replace-spaces-with-dashes="false"
           on-tag-adding="ctrl.validateContact($tag)"
           key-property="id"
-          display-property="name"
+          display-property="email"
           template="tag-template">
           <auto-complete
             source="ctrl.loadContacts($query)"
             min-length="0"
-            load-on-focus="true"
-            load-on-empty="true"
             template="autocomplete-template"></auto-complete>
         </tags-input>
         <multiple-select-modal header-text="Choose the contacts"
@@ -195,7 +193,7 @@
       <i class="icon" ng-class="{'ion-person': data.id || data.id == 0, 'ion-email': !data.id}"></i>
     </div>
     <div class="right-panel">
-      <span>{{data.name}}</span>
+      <span>{{data.firstName ? data.firstName + ' ' + data.lastName : data.email}}</span>
       <a class="remove-button" ng-click="$removeTag()"><i class="icon ion-close-circled"></i></a>
     </div>
   </div>
@@ -207,7 +205,7 @@
       <i class="icon ion-person"></i>
     </div>
     <div class="right-panel">
-      <span class="name" ng-bind-html="$highlight(data.name)"></span>
+      <span class="name" ng-bind-html="$highlight(data.firstName + ' ' + data.lastName)"></span>
       <span class="email" ng-bind-html="$highlight(data.email)"></span>
     </div>
   </div>

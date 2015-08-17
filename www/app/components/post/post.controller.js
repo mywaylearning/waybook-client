@@ -19,8 +19,6 @@
         ctrl.post.gEndDate = new Date(ctrl.post.gEndDate);
       }
 
-      console.log(ctrl.post);
-
       ctrl.model = ctrl.post;
     } else {
       ctrl.model = {

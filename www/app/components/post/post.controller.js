@@ -116,7 +116,6 @@
           });
           if (!exist) {
             ctrl.selectedContacts.push(contact);
-            console.log(selectedContacts);
           }
         });
       }
@@ -149,7 +148,6 @@
         },
         function(FPError){
           $scope.$apply();
-          console.log(FPError.toString());
         });
     };
 

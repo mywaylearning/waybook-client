@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostController');
 
-  function PostController($scope, $state, $http, $q, $ionicModal, router, goal, SWAGGER, PostService, TagService, ContactService) {
+  function PostController($scope, $state, router, goal, SWAGGER, PostService, TagService, ContactService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -136,12 +136,6 @@
             return contact.firstName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.lastName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
           });
       });
-      // return $http.get('app/components/post/test.json', { cache: true}).then(function(response) {
-      //   var contacts = response.data;
-      //   return contacts.filter(function(contact) {
-      //     return contact.name.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
-      //   });
-      // });
     };
 
     ctrl.attachPhotos = function() {
@@ -276,6 +270,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', '$http', '$q', '$ionicModal', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostController];
+  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostController];
 
 }());

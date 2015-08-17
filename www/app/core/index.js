@@ -37,6 +37,8 @@
 
     .factory('CommentService', require('./comment/comment.service.js'))
 
+    .factory('ContactService', require('./contact/contact.service.js'))
+
     .factory('TagService', require('./tag/tag.service.js'))
 
     .factory('PostService', require('./post/post.service.js'));

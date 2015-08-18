@@ -49,8 +49,6 @@
         <input type="date" ng-model="ctrl.model.gEndDate" required>
       </label>
       <ion-toggle
-          ng-if="ctrl.model.postType"
-          ng-checked="false"
           ng-model="ctrl.model.gRecurringEnabled"
           class="item item-text-wrap habit">
           This recurs, and is really a goal to form a habit
@@ -90,13 +88,13 @@
     </div>
     <div ng-if="ctrl.model.postType" class="item item-input attach-actions">
       Attach:
-        <button class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</button>
-        <button class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</button>
-        <button class="button button-clear attach-action" ng-if="!ctrl.model.files" ng-click="ctrl.attachFiles()"><i class="energized ion-document-text"></i> Files</button>
+        <a href="" class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</a>
+        <a href="" class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</a>
+        <a href="" class="button button-clear attach-action" ng-if="!ctrl.model.files" ng-click="ctrl.attachFiles()"><i class="energized ion-document-text"></i> Files</a>
     </div>
 
     <!-- Begin of link extraction -->
-    <div ng-if="ctrl.addLink">
+    <div ng-if="ctrl.addLink || ctrl.model.link">
       <div class="item item-divider">
         Link
       </div>

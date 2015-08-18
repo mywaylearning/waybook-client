@@ -15,8 +15,14 @@
     <div ng-if="item.image" class="item item-image">
       <img ng-src="{{item.image}}" />
     </div>
-    <div class="item item-body">
-      <p class="post-content" ng-bind-html="item.content"></p>
+    <div class="item item-body" ng-bind-html="item.content"></div>
+    <div ng-if="item.postType === 'goal'" class="item item-body">
+      <div ng-if="item.gRecurringEnabled">
+        Your goal is to do this <strong>{{item.gRecurringRepeatsEvery}}</strong> times on a <strong>{{item.gRecurringRecurrence}}</strong> basis.
+      </div>
+      This goal is a <strong>{{item.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{item.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{item.gEndDate | date: 'longDate'}}</strong>.
+    </div>
+    <div class="item" ng-if="item.link || item.files.length">
       <div ng-if="item.link" class="row responsive-sm">
         <div class="col col-50 col-offset-25">
           <link-preview link="item.link"></link-preview>

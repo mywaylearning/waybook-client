@@ -1,0 +1,13 @@
+<ion-popover-view>
+  <div class="list">
+    <a ng-if="popoverStatus.post.gStatus !== 'Active'" class="item item-icon-left" href="" ng-click="editStatus(popoverStatus.post, 'Active')">
+      <i class="icon ion-arrow-graph-up-right"></i> Active
+    </a>
+    <a ng-if="popoverStatus.post.gStatus !== 'Achieved'" class="item item-icon-left" href="" ng-click="editStatus(popoverStatus.post, 'Achieved')">
+      <i class="icon ion-checkmark"></i> Achieved
+    </a>
+    <a ng-if="popoverStatus.post.gStatus !== 'Abandoned'" class="item item-icon-left" href="" ng-click="editStatus(popoverStatus.post, 'Abandoned')">
+      <i class="icon ion-arrow-graph-down-right"></i> Abandoned
+    </a>
+  </div>
+</ion-popover-view>

@@ -6,7 +6,10 @@
         <img gravatar-src="'{{comment.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
         <h2>{{comment.WaybookUser.firstName}} {{comment.WaybookUser.lastName}}</h2>
         <p><span title="{{comment.created | date: 'medium'}}">{{comment.created | date: 'MMM d, y'}}</span></p>
-        <div class="actions" ng-if="user.id === comment.WaybookUser.id">
+        <!-- <div ng-if="user.id === comment.WaybookUser.id" class="comment-actions">
+          <button class="button button-icon ion-chevron-down" ng-click="showPopover($event, item)"></button>
+        </div> -->
+        <div class="comment-actions" ng-if="user.id === comment.WaybookUser.id" >
           <button class="button button-small button-light" ng-click="deleteComment(comment)">Delete</button>
           <button class="button button-small button-light" ng-click="showUpdateComment(comment)" ng-disabled="comment.editMode">Update</button>
         </div>

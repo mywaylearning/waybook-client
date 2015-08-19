@@ -19,10 +19,11 @@
       </div>
       <div class="item item-body" ng-bind-html="item.content"></div>
       <div ng-if="item.postType === 'goal'" class="item item-body">
-        <div ng-if="item.gRecurringEnabled">
+        <p>Status: <button class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{item.gStatus}}</button></p>
+        <p ng-if="item.gRecurringEnabled">
           Your goal is to do this <strong>{{item.gRecurringRepeatsEvery}}</strong> times on a <strong>{{item.gRecurringRecurrence}}</strong> basis.
-        </div>
-        This goal is a <strong>{{item.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{item.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{item.gEndDate | date: 'longDate'}}</strong>.
+        </p>
+        <p>This goal is a <strong>{{item.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{item.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{item.gEndDate | date: 'longDate'}}</strong>.</p>
       </div>
       <div class="item" ng-if="item.link || item.files.length">
         <div ng-if="item.link" class="row responsive-sm">

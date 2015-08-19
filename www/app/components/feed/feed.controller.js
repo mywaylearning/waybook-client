@@ -41,22 +41,20 @@
 
     $scope.editPost = function(post) {
       $scope.popover.hide();
-      $state.go('app.main.edit', {post: post});
+      post.editMode = true;
     };
 
-    // $scope.planData = {};
-    //
-    // $scope.doRefresh = function() {
-    //   $scope.$broadcast('scroll.refreshComplete');
-    // };
-
-    // var ctrl = this;
-    // ctrl.feed = goal.collection();
-    // debug(ctrl.feed);
-
-    $scope.feed = {
-      items: goal.collection().$object
+    $scope.refresh = function() {
+      goal.collection().then(function(result){
+        $scope.feed = {
+          items: result
+        }
+        // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+      });
     };
+
+    $scope.refresh();
 
   }
 

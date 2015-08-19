@@ -178,7 +178,7 @@
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.model.postType" class="buttons padding">
       <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
-      <button class="button button-light" ui-sref="app.main">Cancel</button>
+      <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
     <!-- Begin of post button actions -->
   </form>

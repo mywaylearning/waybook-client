@@ -11,15 +11,20 @@
 
     var ctrl = this;
 
+    // Need to define if will keep this
+    ctrl.selectedContacts = [
+      { id: 0, firstName: 'Self' }
+    ];
+
     // Check if it's updating a post
     if (ctrl.post) {
+      // Populate shared with
+      ctrl.selectedContacts = ctrl.post.share;
       // Prepare dates first
       if (ctrl.post.postType === 'goal') {
         ctrl.post.gStartDate = new Date(ctrl.post.gStartDate);
         ctrl.post.gEndDate = new Date(ctrl.post.gEndDate);
       }
-
-      console.log(ctrl.post);
 
       ctrl.model = ctrl.post;
     } else {
@@ -123,10 +128,6 @@
         });
       }
     };
-
-    ctrl.selectedContacts = [
-      { id: 0, firstName: 'Self' }
-    ];
 
     ctrl.allContacts = ContactService.all().$object;
 
@@ -233,6 +234,14 @@
       delete ctrl.model.image;
     };
 
+    ctrl.cancelPost = function() {
+      if (!ctrl.model.id) {
+        $state.go('app.main');
+      } else {
+        ctrl.post.editMode = false;
+      }
+    };
+
     ctrl.save = function() {
 
       ctrl.model.share = [];
@@ -263,7 +272,7 @@
       } else {
         debug('updating a post...', ctrl.model);
         ctrl.model.save().then(function() {
-          $state.go('app.main', {}, {reload: true});
+          ctrl.post.editMode = false;
         });
       }
     };

@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:CommentController');
 
-  function CommentController($scope, CommentService, $state, $ionicPopup) {
+  function CommentController($scope, CommentService, $state, $ionicPopover, $ionicPopup) {
     debug('here we are (directive controller)');
 
     $scope.options = {
@@ -18,6 +18,21 @@
       comment: ''
     };
 
+    $scope.popoverComment = {};
+
+    $scope.activeComment = {};
+
+    $ionicPopover.fromTemplateUrl('app/components/comment/comment-actions.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popoverComment = popover;
+    });
+
+    $scope.showPopoverComment = function($event, comment) {
+      $scope.activeComment = comment;
+      $scope.popoverComment.show($event);
+    };
+
     $scope.createComment = function() {
       CommentService.create($scope.model).then(function(result){
         result.created = new Date();
@@ -29,7 +44,7 @@
     };
 
     $scope.deleteComment = function(comment) {
-      // console.log(CommentService.getById(comment.id));
+      $scope.popoverComment.hide();
       var confirmPopup = $ionicPopup.confirm({
         title: 'Delete comment',
         template: 'Are you sure you want to delete this comment?'
@@ -46,6 +61,7 @@
     };
 
     $scope.showUpdateComment = function(comment) {
+      $scope.popoverComment.hide();
       comment.editMode = true;
       comment.copyComment = angular.copy(comment.comment);
     };
@@ -62,6 +78,6 @@
     };
   }
 
-  module.exports = ['$scope', 'CommentService', '$state', '$ionicPopup', CommentController];
+  module.exports = ['$scope', 'CommentService', '$state', '$ionicPopover', '$ionicPopup', CommentController];
 
 }());

@@ -1,4 +1,9 @@
 .feed {
+
+  .just-edited {
+    @include just-edited();
+  }
+
   .post-title {
     margin-top: 0;
   }

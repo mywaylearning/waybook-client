@@ -42,6 +42,7 @@
     $scope.editPost = function(post) {
       $scope.popover.hide();
       post.editMode = true;
+      post.justEdited = false;
     };
 
     $scope.refresh = function() {

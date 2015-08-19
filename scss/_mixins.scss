@@ -1,0 +1,20 @@
+@mixin keyframes($name) {
+	@-moz-keyframes $name { @content; }
+	@-webkit-keyframes $name { @content; }
+	@keyframes $name { @content; }
+}
+
+@mixin animation($arguments) {
+	-webkit-animation: #{$arguments};
+	-moz-animation: #{$arguments};
+	animation: #{$arguments};
+}
+
+@include keyframes(border-change) {
+  from { box-shadow: 0 0 8px #009d6e; }
+  to { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+};
+
+@mixin just-edited() {
+	@include animation('border-change 2s linear');
+}

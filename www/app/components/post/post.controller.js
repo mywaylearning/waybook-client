@@ -273,6 +273,7 @@
         debug('updating a post...', ctrl.model);
         ctrl.model.save().then(function() {
           ctrl.post.editMode = false;
+          ctrl.post.justEdited = true;
         });
       }
     };

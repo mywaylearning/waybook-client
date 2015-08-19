@@ -8,6 +8,13 @@
         <button hide-when="large" class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-clear" ui-sref="app.me">
+          <img gravatar-src="'{{app.user.email}}'" gravatar-size="80" gravatar-default="mm" class="avatar-header">
+          {{app.user.firstName}}
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="bodyContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -15,11 +22,11 @@
   <ion-side-menu side="left" expose-aside-when="large">
     <ion-content>
       <ion-list>
-        <ion-item class="item item-dark item-avatar">
+        <!-- <ion-item class="item item-dark item-avatar">
           <img gravatar-src="'{{app.user.email}}'" gravatar-size="80" gravatar-default="mm">
           <h2>Howdy, {{app.user.firstName}}!</h2>
           <p>By the way, nice shirt!</p>
-        </ion-item>
+        </ion-item> -->
 
 
         <div class="item item-input-inset item-dark">

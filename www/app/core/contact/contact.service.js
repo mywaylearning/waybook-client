@@ -13,7 +13,8 @@
      * Public
      */
     svcInterface = {
-      all: _all
+      all: _all,
+      create: _create
     };
     return svcInterface;
 
@@ -22,6 +23,10 @@
      */
     function _all() {
       return Contacts.getList();
+    }
+
+    function _create(contact) {
+      return Contacts.post(contact);
     }
   }
 

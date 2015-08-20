@@ -2,7 +2,7 @@
 <div class="feed">
   <div ng-repeat="item in feed.items | orderBy: '-created'">
     <way-post ng-if="item.editMode" post="item"></way-post>
-    <div class="list card" ng-if="!item.editMode" ng-class="{'just-edited': item.justEdited}">
+    <div class="list" ng-if="!item.editMode" ng-class="{'just-edited': item.justEdited}">
       <div class="item item-avatar">
         <img gravatar-src="'{{item.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
         <h2>{{item.WaybookUser.firstName}} {{item.WaybookUser.lastName}}</h2>

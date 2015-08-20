@@ -1,5 +1,18 @@
 <ion-view view-title="Unite">
   <ion-content padding="true" class="has-header">
-    <h1>Unite</h1>
+    <div ui-view="unite-bodyContent">
+      <div class="list">
+        <div class="item item-avatar" href="#" ng-repeat="contact in contacts | orderBy: 'firstName'">
+          <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
+          <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+        </div>
+      </div>
+    </div>
   </ion-content>
+  <ion-footer-bar align-title="left" class="bar-stable">
+    <h1 class="title"></h1>
+    <div class="buttons">
+      <button class="button ion icon-left ion-person-add" ng-click="openModalAddSupporter()">Add supporter</button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

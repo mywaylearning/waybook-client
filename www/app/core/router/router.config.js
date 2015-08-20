@@ -63,6 +63,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     if (stateNameParts.length === 2) {
       sectionDir = '/' + stateNameParts[1];
       section = stateNameParts[1];
+    } else if (stateNameParts.length === 3) {
+      sectionDir = '/' + stateNameParts[1];
+      section = stateNameParts[2];
     }
 
     angular.forEach(views, function(config, name) {
@@ -192,9 +195,15 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.unite', {
     url: '/unite',
+    cache: false,
     views: {
       'bodyContent': {
         controller: 'UniteController'
+      }
+    },
+    resolve: {
+      contacts: function (ContactService) {
+        return ContactService.all();
       }
     }
   })

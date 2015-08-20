@@ -17,6 +17,7 @@
   require('angular-moment');
   require('ng-tags-input');
   require('mentio');
+  require('state-nav-back-button');
 
   window.debug = require('debug');
 
@@ -34,7 +35,8 @@
     'restangular',
     'angularMoment',
     'ngTagsInput',
-    'mentio'
+    'mentio',
+    'stateBackButtonIonic'
   ])
 
   .controller('AppController', require('./app.controller.js'))

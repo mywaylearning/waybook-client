@@ -151,7 +151,6 @@
         },
         function(FPError){
           $scope.$apply();
-          console.log(FPError.toString());
         });
     };
 

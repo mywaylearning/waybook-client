@@ -104,7 +104,7 @@
     // Validates each item added as contact to share. If there's no ID, it's an e-mail and we must validade it.
     ctrl.validateContact = function($tag) {
       if (!$tag.userId) {
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
         return re.test($tag.email);
       }
 
@@ -123,7 +123,6 @@
           });
           if (!exist) {
             ctrl.selectedContacts.push(contact);
-            console.log(selectedContacts);
           }
         });
       }

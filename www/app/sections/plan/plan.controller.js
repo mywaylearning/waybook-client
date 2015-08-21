@@ -4,17 +4,13 @@
 
   var debug = require('debug')('waybook:PlanController');
 
-  function PlanController($scope, $stateParams) {
+  function PlanController($scope, $state) {
     debug('here we are');
 
-    $scope.planData = {};
-
-    $scope.doRefresh = function() {
-      $scope.$broadcast('scroll.refreshComplete');
-    };
+    console.log($state.current);
 
   }
 
-  module.exports = ['$scope', '$stateParams', PlanController];
+  module.exports = ['$scope', '$state', PlanController];
 
 }());

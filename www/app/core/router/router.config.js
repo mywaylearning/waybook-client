@@ -57,7 +57,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
 
     var stateNameParts = state.name.split('.');
-    var baseDir = '/' + stateNameParts[0];
     var section = '';
     var sectionDir = '';
     if (stateNameParts.length === 2) {
@@ -191,6 +190,19 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     }
   })
+
+  .state('app.plan.subpage', {
+    url: '/subpage',
+    views: {
+      'bodyContent@app': {
+        controller: function($scope, $state) {
+          console.log($state);
+        }
+      }
+    }
+  })
+
+
 
 
   .state('app.unite', {

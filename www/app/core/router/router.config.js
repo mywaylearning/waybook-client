@@ -195,10 +195,30 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.unite', {
     url: '/unite',
+    abstract: true,
+  })
+
+  .state('app.unite.home', {
+    url: '',
     cache: false,
     views: {
-      'bodyContent': {
+      'bodyContent@app': {
         controller: 'UniteController'
+      }
+    },
+    resolve: {
+      contacts: function (ContactService) {
+        return ContactService.all();
+      }
+    }
+  })
+
+  .state('app.unite.contact', {
+    url: '/{contactId:[0-9]{1,4}}',
+    cache: false,
+    views: {
+      'bodyContent@app': {
+        controller: 'UniteDetailController'
       }
     },
     resolve: {

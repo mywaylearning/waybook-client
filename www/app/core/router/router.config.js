@@ -194,7 +194,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.plan.subpage', {
     url: '/subpage',
     views: {
-      'bodyContent': {
+      'bodyContent@app': {
         controller: function($scope, $state) {
           console.log($state);
         }

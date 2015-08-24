@@ -5,7 +5,7 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
 
   $scope.modalAddSupporter = {};
 
-  $ionicModal.fromTemplateUrl('app/sections/unite/unite.add.supporter.html', {
+  $ionicModal.fromTemplateUrl('app/sections/unite/add.bodyContent.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -27,7 +27,7 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
       },
       buttonClicked: function(index) {
         if (index === 0) {
-          $state.go('products.edit', {productId: product.id});
+          $state.go('app.unite.edit', {contactId: contact.id});
         }
        return true;
       }
@@ -62,7 +62,6 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
         });
       }
     });
-
   };
 }
 

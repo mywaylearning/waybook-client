@@ -1,8 +1,10 @@
-<ion-view view-title="Unite: Supporter name" class="unite">
-  <ion-content padding="true">
+<ion-view view-title="Unite: {{contact.firstName}} {{contact.lastName}}">
+  <ion-content padding="true" class="unite">
     <div class="card">
-      <div class="item item-divider">
-        Supporter name
+      <div class="item item-body">
+        <button class="button button-more button-clear icon ion-chevron-down"></button>
+        <img gravatar-src="'{{contact.email}}'" gravatar-size="120" gravatar-default="mm">
+        {{contact.firstName}} {{contact.lastName}}
       </div>
     </div>
   </ion-content>

@@ -132,9 +132,13 @@
 
     ctrl.loadContacts = function($query) {
       return ContactService.all().then(function(contacts){
+        return contacts;
+        /**
         return contacts.filter(function(contact) {
-            return contact.firstName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.lastName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            return !!contact.email;
+            // return contact.firstName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.lastName.toLowerCase().indexOf($query.toLowerCase()) != -1 || contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
           });
+        */
       });
     };
 

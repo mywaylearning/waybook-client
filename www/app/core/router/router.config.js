@@ -207,14 +207,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.unite', {
     url: '/unite',
-    abstract: true,
-  })
-
-  .state('app.unite.home', {
-    url: '',
     cache: false,
     views: {
-      'bodyContent@app': {
+      'bodyContent': {
         controller: 'UniteController'
       }
     },
@@ -234,8 +229,23 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      contacts: function (ContactService) {
-        return ContactService.all();
+      contact: function (ContactService, $stateParams) {
+        return ContactService.getById($stateParams.contactId);
+      }
+    }
+  })
+
+  .state('app.unite.edit', {
+    url: '/edit/{contactId:[0-9]{1,4}}',
+    cache: false,
+    views: {
+      'bodyContent@app': {
+        controller: 'UniteEditController'
+      }
+    },
+    resolve: {
+      contact: function (ContactService, $stateParams) {
+        return ContactService.getById($stateParams.contactId);
       }
     }
   })

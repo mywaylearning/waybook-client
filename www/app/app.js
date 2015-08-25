@@ -17,6 +17,7 @@
   require('angular-moment');
   require('ng-tags-input');
   require('mentio');
+  require('intl-phone-number');
   require('state-nav-back-button');
 
   window.debug = require('debug');
@@ -36,6 +37,7 @@
     'angularMoment',
     'ngTagsInput',
     'mentio',
+    'internationalPhoneNumber',
     'stateBackButtonIonic'
   ])
 

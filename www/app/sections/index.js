@@ -12,6 +12,7 @@
   app.controller('PlanController', require('./plan/plan.controller.js'));
   app.controller('UniteController', require('./unite/unite.controller.js'));
   app.controller('UniteDetailController', require('./unite/unite.detail.controller.js'));
+  app.controller('UniteEditController', require('./unite/unite.edit.controller.js'));
   app.controller('MeController', require('./me/me.controller.js'));
   app.controller('HelpFeedbackController', require('./help-feedback/help-feedback.controller.js'));
   app.controller('AboutController', require('./about/about.controller.js'));

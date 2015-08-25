@@ -18,7 +18,8 @@
     "ionic-ion-showWhen": "./www/lib/ionic-ion-showWhen/index.js",
     "ion-wizard": "./www/lib/ion-wizard/index.js",
     "ng-tags-input": "./www/lib/ng-tags-input/ng-tags-input.min.js",
-    "mentio": "./www/lib/ment.io/dist/mentio.min.js"
+    "mentio": "./www/lib/ment.io/dist/mentio.min.js",
+    "intl-phone-number": "./www/lib/international-phone-number/releases/international-phone-number.min.js"
   },
   "browserify-shim": {
     "angular": "angular",

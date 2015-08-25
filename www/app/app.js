@@ -17,6 +17,7 @@
   require('angular-moment');
   require('ng-tags-input');
   require('mentio');
+  require('intl-phone-number');
 
   window.debug = require('debug');
 
@@ -34,7 +35,8 @@
     'restangular',
     'angularMoment',
     'ngTagsInput',
-    'mentio'
+    'mentio',
+    'internationalPhoneNumber'
   ])
 
   .controller('AppController', require('./app.controller.js'))

@@ -18,7 +18,7 @@
         <div class="item item-divider">Voice:</div>
         <label class="item item-input" ng-repeat="voice in model.voice track by $index">
           <span class="input-label">Voice #{{$index + 1}}:</span>
-          <input ng-model="voice.number" type="tel">
+          <input ng-model="voice.number" international-phone-number utils-script="lib/intl-tel-input/lib/libphonenumber/build/utils.js" type="tel">
         </label>
 
         <div class="item">

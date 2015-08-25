@@ -14,7 +14,8 @@
      */
     svcInterface = {
       all: _all,
-      create: _create
+      create: _create,
+      getById: _getById
     };
     return svcInterface;
 
@@ -27,6 +28,10 @@
 
     function _create(contact) {
       return Contacts.post(contact);
+    }
+
+    function _getById(id) {
+      return api.one('contacts', id).get();
     }
   }
 

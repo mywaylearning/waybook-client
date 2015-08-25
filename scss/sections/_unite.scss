@@ -8,11 +8,9 @@
     color: $disabled;
   }
 
-  .no-contacts-message {
-    font-size: 18px;
-  }
-
-  .button-bottom {
-    margin-top: 0;
+  .button-more {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }

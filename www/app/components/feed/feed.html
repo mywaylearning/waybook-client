@@ -23,6 +23,9 @@
         <p ng-if="item.gRecurringEnabled">
           Your goal is to do this <strong>{{item.gRecurringRepeatsEvery}}</strong> times on a <strong>{{item.gRecurringRecurrence}}</strong> basis.
         </p>
+        <p ng-if="item.cues || item.rewards">
+          All habits follow the pattern cue - routine - reward. <span ng-if="item.cues">Your targeted cue for this habit is <strong>{{item.cues}}</strong>.</span> <span ng-if="item.rewards">Your targeted reward is <strong>{{item.rewards}}</strong></span>.
+        </p>
         <p>This goal is a <strong>{{item.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{item.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{item.gEndDate | date: 'longDate'}}</strong>.</p>
       </div>
       <div class="item" ng-if="item.link || item.files.length">

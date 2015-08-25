@@ -8,6 +8,15 @@
     margin-top: 0;
   }
 
+  .item-image {
+    img:first-child {
+      @media (min-width: 640px) {
+        max-height: 300px;
+        width: auto;
+      }
+    }
+  }
+
   .post-actions {
     position: absolute;
     top: 0;

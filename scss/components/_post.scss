@@ -80,7 +80,13 @@
   }
 
   // Photo attached
-  .photo-attached {
+  .item-image {
+    img:first-child {
+      @media (min-width: 640px) {
+        max-height: 300px;
+        width: auto;
+      }
+    }
   }
 
   .remove-photo {

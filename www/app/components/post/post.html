@@ -5,22 +5,22 @@
       <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType}" ng-bind-html="ctrl.placeHolder"></div>
       <div ng-if="!ctrl.model.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
       <div ng-if="ctrl.model.postType">
-        <div class="textarea"
-          ng-model="ctrl.model.content"
-          contenteditable
-          mentio
-          id="tags"
-          mentio-typedTerm="typedTerm"
-          mentio-require-leading-space="true" required></div>
+          <div class="textarea"
+            ng-model="ctrl.model.content"
+            contenteditable
+            mentio
+            id="tags"
+            mentio-typedTerm="typedTerm"
+            mentio-require-leading-space="true" required></div>
 
-          <mentio-menu
-                mentio-for="'tags'"
-                mentio-trigger-char="'#'"
-                mentio-items="ctrl.tagsView"
-                mentio-template-url="/tags.tpl"
-                mentio-search="ctrl.searchTag(term)"
-                mentio-select="ctrl.getTagText(item)"
-                ></mentio-menu>
+            <mentio-menu
+                  mentio-for="'tags'"
+                  mentio-trigger-char="'#'"
+                  mentio-items="ctrl.tagsView"
+                  mentio-template-url="/tags.tpl"
+                  mentio-search="ctrl.searchTag(term)"
+                  mentio-select="ctrl.getTagText(item)"
+                  ></mentio-menu>
       </div>
       <div ng-if="!ctrl.model.postType" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.thought"><span class="clearfix dark">Thought</span></button>

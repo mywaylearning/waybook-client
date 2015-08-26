@@ -203,7 +203,7 @@
       <i class="icon ion-person"></i>
     </div>
     <div class="right-panel">
-      <span class="name" ng-bind-html="$highlight(data.firstName + ' ' + data.lastName)"></span>
+      <span class="firstName" ng-if="data.firstName" ng-bind-html="$highlight(data.firstName)"></span> <span ng-if="data.lastName" class="lastName" ng-bind-html="$highlight(data.lastName)"></span>
       <span class="email" ng-bind-html="$highlight(data.email)"></span>
     </div>
   </div>

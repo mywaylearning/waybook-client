@@ -49,6 +49,10 @@
           </a>
         </div>
       </div>
+      <div class="item">
+        <button class="button button-small icon ion-plus-round"></button>
+        <button class="button button-small ion-forward" ng-click="reshare(item)" ng-class="{'icon-left': item.shares, 'icon': !item.shares}">{{item.shares}}</button>
+      </div>
       <way-comment post="item" user="app.user"></way-comment>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <div class="item item-comments">
-  <button class="button button-small button-clear button-dark button-toggle-comments" ng-if="!options.showAll && post.Comment.length > options.minCommentsToShow" ng-click="options.showAll = !options.showAll">Show all comments</button>
+  <button class="button button-small button-clear icon-right ion-chevron-down button-dark button-toggle-comments" ng-if="!options.showAll && post.Comment.length > options.minCommentsToShow" ng-click="options.showAll = !options.showAll">{{post.Comment.length - 1}} <span ng-bind="post.Comment.length - 1 > 1 ? 'comments' : 'comment'"></span> </button>
   <div class="comment-list">
     <div class="comment" ng-repeat="comment in post.Comment | limitTo: options.showAll ? post.Comment.length : -options.minCommentsToShow">
       <div class="item item-avatar">

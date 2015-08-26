@@ -38,8 +38,14 @@
       return Goals.getList();
     }
 
-    function _getById(id) {
-      return api.one('goals', id).get();
+    function _getById(id, shares) {
+      var _shares = {};
+
+      if (shares) {
+        _shares = {shared: true}
+      }
+
+      return api.one('goals', id).get(_shares);
     }
   }
 

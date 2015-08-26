@@ -18,8 +18,6 @@
 
     // Check if it's updating a post
     if (ctrl.post) {
-      // Populate shared with
-      ctrl.selectedContacts = ctrl.post.share;
       // Prepare dates first
       if (ctrl.post.postType === 'goal') {
         ctrl.post.gStartDate = new Date(ctrl.post.gStartDate);

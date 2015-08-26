@@ -19,7 +19,6 @@
   require('mentio');
   require('intl-phone-number');
   require('state-nav-back-button');
-  require('angular-medium-editor');
 
 
   window.debug = require('debug');
@@ -40,8 +39,7 @@
     'ngTagsInput',
     'mentio',
     'internationalPhoneNumber',
-    'stateBackButtonIonic',
-    'angular-medium-editor'
+    'stateBackButtonIonic'
   ])
 
   .controller('AppController', require('./app.controller.js'))

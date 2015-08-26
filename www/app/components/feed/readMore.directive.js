@@ -27,6 +27,7 @@
                   overflow: 'visible',
                 });
                 angular.element(this).remove();
+                
               });
             }
           }

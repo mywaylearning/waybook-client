@@ -17,7 +17,9 @@
       <div ng-if="item.image" class="item item-image">
         <img ng-src="{{item.image}}" />
       </div>
-      <div class="item item-body" ng-bind-html="item.content"></div>
+      <div class="item item-body">
+        <div ng-bind-html="item.content" read-more></div>
+      </div>
       <div ng-if="item.postType === 'goal'" class="item item-body">
         <p>Status: <button class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{item.gStatus}}</button></p>
         <p ng-if="item.gRecurringEnabled">

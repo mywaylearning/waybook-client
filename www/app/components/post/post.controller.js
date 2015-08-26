@@ -12,9 +12,7 @@
     var ctrl = this;
 
     // Need to define if will keep this
-    ctrl.selectedContacts = [
-      { id: 0, firstName: 'Self' }
-    ];
+    ctrl.selectedContacts = [];
 
     // Check if it's updating a post
     if (ctrl.post) {
@@ -258,6 +256,12 @@
       if (ctrl.model.gRecurringEnabled) {
         ctrl.model.tags.push('habit');
       }
+
+      // Prepare content
+      // console.log(ctrl.model.content);
+      // ctrl.model.content = ctrl.model.content.replace(/<(?!br\s*\/?)[^>]+>/g, '');
+      // console.log(ctrl.model.content);
+
       if (!ctrl.model.id) {
         debug('saving new post', ctrl.model);
         goal.create(ctrl.model).then(function(result){

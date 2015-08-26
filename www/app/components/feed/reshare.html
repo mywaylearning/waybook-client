@@ -5,6 +5,20 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
+      <div class="item" ng-if="resharePopup.shared">
+        <strong>You shared with:</strong>
+        <ul>
+          <li ng-repeat="shared in resharePopup.shared">
+            <span ng-if="shared.Contact.firstName || shared.Contact.lastName">
+              <span ng-if="shared.Contact.firstName">{{shared.Contact.firstName}}</span> <span ng-if="shared.Contact.lastName">{{shared.Contact.lastName}}</span>
+            </span>
+            <span ng-if="!shared.Contact.firstName || !shared.Contact.lastName">
+              {{shared.Contact.email}}
+            </span>
+            on {{shared.sharedAt | date: 'MMM d, y'}}
+          </li>
+        </ul>
+      </div>
     </div>
   </ion-content>
 </ion-modal-view>

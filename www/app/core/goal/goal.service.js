@@ -42,7 +42,7 @@
       var _shares = {};
 
       if (shares) {
-        _shares = {shares: true}
+        _shares = {shared: true}
       }
 
       return api.one('goals', id).get(_shares);

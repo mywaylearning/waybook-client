@@ -10,7 +10,7 @@
     $scope.options = {
       userCommentFocus: false,
       showAll: false,
-      minCommentsToShow: 2
+      minCommentsToShow: 1
     };
 
     $scope.model = {

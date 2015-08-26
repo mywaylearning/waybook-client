@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:FeedController');
 
-  function FeedController($scope, goal, $ionicPopover, $ionicPopup, $state) {
+  function FeedController($scope, goal, $ionicPopover, $ionicPopup, $state, $ionicModal) {
     debug('here we are (directive controller)');
 
     $scope.popover = {};
@@ -82,8 +82,20 @@
 
     $scope.refresh();
 
+    $scope.reshare = function(post) {
+      $scope.resharePopup;
+
+      $ionicModal.fromTemplateUrl('app/components/feed/reshare.html', {
+        scope: $scope
+      }).then(function(popup){
+        $scope.resharePopup = popup;
+        $scope.resharePopup.show();
+      });
+
+    };
+
   }
 
-  module.exports = ['$scope', 'goal', '$ionicPopover', '$ionicPopup', '$state', FeedController];
+  module.exports = ['$scope', 'goal', '$ionicPopover', '$ionicPopup', '$state', '$ionicModal', FeedController];
 
 }());

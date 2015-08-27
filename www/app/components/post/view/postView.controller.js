@@ -15,7 +15,6 @@
       }).then(function(popover) {
         $scope.popoverActions = popover;
         $scope.popoverActions.show($event);
-        console.log(popover);
       });
     };
 

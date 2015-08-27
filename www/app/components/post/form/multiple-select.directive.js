@@ -36,7 +36,7 @@
             // scope.callback = attrs.callback || null;
 
             $ionicModal.fromTemplateUrl(
-                'app/components/post/multi-select-modal.html',
+                'app/components/post/form/multi-select-modal.html',
                   {'scope': scope}
             ).then(function(modal) {
                 scope.modal = modal;

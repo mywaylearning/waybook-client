@@ -10,7 +10,7 @@
     debug(SWAGGER);
 
     $scope.showPopoverActions = function($event) {
-      $ionicPopover.fromTemplateUrl('app/components/post/post-view-actions.html', {
+      $ionicPopover.fromTemplateUrl('app/components/post/view/post-view-actions.html', {
         scope: $scope,
       }).then(function(popover) {
         $scope.popoverActions = popover;

@@ -16,6 +16,7 @@
   }
 
   .textarea {
+    -webkit-user-select: auto !important;
     border: 1px solid $placeholder-border-color;
     padding: 10px;
     position: relative;

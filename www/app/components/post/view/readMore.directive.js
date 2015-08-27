@@ -10,7 +10,7 @@
       priority: 100,
       link: function ($scope, element, attrs, ctrl) {
         $scope.hasHided = false;
-        var showMore = '<div class="show-more-area"><button class="button button-small button-clear icon-right ion-chevron-down">Show more</button></div>';
+        var showMore = '<div class="read-more"><button class="button button-small button-clear icon-right ion-chevron-down">Show more</button></div>';
         $scope.$watch(element.html(), function(value) {
           if (!$scope.hasHided) {
             // apply this code ONCE
@@ -20,17 +20,17 @@
                 maxHeight: 130,
                 'overflow-y': 'hidden'
               }).append(showMore);
-
-              element.on('click', '.show-more-area', function() {
-                element.css({
-                  maxHeight: 'inherit',
-                  overflow: 'visible',
-                });
-                angular.element(this).remove();
-                
-              });
             }
           }
+        });
+
+        element.on('click', '.read-more', function() {
+          element.css({
+            maxHeight: 'inherit',
+            overflow: 'visible',
+          });
+          angular.element(this).remove();
+
         });
       }
     };

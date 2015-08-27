@@ -7,7 +7,7 @@
     <a ng-if="user.id == post.userId" class="item item-icon-left" href="" ng-click="deletePost()">
       <i class="icon ion-close"></i> Delete
     </a>
-    <a class="item item-icon-left" href="" target="_blank">
+    <a class="item item-icon-left" ui-sref="app.main.post({id: post.id})">
       <i class="icon ion-link"></i> Link to this post
     </a>
     <!-- <a class="item item-icon-left" href="" target="_blank">

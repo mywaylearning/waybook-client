@@ -78,8 +78,14 @@
 
     //Cleanup the popovers when we're done with it!
     $scope.$on('$destroy', function() {
-      $scope.popoverActions.remove();
-      $scope.popoverStatus.remove();
+      if ($scope.popoverActions) {
+          $scope.popoverActions.remove();
+      }
+
+      if ($scope.popoverStatus) {
+        $scope.popoverStatus.remove();
+      }
+
     });
   }
 

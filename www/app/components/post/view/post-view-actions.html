@@ -1,9 +1,10 @@
 <ion-popover-view>
+  {{editPost}}
   <div class="list">
-    <a ng-if="app.user.id == popover.item.userId" class="item item-icon-left" href="" ng-click="editPost(popover.item)">
+    <a ng-if="user.id == post.userId" class="item item-icon-left" href="" ng-click="editPost()">
       <i class="icon ion-edit"></i> Edit
     </a>
-    <a ng-if="app.user.id == popover.item.userId" class="item item-icon-left" href="" ng-click="deletePost(popover.item)">
+    <a ng-if="user.id == post.userId" class="item item-icon-left" href="" ng-click="deletePost()">
       <i class="icon ion-close"></i> Delete
     </a>
     <a class="item item-icon-left" href="" target="_blank">

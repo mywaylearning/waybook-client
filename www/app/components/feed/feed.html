@@ -1,61 +1,6 @@
 <ion-refresher pulling-text="Pull to refresh..." on-refresh="refresh()"></ion-refresher>
 <div class="feed">
   <div ng-repeat="item in feed.items | orderBy: '-created'">
-    <way-post ng-if="item.editMode" post="item"></way-post>
-    <div class="list" ng-if="!item.editMode" ng-class="{'just-edited': item.justEdited}">
-      <div class="item item-avatar">
-        <img gravatar-src="'{{item.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
-        <h2>{{item.WaybookUser.firstName}} {{item.WaybookUser.lastName}}</h2>
-        <p><span title="{{item.created | date: 'medium'}}">{{item.created | date: 'MMM d, y'}}</span></p>
-        <div class="post-actions">
-          <button class="button button-icon ion-chevron-down" ng-click="showPopover($event, item)"></button>
-        </div>
-        <div class="item-tags">
-          <span class="item-tag" ng-repeat="tag in item.tags track by $index">#{{tag}}</span>
-        </div>
-      </div>
-      <div ng-if="item.image" class="item item-image">
-        <img ng-src="{{item.image}}" />
-      </div>
-      <div class="item item-body">
-        <div ng-bind-html="item.content" read-more></div>
-      </div>
-      <div ng-if="item.postType === 'goal'" class="item item-body">
-        <p>Status: <button class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{item.gStatus}}</button></p>
-        <p ng-if="item.gRecurringEnabled">
-          Your goal is to do this <strong>{{item.gRecurringRepeatsEvery}}</strong> times on a <strong>{{item.gRecurringRecurrence}}</strong> basis.
-        </p>
-        <p ng-if="item.cues || item.rewards">
-          All habits follow the pattern cue - routine - reward. <span ng-if="item.cues">Your targeted cue for this habit is <strong>{{item.cues}}</strong>.</span> <span ng-if="item.rewards">Your targeted reward is <strong>{{item.rewards}}</strong></span>.
-        </p>
-        <p>This goal is a <strong>{{item.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{item.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{item.gEndDate | date: 'longDate'}}</strong>.</p>
-      </div>
-      <div class="item" ng-if="item.link || item.files.length">
-        <div ng-if="item.link" class="row responsive-sm">
-          <div class="col col-50 col-offset-25">
-            <link-preview link="item.link"></link-preview>
-          </div>
-        </div>
-        <p>
-          <strong ng-if="item.files.length" ng-click="item.showFiles = ! item.showFiles" class="subdued"><span ng-bind="item.showFiles ? 'Hide' : 'Show'"></span> {{item.files.length}} files attached</strong>
-        </p>
-      </div>
-      <div ng-if="item.showFiles">
-        <div class="item item-divider">
-          Files
-        </div>
-        <div class="list">
-          <a href="{{file.url}}" target="_blank" class="item" ng-repeat="file in item.files">
-              <h2>{{file.filename}}</h2>
-              <p>{{file.mimetype}} | {{file.size / 1000 | number:2}} kB</p>
-          </a>
-        </div>
-      </div>
-      <div class="item">
-        <button class="button button-small icon ion-plus-round"></button>
-        <button class="button button-small ion-forward" ng-click="reshare(item)" ng-class="{'icon-left': item.shares, 'icon': !item.shares}">{{item.shares}}</button>
-      </div>
-      <way-comment post="item" user="app.user"></way-comment>
-    </div>
+    <way-post-view post="item" user="app.user"></way-post-view>
   </div>
 </div>

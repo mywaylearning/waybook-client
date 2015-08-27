@@ -2,9 +2,9 @@
 
   'use strict';
 
-  var debug = require('debug')('waybook:PostController');
+  var debug = require('debug')('waybook:PostFormController');
 
-  function PostController($scope, $state, router, goal, SWAGGER, PostService, TagService, ContactService) {
+  function PostFormController($scope, $state, router, goal, SWAGGER, PostService, TagService, ContactService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -278,6 +278,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostController];
+  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostFormController];
 
 }());

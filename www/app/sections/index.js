@@ -7,6 +7,7 @@
   app.controller('LoginController', require('./login/login.controller.js'));
   app.controller('RegisterController', require('./register/register.controller.js'));
   app.controller('MainController', require('./main/main.controller.js'));
+  app.controller('MainPostController', require('./main/post.controller.js'));
   app.controller('DiscoverController', require('./discover/discover.controller.js'));
   app.controller('ExplorationController', require('./discover/exploration.controller.js'));
   app.controller('PlanController', require('./plan/plan.controller.js'));

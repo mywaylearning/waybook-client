@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function wayPost($timeout) {
+  function wayPostForm($timeout) {
 
     return {
       restrict: 'EA',
@@ -10,10 +10,10 @@
         post: '=',
         postType: '@type'
       },
-      controller: 'PostController',
+      controller: 'PostFormController',
       controllerAs: 'ctrl',
       bindToController: true,
-      templateUrl: '/app/components/post/post.html',
+      templateUrl: '/app/components/post/form/postForm.html',
       link: function(scope, el, attrs) {
         if (scope.ctrl.postType) {
           $timeout(function(){
@@ -26,6 +26,6 @@
     };
   }
 
-  module.exports = ['$timeout', wayPost];
+  module.exports = ['$timeout', wayPostForm];
 
 }());

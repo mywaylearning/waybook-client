@@ -282,7 +282,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/main',
     views: {
       'way-post': {
-        template: '<way-post></way-post>',
+        template: '<way-post-form></way-post-form>',
       },
       'bodyContent': {
         controller: 'MainController'
@@ -294,7 +294,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/thought',
     views: {
       'way-post': {
-        template: '<way-post type="thought"></way-post>',
+        template: '<way-post-form type="thought"></way-post-form>',
       }
     }
   })
@@ -303,7 +303,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/goal',
     views: {
       'way-post': {
-        template: '<way-post type="goal"></way-post>',
+        template: '<way-post-form type="goal"></way-post-form>',
       }
     }
   })
@@ -312,7 +312,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/discovery',
     views: {
       'way-post': {
-        template: '<way-post type="discovery"></way-post>',
+        template: '<way-post-form type="discovery"></way-post-form>',
       }
     }
   })
@@ -321,7 +321,21 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/resource',
     views: {
       'way-post': {
-        template: '<way-post type="resource"></way-post>',
+        template: '<way-post-form type="resource"></way-post-form>',
+      }
+    }
+  })
+
+  .state('app.main.post', {
+    url: '/post/:id',
+    views: {
+      'bodyContent@app': {
+        controller: 'MainPostController'
+      }
+    },
+    resolve: {
+      post: function(goal, $stateParams) {
+        return goal.getById($stateParams.id);
       }
     }
   });

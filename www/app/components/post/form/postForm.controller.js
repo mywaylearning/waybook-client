@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostFormController');
 
-  function PostFormController($scope, $state, router, goal, SWAGGER, PostService, TagService, ContactService) {
+  function PostFormController($scope, $state, $timeout, router, goal, SWAGGER, PostService, TagService, ContactService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -99,11 +99,14 @@
 
     // Validates each item added as contact to share. If there's no ID, it's an e-mail and we must validade it.
     ctrl.validateContact = function($tag) {
-      if (!$tag.userId) {
+      if (!$tag.id) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
-        return re.test($tag.email);
+        var valid = re.test($tag.email);
+        $scope.invalidContact = !valid;
+        return valid;
       }
 
+      $scope.invalidContact = false;
       return true;
     };
 
@@ -236,48 +239,59 @@
 
     ctrl.save = function() {
 
-      ctrl.model.share = [];
+      $timeout(function() {
 
-      angular.forEach(ctrl.selectedContacts, function(contact){
-        if (contact.id === 0) {
+        console.log($scope.invalidContact);
+
+        if ($scope.invalidContact) {
           return;
         }
-        var _contact = contact.createdAt ? contact.plain() : contact;
-        ctrl.model.share.push(_contact);
-      });
 
-      // define tags
-      ctrl.model.tags = detectTags(ctrl.model.content);
+        $scope.saving = true;
 
-      // Append the post type to tags
-      ctrl.model.tags.push(ctrl.model.postType);
+        ctrl.model.share = [];
 
-      // Add tag habit if it's one
-      if (ctrl.model.gRecurringEnabled) {
-        ctrl.model.tags.push('habit');
-      }
-
-      // Prepare content
-      // console.log(ctrl.model.content);
-      // ctrl.model.content = ctrl.model.content.replace(/<(?!br\s*\/?)[^>]+>/g, '');
-      // console.log(ctrl.model.content);
-
-      if (!ctrl.model.id) {
-        debug('saving new post', ctrl.model);
-        goal.create(ctrl.model).then(function(result){
-          $state.go('app.main', {}, {reload: true});
+        angular.forEach(ctrl.selectedContacts, function(contact){
+          if (contact.id === 0) {
+            return;
+          }
+          var _contact = contact.id ? contact.plain() : contact;
+          ctrl.model.share.push(_contact);
         });
-      } else {
-        debug('updating a post...', ctrl.model);
-        ctrl.model.save().then(function() {
-          ctrl.post.editMode = false;
-          ctrl.post.justEdited = true;
-        });
-      }
+
+        // define tags
+        ctrl.model.tags = detectTags(ctrl.model.content);
+
+        // Append the post type to tags
+        ctrl.model.tags.push(ctrl.model.postType);
+
+        // Add tag habit if it's one
+        if (ctrl.model.gRecurringEnabled) {
+          ctrl.model.tags.push('habit');
+        }
+
+        // Prepare content
+        // console.log(ctrl.model.content);
+        // ctrl.model.content = ctrl.model.content.replace(/<(?!br\s*\/?)[^>]+>/g, '');
+        // console.log(ctrl.model.content);
+
+        if (!ctrl.model.id) {
+          debug('saving new post', ctrl.model);
+          goal.create(ctrl.model).then(function(result){
+            $state.go('app.main', {}, {reload: true});
+          });
+        } else {
+          debug('updating a post...', ctrl.model);
+          ctrl.model.save().then(function() {
+            ctrl.post.editMode = false;
+            ctrl.post.justEdited = true;
+          });
+        }
+      }, 10);
     };
 
   }
 
-  module.exports = ['$scope', '$state', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostFormController];
+  module.exports = ['$scope', '$state', '$timeout', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostFormController];
 
 }());

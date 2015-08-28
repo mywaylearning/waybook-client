@@ -148,6 +148,7 @@
         <span class="input-label">Share with:</span>
         <tags-input
           class="share-with"
+          name="share"
           placeholder="Add people"
           ng-model="ctrl.selectedContacts"
           replace-spaces-with-dashes="false"
@@ -177,7 +178,7 @@
 
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.model.postType" class="buttons padding">
-      <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
+      <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid || saving" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
       <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
     <!-- Begin of post button actions -->

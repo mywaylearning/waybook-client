@@ -19,9 +19,6 @@
     };
 
 
-
-
-
     $scope.showPopoverStatus = function($event) {
       $ionicPopover.fromTemplateUrl('app/components/post/view/post-view-status.html', {
         scope: $scope,
@@ -74,6 +71,20 @@
       $scope.popoverActions.hide();
       $scope.post.editMode = true;
       $scope.post.justEdited = false;
+    };
+
+    $scope.shareInfo = function() {
+      goal.getById($scope.post.id, true).then(function(shared){
+        $ionicModal.fromTemplateUrl('app/components/post/view/share-info.html', {
+          scope: $scope
+        }).then(function(popup){
+          $scope.shareInfoPopup = popup;
+          if ($scope.user.id === $scope.post.userId) {
+            $scope.post.shared = shared;
+          }
+          $scope.shareInfoPopup.show();
+        });
+      });
     };
 
     //Cleanup the popovers when we're done with it!

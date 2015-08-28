@@ -1,14 +1,14 @@
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">Re-share</h1>
-    <button class="button button-clear button-primary" ng-click="resharePopup.hide()">Cancel</button>
+    <h1 class="title">Share info</h1>
+    <button class="button button-clear button-primary" ng-click="shareInfoPopup.hide()">Cancel</button>
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
       <div class="item" ng-if="resharePopup.shared">
-        <strong>You shared with:</strong>
+        <strong>You shared this post with:</strong>
         <ul>
-          <li ng-repeat="shared in resharePopup.shared">
+          <li ng-repeat="shared in post.shared">
             <span ng-if="shared.Contact.firstName || shared.Contact.lastName">
               <span ng-if="shared.Contact.firstName">{{shared.Contact.firstName}}</span> <span ng-if="shared.Contact.lastName">{{shared.Contact.lastName}}</span>
             </span>

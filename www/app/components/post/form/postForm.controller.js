@@ -11,7 +11,7 @@
 
     var ctrl = this;
 
-    // Need to define if will keep this
+    // Hold selectec contacts to share
     ctrl.selectedContacts = [];
 
     // Check if it's updating a post
@@ -29,8 +29,15 @@
       };
     }
 
+    if (ctrl.sharedPost) {
+      ctrl.model.sharedPostPostId = ctrl.sharedPost.id;
+    }
+
     // Handle content editable click based on type of post
     ctrl.goToThought = function() {
+      if (ctrl.sharedPost) {
+        return;
+      }
       $state.go('app.main.thought');
     };
 
@@ -263,14 +270,14 @@
 
         $scope.saving = true;
 
-        ctrl.model.share = [];
+        ctrl.model.sharedPost = [];
 
         angular.forEach(ctrl.selectedContacts, function(contact){
           if (contact.id === 0) {
             return;
           }
           var _contact = contact.id ? contact.plain() : contact;
-          ctrl.model.share.push(_contact);
+          ctrl.model.sharedPost.push(_contact);
         });
 
         // define tags

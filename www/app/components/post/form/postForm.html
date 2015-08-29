@@ -1,8 +1,8 @@
 <div class="post-form inner-content">
   <form name="postForm" novalidate ng-submit="ctrl.save()" >
-  <div class="list card cancel-overlay">
+  <div class="list cancel-overlay" ng-class="{'card': !ctrl.sharedPost}">
     <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType}" ng-bind-html="ctrl.placeHolder"></div>
+      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType || ctrl.sharedPost}" ng-bind-html="ctrl.placeHolder"></div>
       <div ng-if="!ctrl.model.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
       <div ng-if="ctrl.model.postType">
           <div class="textarea"
@@ -22,7 +22,7 @@
                   mentio-select="ctrl.getTagText(item)"
                   ></mentio-menu>
       </div>
-      <div ng-if="!ctrl.model.postType" class="button-bar">
+      <div ng-if="!ctrl.model.postType && !ctrl.sharedPost" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.thought"><span class="clearfix dark">Thought</span></button>
           <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.goal"><span class="clearfix dark">Goal</span></button>
           <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.discovery"><span class="clearfix dark">Discovery</span></button>
@@ -86,7 +86,7 @@
       </div>
 
     </div>
-    <div ng-if="ctrl.model.postType" class="item item-input attach-actions">
+    <div ng-if="ctrl.model.postType && !ctrl.sharedPost" class="item item-input attach-actions">
       Attach:
         <a href="" class="button button-clear attach-action" ng-if="!ctrl.model.image" ng-click="ctrl.attachPhotos()"><i class="positive ion-camera"></i> Photo</a>
         <a href="" class="button button-clear attach-action" ng-if="!ctrl.model.link" ng-click="ctrl.addLink = true"><i class="assertive ion-link"></i> Link</a>
@@ -143,8 +143,18 @@
     </div>
     <!-- End of files attachment -->
 
+    <!-- Sharing a post -->
+    <div class="item" ng-if="ctrl.sharedPost">
+      Originally posted by <strong>{{ctrl.sharedPost.WaybookUser.firstName}} {{ctrl.sharedPost.WaybookUser.lastName}}</strong>:
+      <div class="card">
+        <div class="item item-body">
+          <div ng-bind-html="ctrl.sharedPost.content"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Share options -->
-    <div ng-if="ctrl.model.postType && !ctrl.model.id" class="item item-input cancel-overlay">
+    <div ng-if="(ctrl.model.postType && !ctrl.model.id) || ctrl.sharedPost" class="item item-input cancel-overlay">
         <span class="input-label">Share with:</span>
         <tags-input
           class="share-with"
@@ -168,7 +178,7 @@
                             multi-select="true" />
     </div>
     <ion-toggle
-        ng-if="ctrl.model.postType"
+        ng-if="ctrl.model.postType || ctrl.sharedPost"
         ng-model="ctrl.model.resharing"
         class="item item-text-wrap re-share">
       Re-sharing:
@@ -176,9 +186,9 @@
     <!-- End of share options -->
 
     <!-- Begin of post button actions -->
-    <div ng-if="ctrl.model.postType" class="buttons padding">
+    <div ng-if="ctrl.model.postType || ctrl.sharedPost" class="buttons padding">
       <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid || saving" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
-      <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
+      <a href="" class="button button-light" ng-if="!ctrl.sharedPost" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
     <!-- Begin of post button actions -->
   </form>

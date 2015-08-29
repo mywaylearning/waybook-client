@@ -8,7 +8,8 @@
       restrict: 'EA',
       scope: {
         post: '=',
-        postType: '@type'
+        postType: '@type',
+        sharedPost: '='
       },
       controller: 'PostFormController',
       controllerAs: 'ctrl',

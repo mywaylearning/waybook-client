@@ -131,7 +131,23 @@
 
     ctrl.loadContacts = function($query) {
       return ContactService.all().then(function(contacts){
-        return contacts;
+        return contacts.filter(function(contact) {
+          var _ret = false;
+
+          if (contact.firstName && contact.firstName.toLowerCase().indexOf($query.toLowerCase()) != -1) {
+            _ret = true;
+          }
+
+          if (contact.lastName && contact.lastName.toLowerCase().indexOf($query.toLowerCase()) != -1) {
+            _ret = true;
+          }
+
+          if (contact.email.toLowerCase().indexOf($query.toLowerCase()) != -1) {
+            _ret = true;
+          }
+
+          return _ret;
+          });
       });
     };
 
@@ -240,8 +256,6 @@
     ctrl.save = function() {
 
       $timeout(function() {
-
-        console.log($scope.invalidContact);
 
         if ($scope.invalidContact) {
           return;

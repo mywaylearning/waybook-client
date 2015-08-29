@@ -144,7 +144,7 @@
     <!-- End of files attachment -->
 
     <!-- Share options -->
-    <div ng-if="ctrl.model.postType" class="item item-input cancel-overlay">
+    <div ng-if="ctrl.model.postType && !ctrl.model.id" class="item item-input cancel-overlay">
         <span class="input-label">Share with:</span>
         <tags-input
           class="share-with"
@@ -169,7 +169,6 @@
     </div>
     <ion-toggle
         ng-if="ctrl.model.postType"
-        ng-checked="false"
         ng-model="ctrl.model.resharing"
         class="item item-text-wrap re-share">
       Re-sharing:

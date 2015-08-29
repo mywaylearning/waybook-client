@@ -51,8 +51,6 @@
   <div class="item">
     <button class="button button-small icon ion-plus-round"></button>
     <button class="button button-small ion-forward" ng-class="{'icon-left': post.shares, 'icon': !post.shares}"></button>
-    <button class="button button-small ion-information-circled" ng-click="shareInfo()" ng-if="user.id === post.userId"></button>
-
   </div>
   <way-comment post="post" user="user"></way-comment>
 </div>

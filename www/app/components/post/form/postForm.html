@@ -2,7 +2,7 @@
   <form name="postForm" novalidate ng-submit="ctrl.save()" >
   <div class="list cancel-overlay" ng-class="{'card': !ctrl.sharedPost}">
     <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType || ctrl.sharedPost}" ng-bind-html="ctrl.placeHolder"></div>
+      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType}" ng-bind-html="ctrl.placeHolder"></div>
       <div ng-if="!ctrl.model.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
       <div ng-if="ctrl.model.postType">
           <div class="textarea"
@@ -188,7 +188,7 @@
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.model.postType || ctrl.sharedPost" class="buttons padding">
       <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid || saving" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
-      <a href="" class="button button-light" ng-if="!ctrl.sharedPost" ng-click="ctrl.cancelPost()">Cancel</a>
+      <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
     <!-- Begin of post button actions -->
   </form>

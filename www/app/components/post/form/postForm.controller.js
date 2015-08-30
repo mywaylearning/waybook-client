@@ -30,7 +30,7 @@
     }
 
     if (ctrl.sharedPost) {
-      ctrl.model.sharedPostPostId = ctrl.sharedPost.id;
+      ctrl.model.sharedPostId = ctrl.model.sharedPostId || ctrl.sharedPost.id;
     }
 
     // Handle content editable click based on type of post
@@ -253,7 +253,9 @@
     };
 
     ctrl.cancelPost = function() {
-      if (!ctrl.model.id) {
+      if (ctrl.sharedPost) {
+        ctrl.modalInstance.hide();
+      } else if (!ctrl.model.id) {
         $state.go('app.main');
       } else {
         ctrl.post.editMode = false;
@@ -270,14 +272,11 @@
 
         $scope.saving = true;
 
-        ctrl.model.sharedPost = [];
+        ctrl.model.share = [];
 
         angular.forEach(ctrl.selectedContacts, function(contact){
-          if (contact.id === 0) {
-            return;
-          }
           var _contact = contact.id ? contact.plain() : contact;
-          ctrl.model.sharedPost.push(_contact);
+          ctrl.model.share.push(_contact);
         });
 
         // define tags
@@ -299,6 +298,9 @@
         if (!ctrl.model.id) {
           debug('saving new post', ctrl.model);
           goal.create(ctrl.model).then(function(result){
+            if (ctrl.sharedPost) {
+              ctrl.modalInstance.hide();
+            }
             $state.go('app.main', {}, {reload: true});
           });
         } else {

@@ -9,7 +9,8 @@
       scope: {
         post: '=',
         postType: '@type',
-        sharedPost: '='
+        sharedPost: '=',
+        modalInstance: '='
       },
       controller: 'PostFormController',
       controllerAs: 'ctrl',

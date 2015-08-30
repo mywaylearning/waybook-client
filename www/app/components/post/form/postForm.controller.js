@@ -30,7 +30,7 @@
     }
 
     if (ctrl.sharedPost) {
-      ctrl.model.sharedPostId = ctrl.model.sharedPostId || ctrl.sharedPost.id;
+      ctrl.model.sharedPostId = ctrl.sharedPost.sharedPostId || ctrl.sharedPost.id;
     }
 
     // Handle content editable click based on type of post

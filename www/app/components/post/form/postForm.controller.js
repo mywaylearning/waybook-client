@@ -16,6 +16,7 @@
 
     // Check if it's updating a post
     if (ctrl.post) {
+      var originalPost = angular.copy(ctrl.post);
       // Prepare dates first
       if (ctrl.post.postType === 'goal') {
         ctrl.post.gStartDate = new Date(ctrl.post.gStartDate);
@@ -259,6 +260,8 @@
         $state.go('app.main');
       } else {
         ctrl.post.editMode = false;
+        ctrl.post = originalPost;
+
       }
     };
 

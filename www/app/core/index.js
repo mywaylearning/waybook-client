@@ -33,8 +33,6 @@
     .factory('errorHandler', require('./errors/error-handler.service.js'))
     .factory('utils', require('./utils/utils.service.js'))
 
-    .factory('goal', require('./goal/goal.service.js'))
-
     .factory('CommentService', require('./comment/comment.service.js'))
 
     .factory('ContactService', require('./contact/contact.service.js'))

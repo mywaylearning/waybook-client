@@ -4,11 +4,11 @@
 
   var debug = require('debug')('waybook:FeedController');
 
-  function FeedController($scope, goal, $ionicPopover, $ionicPopup, $state, $ionicModal) {
+  function FeedController($scope, PostService, $ionicPopover, $ionicPopup, $state, $ionicModal) {
     debug('here we are (directive controller)');
 
     $scope.refresh = function() {
-      goal.collection().then(function(result){
+      PostService.collection().then(function(result){
         $scope.feed = {
           items: result
         }
@@ -21,6 +21,6 @@
 
   }
 
-  module.exports = ['$scope', 'goal', '$ionicPopover', '$ionicPopup', '$state', '$ionicModal', FeedController];
+  module.exports = ['$scope', 'PostService', '$ionicPopover', '$ionicPopup', '$state', '$ionicModal', FeedController];
 
 }());

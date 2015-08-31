@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostViewController');
 
-  function PostViewController($scope, $state, $timeout, router, goal, SWAGGER, $ionicPopover, $ionicPopup, $ionicModal) {
+  function PostViewController($scope, $state, $timeout, PostService, SWAGGER, $ionicPopover, $ionicPopup, $ionicModal) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -75,7 +75,7 @@
 
     $scope.shareInfo = function() {
       $scope.shareInfoPopup = {};
-      goal.getById($scope.post.id, true).then(function(shared){
+      PostService.getById($scope.post.id, true).then(function(shared){
         $ionicModal.fromTemplateUrl('app/components/post/view/share-info.html', {
           scope: $scope
         }).then(function(popup){
@@ -111,6 +111,6 @@
     });
   }
 
-  module.exports = ['$scope', '$state', '$timeout', 'router', 'goal', 'SWAGGER', '$ionicPopover', '$ionicPopup', '$ionicModal', PostViewController];
+  module.exports = ['$scope', '$state', '$timeout', 'PostService', 'SWAGGER', '$ionicPopover', '$ionicPopup', '$ionicModal', PostViewController];
 
 }());

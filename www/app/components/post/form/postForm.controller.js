@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PostFormController');
 
-  function PostFormController($scope, $state, $timeout, router, goal, SWAGGER, PostService, TagService, ContactService) {
+  function PostFormController($scope, $state, $timeout, SWAGGER, PostService, TagService, ContactService) {
     debug('here we are (directive controller)');
 
     debug(SWAGGER);
@@ -290,14 +290,9 @@
           ctrl.model.tags.push('habit');
         }
 
-        // Prepare content
-        // console.log(ctrl.model.content);
-        // ctrl.model.content = ctrl.model.content.replace(/<(?!br\s*\/?)[^>]+>/g, '');
-        // console.log(ctrl.model.content);
-
         if (!ctrl.model.id) {
           debug('saving new post', ctrl.model);
-          goal.create(ctrl.model).then(function(result){
+          PostService.create(ctrl.model).then(function(result){
             if (ctrl.sharedPost) {
               ctrl.modalInstance.hide();
             }
@@ -315,6 +310,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', '$timeout', 'router', 'goal', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostFormController];
+  module.exports = ['$scope', '$state', '$timeout', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostFormController];
 
 }());

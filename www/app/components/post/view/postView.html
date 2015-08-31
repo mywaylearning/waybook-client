@@ -20,7 +20,7 @@
   <div ng-if="post.postType === 'goal'" class="item item-body">
     <p>Status: <button class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
     <p ng-if="post.gRecurringEnabled">
-      Your goal is to do this <strong>{{post.gRecurringRepeatsEvery}}</strong> times on a <strong>{{post.gRecurringRecurrence}}</strong> basis.
+      Your goal is to do this <strong>{{post.occurrences}} times</strong> on a <strong>{{post.gRecurringRecurrence}}</strong> basis.
     </p>
     <p ng-if="post.cues || post.rewards">
       All habits follow the pattern cue - routine - reward. <span ng-if="post.cues">Your targeted cue for this habit is <strong>{{post.cues}}</strong>.</span> <span ng-if="post.rewards">Your targeted reward is <strong>{{post.rewards}}</strong></span>.

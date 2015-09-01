@@ -252,9 +252,38 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me', {
     url: '/me',
+    abstract: true,
     views: {
       'bodyContent': {
+        templateUrl: 'app/sections/me/me.bodyContent.html',
         controller: 'MeController'
+      }
+    }
+  })
+
+  .state('app.me.account', {
+    url: '',
+    views: {
+      'account-tab': {
+        controller: 'MeAccountController'
+      }
+    }
+  })
+
+  .state('app.me.discoveries', {
+    url: '/discoveries',
+    views: {
+      'discoveries-tab': {
+        controller: 'MeDiscoveriesController'
+      }
+    }
+  })
+
+  .state('app.me.sponsors', {
+    url: '/sponsors',
+    views: {
+      'sponsors-tab': {
+        controller: 'MeSponsorsController'
       }
     }
   })

@@ -15,13 +15,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   userResolve = {
     userGrant: function(grant) {
-      return grant.only([ROLES.user], ['app.main']);
+      return grant.only([ROLES.user], ['app']);
     }
   };
 
   guestResolve = {
     guestGrant: function(grant) {
-      return grant.only([ROLES.guest], ['public.login']);
+      return grant.only([ROLES.guest], ['public']);
     }
   };
 
@@ -84,8 +84,12 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     //templateUrl: 'app/sections/app/public-base.html',
     template: '<ion-nav-view name="publicContent"></ion-nav-view>',
-    controller: function($scope, currentUser) {
-      $scope.app.user = currentUser;
+    controller: function($scope, $state, currentUser) {
+      if (currentUser) {
+        $scope.app.user = currentUser;
+        $state.go('app.main');
+      }
+
     },
     resolve: {
       currentUser: function(user) {
@@ -95,7 +99,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.login', {
-    url: '^/login',
+    url: '/login',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/login/login.publicContent.html',
@@ -105,7 +109,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.verify', {
-    url: '^/verify',
+    url: '/verify',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/verify/verify.publicContent.html',
@@ -115,7 +119,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.register', {
-    url: '^/register',
+    url: '/register',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/register/register.publicContent.html',
@@ -125,7 +129,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.intro', {
-    url: '^/intro',
+    url: '/intro',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/intro/intro.publicContent.html',

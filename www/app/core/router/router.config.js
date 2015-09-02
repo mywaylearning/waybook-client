@@ -334,8 +334,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      post: function(goal, $stateParams) {
-        return goal.getById($stateParams.id);
+      post: function(PostService, $stateParams) {
+        return PostService.getById($stateParams.id);
       }
     }
   });

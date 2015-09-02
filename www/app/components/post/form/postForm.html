@@ -11,7 +11,9 @@
             mentio
             id="tags"
             mentio-typedTerm="typedTerm"
-            mentio-require-leading-space="true" required></div>
+            mentio-require-leading-space="true"
+            ng-required="!ctrl.modalInstance"
+            ></div>
 
             <mentio-menu
                   mentio-for="'tags'"
@@ -187,7 +189,7 @@
 
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.model.postType || ctrl.sharedPost" class="buttons padding">
-      <button class="button button-positive" type="submit" ng-disabled="!postForm.$valid || saving" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
+      <button class="button button-positive" type="submit" ng-disabled="postForm.$invalid || saving" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
       <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
     <!-- Begin of post button actions -->

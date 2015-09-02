@@ -265,6 +265,13 @@
       }
     };
 
+    ctrl.validateForm = function() {
+      if (ctrl.modalInstance) {
+        return false;
+      }
+      return postForm.$invalid || $scope.saving;
+    };
+
     ctrl.save = function() {
 
       $timeout(function() {
@@ -282,8 +289,12 @@
           ctrl.model.share.push(_contact);
         });
 
+        ctrl.model.tags = [];
+
         // define tags
-        ctrl.model.tags = detectTags(ctrl.model.content);
+        if (ctrl.model.content) {
+          ctrl.model.tags = detectTags(ctrl.model.content);
+        }
 
         // Append the post type to tags
         ctrl.model.tags.push(ctrl.model.postType);

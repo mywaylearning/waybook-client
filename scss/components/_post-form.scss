@@ -252,6 +252,22 @@
     }
 }
 
-body.aside-open mentio-menu {
-  margin-left: 276px;
+mentio-menu {
+  .aside-open & {
+    margin-left: 276px;
+  }
+
+  .modal-open & {
+    margin-left: 0;
+  }
 }
+
+// body.aside-open {
+//    {
+//
+//   }
+//
+//   .is-modal mentio-menu {
+//     margin-left: 0;
+//   }
+// }

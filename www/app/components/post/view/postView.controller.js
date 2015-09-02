@@ -9,6 +9,8 @@
 
     debug(SWAGGER);
 
+    $scope.state = $state.current;
+
     $scope.showPopoverActions = function($event) {
       $ionicPopover.fromTemplateUrl('app/components/post/view/post-view-actions.html', {
         scope: $scope,
@@ -74,6 +76,7 @@
     };
 
     $scope.shareInfo = function() {
+      $scope.popoverActions.hide();
       $scope.shareInfoPopup = {};
       PostService.getById($scope.post.id, true).then(function(shared){
         $ionicModal.fromTemplateUrl('app/components/post/view/share-info.html', {
@@ -88,7 +91,13 @@
       });
     };
 
-    $scope.reshare = function() {
+    $scope.reshare = function(post, $event) {
+      if ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
+
+      $scope.sharingPost = post || $scope.post;
       $scope.resharePopup = {};
       $ionicModal.fromTemplateUrl('app/components/post/view/re-share.html', {
         scope: $scope

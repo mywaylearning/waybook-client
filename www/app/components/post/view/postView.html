@@ -1,5 +1,5 @@
 <way-post-form ng-if="post.editMode" post="post"></way-post-form>
-<div class="list post-view" ng-if="!post.editMode" ng-class="{'just-edited': post.justEdited}">
+<div class="list post-view" ng-if="(post.originalShared ? post.originalShared.canShare : true) && !post.editMode" ng-class="{'just-edited': post.justEdited}">
   <div class="item item-avatar">
     <img gravatar-src="'{{post.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
     <h2>{{post.WaybookUser.firstName}} {{post.WaybookUser.lastName}}</h2>
@@ -16,6 +16,26 @@
   </div>
   <div class="item item-body">
     <div ng-bind-html="post.content" read-more></div>
+
+    <div ng-if="post.originalShared">
+      <p>Originally posted by:</p>
+      <div class="card post-reshared" ui-sref="app.main.post({id: post.originalShared.id})">
+        <div class="item item-avatar">
+          <img gravatar-src="'{{post.originalShared.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
+          <h2>{{post.originalShared.WaybookUser.firstName}} {{post.originalShared.WaybookUser.lastName}}</h2>
+          <p><span title="{{post.originalShared.created | date: 'medium'}}">{{post.originalShared.created | date: 'MMM d, y'}}</span></p>
+
+        </div>
+        <div class="item item-body">
+          <div ng-bind-html="post.originalShared.content" read-more></div>
+        </div>
+        <div class="item">
+          <button class="button button-small ion-forward" ng-click="reshare(post.originalShared, $event)" ng-class="{'icon-left': post.originalShared.shares, 'icon': !post.originalShared.shares}">{{post.originalShared.shares}}</button>
+          <button class="button button-clear button-small">Click to see the original post</button>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div ng-if="post.postType === 'goal'" class="item item-body">
     <p>Status: <button class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
@@ -50,7 +70,7 @@
   </div>
   <div class="item">
     <button class="button button-small icon ion-plus-round"></button>
-    <button class="button button-small ion-forward" ng-click="reshare()" ng-class="{'icon-left': post.shares, 'icon': !post.shares}">{{post.shares}}</button>
+    <button class="button button-small ion-forward" ng-if="post.canShare" ng-click="reshare()" ng-class="{'icon-left': post.shares, 'icon': !post.shares}">{{post.shares}}</button>
   </div>
   <way-comment post="post" user="user"></way-comment>
 </div>

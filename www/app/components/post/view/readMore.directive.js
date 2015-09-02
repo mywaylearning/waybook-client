@@ -9,8 +9,18 @@
       restrict: 'A',
       priority: 100,
       link: function ($scope, element, attrs, ctrl) {
+        var needToHide = $scope.$parent.state.name !== 'app.main.post';
+
+        if (!needToHide) {
+          return;
+        }
+
+        var showMore = !$scope.$parent.post.originalShared;
+
+        var showMoreElement = '<div class="read-more"><button class="button button-small button-clear icon-right ion-chevron-down">Show more</button></div>';
+
         $scope.hasHided = false;
-        var showMore = '<div class="read-more"><button class="button button-small button-clear icon-right ion-chevron-down">Show more</button></div>';
+
         $scope.$watch(element.html(), function(value) {
           if (!$scope.hasHided) {
             // apply this code ONCE
@@ -19,19 +29,22 @@
               element.css({
                 maxHeight: 130,
                 'overflow-y': 'hidden'
-              }).append(showMore);
+              }).append(showMoreElement);
             }
           }
         });
 
-        element.on('click', '.read-more', function() {
-          element.css({
-            maxHeight: 'inherit',
-            overflow: 'visible',
+        if (showMore) {
+          element.on('click', '.read-more', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            element.css({
+              maxHeight: 'inherit',
+              overflow: 'visible',
+            });
+            angular.element(this).remove();
           });
-          angular.element(this).remove();
-
-        });
+        }
       }
     };
 

@@ -10,12 +10,13 @@
 
       if (error && error.type === ERROR.grantRejected) {
         debug('YOU SHALL NOT PASS!!!', error);
+        debug(fromState);
 
         if (error.stateTo === fromState) {
           evt.preventDefault();
         }
 
-        $state.go(error.stateTo);
+        // $state.go(error.stateTo);
       }
 
       if (error && error.type === ERROR.unauthorizedRequest) {

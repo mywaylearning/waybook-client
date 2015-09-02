@@ -93,11 +93,13 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
 
     auth.authRefresh().then(function() {
 
+      var newAccessToken = authStore.getAccessToken();
+
       /**
        * We have to do this because we're using $http restangular request
        * interceptors won't be called. Udate the headers with the new access token
        */
-      response.config.headers.Authorization = 'Bearer ' + accessToken;
+      response.config.headers.Authorization = 'Bearer ' + newAccessToken;
 
       /**
        * Repeat the request and then call the handlers the usual way.

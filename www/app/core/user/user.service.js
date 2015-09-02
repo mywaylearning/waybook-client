@@ -21,10 +21,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
     getUploadImageUrl: _getUploadImageUrl,
     getSelf: _getSelf,
     updateSelf: _updateSelf,
-    logout: _logout,
-    test: function() {
-      return userObj;
-    }
+    logout: _logout
   };
 
   /**

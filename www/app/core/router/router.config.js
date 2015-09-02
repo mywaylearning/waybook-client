@@ -15,15 +15,17 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   userResolve = {
     userGrant: function(grant) {
-      return grant.only([ROLES.user], ['app.main']);
+      return grant.only([ROLES.user], ['app']);
     }
   };
 
   guestResolve = {
     guestGrant: function(grant) {
-      return grant.only([ROLES.guest], ['public.login']);
+      return grant.only([ROLES.guest], ['public']);
     }
   };
+
+  $urlRouterProvider.otherwise('/');
 
   $stateProvider
 
@@ -80,22 +82,32 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     return result;
   })
 
-  .state('public', {
+  .state('waybook', {
     abstract: true,
-    //templateUrl: 'app/sections/app/public-base.html',
-    template: '<ion-nav-view name="publicContent"></ion-nav-view>',
-    controller: function($scope, currentUser) {
-      $scope.app.user = currentUser;
-    },
+    template: '<div ui-view />',
     resolve: {
-      currentUser: function(user) {
-        return user.currentUser();
+      authorize: function(auth) {
+        return auth.authorize();
       }
     }
   })
 
+  .state('public', {
+    abstract: true,
+    parent: 'waybook',
+    //templateUrl: 'app/sections/app/public-base.html',
+    template: '<ion-nav-view name="publicContent"></ion-nav-view>',
+    controller: function($scope, $state) {
+      // $scope.app.user = currentUser;
+    }
+  })
+
+  .state('public.home', {
+    url: '/'
+  })
+
   .state('public.login', {
-    url: '^/login',
+    url: '/login',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/login/login.publicContent.html',
@@ -105,7 +117,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.verify', {
-    url: '^/verify',
+    url: '/verify',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/verify/verify.publicContent.html',
@@ -115,7 +127,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.register', {
-    url: '^/register',
+    url: '/register',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/register/register.publicContent.html',
@@ -125,7 +137,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.intro', {
-    url: '^/intro',
+    url: '/intro',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/intro/intro.publicContent.html',
@@ -136,6 +148,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app', {
     abstract: true,
+    parent: 'waybook',
     templateUrl: 'app/sections/app/base.html',
     controller: function(app) {
       app.setUser();
@@ -359,7 +372,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   key = LOCAL_STORAGE_KEYS.introSeen;
 
   if (store.get(key)) {
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/');
   } else {
     $urlRouterProvider.otherwise('/intro');
   }

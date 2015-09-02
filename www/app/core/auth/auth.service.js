@@ -2,7 +2,7 @@
 
 var debug = require('debug')('waybook:AuthService');
 
-function AuthService($rootScope, $state, $q, Restangular, authStore) {
+function AuthService($rootScope, $location, $q, Restangular, authStore) {
   var svcInterface, Oauth, Refresh, token, headers, oauthToken;
 
   Oauth = Restangular.all('login');
@@ -60,7 +60,20 @@ function AuthService($rootScope, $state, $q, Restangular, authStore) {
     return query.length ? query.substr(0, query.length - 1) : query;
   }
 
-  function _authorize() {}
+  /**
+   * Helper method to retreive promise if user is authorized and manage redirections.
+   *
+   * @return {Promise}
+   */
+  function _authorize() {
+    return _isAuthenticated(true).then(function(response) {
+      if (response) {
+        $location.path('main');
+      } else {
+        $location.path('login');
+      }
+    });
+  }
 
   function _authenticate(username, password) {
     var data;
@@ -135,9 +148,9 @@ function AuthService($rootScope, $state, $q, Restangular, authStore) {
     var deferred = $q.defer();
 
     if (angular.isDefined(token)) {
-      deferred.resolve();
+      deferred.resolve(token);
     } else {
-      deferred.reject();
+      deferred.resolve(false);
     }
 
     return deferred.promise;
@@ -186,4 +199,4 @@ function AuthService($rootScope, $state, $q, Restangular, authStore) {
   }
 }
 
-module.exports = ['$rootScope', '$state', '$q', 'Restangular', 'authStore', AuthService];
+module.exports = ['$rootScope', '$location', '$q', 'Restangular', 'authStore', AuthService];

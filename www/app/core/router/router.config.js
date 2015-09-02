@@ -82,30 +82,28 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     return result;
   })
 
-  .state('public', {
+  .state('waybook', {
     abstract: true,
-    //templateUrl: 'app/sections/app/public-base.html',
-    template: '<ion-nav-view name="publicContent"></ion-nav-view>',
-    controller: function($scope, $state, currentUser) {
-      $scope.app.user = currentUser;
-    },
+    template: '<div ui-view />',
     resolve: {
-      currentUser: function(user) {
-        console.log('aqui');
-        return user.currentUser().then(function() {
-
-        });
+      authorize: function(auth) {
+        return auth.authorize();
       }
     }
   })
 
-  .state('public.home', {
-    url: '/',
-    views: {
-      'publicContent': {
-        template: '<h1>Test</h1>'
-      }
+  .state('public', {
+    abstract: true,
+    parent: 'waybook',
+    //templateUrl: 'app/sections/app/public-base.html',
+    template: '<ion-nav-view name="publicContent"></ion-nav-view>',
+    controller: function($scope, $state) {
+      // $scope.app.user = currentUser;
     }
+  })
+
+  .state('public.home', {
+    url: '/'
   })
 
   .state('public.login', {
@@ -150,6 +148,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app', {
     abstract: true,
+    parent: 'waybook',
     templateUrl: 'app/sections/app/base.html',
     controller: function(app) {
       app.setUser();

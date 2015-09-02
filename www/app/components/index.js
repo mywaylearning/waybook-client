@@ -14,7 +14,7 @@
   app.directive('readMore', require('./post/view/readMore.directive.js'));
 
 
-  app.directive('linkPreview', require('./shared/linkPreview.directive.js'));
+  app.directive('linkPreview', require('./common/linkPreview.directive.js'));
 
 
   app.controller('FeedController', require('./feed/feed.controller.js'));

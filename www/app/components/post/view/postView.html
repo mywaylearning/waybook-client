@@ -50,7 +50,7 @@
   </div>
   <div class="item">
     <button class="button button-small icon ion-plus-round"></button>
-    <button class="button button-small ion-forward" ng-click="reshare()" ng-class="{'icon-left': post.shares, 'icon': !post.shares}">{{post.shares}}</button>
+    <button class="button button-small ion-forward" ng-if="post.canShare" ng-click="reshare()" ng-class="{'icon-left': post.shares, 'icon': !post.shares}">{{post.shares}}</button>
   </div>
   <way-comment post="post" user="user"></way-comment>
 </div>

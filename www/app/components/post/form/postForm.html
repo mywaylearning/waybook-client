@@ -12,7 +12,7 @@
             id="tags"
             mentio-typedTerm="typedTerm"
             mentio-require-leading-space="true"
-            ng-required="!ctrl.modalInstance"
+            ng-required="ctrl.modalInstance ? false : ctrl.model.originalShared ? false : true"
             ></div>
 
             <mentio-menu

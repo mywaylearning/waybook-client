@@ -31,7 +31,7 @@
     }
 
     if (ctrl.sharedPost) {
-      ctrl.model.sharedFrom = ctrl.sharedPost.sharedFrom || ctrl.sharedPost.id;
+      ctrl.model.sharedFrom = ctrl.sharedPost.id;
     }
 
     // Handle content editable click based on type of post
@@ -263,13 +263,6 @@
         ctrl.post = originalPost;
 
       }
-    };
-
-    ctrl.validateForm = function() {
-      if (ctrl.modalInstance) {
-        return false;
-      }
-      return postForm.$invalid || $scope.saving;
     };
 
     ctrl.save = function() {

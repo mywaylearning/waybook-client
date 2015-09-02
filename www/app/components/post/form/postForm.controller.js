@@ -31,7 +31,7 @@
     }
 
     if (ctrl.sharedPost) {
-      ctrl.model.sharedPostId = ctrl.sharedPost.sharedPostId || ctrl.sharedPost.id;
+      ctrl.model.sharedFrom = ctrl.sharedPost.id;
     }
 
     // Handle content editable click based on type of post
@@ -282,8 +282,12 @@
           ctrl.model.share.push(_contact);
         });
 
+        ctrl.model.tags = [];
+
         // define tags
-        ctrl.model.tags = detectTags(ctrl.model.content);
+        if (ctrl.model.content) {
+          ctrl.model.tags = detectTags(ctrl.model.content);
+        }
 
         // Append the post type to tags
         ctrl.model.tags.push(ctrl.model.postType);

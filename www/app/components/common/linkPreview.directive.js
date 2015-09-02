@@ -9,7 +9,7 @@
       scope: {
         link: '='
       },
-      templateUrl: '/app/components/shared/linkPreview.html'
+      templateUrl: '/app/components/common/linkPreview.html'
     };
   }
 

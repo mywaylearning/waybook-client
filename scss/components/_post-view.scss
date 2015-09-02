@@ -60,4 +60,39 @@
     top: -5px;
     margin: 0;
   }
+
+  .item-body .card.post-reshared {
+    cursor: pointer;
+
+    .item {
+      padding: 10px;
+    }
+
+    .item-avatar {
+      min-height: 45px;
+      padding-left: 50px;
+
+      img {
+        top: 10px;
+        left: 10px;
+        max-width: 30px;
+        max-height: 30px;
+      }
+
+      h2, p {
+        margin: 0;
+        font-size: 80%;
+      }
+    }
+
+    .item-body {
+      font-size: 80%;
+    }
+  }
+
+  .button-see-original-post {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 }

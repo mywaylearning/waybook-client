@@ -2,7 +2,7 @@
 
 var debug = require('debug')('waybook:AuthService');
 
-function AuthService($q, Restangular, authStore) {
+function AuthService($rootScope, $state, $q, Restangular, authStore) {
   var svcInterface, Oauth, Refresh, token, headers, oauthToken;
 
   Oauth = Restangular.all('login');
@@ -14,6 +14,7 @@ function AuthService($q, Restangular, authStore) {
   oauthToken = null;
 
   svcInterface = {
+    authorize: _authorize,
     authenticate: _authenticate,
     authRefresh: _authRefresh,
     isAuthenticated: _isAuthenticated,
@@ -58,6 +59,8 @@ function AuthService($q, Restangular, authStore) {
 
     return query.length ? query.substr(0, query.length - 1) : query;
   }
+
+  function _authorize() {}
 
   function _authenticate(username, password) {
     var data;
@@ -183,4 +186,4 @@ function AuthService($q, Restangular, authStore) {
   }
 }
 
-module.exports = ['$q', 'Restangular', 'authStore', AuthService];
+module.exports = ['$rootScope', '$state', '$q', 'Restangular', 'authStore', AuthService];

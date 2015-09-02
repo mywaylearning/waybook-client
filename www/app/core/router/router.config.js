@@ -25,6 +25,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   };
 
+  $urlRouterProvider.otherwise('/');
+
   $stateProvider
 
   /**
@@ -85,15 +87,23 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     //templateUrl: 'app/sections/app/public-base.html',
     template: '<ion-nav-view name="publicContent"></ion-nav-view>',
     controller: function($scope, $state, currentUser) {
-      if (currentUser) {
-        $scope.app.user = currentUser;
-        $state.go('app.main');
-      }
-
+      $scope.app.user = currentUser;
     },
     resolve: {
       currentUser: function(user) {
-        return user.currentUser();
+        console.log('aqui');
+        return user.currentUser().then(function() {
+
+        });
+      }
+    }
+  })
+
+  .state('public.home', {
+    url: '/',
+    views: {
+      'publicContent': {
+        template: '<h1>Test</h1>'
       }
     }
   })
@@ -363,7 +373,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   key = LOCAL_STORAGE_KEYS.introSeen;
 
   if (store.get(key)) {
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/');
   } else {
     $urlRouterProvider.otherwise('/intro');
   }

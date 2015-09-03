@@ -52,11 +52,12 @@ var LoginController = function($scope, $state, router, auth, user, errorHandler)
       return $scope.errorsData.message = 'You need to verify your account';
     }
     $scope.errorsData = {};
+    $scope.loginData = {};
     $scope.app.user = userData;
     if ($scope.returnToState) {
       $state.go($scope.returnToState.name, $scope.returnToStateParams);
-      $state.returnToState = null;
-      $state.returnToStateParams = null;
+      $scope.returnToState = null;
+      $scope.returnToStateParams = null;
     } else {
       router.goToLoggedIn();
     }

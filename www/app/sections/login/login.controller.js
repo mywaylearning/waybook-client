@@ -1,6 +1,6 @@
 'use strict';
 
-var LoginController = function($scope, router, auth, user, errorHandler) {
+var LoginController = function($scope, $state, router, auth, user, errorHandler) {
 
   $scope.loginData = {};
 
@@ -47,7 +47,12 @@ var LoginController = function($scope, router, auth, user, errorHandler) {
    */
   function onGetUserSuccess(userData) {
     $scope.app.user = userData;
-    router.goToLoggedIn();
+    if ($scope.returnToState) {
+      $state.go($scope.returnToState.name, $scope.returnToStateParams);
+    } else {
+      router.goToLoggedIn();
+    }
+
   };
 
   /**
@@ -70,6 +75,7 @@ var LoginController = function($scope, router, auth, user, errorHandler) {
 
 module.exports = [
   '$scope',
+  '$state',
   'router',
   'auth',
   'user',

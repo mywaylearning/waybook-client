@@ -2,7 +2,7 @@
 
 var debug = require('debug')('waybook:AuthService');
 
-function AuthService($rootScope, $location, $q, Restangular, authStore) {
+function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, authStore) {
   var svcInterface, Oauth, Refresh, token, headers, oauthToken;
 
   Oauth = Restangular.all('login');
@@ -67,10 +67,21 @@ function AuthService($rootScope, $location, $q, Restangular, authStore) {
    */
   function _authorize() {
     return _isAuthenticated(true).then(function(response) {
-      if (response) {
-        $location.path('main');
+      if (!response) {
+        if ($rootScope.toState.name.indexOf('public.login') === -1) {
+          $rootScope.returnToState = $rootScope.toState;
+          $rootScope.returnToStateParams = $rootScope.toStateParams;
+        }
+
+        $timeout(function(){
+          $state.go('public.login');
+        });
+
       } else {
-        $location.path('login');
+        if ($rootScope.toState.name.indexOf('public') > -1) {
+          $state.go('app.main');
+          // $location.path('/');
+        }
       }
     });
   }
@@ -199,4 +210,4 @@ function AuthService($rootScope, $location, $q, Restangular, authStore) {
   }
 }
 
-module.exports = ['$rootScope', '$location', '$q', 'Restangular', 'authStore', AuthService];
+module.exports = ['$timeout', '$rootScope', '$state', '$location', '$q', 'Restangular', 'authStore', AuthService];

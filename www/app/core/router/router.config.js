@@ -25,7 +25,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   };
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 
   $stateProvider
 
@@ -100,10 +100,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     controller: function($scope, $state) {
       // $scope.app.user = currentUser;
     }
-  })
-
-  .state('public.home', {
-    url: '/'
   })
 
   .state('public.login', {
@@ -265,7 +261,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me', {
     url: '/me',
-    abstract: true,
     views: {
       'bodyContent': {
         templateUrl: 'app/sections/me/me.bodyContent.html',
@@ -275,9 +270,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.me.account', {
-    url: '',
+    url: '/account',
     views: {
-      'account-tab': {
+      'account-tab@': {
         controller: 'MeAccountController'
       }
     }
@@ -286,7 +281,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.me.discoveries', {
     url: '/discoveries',
     views: {
-      'discoveries-tab': {
+      'discoveries-tab@': {
         controller: 'MeDiscoveriesController'
       }
     }
@@ -295,7 +290,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.me.sponsors', {
     url: '/sponsors',
     views: {
-      'sponsors-tab': {
+      'sponsors-tab@': {
         controller: 'MeSponsorsController'
       }
     }
@@ -321,7 +316,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.main', {
     cache: false,
-    url: '/main',
+    url: '/',
     views: {
       'way-post': {
         template: '<way-post-form></way-post-form>',
@@ -333,7 +328,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.thought', {
-    url: '/thought',
+    url: 'thought',
     views: {
       'way-post': {
         template: '<way-post-form type="thought"></way-post-form>',
@@ -342,7 +337,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.goal', {
-    url: '/goal',
+    url: 'goal',
     views: {
       'way-post': {
         template: '<way-post-form type="goal"></way-post-form>',
@@ -351,7 +346,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.discovery', {
-    url: '/discovery',
+    url: 'discovery',
     views: {
       'way-post': {
         template: '<way-post-form type="discovery"></way-post-form>',
@@ -360,7 +355,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.resource', {
-    url: '/resource',
+    url: 'resource',
     views: {
       'way-post': {
         template: '<way-post-form type="resource"></way-post-form>',
@@ -369,7 +364,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.post', {
-    url: '/post/:id',
+    url: 'post/:id',
     views: {
       'bodyContent@app': {
         controller: 'MainPostController'
@@ -398,13 +393,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   //   }
   // });
   // if none of the above states are matched, use this as the fallback
-  key = LOCAL_STORAGE_KEYS.introSeen;
-
-  if (store.get(key)) {
-    $urlRouterProvider.otherwise('/');
-  } else {
-    $urlRouterProvider.otherwise('/intro');
-  }
+  // key = LOCAL_STORAGE_KEYS.introSeen;
+  //
+  // if (store.get(key)) {
+  //   $urlRouterProvider.otherwise('/');
+  // } else {
+  //   $urlRouterProvider.otherwise('/intro');
+  // }
 
 }
 

@@ -8,16 +8,12 @@
     debug('here we are (directive controller)');
 
     $scope.refresh = function() {
-      PostService.collection().then(function(result){
-        $scope.feed = {
-          items: result
-        }
+      PostService.collection().then(function(posts){
+        $scope.posts = posts;
         // Stop the ion-refresher from spinning
        $scope.$broadcast('scroll.refreshComplete');
       });
     };
-
-    $scope.refresh();
 
   }
 

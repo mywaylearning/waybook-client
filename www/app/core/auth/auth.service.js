@@ -14,7 +14,6 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
   oauthToken = null;
 
   svcInterface = {
-    authorize: _authorize,
     authenticate: _authenticate,
     authRefresh: _authRefresh,
     isAuthenticated: _isAuthenticated,
@@ -58,34 +57,6 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
     }
 
     return query.length ? query.substr(0, query.length - 1) : query;
-  }
-
-  /**
-   * Helper method to retreive promise if user is authorized and manage redirections.
-   *
-   * @return {Promise}
-   */
-  function _authorize() {
-    return _isAuthenticated(true).then(function(response) {
-      if (!response) {
-        if ($rootScope.toState.name.indexOf('public') === -1) {
-          $rootScope.returnToState = $rootScope.toState;
-          $rootScope.returnToStateParams = $rootScope.toStateParams;
-        }
-
-        $timeout(function(){
-          if ($rootScope.toState.name.indexOf('public') === -1) {
-            $state.go('public.login');
-          }
-        });
-
-      } else {
-        if ($rootScope.toState.name.indexOf('public') > -1) {
-          $state.go('app.main');
-          // $location.path('/');
-        }
-      }
-    });
   }
 
   function _authenticate(username, password) {

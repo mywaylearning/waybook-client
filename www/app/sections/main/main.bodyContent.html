@@ -1,9 +1,8 @@
 <ion-view view-title="Main" autoscroll="true" hide-back-button="true">
   <ion-content padding="true" class="has-header">
-    <div ui-view="way-post">
+    <div ui-view="way-post-form">
       <way-post-form></way-post-form>
     </div>
-
-    <way-feed></way-feed>
+    <way-feed posts="posts" user="app.user"></way-feed>
   </ion-content>
 </ion-view>

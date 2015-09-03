@@ -1,6 +1,7 @@
 'use strict';
 
-function MainController($scope) {
+function MainController($scope, $state, posts) {
+  $scope.posts = posts;
 }
 
-module.exports = ['$scope', MainController];
+module.exports = ['$scope', '$state', 'posts', MainController];

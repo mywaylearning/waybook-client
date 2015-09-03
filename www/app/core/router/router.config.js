@@ -99,11 +99,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     template: '<ion-nav-view name="publicContent"></ion-nav-view>',
     controller: function($scope, $state) {
       // $scope.app.user = currentUser;
-    }
+    },
+    resolve: guestResolve
   })
 
   .state('public.login', {
     url: '/login',
+    cache: false,
     views: {
       'publicContent': {
         templateUrl: 'app/sections/login/login.publicContent.html',
@@ -124,6 +126,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('public.register', {
     url: '/register',
+    cache: false,
     views: {
       'publicContent': {
         templateUrl: 'app/sections/register/register.publicContent.html',
@@ -151,15 +154,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: userResolve
   })
-
-  // .state('app.logout', {
-  //   url: '^/logout',
-  //   templateUrl: 'app/sections/app/logout.html',
-  //   controller: function($scope) {
-  //     debug($scope);
-  //     $scope.logout();
-  //   }
-  // })
 
   .state('app.discover', {
     abstract: true,
@@ -261,18 +255,20 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me', {
     url: '/me',
+    abstract: true,
     views: {
       'bodyContent': {
-        templateUrl: 'app/sections/me/me.bodyContent.html',
-        controller: 'MeController'
+        templateUrl: 'app/sections/me/me.bodyContent.html'
       }
     }
   })
 
   .state('app.me.account', {
     url: '/account',
+    cache: false,
     views: {
-      'account-tab@': {
+      'account-tab@app.me': {
+        templateUrl: 'app/sections/me/account.account-tab.html',
         controller: 'MeAccountController'
       }
     }
@@ -281,7 +277,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.me.discoveries', {
     url: '/discoveries',
     views: {
-      'discoveries-tab@': {
+      'discoveries-tab@app.me': {
+        templateUrl: 'app/sections/me/discoveries.discoveries-tab.html',
         controller: 'MeDiscoveriesController'
       }
     }
@@ -290,7 +287,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.me.sponsors', {
     url: '/sponsors',
     views: {
-      'sponsors-tab@': {
+      'sponsors-tab@app.me': {
         controller: 'MeSponsorsController'
       }
     }

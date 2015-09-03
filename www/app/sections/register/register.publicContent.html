@@ -3,38 +3,38 @@
 </div>
 <ion-view cache-view="false">
   <ion-content padding="true" class="has-header">
-    <form name="loginForm" ng-submit="onRegister()">
+    <form name="registerForm" ng-submit="onRegister()">
       <ion-list>
 
         <label class="item item-input">
           <span class="input-label">First name:</span>
-          <input type="text" ng-model="register.name" placeholder="First name">
+          <input type="text" ng-model="register.name" placeholder="First name" required>
         </label>
 
         <label class="item item-input">
           <span class="input-label">Last name:</span>
-          <input type="text" ng-model="register.lastName" placeholder="Last name">
+          <input type="text" ng-model="register.lastName" placeholder="Last name" required>
         </label>
 
         <label class="item item-input">
           <span class="input-label">Username:</span>
-          <input type="email" ng-model="register.username" placeholder="Username">
+          <input type="text" ng-model="register.username" placeholder="Username" required>
         </label>
 
         <label class="item item-input">
           <span class="input-label">E-mail:</span>
-          <input type="email" ng-model="register.email" placeholder="E-mail">
+          <input type="email" ng-model="register.email" placeholder="E-mail" required>
         </label>
 
         <label class="item item-input">
           <span class="input-label">Password:</span>
-          <input type="password" ng-model="register.password" placeholder="Create a password">
+          <input type="password" ng-model="register.password" placeholder="Create a password" required>
         </label>
       </ion-list>
 
       <div class="spacer" style="height: 40px;"></div>
 
-      <button class="button button-stable button-block" type="submit">
+      <button class="button button-stable button-block" ng-disabled="registerForm.$invalid" type="submit">
         Sign Up
       </button>
 

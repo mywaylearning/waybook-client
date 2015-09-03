@@ -5,8 +5,6 @@
   function GrantRun($timeout, $rootScope, $state, $stateParams, user, auth, ERROR) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
-      console.log('stateChangeStart', toState);
-
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
 

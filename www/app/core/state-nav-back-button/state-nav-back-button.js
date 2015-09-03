@@ -26,7 +26,6 @@ angular.module('stateBackButtonIonic', [])
 
 			return function(scope) {
 				scope.customStateBack = function() {
-            console.log($state, $state.$current.parent.navigable)
 					if ($ionicHistory.backView()) {
 						$ionicHistory.goBack();
 					} else if (!!$state.$current.parent.navigable) {

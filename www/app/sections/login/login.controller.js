@@ -3,6 +3,7 @@
 var LoginController = function($scope, $state, router, auth, user, errorHandler) {
 
   $scope.loginData = {};
+  $scope.errorsData = {};
 
   /**
    * Handle login form submission and validation. Once the use has successfully
@@ -46,9 +47,15 @@ var LoginController = function($scope, $state, router, auth, user, errorHandler)
    * Then redirect to logged in state.
    */
   function onGetUserSuccess(userData) {
+    if (userData.confirmationToken) {
+      user.logout();
+      return $scope.errorsData.message = 'You need to verify your account';
+    }
     $scope.app.user = userData;
     if ($scope.returnToState) {
       $state.go($scope.returnToState.name, $scope.returnToStateParams);
+      $state.returnToState = null;
+      $state.returnToStateParams = null;
     } else {
       router.goToLoggedIn();
     }
@@ -68,7 +75,7 @@ var LoginController = function($scope, $state, router, auth, user, errorHandler)
     /**
      * Redirect to login page
      */
-    router.goToLoggedOut();
+    $scope.errorsData.message = 'Invalid e-mail or password.';
   }.bind(this);
 
 };

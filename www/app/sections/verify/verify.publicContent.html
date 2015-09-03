@@ -1,0 +1,7 @@
+<div class="verify-account">
+  <ion-spinner ng-if="data.isLoading"></ion-spinner>
+  <div class="message" ng-if="!data.isLoading" ng-class="{'success': data.verified, 'error': !data.verified}">
+    <p ng-if="data.verified">Your account was verified!</p>
+    <p ng-if="!data.verified">Your account was not verified!</p>
+  </div>
+</div>

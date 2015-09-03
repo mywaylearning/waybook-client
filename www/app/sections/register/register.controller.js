@@ -27,8 +27,6 @@ function RegisterController($scope, router, user, errorHandler, $ionicModal) {
    * successfully authenticated we will be redirec to appropriate page.
    */
   $scope.onRegister = function() {
-    console.log('aqui2');
-
     var model = {
       name: $scope.register.name,
       lastName: $scope.register.lastName,

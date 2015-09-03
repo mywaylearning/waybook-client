@@ -1,12 +1,15 @@
 'use strict';
 
-function VerifyController($scope, router, user, errorHandler) {
-
+function VerifyController($scope, $state, user, errorHandler) {
   var token = location.hash.split('t=');
 
   if (!token[1]) {
-    return router.goToLoggedOut();
+    return $state.go('^');
   }
+
+  $scope.data = {
+    isLoading: true
+  };
 
   var model = {
     verify: token[1]
@@ -15,16 +18,19 @@ function VerifyController($scope, router, user, errorHandler) {
   user
     .register(model)
     .then(function(data) {
-      router.goToLoggedOut();
+      $scope.data.verified = true;
     })
     .catch(function(error) {
-      router.goToLoggedOut();
+      $scope.data.verified = false;
+    })
+    .finally(function() {
+      $scope.data.isLoading = false;
     });
 };
 
 module.exports = [
   '$scope',
-  'router',
+  '$state',
   'user',
   'errorHandler',
   VerifyController

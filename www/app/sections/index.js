@@ -7,6 +7,7 @@
   app.controller('LoginController', require('./login/login.controller.js'));
   app.controller('RegisterController', require('./register/register.controller.js'));
   app.controller('MainController', require('./main/main.controller.js'));
+  app.controller('MainTypeController', require('./main/mainType.controller.js'));
   app.controller('MainPostController', require('./main/post.controller.js'));
   app.controller('DiscoverController', require('./discover/discover.controller.js'));
   app.controller('ExplorationController', require('./discover/exploration.controller.js'));
@@ -20,7 +21,7 @@
   app.controller('MeAccountController', require('./me/account.controller.js'));
   app.controller('MeDiscoveriesController', require('./me/discoveries.controller.js'));
   app.controller('MeSponsorsController', require('./me/sponsors.controller.js'));
-  
+
   app.controller('HelpFeedbackController', require('./help-feedback/help-feedback.controller.js'));
   app.controller('AboutController', require('./about/about.controller.js'));
   app.controller('IntroController', require('./verify/verify.controller.js'));

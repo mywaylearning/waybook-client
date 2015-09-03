@@ -7,10 +7,6 @@
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
-
-      if (user.isUserResolved()) {
-        auth.authorize();
-      }
     });
 
 
@@ -27,7 +23,7 @@
           evt.preventDefault();
         }
 
-        $state.go(fromState.name, fromParams);
+        // $state.go(fromState.name, fromParams);
       }
 
       if (error && error.type === ERROR.unauthorizedRequest) {

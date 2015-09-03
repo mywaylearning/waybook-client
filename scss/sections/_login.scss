@@ -1,0 +1,23 @@
+.login {
+  .verify-account {
+    text-align: center;
+
+    .message {
+      display: block;
+      height: 34px;
+      top: 0;
+      padding: 0;
+      line-height: 34px;
+      font-size: 14px;
+      color: #FFF;
+
+      &.success {
+        background-color: #33cd5f;
+      }
+
+      &.error {
+        background-color: #e42012
+      }
+    }
+  }
+}

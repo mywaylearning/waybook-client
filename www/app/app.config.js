@@ -49,7 +49,10 @@
   })
 
   .constant('POST_TYPES', {
-    'g': 'Goal'
+    'thought': 'Thought',
+    'goal': 'Goal',
+    'discovery': 'Discovery',
+    'resource': 'Resource'
   })
 
   .constant('DEFAULT_PER_PAGE', 20)

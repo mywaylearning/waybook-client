@@ -11,6 +11,8 @@
 
     $scope.state = $state.current;
 
+    $scope.posts = $scope.$parent.$parent.posts;
+
     $scope.showPopoverActions = function($event) {
       $ionicPopover.fromTemplateUrl('app/components/post/view/post-view-actions.html', {
         scope: $scope,
@@ -98,6 +100,7 @@
       }
 
       $scope.sharingPost = post || $scope.post;
+      $scope.postType = 'thought';
       $scope.resharePopup = {};
       $ionicModal.fromTemplateUrl('app/components/post/view/re-share.html', {
         scope: $scope

@@ -25,7 +25,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   };
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 
   $stateProvider
 
@@ -99,15 +99,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     template: '<ion-nav-view name="publicContent"></ion-nav-view>',
     controller: function($scope, $state) {
       // $scope.app.user = currentUser;
-    }
-  })
-
-  .state('public.home', {
-    url: '/'
+    },
+    resolve: guestResolve
   })
 
   .state('public.login', {
     url: '/login',
+    cache: false,
     views: {
       'publicContent': {
         templateUrl: 'app/sections/login/login.publicContent.html',
@@ -128,6 +126,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('public.register', {
     url: '/register',
+    cache: false,
     views: {
       'publicContent': {
         templateUrl: 'app/sections/register/register.publicContent.html',
@@ -155,15 +154,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: userResolve
   })
-
-  // .state('app.logout', {
-  //   url: '^/logout',
-  //   templateUrl: 'app/sections/app/logout.html',
-  //   controller: function($scope) {
-  //     debug($scope);
-  //     $scope.logout();
-  //   }
-  // })
 
   .state('app.discover', {
     abstract: true,
@@ -265,9 +255,40 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me', {
     url: '/me',
+    abstract: true,
     views: {
       'bodyContent': {
-        controller: 'MeController'
+        templateUrl: 'app/sections/me/me.bodyContent.html'
+      }
+    }
+  })
+
+  .state('app.me.account', {
+    url: '/account',
+    cache: false,
+    views: {
+      'account-tab@app.me': {
+        templateUrl: 'app/sections/me/account.account-tab.html',
+        controller: 'MeAccountController'
+      }
+    }
+  })
+
+  .state('app.me.discoveries', {
+    url: '/discoveries',
+    views: {
+      'discoveries-tab@app.me': {
+        templateUrl: 'app/sections/me/discoveries.discoveries-tab.html',
+        controller: 'MeDiscoveriesController'
+      }
+    }
+  })
+
+  .state('app.me.sponsors', {
+    url: '/sponsors',
+    views: {
+      'sponsors-tab@app.me': {
+        controller: 'MeSponsorsController'
       }
     }
   })
@@ -292,7 +313,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.main', {
     cache: false,
-    url: '/main',
+    url: '/',
     views: {
       'way-post': {
         template: '<way-post-form></way-post-form>',
@@ -304,7 +325,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.thought', {
-    url: '/thought',
+    url: 'thought',
     views: {
       'way-post': {
         template: '<way-post-form type="thought"></way-post-form>',
@@ -313,7 +334,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.goal', {
-    url: '/goal',
+    url: 'goal',
     views: {
       'way-post': {
         template: '<way-post-form type="goal"></way-post-form>',
@@ -322,7 +343,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.discovery', {
-    url: '/discovery',
+    url: 'discovery',
     views: {
       'way-post': {
         template: '<way-post-form type="discovery"></way-post-form>',
@@ -331,7 +352,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.resource', {
-    url: '/resource',
+    url: 'resource',
     views: {
       'way-post': {
         template: '<way-post-form type="resource"></way-post-form>',
@@ -340,7 +361,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.post', {
-    url: '/post/:id',
+    url: 'post/:id',
     views: {
       'bodyContent@app': {
         controller: 'MainPostController'
@@ -369,13 +390,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   //   }
   // });
   // if none of the above states are matched, use this as the fallback
-  key = LOCAL_STORAGE_KEYS.introSeen;
-
-  if (store.get(key)) {
-    $urlRouterProvider.otherwise('/');
-  } else {
-    $urlRouterProvider.otherwise('/intro');
-  }
+  // key = LOCAL_STORAGE_KEYS.introSeen;
+  //
+  // if (store.get(key)) {
+  //   $urlRouterProvider.otherwise('/');
+  // } else {
+  //   $urlRouterProvider.otherwise('/intro');
+  // }
 
 }
 

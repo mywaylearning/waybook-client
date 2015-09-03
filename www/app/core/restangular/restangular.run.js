@@ -24,7 +24,7 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
     switch (response.status) {
       case 401:
         handleUnauthorized(response, deferred);
-        stopErrorPropagation = true;
+        stopErrorPropagation = false;
         break;
 
       case 403:

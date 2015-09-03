@@ -1,13 +1,15 @@
-<ion-view view-title="Me" hide-back-button="true">
-  <ion-content padding="true" class="has-header">
-    <h1>Me</h1>
+<ion-tabs class="tabs-icon-top tabs-stable">
 
-    <div class="button-bar">
-      <a class="button">Account</a>
-      <a class="button">Discoveries</a>
-      <a class="button">Sponsors</a>
-    </div>
+  <ion-tab title="Account" icon="ion-person" ui-sref="app.me.account">
+    <ion-nav-view name="account-tab"></ion-nav-view>
+  </ion-tab>
 
+  <ion-tab title="Discoveries" icon="ion-flash" ui-sref="app.me.discoveries">
+    <ion-nav-view name="discoveries-tab"></ion-nav-view>
+  </ion-tab>
 
-  </ion-content>
-</ion-view>
+  <ion-tab title="Sponsors" icon="ion-person-stalker" ui-sref="app.me.sponsors">
+    <ion-nav-view name="sponsors-tab"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

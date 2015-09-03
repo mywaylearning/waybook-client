@@ -12,7 +12,6 @@
       },
       transclude: true,
       controller: 'PostViewController',
-      bindToController: true,
       templateUrl: '/app/components/post/view/postView.html',
       link: function(scope, el, attrs) {}
     };

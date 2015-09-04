@@ -258,7 +258,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      user: function(user) {
+      currentUser: function(user) {
         return user.currentUser(true);
       }
     },

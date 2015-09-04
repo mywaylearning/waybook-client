@@ -1,7 +1,7 @@
 'use strict';
 
-function MeEditController($scope, $stateParams, user, utils) {
-  $scope.user = user;
+function MeEditController($scope, $stateParams, currentUser, user, utils) {
+  $scope.user = currentUser;
 
   $scope.ageRequired = $stateParams.ageRequired;
 
@@ -11,7 +11,6 @@ function MeEditController($scope, $stateParams, user, utils) {
   };
 
   $scope.$watch('user.birth', function(birth) {
-    console.log(birth)
     $scope.accountData.underAge = false;
     $scope.accountData.needParent = false;
     if (!birth) {
@@ -33,14 +32,19 @@ function MeEditController($scope, $stateParams, user, utils) {
   });
 
   $scope.updateUser = function() {
-    $scope.user.save().then(function(result) {
-      console.log('saved');
+    user.updateSelf($scope.user).then(function(response) {
+      console.log(response);
     });
+
+    // $scope.user.save().then(function(result) {
+    //
+    //   console.log('saved');
+    // });
   }
 
 
 }
 
-MeEditController.$inject = ['$scope', '$stateParams', 'user', 'utils'];
+MeEditController.$inject = ['$scope', '$stateParams', 'currentUser', 'user', 'utils'];
 
 module.exports = MeEditController;

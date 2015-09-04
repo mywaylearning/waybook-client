@@ -253,38 +253,16 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     cache: false,
     views: {
       'account-tab': {
-        templateUrl: 'app/sections/me/account/info.tab.html',
-        controller: 'MeAccountInfoController'
-      }
-    },
-    resolve: {
-      user: function(user) {
-        return user.currentUser(true);
-      }
-    }
-  })
-
-  .state('app.me.account.edit', {
-    url: '/edit',
-    cache: false,
-    views: {
-      'account-tab@app.me': {
         templateUrl: 'app/sections/me/account/edit.tab.html',
         controller: 'MeAccountEditController'
       }
-    }
-  })
-
-  .state('app.me.account.age', {
-    url: '/age',
-    cache: false,
-    views: {
-      'account-tab@app.me': {
-        templateUrl: 'app/sections/me/account/age.tab.html',
-        controller: 'MeAccountAgeController'
+    },
+    resolve: {
+      currentUser: function(user) {
+        return user.currentUser(true);
       }
     },
-    params : { hideBackButton: false }
+    params : { ageRequired: false }
   })
 
   .state('app.me.discoveries', {

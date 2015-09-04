@@ -1,5 +1,75 @@
 <ion-view title="Account">
-  <ion-content padding="true">
-    <h3>Account</h3>
+  <ion-content padding="true" delegate-handle="mainScroll">
+    <form name="accountForm" ng-submit="updateUser()">
+      <div class="card">
+        <div class="item item-divider">Basics:</div>
+        <label class="item item-input">
+          <span class="input-label">First name:</span>
+          <input type="text" ng-model="user.firstName" placeholder="First name" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last name:</span>
+          <input type="text" ng-model="user.lastName" placeholder="Last name" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">E-mail:</span>
+          <input type="email" ng-model="user.email" placeholder="E-mail" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Username:</span>
+          <input type="text" ng-model="user.username" placeholder="Username" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Post code:</span>
+          <input type="text" ng-model="user.postCode" placeholder="Post code" required>
+        </label>
+        <label class="item item-input item-select">
+          <span class="input-label">Gender:</span>
+          <select ng-model="user.gender" required>
+            <option value="">Select</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </label>
+        <label class="item item-input" id="age">
+          <span class="input-label">Date or Birth:</span>
+          <input type="date" ng-model="user.birth" placeholder="Date of birth" required>
+        </label>
+
+        <div ng-show="accountData.needParent">
+          <div class="item item-divider">Parent of guardian information:</div>
+          <label class="item item-input">
+            <span class="input-label">First name:</span>
+            <input type="text" ng-model="user.parent.firstName" placeholder="Parent of guardian first name" ng-required="accountData.needParent">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Last name:</span>
+            <input type="text" ng-model="user.parent.lastName" placeholder="Parent of guardian last name" ng-required="accountData.needParent">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">E-mail:</span>
+            <input type="email" ng-model="user.parent.email" placeholder="Parent of guardian e-mail" ng-required="accountData.needParent">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Phone:</span>
+            <input type="tel" ng-model="user.parent.phone" placeholder="Parent of guardian phone number" ng-required="accountData.needParent">
+          </label>
+        </div>
+
+
+        <div class="item item-divider">Password:</div>
+        <ion-toggle ng-model="accountData.changePassword" toggle-class="toggle-calm">Change password?</ion-toggle>
+        <label class="item item-input" ng-if="accountData.changePassword">
+          <span class="input-label">New password:</span>
+          <input type="password" ng-model="user.newPassword" placeholder="New password (min of 6 characters)" ng-required="accountData.changePassword" pattern=".{6,}">
+        </label>
+        <label class="item item-input" ng-if="accountData.changePassword">
+          <span class="input-label" ng-class="{'assertive': accountForm.confirmPassword.$invalid}">Confirm password:</span>
+          <input type="password" name="confirmPassword" ng-model="user.confirmPassword" placeholder="Type again your new password" required password-match="user.newPassword">
+        </label>
+      </div>
+      <button class="button button-block button-positive" ng-disabled="accountForm.$invalid" type="submit">Update</button>
+    </form>
+
   </ion-content>
 </ion-view>

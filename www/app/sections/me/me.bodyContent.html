@@ -1,15 +1,17 @@
-<ion-tabs class="tabs-icon-top tabs-stable">
+<ion-view hide-back-button="true">
+  <ion-tabs class="tabs-icon-top tabs-stable">
 
-  <ion-tab title="Account" icon="ion-person" ui-sref="app.me.account">
-    <ion-nav-view name="account-tab"></ion-nav-view>
-  </ion-tab>
+    <ion-tab title="Account" icon="ion-person" ng-click="goTab('account')">
+      <ion-nav-view name="account-tab"></ion-nav-view>
+    </ion-tab>
 
-  <ion-tab title="Discoveries" icon="ion-flash" ui-sref="app.me.discoveries">
-    <ion-nav-view name="discoveries-tab"></ion-nav-view>
-  </ion-tab>
+    <ion-tab title="Discoveries" icon="ion-flash" ng-click="goTab('discoveries')">
+      <ion-nav-view name="discoveries-tab"></ion-nav-view>
+    </ion-tab>
 
-  <ion-tab title="Sponsors" icon="ion-person-stalker" ui-sref="app.me.sponsors">
-    <ion-nav-view name="sponsors-tab"></ion-nav-view>
-  </ion-tab>
+    <ion-tab title="Sponsors" icon="ion-person-stalker" ng-click="goTab('sponsors')">
+      <ion-nav-view name="sponsors-tab"></ion-nav-view>
+    </ion-tab>
 
-</ion-tabs>
+  </ion-tabs>
+</ion-view>

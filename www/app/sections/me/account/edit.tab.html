@@ -1,0 +1,49 @@
+<ion-view view-title="Edit your information">
+  <ion-content padding="true">
+    <form name="accountForm" ng-submit="updateUser()">
+      <div class="card">
+        <div class="item item-divider">Basics:</div>
+        <label class="item item-input">
+          <span class="input-label">First name:</span>
+          <input type="text" ng-model="user.firstName" placeholder="First name" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last name:</span>
+          <input type="text" ng-model="user.lastName" placeholder="Last name" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">E-mail:</span>
+          <input type="email" ng-model="user.email" placeholder="E-mail" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Username:</span>
+          <input type="text" ng-model="user.username" placeholder="Username" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Post code:</span>
+          <input type="text" ng-model="user.postCode" placeholder="Post code" required>
+        </label>
+        <label class="item item-input item-select">
+          <span class="input-label">Gender:</span>
+          <select ng-model="user.gender" required>
+            <option value="">Select</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </label>
+
+        <div class="item item-divider">Password:</div>
+        <ion-toggle ng-model="accountData.changePassword" toggle-class="toggle-calm">Change password?</ion-toggle>
+        <label class="item item-input" ng-if="accountData.changePassword">
+          <span class="input-label">New password:</span>
+          <input type="password" ng-model="user.newPassword" placeholder="New password (min of 6 characters)" ng-required="accountData.changePassword" pattern=".{6,}">
+        </label>
+        <label class="item item-input" ng-if="accountData.changePassword">
+          <span class="input-label" ng-class="{'assertive': accountForm.confirmPassword.$invalid}">Confirm password:</span>
+          <input type="password" name="confirmPassword" ng-model="user.confirmPassword" placeholder="Type again your new password" required password-match="user.newPassword">
+        </label>
+      </div>
+      <button class="button button-block button-positive" ng-disabled="accountForm.$invalid" type="submit">Update</button>
+    </form>
+  </ion-content>
+</ion-view>

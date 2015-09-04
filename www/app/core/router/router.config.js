@@ -25,8 +25,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   };
 
-  $urlRouterProvider.otherwise('/login');
-
   $stateProvider
 
   /**
@@ -240,27 +238,60 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     views: {
       'bodyContent': {
-        templateUrl: 'app/sections/me/me.bodyContent.html'
+        templateUrl: 'app/sections/me/me.bodyContent.html',
+        controller: function($scope, $state) {
+          $scope.goTab = function (tab) {
+            $state.go('app.me.' + tab);
+          };
+        }
       }
     }
   })
 
   .state('app.me.account', {
-    url: '/account',
+    url: '',
+    cache: false,
+    views: {
+      'account-tab': {
+        templateUrl: 'app/sections/me/account/info.tab.html',
+        controller: 'MeAccountInfoController'
+      }
+    },
+    resolve: {
+      user: function(user) {
+        return user.currentUser(true);
+      }
+    }
+  })
+
+  .state('app.me.account.edit', {
+    url: '/edit',
     cache: false,
     views: {
       'account-tab@app.me': {
-        templateUrl: 'app/sections/me/account.account-tab.html',
-        controller: 'MeAccountController'
+        templateUrl: 'app/sections/me/account/edit.tab.html',
+        controller: 'MeAccountEditController'
       }
     }
+  })
+
+  .state('app.me.account.age', {
+    url: '/age',
+    cache: false,
+    views: {
+      'account-tab@app.me': {
+        templateUrl: 'app/sections/me/account/age.tab.html',
+        controller: 'MeAccountAgeController'
+      }
+    },
+    params : { hideBackButton: false }
   })
 
   .state('app.me.discoveries', {
     url: '/discoveries',
     views: {
-      'discoveries-tab@app.me': {
-        templateUrl: 'app/sections/me/discoveries.discoveries-tab.html',
+      'discoveries-tab': {
+        templateUrl: 'app/sections/me/discoveries.tab.html',
         controller: 'MeDiscoveriesController'
       }
     }
@@ -269,7 +300,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.me.sponsors', {
     url: '/sponsors',
     views: {
-      'sponsors-tab@app.me': {
+      'sponsors-tab': {
+        templateUrl: 'app/sections/me/sponsors.tab.html',
         controller: 'MeSponsorsController'
       }
     }
@@ -328,42 +360,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
-  // .state('app.main.thought', {
-  //   url: 'thought',
-  //   views: {
-  //     'way-post': {
-  //       template: '<way-post-form type="thought"></way-post-form>',
-  //     }
-  //   }
-  // })
-  //
-  // .state('app.main.goal', {
-  //   url: 'goal',
-  //   views: {
-  //     'way-post': {
-  //       template: '<way-post-form type="goal"></way-post-form>',
-  //     }
-  //   }
-  // })
-  //
-  // .state('app.main.discovery', {
-  //   url: 'discovery',
-  //   views: {
-  //     'way-post': {
-  //       template: '<way-post-form type="discovery"></way-post-form>',
-  //     }
-  //   }
-  // })
-  //
-  // .state('app.main.resource', {
-  //   url: 'resource',
-  //   views: {
-  //     'way-post': {
-  //       template: '<way-post-form type="resource"></way-post-form>',
-  //     }
-  //   }
-  // })
-
   .state('app.main.post', {
     url: 'post/:id',
     views: {
@@ -377,6 +373,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     }
   });
+
+  $urlRouterProvider.otherwise('/');
 
   // .state('app.search', {
   //   url: '^/search',

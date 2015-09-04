@@ -5,6 +5,18 @@
   function GrantRun($timeout, $rootScope, $state, $stateParams, user, auth, ERROR) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
+      if (auth.isAuthenticated()) {
+        user.currentUser().then(function(user) {
+          user.birth = 'test'; // Just to avoid redirect to age information
+          if (!user.birth) {
+            event.preventDefault();
+            $timeout(function() {
+              $state.go('app.me.account.age', {hideBackButton: true});
+            });
+          }
+        });
+      }
+
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
     });

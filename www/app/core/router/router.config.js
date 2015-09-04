@@ -235,6 +235,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me', {
     url: '/me',
+    abstract: true,
     views: {
       'bodyContent': {
         templateUrl: 'app/sections/me/me.bodyContent.html',
@@ -248,12 +249,12 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.me.account', {
-    url: '/account',
+    url: '',
     cache: false,
     views: {
       'account-tab': {
-        templateUrl: 'app/sections/me/account.account-tab.html',
-        controller: 'MeAccountController'
+        templateUrl: 'app/sections/me/account/info.tab.html',
+        controller: 'MeAccountInfoController'
       }
     },
     resolve: {
@@ -263,10 +264,34 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.me.account.edit', {
+    url: '/edit',
+    cache: false,
+    views: {
+      'account-tab@app.me': {
+        templateUrl: 'app/sections/me/account/edit.tab.html',
+        controller: 'MeAccountEditController'
+      }
+    }
+  })
+
+  .state('app.me.account.age', {
+    url: '/age',
+    cache: false,
+    views: {
+      'account-tab@app.me': {
+        templateUrl: 'app/sections/me/account/age.tab.html',
+        controller: 'MeAccountAgeController'
+      }
+    },
+    params : { hideBackButton: false }
+  })
+
   .state('app.me.discoveries', {
     url: '/discoveries',
     views: {
       'discoveries-tab': {
+        templateUrl: 'app/sections/me/discoveries.tab.html',
         controller: 'MeDiscoveriesController'
       }
     }
@@ -276,6 +301,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/sponsors',
     views: {
       'sponsors-tab': {
+        templateUrl: 'app/sections/me/sponsors.tab.html',
         controller: 'MeSponsorsController'
       }
     }

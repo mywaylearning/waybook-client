@@ -1,5 +1,5 @@
-<ion-view title="Account">
-  <ion-content padding="true" delegate-handle="mainScroll">
+<ion-view view-title="Edit your information">
+  <ion-content padding="true">
     <form name="accountForm" ng-submit="updateUser()">
       <div class="card">
         <div class="item item-divider">Basics:</div>
@@ -31,31 +31,6 @@
             <option value="F">Female</option>
           </select>
         </label>
-        <label class="item item-input" id="age">
-          <span class="input-label">Date or Birth:</span>
-          <input type="date" ng-model="user.birth" placeholder="Date of birth" required>
-        </label>
-
-        <div ng-show="accountData.needParent">
-          <div class="item item-divider">Parent of guardian information:</div>
-          <label class="item item-input">
-            <span class="input-label">First name:</span>
-            <input type="text" ng-model="user.parent.firstName" placeholder="Parent of guardian first name" ng-required="accountData.needParent">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Last name:</span>
-            <input type="text" ng-model="user.parent.lastName" placeholder="Parent of guardian last name" ng-required="accountData.needParent">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">E-mail:</span>
-            <input type="email" ng-model="user.parent.email" placeholder="Parent of guardian e-mail" ng-required="accountData.needParent">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Phone:</span>
-            <input type="tel" ng-model="user.parent.phone" placeholder="Parent of guardian phone number" ng-required="accountData.needParent">
-          </label>
-        </div>
-
 
         <div class="item item-divider">Password:</div>
         <ion-toggle ng-model="accountData.changePassword" toggle-class="toggle-calm">Change password?</ion-toggle>
@@ -70,6 +45,5 @@
       </div>
       <button class="button button-block button-positive" ng-disabled="accountForm.$invalid" type="submit">Update</button>
     </form>
-
   </ion-content>
 </ion-view>

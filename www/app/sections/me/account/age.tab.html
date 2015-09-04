@@ -1,0 +1,40 @@
+<ion-view view-title="Age information" hide-back-button="hideBackButton">
+  <ion-content padding="true">
+    <form name="ageForm" ng-submit="updateUser()">
+      <div class="card">
+        <label class="item item-input">
+          <span class="input-label">Date or Birth:</span>
+          <input type="date" ng-model="user.birth" placeholder="Date of birth" required>
+        </label>
+
+        <div class="item assertive" ng-show="accountData.underAge">
+          Sorry but the minimum age for the Waybook is 13.
+        </div>
+
+        <div ng-show="accountData.needParent">
+          <div class="item item-divider">Parent of guardian information:</div>
+          <label class="item item-input">
+            <span class="input-label">First name:</span>
+            <input type="text" ng-model="user.parent.firstName" placeholder="Parent of guardian first name" ng-required="accountData.needParent">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Last name:</span>
+            <input type="text" ng-model="user.parent.lastName" placeholder="Parent of guardian last name" ng-required="accountData.needParent">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">E-mail:</span>
+            <input type="email" ng-model="user.parent.email" placeholder="Parent of guardian e-mail" ng-required="accountData.needParent">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Phone:</span>
+            <input type="tel" ng-model="user.parent.phone" placeholder="Parent of guardian phone number" ng-required="accountData.needParent">
+          </label>
+        </div>
+
+
+      </div>
+      <button class="button button-block button-positive" ng-disabled="ageForm.$invalid || accountData.underAge" type="submit">Update</button>
+    </form>
+
+  </ion-content>
+</ion-view>

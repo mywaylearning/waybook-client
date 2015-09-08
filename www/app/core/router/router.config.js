@@ -82,7 +82,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('public', {
     abstract: true,
-    template: '</div><ion-nav-view name="publicContent"></ion-nav-view>',
+    template: '<ion-nav-bar class="bar-stable"><ion-nav-back-button state-nav-back-button></ion-nav-back-button></ion-nav-bar><ion-nav-view name="publicContent"></ion-nav-view>',
     resolve: guestResolve
   })
 
@@ -112,6 +112,24 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       'publicContent': {
         templateUrl: 'app/sections/register/register.publicContent.html',
         controller: 'RegisterController'
+      }
+    }
+  })
+
+  .state('public.register.terms', {
+    url: '^/terms',
+    views: {
+      'publicContent@public': {
+        templateUrl: 'app/sections/public/terms.html'
+      }
+    }
+  })
+
+  .state('public.register.privacy', {
+    url: '^/privacy',
+    views: {
+      'publicContent@public': {
+        templateUrl: 'app/sections/public/privacy.html'
       }
     }
   })

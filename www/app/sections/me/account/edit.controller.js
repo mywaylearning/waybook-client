@@ -2,7 +2,7 @@
 
 function MeEditController($scope, $stateParams, $state, currentUser, user, utils) {
 
-  currentUser.birthDate = new Date(currentUser.birthDate);
+  currentUser.birthDate = currentUser.birthDate ? new Date(currentUser.birthDate) : null;
   currentUser.gender = !currentUser.gender ? '' : currentUser.gender;
 
   $scope.user = currentUser;

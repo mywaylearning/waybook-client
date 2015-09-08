@@ -7,8 +7,7 @@
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
       if (auth.isAuthenticated()) {
         user.currentUser().then(function(user) {
-          user.birth = new Date(); // Just to avoid redirect to age information
-          if (!user.birth) {
+          if (!user.birthDate) {
             event.preventDefault();
             $timeout(function() {
               $state.go('app.me.account', {ageRequired: true});

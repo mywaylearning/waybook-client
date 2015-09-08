@@ -1,6 +1,6 @@
 <ion-view view-title="Edit your information" hide-back-button="ageRequired">
   <ion-content padding="true">
-    <form name="basicForm" ng-submit="updateUser()" ng-if="!ageRequired">
+    <form name="basicForm" ng-submit="updateBasics()" ng-if="!ageRequired">
       <div class="card">
         <div class="item item-divider">Basic information:</div>
         <label class="item item-input">
@@ -21,7 +21,7 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Post code:</span>
-          <input type="text" ng-model="user.postCode" placeholder="Post code" required>
+          <input type="text" ng-model="user.postalCode" placeholder="Post code" required>
         </label>
         <label class="item item-input item-select">
           <span class="input-label">Gender:</span>
@@ -36,7 +36,7 @@
       <button class="button button-block button-positive" ng-disabled="basicForm.$invalid" type="submit">Update basic info</button>
     </form>
 
-    <form name="ageForm" ng-submit="updateUser()" class="padding-top">
+    <form name="ageForm" ng-submit="updateAge()" class="padding-top">
       <div class="card">
         <div class="item item-divider">Age information:</div>
         <div class="item" ng-if="ageRequired">
@@ -44,7 +44,7 @@
         </div>
         <label class="item item-input">
           <span class="input-label">Date or Birth:</span>
-          <input type="date" ng-model="user.birth" placeholder="Date of birth" required>
+          <input type="date" ng-model="user.birthDate" placeholder="Date of birth" required>
         </label>
 
         <div class="item assertive" ng-show="accountData.underAge">
@@ -55,19 +55,19 @@
           <div class="item item-divider">Parent of guardian information:</div>
           <label class="item item-input">
             <span class="input-label">First name:</span>
-            <input type="text" ng-model="user.parent.firstName" placeholder="Parent of guardian first name" ng-required="accountData.needParent">
+            <input type="text" ng-model="user.parentFirstName" placeholder="Parent of guardian first name" ng-required="accountData.needParent">
           </label>
           <label class="item item-input">
             <span class="input-label">Last name:</span>
-            <input type="text" ng-model="user.parent.lastName" placeholder="Parent of guardian last name" ng-required="accountData.needParent">
+            <input type="text" ng-model="user.parentLastName" placeholder="Parent of guardian last name" ng-required="accountData.needParent">
           </label>
           <label class="item item-input">
             <span class="input-label">E-mail:</span>
-            <input type="email" ng-model="user.parent.email" placeholder="Parent of guardian e-mail" ng-required="accountData.needParent">
+            <input type="email" ng-model="user.parentEmail" placeholder="Parent of guardian e-mail" ng-required="accountData.needParent">
           </label>
           <label class="item item-input">
             <span class="input-label">Phone:</span>
-            <input type="tel" ng-model="user.parent.phone" placeholder="Parent of guardian phone number" ng-required="accountData.needParent">
+            <input type="tel" ng-model="user.parentPhone" pattern="\d*" placeholder="Parent of guardian phone number" ng-required="accountData.needParent">
           </label>
         </div>
 
@@ -76,20 +76,20 @@
       <button class="button button-block button-positive" ng-disabled="ageForm.$invalid || accountData.underAge" type="submit">Update</button>
     </form>
 
-    <form name="passwordForm" ng-submit="updateUser()" class="padding-top" ng-if="!ageRequired">
+    <form name="passwordForm" ng-submit="updatePassword()" class="padding-top" ng-if="!ageRequired">
       <div class="card">
         <div class="item item-divider">Password:</div>
         <label class="item item-input">
           <span class="input-label">Current password:</span>
-          <input type="password" ng-model="user.currentPassword" placeholder="Your current password" required>
+          <input type="password" ng-model="password.current" placeholder="Your current password" required>
         </label>
         <label class="item item-input">
           <span class="input-label">New password:</span>
-          <input type="password" ng-model="user.newPassword" placeholder="New password (min of 6 characters)" name="newPassword" required pattern=".{6,}">
+          <input type="password" ng-model="password.new" placeholder="New password (min of 6 characters)" name="newPassword" required pattern=".{6,}">
         </label>
         <label class="item item-input">
           <span class="input-label" ng-class="{'assertive': passwordForm.confirmPassword.$invalid && passwordForm.newPassword.$dirty}">Confirm password:</span>
-          <input type="password" name="confirmPassword" ng-model="user.confirmPassword" placeholder="Type again your new password" required password-match="user.newPassword">
+          <input type="password" name="confirmPassword" ng-model="password.confirm" placeholder="Type again your new password" required password-match="password.new">
         </label>
       </div>
       <button class="button button-block button-positive" ng-disabled="passwordForm.$invalid" type="submit">Update password</button>

@@ -1,7 +1,12 @@
 'use strict';
 
-function MeEditController($scope, $stateParams, currentUser, user, utils) {
+function MeEditController($scope, $stateParams, $state, currentUser, user, utils) {
+
+  currentUser.birthDate = new Date(currentUser.birthDate);
+  currentUser.gender = !currentUser.gender ? '' : currentUser.gender;
+
   $scope.user = currentUser;
+  $scope.password = {};
 
   $scope.ageRequired = $stateParams.ageRequired;
 
@@ -10,7 +15,7 @@ function MeEditController($scope, $stateParams, currentUser, user, utils) {
     needParent: false
   };
 
-  $scope.$watch('user.birth', function(birth) {
+  $scope.$watch('user.birthDate', function(birth) {
     $scope.accountData.underAge = false;
     $scope.accountData.needParent = false;
     if (!birth) {
@@ -18,33 +23,59 @@ function MeEditController($scope, $stateParams, currentUser, user, utils) {
     }
     var age = utils.age(birth);
 
-
     if (age < 13) {
       return $scope.accountData.underAge = true;
     }
 
     if (age < 18) {
-      $scope.user.parent = {};
       return $scope.accountData.needParent = true;
     }
-    delete $scope.user.parent;
-
   });
 
-  $scope.updateUser = function() {
-    user.updateSelf($scope.user).then(function(response) {
-      console.log(response);
+  var _updateSelf = function(model) {
+    user.updateSelf(model).then(function(response) {
+      $state.transitionTo($state.current, {}, { reload: true });
     });
+  };
 
-    // $scope.user.save().then(function(result) {
-    //
-    //   console.log('saved');
-    // });
+  $scope.updateBasics = function() {
+    var model = {
+      firstName: $scope.user.firstName,
+      lastName: $scope.user.lastName,
+      username: $scope.user.username,
+      postalCode: $scope.user.postalCode,
+      gender: $scope.user.gender
+    };
+
+    _updateSelf(model);
+  };
+
+  $scope.updateAge = function() {
+    var model = {
+      birthDate: $scope.user.birthDate,
+      parentFirstName: $scope.user.parentFirstName,
+      parentLastName: $scope.user.parentLastName,
+      parentEmail: $scope.user.parentEmail,
+      parentPhone: $scope.user.parentPhone,
+    };
+
+    _updateSelf(model);
+
+  };
+
+  $scope.updatePassword = function() {
+    var model = {
+      password: $scope.password.current,
+      newPassowrd: $scope.password.new,
+      confirmPassword: $scope.password.confirm
+    };
+
+    _updateSelf(model);
   }
 
 
 }
 
-MeEditController.$inject = ['$scope', '$stateParams', 'currentUser', 'user', 'utils'];
+MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'user', 'utils'];
 
 module.exports = MeEditController;

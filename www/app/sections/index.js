@@ -5,7 +5,10 @@
   var app = angular.module('waybook');
 
   app.controller('LoginController', require('./login/login.controller.js'));
+
   app.controller('RegisterController', require('./register/register.controller.js'));
+  app.directive('checkPw', require('./register/checkPw.directive.js'));
+
   app.controller('MainController', require('./main/main.controller.js'));
   app.controller('MainTypeController', require('./main/mainType.controller.js'));
   app.controller('MainPostController', require('./main/post.controller.js'));

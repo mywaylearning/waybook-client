@@ -85,8 +85,14 @@
         </label>
         <label class="item item-input">
           <span class="input-label">New password:</span>
-          <input type="password" ng-model="password.new" placeholder="New password (min of 6 characters)" name="newPassword" required pattern=".{6,}">
+          <input type="password" ng-model="password.new" placeholder="New password" name="newPassword" required check-pw>
         </label>
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label"></span>
+            <p>Use at least one uppercase letter, one numeral and seven characters.</p>
+          </label>
+        </div>
         <label class="item item-input">
           <span class="input-label" ng-class="{'assertive': passwordForm.confirmPassword.$invalid && passwordForm.newPassword.$dirty}">Confirm password:</span>
           <input type="password" name="confirmPassword" ng-model="password.confirm" placeholder="Type again your new password" required password-match="password.new">

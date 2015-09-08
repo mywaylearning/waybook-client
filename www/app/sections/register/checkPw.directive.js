@@ -1,0 +1,32 @@
+(function() {
+
+  'use strict';
+
+  function checkPw() {
+
+    return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl) {
+      ctrl.$parsers.unshift(function(viewValue) {
+        var containsUpperLetter = /[A-Z]+/.test(viewValue);
+        var containsDigit = /[0-9]+/.test(viewValue);
+        var hasCorrectLength = viewValue.length >= 7;
+
+        ctrl.$setValidity('containsUpperLetter', containsUpperLetter);
+        ctrl.$setValidity('containsDigit', containsDigit);
+        ctrl.$setValidity('hasCorrectLength', hasCorrectLength);
+
+        if (containsUpperLetter && containsDigit && hasCorrectLength) {
+          return viewValue;
+        }
+        else {
+          return undefined;
+        }
+      });
+    }
+  };
+  }
+
+  module.exports = [checkPw];
+
+}());

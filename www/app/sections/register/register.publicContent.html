@@ -28,11 +28,19 @@
 
         <label class="item item-input">
           <span class="input-label">Password:</span>
-          <input type="password" ng-model="register.password" placeholder="Create a password (min of 6 characters)" required pattern=".{6,}">
+          <input type="password" ng-model="register.password" placeholder="Create a password" required check-pw>
         </label>
+
+        <label class="item item-input">
+          <span class="input-label"></span>
+          <p>Use at least one uppercase letter, one numeral and seven characters.</p>
+        </label>
+
       </ion-list>
 
       <div class="spacer" style="height: 40px;"></div>
+
+      <p>By clicking on <strong>"Sign Up"</strong>, you agree to our <a ui-sref="public.register.terms">terms of service</a> and <a ui-sref="public.register.privacy">privacy policy</a>.</p>
 
       <button class="button button-stable button-block" ng-disabled="registerForm.$invalid" type="submit">
         Sign Up

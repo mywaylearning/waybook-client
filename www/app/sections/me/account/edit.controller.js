@@ -2,7 +2,7 @@
 
 function MeEditController($scope, $stateParams, $state, currentUser, user, utils) {
 
-  currentUser.birthDate = new Date(currentUser.birthDate);
+  currentUser.birthDate = currentUser.birthDate ? new Date(currentUser.birthDate) : null;
   currentUser.gender = !currentUser.gender ? '' : currentUser.gender;
 
   $scope.user = currentUser;
@@ -34,6 +34,9 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
 
   var _updateSelf = function(model) {
     user.updateSelf(model).then(function(response) {
+      if ($scope.ageRequired) {
+        return $state.go('app.main');
+      }
       $state.transitionTo($state.current, {}, { reload: true });
     });
   };

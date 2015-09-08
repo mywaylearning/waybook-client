@@ -73,7 +73,7 @@
 
 
       </div>
-      <button class="button button-block button-positive" ng-disabled="ageForm.$invalid || accountData.underAge" type="submit">Update</button>
+      <button class="button button-block button-positive" ng-disabled="ageForm.$invalid || accountData.underAge" type="submit" ng-bind="ageRequired ? 'Get started' : 'Update age'">Update</button>
     </form>
 
     <form name="passwordForm" ng-submit="updatePassword()" class="padding-top" ng-if="!ageRequired">

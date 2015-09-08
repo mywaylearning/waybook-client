@@ -34,6 +34,9 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
 
   var _updateSelf = function(model) {
     user.updateSelf(model).then(function(response) {
+      if ($scope.ageRequired) {
+        return $state.go('app.main');
+      }
       $state.transitionTo($state.current, {}, { reload: true });
     });
   };

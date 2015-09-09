@@ -69,7 +69,7 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
   $scope.updatePassword = function() {
     var model = {
       password: $scope.password.current,
-      newPassowrd: $scope.password.new,
+      newPassword: $scope.password.new,
       confirmPassword: $scope.password.confirm
     };
 

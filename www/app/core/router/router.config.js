@@ -353,6 +353,15 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   });
 
+  // if none of the above states are matched, use this as the fallback
+  key = LOCAL_STORAGE_KEYS.introSeen;
+
+  if (store.get(key)) {
+    $urlRouterProvider.otherwise('/');
+  } else {
+    $urlRouterProvider.otherwise('/intro');
+  }
+
   // .state('app.search', {
   //   url: '^/search',
   //   views: {
@@ -368,15 +377,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   //     'bodyContent': { controller: 'PlaylistController' }
   //   }
   // });
-  // if none of the above states are matched, use this as the fallback
-  key = LOCAL_STORAGE_KEYS.introSeen;
-
-  if (store.get(key)) {
-    $urlRouterProvider.otherwise('/');
-  } else {
-    $urlRouterProvider.otherwise('/intro');
-  }
-
 }
 
 RouterConfig.$inject = [

@@ -48,6 +48,11 @@
     'invalidFileType': 'InvalidFileType'
   })
 
+  .constant('USER_AGE', {
+    'minimumAge': 13,
+    'minimumParentAge': 18
+  })
+
   .constant('POST_TYPES', {
     'thought': 'Thought',
     'goal': 'Goal',

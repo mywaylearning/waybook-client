@@ -1,6 +1,6 @@
 'use strict';
 
-function MeEditController($scope, $stateParams, $state, currentUser, user, utils) {
+function MeEditController($scope, $stateParams, $state, currentUser, user, utils, USER_AGE) {
 
   currentUser.birthDate = currentUser.birthDate ? new Date(currentUser.birthDate) : null;
   currentUser.gender = !currentUser.gender ? '' : currentUser.gender;
@@ -23,11 +23,11 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
     }
     var age = utils.age(birth);
 
-    if (age < 13) {
+    if (age < USER_AGE.minimumAge) {
       return $scope.accountData.underAge = true;
     }
 
-    if (age < 18) {
+    if (age < USER_AGE.minimumParentAge) {
       return $scope.accountData.needParent = true;
     }
   });
@@ -79,6 +79,6 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
 
 }
 
-MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'user', 'utils'];
+MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'user', 'utils', 'USER_AGE'];
 
 module.exports = MeEditController;

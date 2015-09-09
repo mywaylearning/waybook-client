@@ -267,6 +267,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me.discoveries', {
     url: '/discoveries',
+    cache: false,
     views: {
       'discoveries-tab': {
         templateUrl: 'app/sections/me/discoveries.tab.html',

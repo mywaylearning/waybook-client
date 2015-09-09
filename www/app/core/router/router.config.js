@@ -116,24 +116,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
-  .state('public.register.terms', {
-    url: '^/terms',
-    views: {
-      'publicContent@public': {
-        templateUrl: 'app/sections/public/terms.html'
-      }
-    }
-  })
-
-  .state('public.register.privacy', {
-    url: '^/privacy',
-    views: {
-      'publicContent@public': {
-        templateUrl: 'app/sections/public/privacy.html'
-      }
-    }
-  })
-
   .state('public.intro', {
     url: '/intro',
     views: {

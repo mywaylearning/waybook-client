@@ -276,7 +276,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       discoveries: function(PostService) {
-        return PostService.collectionByPostType('discovery');
+        return PostService.collection('discovery');
       }
     }
   })

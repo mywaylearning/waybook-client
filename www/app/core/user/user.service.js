@@ -8,7 +8,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
   Users = api.all('users');
   User = api.one('user');
 
-  userObj = null;
+  userObj = undefined;
   userRequest = null;
 
   /**
@@ -17,6 +17,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
   return {
     register: _register,
     currentUser: _currentUser,
+    isUserResolved: _userIsResolved,
     getByUsername: _getByUsername,
     getUploadImageUrl: _getUploadImageUrl,
     getSelf: _getSelf,
@@ -30,10 +31,15 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    * trying to retreive the user object from API.
    *
    * @return {mixed} -  empty object if unautenticated
+
    *                    Promise if authenticated
    */
   function _currentUser() {
     return auth.isAuthenticated() ? _getSelf() : {};
+  }
+
+  function _userIsResolved() {
+    return angular.isDefined(userObj);
   }
 
   /**
@@ -101,7 +107,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    */
   function _logout() {
     auth.destroy();
-    userObj = null;
+    userObj = undefined;
     userRequest = null;
 
     router.goToLoggedOut();

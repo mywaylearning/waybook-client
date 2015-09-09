@@ -2,7 +2,25 @@
 
   'use strict';
   var debug = require('debug')('waybook:GrantRun');
-  function GrantRun($rootScope, $state, user, ERROR) {
+  function GrantRun($timeout, $rootScope, $state, $stateParams, user, auth, ERROR) {
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
+      if (auth.isAuthenticated()) {
+        user.currentUser().then(function(user) {
+          if (!user.birthDate) {
+            event.preventDefault();
+            $timeout(function() {
+              $state.go('app.me.account', {ageRequired: true});
+            });
+          }
+        });
+      }
+
+      $rootScope.toState = toState;
+      $rootScope.toStateParams = toStateParams;
+    });
+
+
 
     $rootScope.$on('$stateChangeError', onStateChangeError);
 
@@ -16,15 +34,19 @@
           evt.preventDefault();
         }
 
-        // $state.go(error.stateTo);
+        // $state.go(fromState.name, fromParams);
       }
 
       if (error && error.type === ERROR.unauthorizedRequest) {
-        user.logout();
+        auth.isAuthenticated(true).then(function(response){
+          if (response) {
+            user.logout();
+          }
+        });
       }
     }
   }
 
-  module.exports = ['$rootScope', '$state', 'user', 'ERROR', GrantRun];
+  module.exports = ['$timeout', '$rootScope', '$state', '$stateParams', 'user', 'auth', 'ERROR', GrantRun];
 
 }());

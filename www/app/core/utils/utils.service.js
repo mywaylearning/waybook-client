@@ -8,7 +8,8 @@ function UtilsService($q, Moment) {
    */
   service = {
     promisify: _promisify,
-    dateAgo: _dateAgo
+    dateAgo: _dateAgo,
+    age: _age
   };
   return service;
 
@@ -38,6 +39,11 @@ function UtilsService($q, Moment) {
  function _dateAgo(fromDate, toDate) {
    return new Moment(toDate).from(fromDate);
  }
+
+ function _age(birth) {
+   return new Moment().diff(birth, 'years');
+ }
+
 }
 
 module.exports = ['$q', 'Moment', UtilsService];

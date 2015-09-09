@@ -2,7 +2,7 @@
 
 var debug = require('debug')('waybook:AuthService');
 
-function AuthService($rootScope, $location, $q, Restangular, authStore) {
+function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, authStore) {
   var svcInterface, Oauth, Refresh, token, headers, oauthToken;
 
   Oauth = Restangular.all('login');
@@ -14,7 +14,6 @@ function AuthService($rootScope, $location, $q, Restangular, authStore) {
   oauthToken = null;
 
   svcInterface = {
-    authorize: _authorize,
     authenticate: _authenticate,
     authRefresh: _authRefresh,
     isAuthenticated: _isAuthenticated,
@@ -58,21 +57,6 @@ function AuthService($rootScope, $location, $q, Restangular, authStore) {
     }
 
     return query.length ? query.substr(0, query.length - 1) : query;
-  }
-
-  /**
-   * Helper method to retreive promise if user is authorized and manage redirections.
-   *
-   * @return {Promise}
-   */
-  function _authorize() {
-    return _isAuthenticated(true).then(function(response) {
-      if (response) {
-        $location.path('main');
-      } else {
-        $location.path('login');
-      }
-    });
   }
 
   function _authenticate(username, password) {
@@ -199,4 +183,4 @@ function AuthService($rootScope, $location, $q, Restangular, authStore) {
   }
 }
 
-module.exports = ['$rootScope', '$location', '$q', 'Restangular', 'authStore', AuthService];
+module.exports = ['$timeout', '$rootScope', '$state', '$location', '$q', 'Restangular', 'authStore', AuthService];

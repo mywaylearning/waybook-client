@@ -25,10 +25,10 @@
                   ></mentio-menu>
       </div>
       <div ng-if="!ctrl.model.postType && !ctrl.sharedPost" class="button-bar">
-          <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.thought"><span class="clearfix dark">Thought</span></button>
-          <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.goal"><span class="clearfix dark">Goal</span></button>
-          <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.discovery"><span class="clearfix dark">Discovery</span></button>
-          <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.resource"><span class="clearfix dark">Resource</span></button>
+          <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.type({type: 'thought'})"><span class="clearfix dark">Thought</span></button>
+          <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.type({type: 'goal'})"><span class="clearfix dark">Goal</span></button>
+          <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.type({type: 'discovery'})"><span class="clearfix dark">Discovery</span></button>
+          <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.type({type: 'resource'})"><span class="clearfix dark">Resource</span></button>
       </div>
     </div>
     <div ng-if="ctrl.model.postType == 'goal'">
@@ -189,7 +189,7 @@
 
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.model.postType || ctrl.sharedPost" class="buttons padding">
-      <button class="button button-positive" type="submit" ng-disabled="postForm.$invalid || saving" ng-bind="ctrl.post ? 'Update' : 'Post'"></button>
+      <button class="button button-positive" type="submit" ng-disabled="postForm.$invalid || saving" ng-bind="saving ? 'Saving...' : ctrl.post ? 'Update' : 'Post'"></button>
       <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
     <!-- Begin of post button actions -->

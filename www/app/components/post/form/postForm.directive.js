@@ -8,7 +8,8 @@
       restrict: 'EA',
       scope: {
         post: '=',
-        postType: '@type',
+        posts: '=',
+        postType: '=type',
         sharedPost: '=',
         modalInstance: '='
       },

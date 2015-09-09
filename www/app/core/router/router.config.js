@@ -5,7 +5,7 @@ var fs = require('fs');
 
 require('ionic');
 
-function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider, store, ROLES, LOCAL_STORAGE_KEYS) {
+function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider, store, ROLES, LOCAL_STORAGE_KEYS, POST_TYPES) {
   var userResolve, guestResolve, key;
 
   $urlMatcherFactoryProvider.strictMode(false);
@@ -24,8 +24,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       return grant.only([ROLES.guest], ['public']);
     }
   };
-
-  $urlRouterProvider.otherwise('/');
 
   $stateProvider
 
@@ -82,28 +80,10 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     return result;
   })
 
-  .state('waybook', {
-    abstract: true,
-    template: '<div ui-view />',
-    resolve: {
-      authorize: function(auth) {
-        return auth.authorize();
-      }
-    }
-  })
-
   .state('public', {
     abstract: true,
-    parent: 'waybook',
-    //templateUrl: 'app/sections/app/public-base.html',
-    template: '<ion-nav-view name="publicContent"></ion-nav-view>',
-    controller: function($scope, $state) {
-      // $scope.app.user = currentUser;
-    }
-  })
-
-  .state('public.home', {
-    url: '/'
+    template: '<ion-nav-bar class="bar-stable"><ion-nav-back-button state-nav-back-button></ion-nav-back-button></ion-nav-bar><ion-nav-view name="publicContent"></ion-nav-view>',
+    resolve: guestResolve
   })
 
   .state('public.login', {
@@ -116,10 +96,10 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
-  .state('public.verify', {
+  .state('public.login.verify', {
     url: '/verify',
     views: {
-      'publicContent': {
+      'verify': {
         templateUrl: 'app/sections/verify/verify.publicContent.html',
         controller: 'VerifyController'
       }
@@ -148,22 +128,12 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app', {
     abstract: true,
-    parent: 'waybook',
     templateUrl: 'app/sections/app/base.html',
     controller: function(app) {
       app.setUser();
     },
     resolve: userResolve
   })
-
-  // .state('app.logout', {
-  //   url: '^/logout',
-  //   templateUrl: 'app/sections/app/logout.html',
-  //   controller: function($scope) {
-  //     debug($scope);
-  //     $scope.logout();
-  //   }
-  // })
 
   .state('app.discover', {
     abstract: true,
@@ -265,9 +235,52 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.me', {
     url: '/me',
+    abstract: true,
     views: {
       'bodyContent': {
-        controller: 'MeController'
+        templateUrl: 'app/sections/me/me.bodyContent.html',
+        controller: function($scope, $state) {
+          $scope.goTab = function (tab) {
+            $state.go('app.me.' + tab);
+          };
+        }
+      }
+    }
+  })
+
+  .state('app.me.account', {
+    url: '',
+    cache: false,
+    views: {
+      'account-tab': {
+        templateUrl: 'app/sections/me/account/edit.tab.html',
+        controller: 'MeAccountEditController'
+      }
+    },
+    resolve: {
+      currentUser: function(user) {
+        return user.currentUser(true);
+      }
+    },
+    params : { ageRequired: false }
+  })
+
+  .state('app.me.discoveries', {
+    url: '/discoveries',
+    views: {
+      'discoveries-tab': {
+        templateUrl: 'app/sections/me/discoveries.tab.html',
+        controller: 'MeDiscoveriesController'
+      }
+    }
+  })
+
+  .state('app.me.sponsors', {
+    url: '/sponsors',
+    views: {
+      'sponsors-tab': {
+        templateUrl: 'app/sections/me/sponsors.tab.html',
+        controller: 'MeSponsorsController'
       }
     }
   })
@@ -292,7 +305,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.main', {
     cache: false,
-    url: '/main',
+    url: '/',
     views: {
       'way-post': {
         template: '<way-post-form></way-post-form>',
@@ -300,47 +313,33 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       'bodyContent': {
         controller: 'MainController'
       }
-    }
-  })
-
-  .state('app.main.thought', {
-    url: '/thought',
-    views: {
-      'way-post': {
-        template: '<way-post-form type="thought"></way-post-form>',
+    },
+    resolve: {
+      posts: function(PostService) {
+        return PostService.collection();
       }
     }
+
   })
 
-  .state('app.main.goal', {
-    url: '/goal',
+  .state('app.main.type', {
+    url: ':type',
     views: {
-      'way-post': {
-        template: '<way-post-form type="goal"></way-post-form>',
+      'way-post-form': {
+        template: '<way-post-form type="type" posts="posts"></way-post-form>',
+        controller: 'MainTypeController'
       }
-    }
-  })
-
-  .state('app.main.discovery', {
-    url: '/discovery',
-    views: {
-      'way-post': {
-        template: '<way-post-form type="discovery"></way-post-form>',
-      }
-    }
-  })
-
-  .state('app.main.resource', {
-    url: '/resource',
-    views: {
-      'way-post': {
-        template: '<way-post-form type="resource"></way-post-form>',
+    },
+    resolve: {
+      type: function($stateParams) {
+        var type = $stateParams.type;
+        return angular.isDefined(POST_TYPES[type]) ? type : false;
       }
     }
   })
 
   .state('app.main.post', {
-    url: '/post/:id',
+    url: 'post/:id',
     views: {
       'bodyContent@app': {
         controller: 'MainPostController'
@@ -386,7 +385,8 @@ RouterConfig.$inject = [
   '$locationProvider',
   'store',
   'ROLES',
-  'LOCAL_STORAGE_KEYS'
+  'LOCAL_STORAGE_KEYS',
+  'POST_TYPES'
 ];
 
 module.exports = RouterConfig;

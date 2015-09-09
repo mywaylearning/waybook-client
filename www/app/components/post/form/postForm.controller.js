@@ -39,7 +39,7 @@
       if (ctrl.sharedPost) {
         return;
       }
-      $state.go('app.main.thought');
+      $state.go('app.main.type', {type: 'thought'});
     };
 
     // Define default options based on type of post
@@ -300,10 +300,14 @@
         if (!ctrl.model.id) {
           debug('saving new post', ctrl.model);
           PostService.create(ctrl.model).then(function(result){
-            if (ctrl.sharedPost) {
-              ctrl.modalInstance.hide();
-            }
-            $state.go('app.main', {}, {reload: true});
+            PostService.getById(result.id).then(function(newPost){
+              if (ctrl.sharedPost) {
+                ctrl.modalInstance.hide();
+              }
+              newPost.justEdited = true;
+              ctrl.posts.push(newPost);
+              $state.go('app.main');
+            });
           });
         } else {
           debug('updating a post...', ctrl.model);

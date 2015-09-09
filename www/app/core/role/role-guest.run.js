@@ -12,16 +12,21 @@
    * @param  {constant} ROLES
    * @return {Role}
    */
-  function init(Role, auth, ROLES) {
+  function init(Role, $state, $timeout, auth, ROLES) {
 
     return new Role(ROLES.guest, validate);
 
     function validate() {
-      debug(auth.isAuthenticated());
-      return !auth.isAuthenticated();
+      var authenticated = auth.isAuthenticated();
+      if (authenticated) {
+        $timeout(function(){
+          $state.go('app.main');
+        });
+      }
+      return !authenticated;
     }
   }
 
-  module.exports = ['Role', 'auth', 'ROLES', init];
+  module.exports = ['Role', '$state', '$timeout', 'auth', 'ROLES', init];
 
 }());

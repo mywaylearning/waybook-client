@@ -8,6 +8,7 @@
       restrict: 'EA',
       scope: {
         posts: '=',
+        postType: '@type',
         user: '='
       },
       controller: 'FeedController',

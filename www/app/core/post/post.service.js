@@ -27,8 +27,13 @@
        return Posts.post(post);
      }
 
-     function _collection() {
-       return Posts.getList();
+     function _collection(postType) {
+       var query = {};
+
+       if (postType) {
+         query.postType = postType;
+       }
+       return Posts.getList(query);
      }
 
      function _getById(id, shares) {

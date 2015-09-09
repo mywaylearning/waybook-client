@@ -8,7 +8,7 @@
     debug('here we are (directive controller)');
 
     $scope.refresh = function() {
-      PostService.collection().then(function(posts){
+      PostService.collection($scope.postType).then(function(posts){
         $scope.posts = posts;
         // Stop the ion-refresher from spinning
        $scope.$broadcast('scroll.refreshComplete');

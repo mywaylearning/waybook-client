@@ -15,6 +15,7 @@
     svcInterface = {
       create: _create,
       collection: _collection,
+      collectionByPostType: _collectionByPostType,
       getById: _getById,
       extractLink: _extractLink
     };
@@ -29,6 +30,10 @@
 
      function _collection() {
        return Posts.getList();
+     }
+
+     function _collectionByPostType(postType) {
+       return Posts.getList({postType: postType});
      }
 
      function _getById(id, shares) {

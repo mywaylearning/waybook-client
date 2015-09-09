@@ -272,6 +272,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         templateUrl: 'app/sections/me/discoveries.tab.html',
         controller: 'MeDiscoveriesController'
       }
+    },
+    resolve: {
+      discoveries: function(PostService) {
+        return PostService.collectionByPostType('discovery');
+      }
     }
   })
 

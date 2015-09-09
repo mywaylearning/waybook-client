@@ -67,7 +67,7 @@
 
     .text {
       position: absolute;
-      bottom: 40px;
+      bottom: 90px;
       width: 100%;
     }
 
@@ -76,11 +76,35 @@
     }
 
     @media (orientation: landscape) {
-      background-position: bottom center;
+      background-position: center 55%;
     }
 
     @media (min-width: 890px) {
       background-size: contain;
+    }
+  }
+
+  .slider-pager {
+    bottom: 70px;
+  }
+
+  .buttons-bottom {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+
+    &.last-slide {
+      .button {
+        opacity: 1;
+      }
+    }
+
+    .button {
+      opacity: 0.8;
+      margin: 0 20px;
+      padding-left: 40px;
+      padding-right: 40px;
     }
   }
 }

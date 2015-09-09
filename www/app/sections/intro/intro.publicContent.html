@@ -1,24 +1,4 @@
-
-<ion-view view-title="Welcome" class="intro">
-  <ion-nav-bar class="bar-stable">
-    <ion-nav-buttons side="left">
-      <button class="button button-positive button-clear" ng-click="startApp()" ng-if="!slideIndex">
-        Skip Intro
-      </button>
-      <button class="button button-positive button-clear" ng-click="previous()" ng-if="slideIndex > 0">
-        Previous
-      </button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-      <button class="button button-positive button-clear" ng-click="next()" ng-if="slideIndex != 2">
-        Next
-      </button>
-      <button class="button button-positive button-clear" ng-click="startApp()" ng-if="slideIndex == 2">
-        Start
-      </button>
-    </ion-nav-buttons>
-  </ion-nav-bar>
-
+<ion-view hide-nav-bar="true" class="intro">
   <ion-slide-box show-page="true" on-slide-changed="slideChanged($index)">
     <ion-slide class="screen-1">
       <div class="text">
@@ -40,10 +20,11 @@
       <div class="text">
         <h2>Success comes easier</h2>
         <h4>...with a help from your supporters.</h4>
-        <button class="button button-balanced" ng-click="startApp()">Start using Waybook</button>
       </div>
     </ion-slide>
-
   </ion-slide-box>
-
+  <div class="buttons-bottom" ng-class="{'last-slide': slideIndex == 2}">
+    <button class="button button-light" ng-click="startApp('register')">Sign up</button>
+    <button class="button button-light" ng-click="startApp('login')">Sign in</button>
+  </div>
 </ion-view>

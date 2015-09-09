@@ -4,9 +4,9 @@ function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_ST
 
   var key = LOCAL_STORAGE_KEYS.introSeen;
 
-  $scope.startApp = function() {
+  $scope.startApp = function(route) {
     store.set(key, true);
-    return $state.go('public.login');
+    return $state.go('public.' + route);
   };
 
   $scope.next = function() {

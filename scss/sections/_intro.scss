@@ -23,6 +23,10 @@
       font-size: 24px;
     }
 
+    @media (orientation: landscape) {
+      background-position: center 20%;
+    }
+
     @media (min-width: 890px) {
       background-size: contain;
 
@@ -49,6 +53,10 @@
       font-size: 24px;
     }
 
+    @media (orientation: landscape) {
+      background-position: center 70%;
+    }
+
     @media (min-width: 890px) {
       background-size: contain;
     }
@@ -59,12 +67,16 @@
 
     .text {
       position: absolute;
-      bottom: 50px;
+      bottom: 40px;
       width: 100%;
     }
 
     h2, h4 {
       // background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (orientation: landscape) {
+      background-position: bottom center;
     }
 
     @media (min-width: 890px) {

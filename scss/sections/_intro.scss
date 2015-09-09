@@ -1,0 +1,74 @@
+.intro {
+
+  .slider-slide {
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .screen-1 {
+    background-image: url(/img/intro/screen1.jpg);
+
+    .text {
+      text-align: left;
+      float: left;
+      margin-left: 15px;
+    }
+
+    h2 {
+      font-size: 34px;
+    }
+
+    h4 {
+      font-size: 24px;
+    }
+
+    @media (min-width: 890px) {
+      background-size: contain;
+
+      .text {
+        text-align: center;
+        float: none;
+        margin: 0;
+      }
+    }
+  }
+
+  .screen-2 {
+    background-image: url(/img/intro/screen2.jpg);
+
+    h2, h4 {
+      color: #FFF;
+    }
+
+    h2 {
+      font-size: 40px;
+    }
+
+    h4 {
+      font-size: 24px;
+    }
+
+    @media (min-width: 890px) {
+      background-size: contain;
+    }
+  }
+
+  .screen-3 {
+    background-image: url(/img/intro/screen3.jpg);
+
+    .text {
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+    }
+
+    h2, h4 {
+      // background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (min-width: 890px) {
+      background-size: contain;
+    }
+  }
+}

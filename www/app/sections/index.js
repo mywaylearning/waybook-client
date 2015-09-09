@@ -17,6 +17,6 @@
   app.controller('MeController', require('./me/me.controller.js'));
   app.controller('HelpFeedbackController', require('./help-feedback/help-feedback.controller.js'));
   app.controller('AboutController', require('./about/about.controller.js'));
-  app.controller('IntroController', require('./verify/verify.controller.js'));
+  app.controller('IntroController', require('./intro/intro.controller.js'));
   app.controller('VerifyController', require('./verify/verify.controller.js'));
 }());

@@ -1,43 +1,47 @@
 
-<ion-view view-title="Intro" title="Intro" class="intro">
+<ion-view view-title="Welcome" class="intro">
   <ion-nav-bar class="bar-stable">
     <ion-nav-buttons side="left">
-      <button class="button button-positive button-clear no-animation" ng-click="startApp()" ng-if="!slideIndex">
+      <button class="button button-positive button-clear" ng-click="startApp()" ng-if="!slideIndex">
         Skip Intro
       </button>
-      <button class="button button-positive button-clear no-animation" ng-click="previous()" ng-if="slideIndex > 0">
-        Previous Slide
+      <button class="button button-positive button-clear" ng-click="previous()" ng-if="slideIndex > 0">
+        Previous
       </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-      <button class="button button-positive button-clear no-animation" ng-click="next()" ng-if="slideIndex != 3">
+      <button class="button button-positive button-clear" ng-click="next()" ng-if="slideIndex != 2">
         Next
       </button>
-      <button class="button button-positive button-clear no-animation" ng-click="startApp()" ng-if="slideIndex == 3">
-        Start using Waybook
+      <button class="button button-positive button-clear" ng-click="startApp()" ng-if="slideIndex == 2">
+        Start
       </button>
     </ion-nav-buttons>
   </ion-nav-bar>
 
   <ion-slide-box show-page="true" on-slide-changed="slideChanged($index)">
-    <ion-slide>
-      <h2>Welcome to the Waybook!</h2>
-      <p>welcome welcome welcome</p>
+    <ion-slide class="screen-1">
+      <div class="text">
+        <h2>Everyone has genius.</h2>
+        <h4>Discover yours.</h4>
+      </div>
+
     </ion-slide>
 
-    <ion-slide>
-      <h2>Here's how you do this!</h2>
-      <p>explain explain</p>
+    <ion-slide class="screen-2">
+      <div class="text">
+        <h2>Own your future.</h2>
+        <h4>There’s magic in a goal.</h4>
+      </div>
+
     </ion-slide>
 
-    <ion-slide>
-      <h2>Don't forget this!</h2>
-      <p>but wait, there's more!</p>
-    </ion-slide>
-
-    <ion-slide>
-      <h2>One more thing...</h2>
-      <p>you're really going to like this</p>
+    <ion-slide class="screen-3">
+      <div class="text">
+        <h2>Success comes easier</h2>
+        <h4>...with a help from your supporters.</h4>
+        <button class="button button-balanced" ng-click="startApp()">Start using Waybook</button>
+      </div>
     </ion-slide>
 
   </ion-slide-box>

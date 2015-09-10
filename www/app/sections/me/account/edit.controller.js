@@ -15,6 +15,16 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
     needParent: false
   };
 
+  $scope.ageConfig = {
+    titleLabel: 'Your date of birth',
+    to: new Date(),
+    callback: function (val) {
+      if (val) {
+        $scope.user.birthDate = val;
+      }
+    }
+  };
+
   $scope.$watch('user.birthDate', function(birth) {
     $scope.accountData.underAge = false;
     $scope.accountData.needParent = false;

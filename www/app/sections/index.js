@@ -22,6 +22,7 @@
 
   app.controller('MeController', require('./me/me.controller.js'));
   app.controller('MeAccountEditController', require('./me/account/edit.controller.js'));
+  app.directive('wayFormatDate', require('./me/account/formatDate.directive.js'));
   app.directive('passwordMatch', require('./me/account/passwordMatch.directive.js'));
   app.controller('MeDiscoveriesController', require('./me/discoveries.controller.js'));
   app.controller('MeSponsorsController', require('./me/sponsors.controller.js'));

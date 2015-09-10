@@ -19,6 +19,7 @@
   require('mentio');
   require('intl-phone-number');
   require('state-nav-back-button');
+  require('ionic-datepicker');
 
 
   window.debug = require('debug');
@@ -39,7 +40,8 @@
     'ngTagsInput',
     'mentio',
     'internationalPhoneNumber',
-    'stateBackButtonIonic'
+    'stateBackButtonIonic',
+    'ionic-datepicker'
   ])
 
   .controller('AppController', require('./app.controller.js'))

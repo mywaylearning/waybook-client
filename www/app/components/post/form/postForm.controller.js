@@ -11,6 +11,27 @@
 
     var ctrl = this;
 
+    // Datepicker configurations
+    ctrl.startDateConfig = {
+      titleLabel: 'Date you are planning to start this goal',
+      from: new Date(),
+      callback: function (val) {
+        if (val) {
+          ctrl.model.gStartDate = val;
+        }
+      }
+    };
+
+    ctrl.deadlineDateConfig = {
+      titleLabel: 'Date you are planning to finish this goal',
+      from: new Date(),
+      callback: function (val) {
+        if (val) {
+          ctrl.model.gEndDate = val;
+        }
+      }
+    };
+
     // Hold selectec contacts to share
     ctrl.selectedContacts = [];
 

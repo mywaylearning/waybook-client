@@ -24,14 +24,15 @@
         </label>
 
         <label class="item item-input">
-          <span class="input-label">Password:</span>
-          <input type="password" ng-model="register.password" placeholder="Create a password" required check-pw>
+          <span class="input-label" ng-class="{'assertive': registerForm.password.$invalid && registerForm.password.$dirty}">Password:</span>
+          <i class="icon placeholder-icon" ng-show="registerForm.password.$dirty" ng-class="{'ion-close': registerForm.password.$invalid, 'ion-checkmark': registerForm.password.$valid}"></i>
+          <input type="password" name="password" ng-model="register.password" placeholder="Create a password" required check-pw>
         </label>
 
-        <label class="item item-input">
-          <span class="input-label"></span>
-          <p>Use at least one uppercase letter, one numeral and seven characters.</p>
+        <label class="item item-body" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+          <span ng-class="{'assertive': registerForm.password.$invalid}">Use at least one uppercase letter, one numeral and seven characters.</span>
         </label>
+
 
       </ion-list>
 

@@ -20,6 +20,10 @@ function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_ST
   $scope.slideChanged = function(index) {
     $scope.slideIndex = index;
   };
+
+  $scope.goToSlide = function(index) {
+    $ionicSlideBoxDelegate.slide(index);
+  }
 }
 
 module.exports = [

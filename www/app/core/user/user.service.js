@@ -105,12 +105,18 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    * Will delete the access token, user info,
    * and redirect to logged out page.
    */
-  function _logout() {
+  function _logout(redirect) {
+    if (redirect == null) {
+      redirect = true;
+    }
     auth.destroy();
     userObj = undefined;
     userRequest = null;
 
-    router.goToLoggedOut();
+
+    if (redirect) {
+      router.goToLoggedOut();
+    }
   }
 
   /**

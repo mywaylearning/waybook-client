@@ -48,7 +48,7 @@ var LoginController = function($scope, $state, router, auth, user, errorHandler)
    */
   function onGetUserSuccess(userData) {
     if (userData.confirmationToken) {
-      user.logout();
+      user.logout(false);
       return $scope.errorsData.message = 'You need to verify your account';
     }
     $scope.errorsData = {};

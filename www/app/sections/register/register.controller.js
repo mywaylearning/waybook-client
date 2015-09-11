@@ -1,28 +1,19 @@
 'use strict';
 
-function RegisterController($scope, router, user, errorHandler, $ionicModal) {
+function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
 
   $scope.register = {};
-  $scope.successModal = {};
 
   // Creates a modal instance in case of registration is successfull
-  $ionicModal.fromTemplateUrl('app/sections/register/register.emailSent.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.successModal = modal;
-  });
-
-  // Redirect user when click on the modal button
-  $scope.goToLogin = function() {
-    $scope.successModal.remove();
-    router.goTo('public.login');
+  var emailSent = function() {
+    $ionicPopup.alert({
+      title: 'Verification email sent',
+      subTitle: 'An email has been sent to your inbox. Please check your email and click on the link to verify your account.',
+      okText: 'Ok',
+    }).then(function() {
+      router.goTo('public.login');
+    });
   };
-
-  //Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.successModal.remove();
-  });
 
   /**
    * Handle register form submission and validation. Once the use has
@@ -49,7 +40,7 @@ function RegisterController($scope, router, user, errorHandler, $ionicModal) {
     user
       .register(model)
       .then(function(data) {
-        $scope.successModal.show();
+        emailSent();
       })
       .catch(function(error) {
         console.log('on error', error);
@@ -62,6 +53,6 @@ module.exports = [
   'router',
   'user',
   'errorHandler',
-  '$ionicModal',
+  '$ionicPopup',
   RegisterController
 ];

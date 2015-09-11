@@ -16,6 +16,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    */
   return {
     register: _register,
+    recoverPasswordRequest: _recoverPasswordRequest,
     currentUser: _currentUser,
     isUserResolved: _userIsResolved,
     getByUsername: _getByUsername,
@@ -78,6 +79,18 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
   function _register(user) {
     return Users.post(user);
   }
+
+  /**
+   * Start proccess of password recovering
+   * @param  {String} email
+   * @return {Promise}
+   */
+   function _recoverPasswordRequest(email) {
+     return Users.post({
+       recovery: email
+     });
+   }
+
 
   /**
    * Get the authenticated user's information.

@@ -29,9 +29,10 @@
           <input type="password" name="password" ng-model="register.password" placeholder="Create a password" required check-pw>
         </label>
 
-        <label class="item item-body" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
-          <span ng-class="{'assertive': registerForm.password.$invalid}">Use at least one uppercase letter, one numeral and seven characters.</span>
-        </label>
+        <div class="item item-input item-divider" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+          <span class="input-label"></span>
+          <p class="password-helper" ng-class="{'assertive': registerForm.password.$invalid}">Use at least one uppercase letter, one numeral and seven characters.</p>
+        </div>
 
 
       </ion-list>

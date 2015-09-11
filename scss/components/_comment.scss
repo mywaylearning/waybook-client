@@ -82,6 +82,7 @@
 }
 
 .comment-input {
+  -webkit-user-select: auto !important;
   border: 1px solid #d4d4d4;
   width: 100%;
   word-wrap: break-word;

@@ -1,6 +1,6 @@
 'use strict';
 
-var LoginController = function($scope, $state, router, auth, user, errorHandler) {
+var LoginController = function($scope, $state, $ionicPopup, router, auth, user, errorHandler) {
 
   $scope.loginData = {};
   $scope.errorsData = {};
@@ -32,6 +32,43 @@ var LoginController = function($scope, $state, router, auth, user, errorHandler)
       .then(onAuthenticated)
       .then(onGetUserSuccess)
       .catch(handleError);
+  };
+
+  $scope.recoverPasswordData = {
+    emailSent: false
+  };
+
+  $scope.recoverPassword = function() {
+
+
+    // An elaborate, custom popup
+    var recoverPopup = $ionicPopup.show({
+      template: '<input type="email" ng-model="recoverPasswordData.recoverEmail">',
+      title: 'Enter your e-mail',
+      subTitle: 'You will receive an e-mail with instructions.',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Send</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            if (!$scope.recoverPasswordData.recoverEmail) {
+              //don't allow the user to close unless he enters an e-mail
+              e.preventDefault();
+            } else {
+              return $scope.recoverPasswordData.recoverEmail;
+            }
+          }
+        }
+      ]
+    });
+    recoverPopup.then(function(email) {
+      $scope.recoverPasswordData.emailSent = true;
+      // user.recoverPasswordRequest(email).then(function(response) {
+      //   console.log(response);
+      // });
+    });
   };
 
   /**
@@ -85,6 +122,7 @@ var LoginController = function($scope, $state, router, auth, user, errorHandler)
 module.exports = [
   '$scope',
   '$state',
+  '$ionicPopup',
   'router',
   'auth',
   'user',

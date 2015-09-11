@@ -106,6 +106,15 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('public.login.recoverPassword', {
+    url: '^/recover-password/{token}',
+    views: {
+      'publicContent@public': {
+        controller: 'RecoverPasswordController'
+      }
+    }
+  })
+
   .state('public.register', {
     url: '/register',
     views: {

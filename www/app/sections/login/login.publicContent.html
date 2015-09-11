@@ -18,6 +18,10 @@
             <span class="input-label">Password</span>
             <input type="password" ng-model="loginData.password" placeholder="Password" required>
           </label>
+          <div class="item item-body item-divider">
+            <p ng-if="recoverPasswordData.emailSent">We sent an e-mail to <strong>{{recoverPasswordData.recoverEmail}}</strong>. Please follow the instructions there to set a new password.</p>
+            <button ng-if="!recoverPasswordData.emailSent" class="button button-clear button-small" ng-click="recoverPassword()">Don't remember your password?</button>
+          </div>
         </ion-list>
         <div class="spacer" style="height: 40px;"></div>
         <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>

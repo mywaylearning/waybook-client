@@ -65,9 +65,9 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
     });
     recoverPopup.then(function(email) {
       $scope.recoverPasswordData.emailSent = true;
-      // user.recoverPasswordRequest(email).then(function(response) {
-      //   console.log(response);
-      // });
+      user.recoverPasswordRequest(email).then(function(response) {
+        console.log(response);
+      });
     });
   };
 

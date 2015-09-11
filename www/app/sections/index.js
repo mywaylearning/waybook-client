@@ -5,7 +5,7 @@
   var app = angular.module('waybook');
 
   app.controller('LoginController', require('./login/login.controller.js'));
-  app.controller('RecoverPasswordController', require('./login/recoverPassword.controller.js'));
+  app.controller('RecoverPasswordController', require('./recover-password/recoverPassword.controller.js'));
 
   app.controller('RegisterController', require('./register/register.controller.js'));
   app.directive('checkPw', require('./register/checkPw.directive.js'));

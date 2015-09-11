@@ -17,6 +17,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
   return {
     register: _register,
     recoverPasswordRequest: _recoverPasswordRequest,
+    setRecoveryPassword: _setRecoveryPassword,
     currentUser: _currentUser,
     isUserResolved: _userIsResolved,
     getByUsername: _getByUsername,
@@ -90,6 +91,19 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
        recovery: email
      });
    }
+
+   /**
+    * Set new password from recovery
+    * @param  {String} email,
+    * @param  {String} token
+    * @return {Promise}
+    */
+    function _setRecoveryPassword(password, token) {
+      return Users.post({
+        password: password,
+        recoveryToken: token
+      });
+    }
 
 
   /**

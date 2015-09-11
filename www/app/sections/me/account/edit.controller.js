@@ -17,6 +17,7 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
 
   $scope.ageConfig = {
     titleLabel: 'Your date of birth',
+    inputDate: currentUser.birthDate,
     to: new Date(),
     callback: function (val) {
       if (val) {

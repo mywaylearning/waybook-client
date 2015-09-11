@@ -20,7 +20,7 @@
           </label>
           <div class="item item-body item-divider">
             <p ng-if="recoverPasswordData.emailSent">We sent an e-mail to <strong>{{recoverPasswordData.recoverEmail}}</strong>. Please follow the instructions there to set a new password.</p>
-            <button ng-if="!recoverPasswordData.emailSent" class="button button-clear button-small" ng-click="recoverPassword()">Don't remember your password?</button>
+            <a href="" ng-if="!recoverPasswordData.emailSent" class="button button-clear button-small" ng-click="recoverPassword()">Don't remember your password?</a>
           </div>
         </ion-list>
         <div class="spacer" style="height: 40px;"></div>

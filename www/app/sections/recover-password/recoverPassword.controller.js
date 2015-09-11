@@ -10,7 +10,9 @@ var RecoverPasswordController = function($scope, $state, $stateParams, user) {
       recoveryToken: $stateParams.token
     }
 
-    // Call API endpoint to change password
+    user.setRecoveryPassword($scope.password.new, $stateParams.token).then(function(result) {
+      $state.go('public.login');
+    });
 
   }
 };

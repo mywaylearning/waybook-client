@@ -35,13 +35,16 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
   };
 
   $scope.recoverPasswordData = {
+    recoverEmail: '',
     emailSent: false
   };
 
+  $scope.$watch('loginData.email', function(email) {
+    $scope.recoverPasswordData.recoverEmail = email;
+  });
+
   $scope.recoverPassword = function() {
 
-
-    // An elaborate, custom popup
     var recoverPopup = $ionicPopup.show({
       template: '<input type="email" ng-model="recoverPasswordData.recoverEmail">',
       title: 'Enter your e-mail',

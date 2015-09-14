@@ -37,12 +37,14 @@ function ErrorHandlerFactory(FORM_ERRORS) {
    * error codes to form input names.
    * If input names is an array it will loop through
    * all fields values.
+   * Empty array means that fields are dinamic, based on
+   * error response from API.
    *
    * @type {Object}
    */
   errorToFieldMap = {};
   errorToFieldMap[FORM_ERRORS.invalidLogin] = ['email', 'password'];
-  errorToFieldMap[FORM_ERRORS.userEmailTaken] = 'email';
+  errorToFieldMap[FORM_ERRORS.validationError] = [];
 
   /**
    * Public
@@ -67,10 +69,10 @@ function ErrorHandlerFactory(FORM_ERRORS) {
   function isKnownError(error) {
     var errorMatch = false;
 
-    if (!error.name) { return errorMatch; }
+    if (!error.error && !error.name) { return errorMatch; }
 
     angular.forEach(FORM_ERRORS, function(value) {
-      if (error.name === value) { errorMatch = true; }
+      if (error.error === value || error.name === value) { errorMatch = true; }
     });
 
     return errorMatch;
@@ -134,9 +136,9 @@ function ErrorHandlerFactory(FORM_ERRORS) {
     if (resetBefore) { this.reset(); }
 
     // check if know error - if not default to unkown error
-    errorName = isKnownError(err) ? err.name : unknownError.name;
+    errorName = isKnownError(err) ? err.error || err.name : unknownError.name;
 
-    this.scope.errors[errorName] = true;
+    this.scope.errors[errorName] = err.error_description || err.message;
 
     // If this an unknown error no point doing field errors
     if (errorName === unknownError.name) { return false; }
@@ -148,12 +150,26 @@ function ErrorHandlerFactory(FORM_ERRORS) {
       // make sure fields is in array format even if there is only
       // one field matched
       fields = angular.isArray(fields) ? fields : [fields];
+      var asyncErrors;
+
+      // Check if it's a empty array
+      if (!fields.length) {
+        // check if there is details in error response
+        if (err.details && err.details.messages) {
+          asyncErrors = err.details.messages;
+          fields = Object.keys(asyncErrors);
+        }
+      }
 
       fields.forEach(function(field) {
-
         if (this.form[field]) {
           // If the field exists in the form mark it as invalid
           this.form[field].$setValidity(errorName, false);
+
+          // Add specific error to scope
+          if (asyncErrors) {
+            this.scope.errors[field] = asyncErrors[field][0];
+          }
         }
       }, this);
     }

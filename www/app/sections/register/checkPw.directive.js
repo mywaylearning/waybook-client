@@ -10,13 +10,11 @@
       ctrl.$parsers.unshift(function(viewValue) {
         var containsUpperLetter = /[A-Z]+/.test(viewValue);
         var containsDigit = /[0-9]+/.test(viewValue);
-        var hasCorrectLength = viewValue.length >= 7;
 
         ctrl.$setValidity('containsUpperLetter', containsUpperLetter);
         ctrl.$setValidity('containsDigit', containsDigit);
-        ctrl.$setValidity('hasCorrectLength', hasCorrectLength);
 
-        if (containsUpperLetter && containsDigit && hasCorrectLength) {
+        if (containsUpperLetter && containsDigit) {
           return viewValue;
         }
         else {

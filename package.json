@@ -8,6 +8,7 @@
     "angular": "./www/lib/angular/angular.min.js",
     "angular-animate": "./www/lib/angular-animate/angular-animate.min.js",
     "angular-sanitize": "./www/lib/angular-sanitize/angular-sanitize.min.js",
+    "angular-messages": "./www/lib/angular-messages/angular-messages.min.js",
     "angular-ui-router": "./www/lib/angular-ui-router/release/angular-ui-router.min.js",
     "restangular": "./www/lib/restangular/dist/restangular.min.js",
     "lodash": "./www/app/components/lodash.custom.min.js",

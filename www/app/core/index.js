@@ -31,6 +31,7 @@
     .factory('invitationStore', require('./invitation-token/invitation-token-store.service.js'))
 
     .factory('errorHandler', require('./errors/error-handler.service.js'))
+    .directive('resetValidation', require('./errors/resetValidation.directive.js'))
     .factory('utils', require('./utils/utils.service.js'))
 
     .factory('CommentService', require('./comment/comment.service.js'))

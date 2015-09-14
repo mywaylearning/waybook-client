@@ -6,6 +6,7 @@
   require('angular');
   require('angular-animate');
   require('angular-sanitize');
+  require('angular-messages');
   require('angular-ui-router');
   require('ionic-angular');
   require('./app.config');
@@ -33,6 +34,7 @@
     'app.config',
     'ngAnimate',
     'ngSanitize',
+    'ngMessages',
     'ui.router',
     'ui.gravatar',
     'restangular',

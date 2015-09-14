@@ -9,7 +9,18 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
    * Handle login form submission and validation. Once the use has successfully
    * authenticated they will be redirected to appropriate page.
    */
-  $scope.doLogin = function() {
+  $scope.doLogin = function(form) {
+
+    console.log(form.$error);
+
+    if (form.$invalid) {
+      if (!form.$error.invalid_grant) {
+        return;
+      }
+    }
+
+
+
     var email = $scope.loginData.email;
     var password = $scope.loginData.password;
 
@@ -94,7 +105,7 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
       return $scope.errorsData.message = 'You need to verify your account';
     }
     $scope.errorsData = {};
-    $scope.loginData = {};
+    // $scope.loginData = {};
     $scope.app.user = userData;
     if ($scope.returnToState) {
       $state.go($scope.returnToState.name, $scope.returnToStateParams);
@@ -114,13 +125,11 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
      * Clean auth data stored
      */
     auth.destroy();
-    errorHandler.getInstance(this).handle(error);
+    var _errorHandler = errorHandler.getInstance($scope);
 
-    /**
-     * Redirect to login page
-     */
-    $scope.errorsData.message = 'Invalid e-mail or password.';
-  }.bind(this);
+    _errorHandler.setFormController($scope.$$childHead.loginForm);
+    _errorHandler.handle(error);
+  };
 
 };
 

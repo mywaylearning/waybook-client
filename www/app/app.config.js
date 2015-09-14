@@ -41,7 +41,8 @@
   })
 
   .constant('FORM_ERRORS', {
-    'invalidLogin': 'OauthError',
+    'invalidLogin': 'invalid_grant',
+    'validationError': 'ValidationError',
     'userEmailTaken': 'EmailAlreadyInUse',
     'entityNotFound': 'EntityNotFound',
     'fileUploadTooLarge': 'FileUploadTooLarge',

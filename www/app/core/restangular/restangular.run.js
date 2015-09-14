@@ -88,7 +88,7 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
      * user credentials
      */
     if (!accessToken) {
-      return deferred.reject({});
+      return deferred.reject(response.data);
     }
 
     auth.authRefresh().then(function() {
@@ -123,6 +123,7 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
 
   function handleUnknownErrors(response, deferred) {
     console.log('handleUnknownErrors', response);
+    deferred.reject(response.data.error);
   }
 }
 

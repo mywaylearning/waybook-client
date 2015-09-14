@@ -5,10 +5,10 @@ function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
   $scope.register = {};
 
   // Creates a modal instance in case of registration is successfull
-  var emailSent = function() {
+  var emailSent = function(email) {
     $ionicPopup.alert({
       title: 'Verification email sent',
-      subTitle: 'An email has been sent to your inbox. Please check your email and click on the link to verify your account.',
+      subTitle: 'An email was sent to <strong>'+ email +'</strong>. Please check your email and click on the link to verify your account.',
       okText: 'Ok',
     }).then(function() {
       router.goTo('public.login');
@@ -20,6 +20,7 @@ function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
    * successfully authenticated we will be redirec to appropriate page.
    */
   $scope.onRegister = function() {
+
     var model = {
       name: $scope.register.name,
       lastName: $scope.register.lastName,
@@ -40,11 +41,20 @@ function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
     user
       .register(model)
       .then(function(data) {
-        emailSent();
+        emailSent(model.email);
       })
-      .catch(function(error) {
-        console.log('on error', error);
-      });
+      .catch(handleError);
+  };
+
+  /**
+   * Handle invalid fields
+   */
+  var handleError = function(error) {
+    console.log(error);
+    var _errorHandler = errorHandler.getInstance($scope);
+
+    _errorHandler.setFormController($scope.$$childHead.registerForm);
+    _errorHandler.handle(error);
   };
 };
 

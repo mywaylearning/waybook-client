@@ -5,6 +5,7 @@
   "devDependencies": {},
   "dependencies": {
     "angular-gravatar": "~0.3.1",
+    "angular-messages": "~1.4.5",
     "bourbon": "~4.2.3",
     "international-phone-number": "~0.0.8",
     "ion-wizard": "https://raw.githubusercontent.com/arielfaur/ionic-wizard/v1.0.2/dist/ion-wizard.js",

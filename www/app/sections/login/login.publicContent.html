@@ -8,24 +8,31 @@
         </div>
       </div>
 
-      <form name="loginForm" ng-submit="doLogin()">
+      <form name="loginForm" ng-submit="doLogin(loginForm)" novalidate="">
         <ion-list>
+          <div class="form-errors" multiple ng-messages="loginForm.$submitted && loginForm.$error">
+            <div class="form-error" ng-message="required">You must provide an e-mail and a password</div>
+            <div ng-messages-include="app/core/errors/messages.html"></div>
+          </div>
           <label class="item item-input">
             <span class="input-label">Email</span>
-            <input type="email" ng-model="loginData.email" placeholder="Email" required>
+            <input type="email" name="email" ng-model="loginData.email" placeholder="Email" required reset-validation>
           </label>
+
           <label class="item item-input">
             <span class="input-label">Password</span>
-            <input type="password" ng-model="loginData.password" placeholder="Password" required>
+            <input type="password" name="password" ng-model="loginData.password" placeholder="Password" required reset-validation>
           </label>
+
           <div class="item item-body item-divider">
             <p ng-if="recoverPasswordData.emailSent">We sent an e-mail to <strong>{{recoverPasswordData.recoverEmail}}</strong>. Please follow the instructions there to set a new password.</p>
             <a href="" ng-if="!recoverPasswordData.emailSent" class="button button-clear button-small" ng-click="recoverPassword()">Forgot your password?</a>
           </div>
         </ion-list>
+
         <div class="spacer" style="height: 40px;"></div>
         <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>
-        <button class="button button-stable button-block" ng-disabled="loginForm.$invalid" type="submit">Log in</button>
+        <button class="button button-stable button-block" type="submit">Log in</button>
         <a ui-sref="public.register" class="button button-positive button-clear button-block">Or create an account</a>
       </form>
     </div>

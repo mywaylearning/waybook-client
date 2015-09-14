@@ -3,38 +3,58 @@
     <form name="registerForm" ng-submit="onRegister()">
       <ion-list>
 
-        <label class="item item-input">
+        <label class="item item-input"
+          ng-class="{ 'has-error' : registerForm.firstName.$dirty && registerForm.firstName.$invalid}">
           <span class="input-label">First name:</span>
-          <input type="text" ng-model="register.name" placeholder="First name" required>
+          <input type="text" name="firstName" ng-model="register.name" placeholder="First name" required>
         </label>
 
-        <label class="item item-input">
-          <span class="input-label">Last name:</span>
-          <input type="text" ng-model="register.lastName" placeholder="Last name" required>
-        </label>
-
-        <label class="item item-input">
-          <span class="input-label">Username:</span>
-          <input type="text" ng-model="register.username" placeholder="Username" required>
-        </label>
-
-        <label class="item item-input">
-          <span class="input-label">E-mail:</span>
-          <input type="email" ng-model="register.email" placeholder="E-mail" required>
-        </label>
-
-        <label class="item item-input">
-          <span class="input-label" ng-class="{'assertive': registerForm.password.$invalid && registerForm.password.$dirty}">Password:</span>
-          <i class="icon placeholder-icon" ng-show="registerForm.password.$dirty" ng-class="{'ion-close': registerForm.password.$invalid, 'ion-checkmark': registerForm.password.$valid}"></i>
-          <input type="password" name="password" ng-model="register.password" placeholder="Create a password" required check-pw>
-        </label>
-
-        <div class="item item-input item-divider" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
-          <span class="input-label"></span>
-          <p class="password-helper" ng-class="{'assertive': registerForm.password.$invalid}">Use at least one uppercase letter, one numeral and seven characters.</p>
+        <div class="form-errors" ng-messages="registerForm.firstName.$dirty && registerForm.firstName.$error">
+          <div ng-messages-include="app/core/errors/messages.html"></div>
         </div>
 
+        <label class="item item-input"
+          ng-class="{ 'has-error' : registerForm.lastName.$dirty && registerForm.lastName.$invalid}">
+          <span class="input-label">Last name:</span>
+          <input type="text" name="lastName" ng-model="register.lastName" placeholder="Last name" required>
+        </label>
 
+        <div class="form-errors" ng-messages="registerForm.lastName.$dirty && registerForm.lastName.$error">
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+
+        <label class="item item-input"
+          ng-class="{ 'has-error' : registerForm.username.$dirty && registerForm.username.$invalid}">
+          <span class="input-label">Username:</span>
+          <input type="text" ng-model="register.username" name="username" placeholder="Username" required reset-validation>
+        </label>
+
+        <div class="form-errors" ng-messages="registerForm.username.$dirty && registerForm.username.$error">
+          <div class="form-error" ng-message="ValidationError">{{errors.username}}</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+
+        <label class="item item-input"
+          ng-class="{ 'has-error' : registerForm.email.$dirty && registerForm.email.$invalid}">
+          <span class="input-label">E-mail:</span>
+          <input type="email" name="email" ng-model="register.email" placeholder="E-mail" required reset-validation>
+        </label>
+
+        <div class="form-errors" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
+          <div class="form-error" ng-message="ValidationError">{{errors.email}}</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+
+        <label class="item item-input"
+          ng-class="{ 'has-error' : registerForm.password.$dirty && registerForm.password.$invalid}">
+          <span class="input-label">Password:</span>
+          <input type="password" name="password" ng-model="register.password" placeholder="Create a password" required check-pw ng-minlength="7">
+        </label>
+
+        <div class="form-errors" multiple ng-messages="registerForm.password.$dirty && registerForm.password.$error">
+          <div class="form-error" ng-message="minlength">Your password must contain at least 7 characters.</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
       </ion-list>
 
       <div class="spacer" style="height: 40px;"></div>

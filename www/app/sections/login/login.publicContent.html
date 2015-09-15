@@ -19,8 +19,7 @@
             <input type="password" ng-model="loginData.password" placeholder="Password" required>
           </label>
           <div class="item item-body item-divider">
-            <p ng-if="recoverPasswordData.emailSent">We sent an e-mail to <strong>{{recoverPasswordData.recoverEmail}}</strong>. Please follow the instructions there to set a new password.</p>
-            <a href="" ng-if="!recoverPasswordData.emailSent" class="button button-clear button-small" ng-click="recoverPassword()">Forgot your password?</a>
+            <a href="" class="button button-clear button-small" ng-click="recoverPassword()">Forgot your password?</a>
           </div>
         </ion-list>
         <div class="spacer" style="height: 40px;"></div>

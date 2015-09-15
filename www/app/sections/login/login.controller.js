@@ -68,9 +68,14 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
     });
     recoverPopup.then(function(email) {
       if (email) {
-        $scope.recoverPasswordData.emailSent = true;
         user.recoverPasswordRequest(email).then(function(response) {
-          console.log(response);
+          $ionicPopup.show({
+            title: 'E-mail sent',
+            subTitle: 'We sent an e-mail to <strong>' + email + '</strong>. Please follow the instructions there to set a new password.',
+            buttons: [
+              { text: 'Ok' }
+            ]
+          });
         });
       }
     });

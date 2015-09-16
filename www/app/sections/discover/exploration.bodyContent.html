@@ -1,19 +1,9 @@
-<ion-view title="The Big 5 Personality Inventory">
-  <ion-content padding="true" class="has-header">
-  <h1>Big 5 Personality Inventory</h1>
-  <div class="list">
+<ion-view title="{{viewData.exploration.title}}">
+  <way-exploration-questions-multiple-choice
+    ng-if="viewData.exploration.pattern == 'multiple-choice'"
+    exploration="viewData.exploration"></way-exploration-questions-multiple-choice>
 
-    <!-- <a ng-repeat="exploration in explorations.perception"
-      href="#!/discover/perception/{{exploration.name}}"
-      class="item item-thumbnail-left">
-
-    </a> -->
-
-    <div class="item item-divider">Personality</div>
-
-
-
-  </div>
-
-  </ion-content>
+  <way-exploration-questions-heat-map
+    ng-if="viewData.exploration.pattern == 'heat-map'"
+    exploration="viewData.exploration"></way-exploration-questions-heat-map>
 </ion-view>

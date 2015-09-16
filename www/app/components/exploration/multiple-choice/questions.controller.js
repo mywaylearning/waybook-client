@@ -3,8 +3,6 @@
 
   function ExplorationQuestionsController($scope, $ionicSlideBoxDelegate) {
 
-    console.log($scope.exploration);
-
     $scope.questions = $scope.exploration.questions;
 
     $scope.answers = $scope.exploration.answers;

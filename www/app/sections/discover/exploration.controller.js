@@ -4,9 +4,11 @@
 
   var debug = require('debug')('waybook:ExplorationController');
 
-  function ExplorationController($scope, $stateParams) {
+  function ExplorationController($scope, $stateParams, questions) {
     debug('here we are');
     debug($stateParams);
+
+    $scope.questions = questions;
 
     $scope.expData = {};
 
@@ -16,6 +18,6 @@
 
   }
 
-  module.exports = ['$scope', '$stateParams', ExplorationController];
+  module.exports = ['$scope', '$stateParams', 'questions', ExplorationController];
 
 }());

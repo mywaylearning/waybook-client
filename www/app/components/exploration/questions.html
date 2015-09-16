@@ -1,0 +1,30 @@
+<div class="bar bar-subheader">
+  <button
+    class="button button-icon icon ion-chevron-left"
+    ng-click="previous()"
+    ng-if="slides.index > 0"></button>
+  <h2 class="title">Question #{{slides.index + 1}} of {{slides.count}}</h2>
+  <button
+    class="button button-icon icon ion-chevron-right"
+    ng-click="next()"
+      ng-if="slides.index < slides.count - 1"
+
+    ></button>
+</div>
+<ion-content padding="true" class="has-subheader">
+
+
+
+  <!-- <a ng-repeat="exploration in explorations.perception"
+    href="#!/discover/perception/{{exploration.name}}"
+    class="item item-thumbnail-left">
+
+  </a> -->
+
+  <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false">
+    <ion-slide ng-repeat="question in questions">
+      <way-exploration-question question="question" on-answer="next()"></way-exploration-question>
+    </ion-slide>
+  </ion-slide-box>
+
+</ion-content>

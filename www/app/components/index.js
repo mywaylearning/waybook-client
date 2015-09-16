@@ -13,6 +13,12 @@
   app.directive('wayPostView', require('./post/view/postView.directive.js'));
   app.directive('readMore', require('./post/view/readMore.directive.js'));
 
+  app.controller('ExplorationQuestionsController', require('./exploration/questions.controller.js'));
+  app.directive('wayExplorationQuestions', require('./exploration/questions.directive.js'));
+
+  app.controller('ExplorationQuestionController', require('./exploration/question.controller.js'));
+  app.directive('wayExplorationQuestion', require('./exploration/question.directive.js'));
+
 
   app.directive('linkPreview', require('./common/linkPreview.directive.js'));
 

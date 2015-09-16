@@ -1,0 +1,10 @@
+<div class="list">
+  <div class="item item-body item-divider item-question">{{question.question}}</div>
+  <ion-radio
+    ng-model="question.choice"
+    name="question-{{question.id}}"
+    ng-value="{{answer.value}}"
+    ng-repeat="answer in question.answers"
+    ng-change="answered(answer)"
+    icon="{{icon}}">{{answer.text}}</ion-radio>
+</div>

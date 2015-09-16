@@ -40,6 +40,8 @@
 
     .factory('TagService', require('./tag/tag.service.js'))
 
-    .factory('PostService', require('./post/post.service.js'));
+    .factory('PostService', require('./post/post.service.js'))
+
+    .factory('ExplorationService', require('./exploration/exporation.service.js'));
 
 }());

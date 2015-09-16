@@ -171,6 +171,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         templateUrl: 'app/sections/discover/exploration.bodyContent.html',
         controller: 'ExplorationController'
       }
+    },
+    resolve: {
+      questions: function(ExplorationService) {
+        return ExplorationService.questions();
+      }
     }
   })
 

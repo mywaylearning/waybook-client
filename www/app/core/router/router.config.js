@@ -148,7 +148,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/discover',
     views: {
       'bodyContent': {
-        templateUrl: 'app/sections/discover/discover.bodyContent.html',
         controller: 'DiscoverController'
       }
     },
@@ -163,7 +162,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/:category/:exploration',
     views: {
       'bodyContent@app': {
-        // templateUrl: 'app/sections/discover/exploration.bodyContent.html',
         controller: 'ExplorationController'
       }
     },

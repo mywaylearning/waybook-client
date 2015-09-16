@@ -145,20 +145,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.discover', {
-    abstract: true,
     url: '/discover',
     views: {
       'bodyContent': {
-        template: '<ion-nav-view name="discover-bodyContent"></ion-nav-view>'
-      }
-    }
-  })
-
-  .state('app.discover.entry', {
-    url: '',
-    views: {
-      'discover-bodyContent': {
-        templateUrl: 'app/sections/discover/discover.bodyContent.html',
         controller: 'DiscoverController'
       }
     },
@@ -172,8 +161,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app.discover.exploration', {
     url: '/:category/:exploration',
     views: {
-      'discover-bodyContent': {
-        templateUrl: 'app/sections/discover/exploration.bodyContent.html',
+      'bodyContent@app': {
         controller: 'ExplorationController'
       }
     },

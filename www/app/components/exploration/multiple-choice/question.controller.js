@@ -3,8 +3,6 @@
 
   function ExplorationQuestionController($scope, $timeout) {
 
-    console.log($scope.question);
-
     $scope.viewData = {
       icon: 'ion-load-c spin',
       disableAnswers: false,
@@ -19,7 +17,6 @@
 
     $scope.answered = function(answer) {
       $scope.viewData.disableAnswers = true;
-      console.log($scope.model);
       $timeout(function() {
         $scope.viewData.icon = 'ion-checkmark';
         $scope.viewData.disableAnswers = false;

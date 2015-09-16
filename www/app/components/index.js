@@ -13,11 +13,17 @@
   app.directive('wayPostView', require('./post/view/postView.directive.js'));
   app.directive('readMore', require('./post/view/readMore.directive.js'));
 
-  app.controller('ExplorationQuestionsController', require('./exploration/questions.controller.js'));
-  app.directive('wayExplorationQuestions', require('./exploration/questions.directive.js'));
+  app.controller('ExplorationQuestionsMultipleChoiceController', require('./exploration/multiple-choice/questions.controller.js'));
+  app.directive('wayExplorationQuestionsMultipleChoice', require('./exploration/multiple-choice/questions.directive.js'));
 
-  app.controller('ExplorationQuestionController', require('./exploration/question.controller.js'));
-  app.directive('wayExplorationQuestion', require('./exploration/question.directive.js'));
+  app.controller('ExplorationQuestionMultipleChoiceController', require('./exploration/multiple-choice/question.controller.js'));
+  app.directive('wayExplorationQuestionMultipleChoice', require('./exploration/multiple-choice/question.directive.js'));
+
+  app.controller('ExplorationQuestionsHeatMapController', require('./exploration/heat-map/questions.controller.js'));
+  app.directive('wayExplorationQuestionsHeatMap', require('./exploration/heat-map/questions.directive.js'));
+
+  app.controller('ExplorationQuestionHeatMapController', require('./exploration/heat-map/question.controller.js'));
+  app.directive('wayExplorationQuestionHeatMap', require('./exploration/heat-map/question.directive.js'));
 
 
   app.directive('linkPreview', require('./common/linkPreview.directive.js'));

@@ -4,14 +4,15 @@
 
   var debug = require('debug')('waybook:DiscoveryController');
 
-  function DiscoveryController($scope, $stateParams) {
+  function DiscoveryController($scope, categories) {
     debug('here we are');
 
-    $scope.discoveryData = {};
-
+    $scope.viewData = {
+      categories: categories
+    };
 
   }
 
-  module.exports = ['$scope', '$stateParams', DiscoveryController];
+  module.exports = ['$scope', 'categories', DiscoveryController];
 
 }());

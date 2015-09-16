@@ -4,20 +4,15 @@
 
   var debug = require('debug')('waybook:ExplorationController');
 
-  function ExplorationController($scope, $stateParams, questions) {
+  function ExplorationController($scope, exploration) {
     debug('here we are');
-    debug($stateParams);
 
-    $scope.questions = questions;
-
-    $scope.expData = {};
-
-    $scope.$on('wizard:StepFailed', function(e, args) {
-      // handle error
-    });
+    $scope.viewData = {
+      exploration: exploration
+    };
 
   }
 
-  module.exports = ['$scope', '$stateParams', 'questions', ExplorationController];
+  module.exports = ['$scope', 'exploration', ExplorationController];
 
 }());

@@ -1,3 +1,9 @@
-<ion-view title="The Big 5 Personality Inventory">
-  <way-exploration-questions questions="questions"></way-exploration-questions>
+<ion-view title="{{viewData.exploration.title}}">
+  <way-exploration-questions-multiple-choice
+    ng-if="viewData.exploration.pattern == 'multiple-choice'"
+    exploration="viewData.exploration"></way-exploration-questions-multiple-choice>
+
+  <way-exploration-questions-heat-map
+    ng-if="viewData.exploration.pattern == 'heat-map'"
+    exploration="viewData.exploration"></way-exploration-questions-heat-map>
 </ion-view>

@@ -4,10 +4,10 @@
   function ExplorationQuestionsDirective() {
     return {
       restrict: 'E',
-      templateUrl: '/app/components/exploration/questions.html',
-      controller: 'ExplorationQuestionsController',
+      templateUrl: '/app/components/exploration/heat-map/questions.html',
+      controller: 'ExplorationQuestionsHeatMapController',
       scope: {
-        questions: '='
+        exploration: '='
       }
     }
 

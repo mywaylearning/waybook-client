@@ -161,6 +161,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         templateUrl: 'app/sections/discover/discover.bodyContent.html',
         controller: 'DiscoverController'
       }
+    },
+    resolve: {
+      categories: function(ExplorationService) {
+        return ExplorationService.categories();
+      }
     }
   })
 
@@ -173,8 +178,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      questions: function(ExplorationService) {
-        return ExplorationService.questions();
+      exploration: function(ExplorationService, $stateParams) {
+        return ExplorationService.exploration($stateParams.exploration);
       }
     }
   })

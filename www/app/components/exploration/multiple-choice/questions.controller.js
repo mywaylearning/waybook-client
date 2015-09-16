@@ -3,9 +3,15 @@
 
   function ExplorationQuestionsController($scope, $ionicSlideBoxDelegate) {
 
+    console.log($scope.exploration);
+
+    $scope.questions = $scope.exploration.questions;
+
+    $scope.answers = $scope.exploration.answers;
+
     $scope.slides = {
       index: 0,
-      count: $scope.questions.length
+      count: Object.keys($scope.questions).length
     };
 
     $scope.previous = function() {

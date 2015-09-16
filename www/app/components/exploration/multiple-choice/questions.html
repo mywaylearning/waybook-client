@@ -11,20 +11,10 @@
 
     ></button>
 </div>
-<ion-content padding="true" class="has-subheader">
-
-
-
-  <!-- <a ng-repeat="exploration in explorations.perception"
-    href="#!/discover/perception/{{exploration.name}}"
-    class="item item-thumbnail-left">
-
-  </a> -->
-
+<ion-content class="padding has-subheader">
   <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false">
-    <ion-slide ng-repeat="question in questions">
-      <way-exploration-question question="question" on-answer="next()"></way-exploration-question>
+    <ion-slide ng-repeat="(id, question) in questions">
+      <way-exploration-question-multiple-choice question-id="{{id}}" question="question" answers="answers" on-answer="next()"></way-exploration-question-multiple-choice>
     </ion-slide>
   </ion-slide-box>
-
 </ion-content>

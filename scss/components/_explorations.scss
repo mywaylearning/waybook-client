@@ -4,3 +4,18 @@
   padding-bottom: 16px;
   font-weight: 600;
 }
+
+.item .badge {
+  display: inline-block;
+  width: 120px;
+  line-height: 46px;
+  top: 0;
+  right: 0;
+  text-align: center;
+  padding: 3px 0;
+  border-radius: 0;
+}
+
+.item-cliclable {
+  cursor: pointer;
+}

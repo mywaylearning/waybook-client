@@ -11,7 +11,7 @@
     };
 
     $scope.model = {
-      questionId: angular.isObject($scope.question) ? $scope.question.id : $scope.questionId,
+      questionId: angular.isObject($scope.question) ? $scope.question.id : parseInt($scope.questionId, 10),
       answer: null
     };
 

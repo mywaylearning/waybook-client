@@ -4,23 +4,22 @@
   function ExplorationQuestionController($scope, $timeout) {
 
     $scope.viewData = {
-      icon: 'ion-load-c spin',
       disableAnswers: false,
       question: angular.isObject($scope.question) ? $scope.question.question : $scope.question,
       answers: $scope.answers || $scope.question.answers
     };
 
     $scope.model = {
-      questionId: angular.isObject($scope.question) ? $scope.question.id : $scope.questionId,
+      questionId: angular.isObject($scope.question) ? $scope.question.id : parseInt($scope.questionId, 10),
       answer: null
     };
 
     $scope.answered = function(answer) {
+      $scope.viewData.icon = 'ion-load-c spin';
       $scope.viewData.disableAnswers = true;
       $timeout(function() {
         $scope.viewData.icon = 'ion-checkmark';
         $scope.viewData.disableAnswers = false;
-
         $scope.onAnswer();
       }, 1000);
     };

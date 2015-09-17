@@ -1,7 +1,7 @@
 <div class="list">
   <div class="item item-body item-divider item-question">{{viewData.question}}</div>
   <ion-radio
-    ng-disabled="disableAnswers"
+    ng-disabled="viewData.disableAnswers"
     ng-model="model.answer"
     name="question-{{model.questionId}}"
     ng-repeat="answer in viewData.answers"

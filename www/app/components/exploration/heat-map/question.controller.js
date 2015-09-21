@@ -17,7 +17,7 @@
       }
 
       // Assign class based on answer value
-      switch (answer.value) {
+      switch (answer.order) {
         case 1:
           answer.class = 'light';
           break;
@@ -41,7 +41,7 @@
 
     // Define our default model
     var model = {
-      questionId: parseInt($scope.questionId, 10),
+      question: $scope.question.order,
       answer: null
     };
 
@@ -50,6 +50,7 @@
       model.answer = $scope.answers[index].value;
 
       // Try to save model. If any error occours, decrement currentIndex
+      console.log('Saving...', model);
       $scope.answer = $scope.answers[index];
       $scope.$apply();
     };

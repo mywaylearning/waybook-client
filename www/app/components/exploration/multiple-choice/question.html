@@ -1,11 +1,11 @@
 <div class="list">
-  <div class="item item-body item-divider item-question">{{viewData.question}}</div>
+  <div class="item item-body item-divider item-question">{{viewData.question.question}}</div>
   <ion-radio
     ng-disabled="viewData.disableAnswers"
     ng-model="model.answer"
-    name="question-{{model.questionId}}"
-    ng-repeat="answer in viewData.answers"
-    ng-value="{{answer.value}}"
+    name="question-{{viewData.question.order}}"
+    ng-repeat="answer in viewData.answers | orderBy: 'order'"
+    ng-value="{{answer.order}}"
     ng-change="answered(answer)"
-    icon="{{viewData.icon}}">{{answer.text}}</ion-radio>
+    icon="{{viewData.icon}}">{{answer.answer}}</ion-radio>
 </div>

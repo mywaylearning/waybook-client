@@ -5,18 +5,20 @@
 
     $scope.viewData = {
       disableAnswers: false,
-      question: angular.isObject($scope.question) ? $scope.question.question : $scope.question,
+      question: $scope.question,
       answers: $scope.answers || $scope.question.answers
     };
 
     $scope.model = {
-      questionId: angular.isObject($scope.question) ? $scope.question.id : parseInt($scope.questionId, 10),
+      question: $scope.question.order,
       answer: null
     };
 
     $scope.answered = function(answer) {
       $scope.viewData.icon = 'ion-load-c spin';
       $scope.viewData.disableAnswers = true;
+
+      console.log('Saving', $scope.model);
       $timeout(function() {
         $scope.viewData.icon = 'ion-checkmark';
         $scope.viewData.disableAnswers = false;

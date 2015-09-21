@@ -8,8 +8,7 @@
       controller: 'ExplorationQuestionHeatMapController',
       scope: {
         answers: '=',
-        question: '=',
-        questionId: '@'
+        question: '='
       },
       link: function(scope, el, attrs) {
         el.on('click', function() {

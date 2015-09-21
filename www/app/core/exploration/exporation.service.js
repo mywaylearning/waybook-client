@@ -10,7 +10,8 @@
 
     var svcInterface = {
       getCategories: _getCategories,
-      collection: _collection
+      collection: _collection,
+      getBySlug: _getBySlug
     };
 
     return svcInterface;
@@ -170,6 +171,10 @@
     function _collection() {
       return Explorations.getList();
     }
+
+    function _getBySlug(slug) {
+      return api.one('explorations', slug).get();
+    };
 
   };
 

@@ -1,7 +1,7 @@
 <ion-view title="Discover">
   <ion-content padding="true" class="has-header">
 
-  <div class="list" ng-repeat="category in viewData.categories">
+  <div class="list" ng-repeat="category in viewData.categories track by $index">
 
     <div class="item item-divider">{{category.category}}</div>
 
@@ -10,7 +10,7 @@
       ui-sref="app.discover.exploration({exploration: exploration.slug})"
       class="item item-thumbnail-left">
       <img ng-src="{{exploration.image}}">
-      <h2>{{exploration.title}}</h2>
+      <h2>{{exploration.name}}</h2>
       <p>{{exploration.description}}</p>
     </a>
 

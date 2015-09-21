@@ -155,9 +155,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     resolve: {
       categories: function(ExplorationService) {
         return ExplorationService.getCategories();
-      },
-      explorations: function(ExplorationService) {
-        return ExplorationService.collection();
       }
     }
   })
@@ -171,7 +168,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       exploration: function(ExplorationService, $stateParams) {
-        return ExplorationService.exploration($stateParams.exploration);
+        return ExplorationService.getBySlug($stateParams.exploration);
       }
     }
   })

@@ -3,11 +3,11 @@
 
   <div class="list" ng-repeat="category in viewData.categories">
 
-    <div class="item item-divider">{{category.title}}</div>
+    <div class="item item-divider">{{category.category}}</div>
 
     <a
       ng-repeat="exploration in category.explorations"
-      ui-sref="app.discover.exploration({category: category.slug, exploration: exploration.slug})"
+      ui-sref="app.discover.exploration({exploration: exploration.slug})"
       class="item item-thumbnail-left">
       <img ng-src="{{exploration.image}}">
       <h2>{{exploration.title}}</h2>

@@ -3,6 +3,18 @@
 
   function ExplorationService($q, api, EVENTS) {
 
+    var svcInterface, Explorations;
+
+    var Explorations = api.all('explorations');
+    var Categories = api.all('categories');
+
+    var svcInterface = {
+      getCategories: _getCategories,
+      collection: _collection
+    };
+
+    return svcInterface;
+
     var explorations = {
       "the-big":
           {
@@ -151,18 +163,12 @@
       }
     ];
 
-    return {
-      exploration: function(exploration) {
-        var deferred = $q.defer();
-        deferred.resolve(explorations[exploration]);
-        return deferred.promise;
-      },
+    function _getCategories() {
+      return Categories.getList();
+    }
 
-      categories: function() {
-        var deferred = $q.defer();
-        deferred.resolve(categories);
-        return deferred.promise;
-      }
+    function _collection() {
+      return Explorations.getList();
     }
 
   };

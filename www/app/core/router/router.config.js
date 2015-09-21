@@ -146,6 +146,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.discover', {
     url: '/discover',
+    cache: false,
     views: {
       'bodyContent': {
         controller: 'DiscoverController'
@@ -153,13 +154,16 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       categories: function(ExplorationService) {
-        return ExplorationService.categories();
+        return ExplorationService.getCategories();
+      },
+      explorations: function(ExplorationService) {
+        return ExplorationService.collection();
       }
     }
   })
 
   .state('app.discover.exploration', {
-    url: '/:category/:exploration',
+    url: '/:exploration',
     views: {
       'bodyContent@app': {
         controller: 'ExplorationController'

@@ -2,11 +2,9 @@
   'use strict';
 
   function ExplorationQuestionsController($scope) {
-
-    $scope.questions = $scope.exploration.questions;
-
-    $scope.answers = $scope.exploration.answers;
-
+    angular.forEach($scope.exploration.questions, function(question) {
+      question.order = parseInt(question.order);
+    });
   }
 
   module.exports = [

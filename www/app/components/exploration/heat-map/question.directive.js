@@ -7,7 +7,7 @@
       templateUrl: 'app/components/exploration/heat-map/question.html',
       controller: 'ExplorationQuestionHeatMapController',
       scope: {
-        answers: '=',
+        exploration: '=',
         question: '='
       },
       link: function(scope, el, attrs) {

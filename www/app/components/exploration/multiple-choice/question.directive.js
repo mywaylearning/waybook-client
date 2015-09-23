@@ -7,8 +7,8 @@
       templateUrl: '/app/components/exploration/multiple-choice/question.html',
       controller: 'ExplorationQuestionMultipleChoiceController',
       scope: {
+        exploration: '=',
         question: '=',
-        answers: '=',
         onAnswer: '&'
       }
     }

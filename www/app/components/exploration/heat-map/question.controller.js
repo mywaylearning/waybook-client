@@ -18,19 +18,19 @@
 
       // Assign class based on answer value
       switch (answer.order) {
-        case 1:
+        case '1':
           answer.class = 'light';
           break;
-        case 2:
+        case '2':
           answer.class = 'positive';
           break;
-        case 3:
+        case '3':
           answer.class = 'calm';
           break;
-        case 4:
+        case '4':
           answer.class = 'energized';
           break;
-        case 5:
+        case '5':
           answer.class = 'assertive';
           break;
       }
@@ -47,7 +47,7 @@
 
     // Set a answer based on index
     $scope.setAnswer = function(index) {
-      model.answer = $scope.answers[index].value;
+      model.answer = $scope.answers[index].order;
 
       // Try to save model. If any error occours, decrement currentIndex
       console.log('Saving...', model);

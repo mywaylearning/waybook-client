@@ -13,7 +13,7 @@
 </div>
 <ion-content class="padding has-subheader">
   <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false">
-    <ion-slide ng-repeat="question in exploration.questions | orderBy: 'order'">
+    <ion-slide ng-repeat="question in exploration.questions">
       <way-exploration-question-multiple-choice exploration="exploration" question="question" on-answer="next()"></way-exploration-question-multiple-choice>
     </ion-slide>
   </ion-slide-box>

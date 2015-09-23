@@ -1,17 +1,17 @@
 (function() {
   'use strict';
 
-  function ExplorationQuestionHeatMapController($scope) {
+  function ExplorationQuestionHeatMapController($scope, ExplorationService) {
 
     // Define current answer index
     var currentAnswerIndex = 0;
 
     // Loop default answers to perform some assignments and verifications
-    angular.forEach($scope.answers, function(answer, index) {
+    angular.forEach($scope.exploration.answers, function(answer, index) {
 
       // Check if there is any user answer
-      if ($scope.question.userAnswer) {
-        if ($scope.question.userAnswer === answer.value) {
+      if ($scope.question.answer) {
+        if ($scope.question.answer === answer.order) {
           currentAnswerIndex = index;
         }
       }
@@ -37,27 +37,32 @@
     });
 
     // Set default answer based on currentIndex on first load
-    $scope.answer = $scope.answers[currentAnswerIndex];
+    $scope.answer = $scope.exploration.answers[currentAnswerIndex];
 
     // Define our default model
     var model = {
+      id: $scope.exploration.id,
       question: $scope.question.order,
       answer: null
     };
 
     // Set a answer based on index
-    $scope.setAnswer = function(index) {
-      model.answer = $scope.answers[index].order;
+    $scope.setAnswer = function() {
+      model.answer = $scope.exploration.answers[currentAnswerIndex].order;
 
       // Try to save model. If any error occours, decrement currentIndex
-      console.log('Saving...', model);
-      $scope.answer = $scope.answers[index];
-      $scope.$apply();
+      ExplorationService.answerExplorationQuestion(model).then(function() {
+        $scope.answer = $scope.exploration.answers[currentAnswerIndex];
+      }).catch(function() {
+        currentAnswerIndex--;
+      });
+
+
     };
 
     // Handle click
     $scope.onClick = function() {
-      var maxIndex = Object.keys($scope.answers).length - 1;
+      var maxIndex = Object.keys($scope.exploration.answers).length - 1;
 
       if (currentAnswerIndex === maxIndex) {
         currentAnswerIndex = 0;
@@ -71,6 +76,7 @@
 
   module.exports = [
     '$scope',
+    'ExplorationService',
     ExplorationQuestionHeatMapController
   ];
 }())

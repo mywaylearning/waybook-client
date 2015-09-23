@@ -1,6 +1,6 @@
 <ion-content class="padding has-header">
   <div class="list">
-    <way-exploration-question-heat-map ng-repeat="question in questions | orderBy: 'order'" question="question" answers="answers"></way-exploration-question-heat-map>
+    <way-exploration-question-heat-map ng-repeat="question in exploration.questions | orderBy: 'order'" exploration="exploration" question="question"></way-exploration-question-heat-map>
   </div>
 
 </ion-content>

@@ -1,35 +1,56 @@
 (function() {
   'use strict';
 
-  function ExplorationQuestionController($scope, $timeout) {
+  function ExplorationQuestionController($scope, $timeout, ExplorationService) {
 
     $scope.viewData = {
       disableAnswers: false,
       question: $scope.question,
-      answers: $scope.answers || $scope.question.answers
+      answers: $scope.exploration.answers || $scope.question.answers,
+      error: null
     };
 
+
     $scope.model = {
+      id: $scope.exploration.id,
       question: $scope.question.order,
-      answer: null
+      answer: false
     };
+
+    if ($scope.question.answer) {
+      $scope.model.answer = $scope.question.answer;
+      $scope.viewData.icon = 'ion-checkmark';
+    }
 
     $scope.answered = function(answer) {
       $scope.viewData.icon = 'ion-load-c spin';
       $scope.viewData.disableAnswers = true;
 
-      console.log('Saving', $scope.model);
-      $timeout(function() {
+      $scope.model.answer = answer.order;
+
+      ExplorationService.answerExplorationQuestion($scope.model).then(function() {
+        $scope.viewData.error = null;
         $scope.viewData.icon = 'ion-checkmark';
-        $scope.viewData.disableAnswers = false;
         $scope.onAnswer();
-      }, 1000);
+      }).catch(function() {
+        $scope.viewData.error = 'We couldn\'t save your answer. Please try again.';
+        if ($scope.question.answer) {
+          return $scope.model.answer = $scope.question.answer;
+        }
+        $scope.model.answer = false;
+      }).finally(function() {
+        if ($scope.question.answer) {
+          $scope.viewData.icon = 'ion-checkmark';
+        }
+        $scope.viewData.disableAnswers = false;
+      });
     };
   }
 
   module.exports = [
     '$scope',
     '$timeout',
+    'ExplorationService',
     ExplorationQuestionController
   ];
 }())

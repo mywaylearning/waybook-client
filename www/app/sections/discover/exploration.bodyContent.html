@@ -1,9 +1,9 @@
-<ion-view title="{{viewData.exploration.title}}">
+<ion-view title="{{viewData.exploration.name}}">
   <way-exploration-questions-multiple-choice
     ng-if="viewData.exploration.pattern == 'multiple-choice'"
     exploration="viewData.exploration"></way-exploration-questions-multiple-choice>
 
   <way-exploration-questions-heat-map
-    ng-if="viewData.exploration.pattern == 'heat-map'"
+    ng-if="viewData.exploration.pattern == 'heatmap'"
     exploration="viewData.exploration"></way-exploration-questions-heat-map>
 </ion-view>

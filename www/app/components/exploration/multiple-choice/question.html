@@ -8,4 +8,5 @@
     ng-value="{{answer.order}}"
     ng-change="answered(answer)"
     icon="{{viewData.icon}}">{{answer.answer}}</ion-radio>
+  <div class="item item-body assertive" ng-if="viewData.error">{{viewData.error}}</div>
 </div>

@@ -5,17 +5,41 @@
   font-weight: 600;
 }
 
-.item .badge {
-  display: inline-block;
-  width: 120px;
-  line-height: 46px;
-  top: 0;
-  right: 0;
-  text-align: center;
-  padding: 3px 0;
-  border-radius: 0;
-}
-
 .item-cliclable {
   cursor: pointer;
+  text-align: center;
+}
+
+.answer-text {
+  position: absolute;
+  font-size: 12px;
+  right: 5px;
+  bottom: 0;
+}
+
+.item-dont-know {
+  background-color: $light;
+}
+
+.item-must-have {
+  background-color: $balanced;
+  border-color: darken($balanced, 5%);
+}
+
+.item-should-have {
+  background-color: darken($balanced, 15%);
+  border-color: darken($balanced, 20%);
+  color: #FFF;
+}
+
+.item-nice-have {
+  background-color: darken($balanced, 30%);
+  border-color: darken($balanced, 35%);
+  color: #FFF;
+}
+
+.item-avoid {
+  background-color: $assertive;
+  border-color: darken($assertive, 5%);
+  color: #FFF;
 }

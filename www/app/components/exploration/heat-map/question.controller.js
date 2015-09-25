@@ -16,22 +16,24 @@
         }
       }
 
+      console.log(answer);
+
       // Assign class based on answer value
       switch (answer.order) {
         case '1':
-          answer.class = 'light';
+          answer.class = 'dont-know';
           break;
         case '2':
-          answer.class = 'positive';
+          answer.class = 'must-have';
           break;
         case '3':
-          answer.class = 'calm';
+          answer.class = 'should-have';
           break;
         case '4':
-          answer.class = 'energized';
+          answer.class = 'nice-have';
           break;
         case '5':
-          answer.class = 'assertive';
+          answer.class = 'avoid';
           break;
       }
     });

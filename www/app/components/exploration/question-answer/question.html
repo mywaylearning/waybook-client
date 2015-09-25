@@ -1,0 +1,8 @@
+<div class="list">
+  <div class="item item-body item-divider item-question">{{viewData.question.question}}</div>
+  <div class="item item-input">
+    <textarea placeholder="Type your answer here" ng-model="model.answer" rows="5"></textarea>
+  </div>
+  <div class="item item-body assertive" ng-if="viewData.error">{{viewData.error}}</div>
+</div>
+<button class="button button-positive button-block" ng-disabled="model.answer == ''" ng-click="saveAnswer()">Save</button>

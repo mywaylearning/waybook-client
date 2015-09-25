@@ -24,8 +24,6 @@
       }
     });
 
-
-
     $scope.previous = function() {
       $ionicSlideBoxDelegate.previous();
     };

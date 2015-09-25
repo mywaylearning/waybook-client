@@ -26,6 +26,13 @@
   app.directive('wayExplorationQuestionHeatMap', require('./exploration/heat-map/question.directive.js'));
 
 
+  app.controller('ExplorationQuestionsQAController', require('./exploration/question-answer/questions.controller.js'));
+  app.directive('wayExplorationQuestionsQuestionAnswer', require('./exploration/question-answer/questions.directive.js'));
+
+  app.controller('ExplorationQuestionQAController', require('./exploration/question-answer/question.controller.js'));
+  app.directive('wayExplorationQuestionQuestionAnswer', require('./exploration/question-answer/question.directive.js'));
+
+
   app.directive('linkPreview', require('./common/linkPreview.directive.js'));
 
 

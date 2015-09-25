@@ -27,8 +27,9 @@
 }
 
 .item-should-have {
-  background-color: darken($balanced, 10%);
-  border-color: darken($balanced, 15%);
+  background-color: darken($balanced, 15%);
+  border-color: darken($balanced, 20%);
+  color: #FFF;
 }
 
 .item-nice-have {

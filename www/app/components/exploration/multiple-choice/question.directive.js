@@ -9,7 +9,8 @@
       scope: {
         exploration: '=',
         question: '=',
-        onAnswer: '&'
+        onAnswer: '&',
+        onComplete: '&'
       }
     }
 

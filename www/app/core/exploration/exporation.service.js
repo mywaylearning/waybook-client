@@ -13,7 +13,8 @@
       getCategories: _getCategories,
       collection: _collection,
       getBySlug: _getBySlug,
-      answerExplorationQuestion: _answerExplorationQuestion
+      answerExplorationQuestion: _answerExplorationQuestion,
+      getExplorationResults: _getExplorationResults
     };
 
     return svcInterface;
@@ -34,6 +35,13 @@
     function _answerExplorationQuestion(obj) {
       var answer = angular.extend(api.one('explorations'), obj);
       return answer.put();
+    }
+
+    function _getExplorationResults(exploration) {
+      return api.one('explorations', exploration.slug).get({
+        results: true,
+        explorationId: exploration.id
+      });
     }
 
   };

@@ -21,6 +21,8 @@
   require('intl-phone-number');
   require('state-nav-back-button');
   require('ionic-datepicker');
+  require('highcharts');
+  require('highcharts-ng');
 
 
   window.debug = require('debug');
@@ -43,7 +45,8 @@
     'mentio',
     'internationalPhoneNumber',
     'stateBackButtonIonic',
-    'ionic-datepicker'
+    'ionic-datepicker',
+    'highcharts-ng'
   ])
 
   .controller('AppController', require('./app.controller.js'))

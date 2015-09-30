@@ -173,6 +173,26 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.discover.exploration.results', {
+    url: '/results',
+    views: {
+      'bodyContent@app': {
+        templateUrl: 'app/sections/discover/result.bodyContent.html',
+        controller: function($scope, exploration, results) {
+          $scope.viewData = {
+            exploration: exploration,
+            results: results
+          };
+        }
+      }
+    },
+    resolve: {
+      results: function(ExplorationService, exploration) {
+        return ExplorationService.getExplorationResults(exploration);
+      }
+    }
+  })
+
   .state('app.plan', {
     url: '/plan',
     views: {
@@ -205,7 +225,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      contacts: function (ContactService) {
+      contacts: function(ContactService) {
         return ContactService.all();
       }
     }
@@ -220,7 +240,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      contact: function (ContactService, $stateParams) {
+      contact: function(ContactService, $stateParams) {
         return ContactService.getById($stateParams.contactId);
       }
     }
@@ -235,7 +255,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      contact: function (ContactService, $stateParams) {
+      contact: function(ContactService, $stateParams) {
         return ContactService.getById($stateParams.contactId);
       }
     }
@@ -248,7 +268,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       'bodyContent': {
         templateUrl: 'app/sections/me/me.bodyContent.html',
         controller: function($scope, $state) {
-          $scope.goTab = function (tab) {
+          $scope.goTab = function(tab) {
             $state.go('app.me.' + tab);
           };
         }
@@ -270,7 +290,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         return user.currentUser(true);
       }
     },
-    params : { ageRequired: false }
+    params: {
+      ageRequired: false
+    }
   })
 
   .state('app.me.discoveries', {

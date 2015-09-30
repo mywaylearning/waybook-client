@@ -20,6 +20,7 @@
     if ($scope.question.answer) {
       $scope.model.answer = $scope.question.answer;
       $scope.viewData.icon = 'ion-checkmark';
+      $scope.onComplete()($scope.question.order);
     }
 
     $scope.answered = function(answer) {
@@ -32,6 +33,7 @@
         $scope.viewData.error = null;
         $scope.viewData.icon = 'ion-checkmark';
         $scope.onAnswer();
+        $scope.onComplete()($scope.question.order);
       }).catch(function() {
         $scope.viewData.error = 'We couldn\'t save your answer. Please try again.';
         if ($scope.question.answer) {

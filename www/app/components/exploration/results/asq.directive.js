@@ -7,7 +7,8 @@
       templateUrl: '/app/components/exploration/results/asq.html',
       controller: 'AsqController',
       scope: {
-        results: '='
+        results: '=',
+        exploration: '='
       }
     }
   }

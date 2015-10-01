@@ -1,1 +1,8 @@
-<div way-score-chart chart-score="{{viewData.score}}" chart-min="{{viewData.min}}" chart-max="{{viewData.max}}" chart-label="{{viewData.label}}"></div>
+<div class="card">
+  <div class="item item-body">
+    <div way-score-chart chart-score="{{viewData.score}}" chart-min="{{viewData.min}}" chart-max="{{viewData.max}}" chart-label="{{viewData.label}}"></div>
+  </div>
+  <div class="item item-body">
+    {{exploration.resultExplanation}}
+  </div>
+</div>

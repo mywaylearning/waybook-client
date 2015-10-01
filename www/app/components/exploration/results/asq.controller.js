@@ -4,8 +4,8 @@
   function AsqController($scope) {
     $scope.viewData = {
       score: $scope.results.score,
-      min: 0,
-      max: 50,
+      min: $scope.results.min,
+      max: $scope.results.max,
       label: 'your score'
     };
   }

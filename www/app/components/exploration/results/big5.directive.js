@@ -7,7 +7,8 @@
       templateUrl: '/app/components/exploration/results/big5.html',
       controller: 'Big5Controller',
       scope: {
-        results: '='
+        results: '=',
+        exploration: '='
       }
     }
   }

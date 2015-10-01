@@ -12,7 +12,7 @@
     ></button>
 </div>
 <ion-content class="padding has-subheader">
-  <button class="button button-positive button-block" ng-if="slides.completed.length == slides.count" ui-sref="app.discover.exploration.results({exploration: 'personality-big5'})">Check your results</button>
+  <button class="button button-positive button-block" ng-if="slides.completed.length == slides.count" ui-sref="app.discover.exploration.results({exploration: exploration.slug})">Check your results</button>
   <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" active-slide="slides.index">
     <ion-slide ng-repeat="question in exploration.questions | orderBy:  'order'">
       <way-exploration-question-multiple-choice exploration="exploration" question="question" on-answer="next()" on-complete="markAsCompleted"></way-exploration-question-multiple-choice>

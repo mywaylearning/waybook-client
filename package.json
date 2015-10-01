@@ -24,6 +24,8 @@
     "state-nav-back-button": "./www/app/core/state-nav-back-button/state-nav-back-button.js",
     "ionic-datepicker": "./www/lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js",
     "highcharts": "./www/lib/highcharts/highcharts.js",
+    "highcharts-more": "./www/lib/highcharts/highcharts-more.js",
+    "highcharts-solidgauge": "./www/lib/highcharts/modules/solid-gauge.js",
     "highcharts-ng": "./www/lib/highcharts-ng/dist/highcharts-ng.min.js"
   },
   "browserify-shim": {

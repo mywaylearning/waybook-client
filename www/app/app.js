@@ -22,6 +22,8 @@
   require('state-nav-back-button');
   require('ionic-datepicker');
   require('highcharts');
+  require('highcharts-more');
+  require('highcharts-solidgauge');
   require('highcharts-ng');
 
 

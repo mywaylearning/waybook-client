@@ -4,8 +4,6 @@
   function Big5Controller($scope) {
     var _results = $scope.results.plain();
 
-    console.log($scope.exploration);
-
     var series = Object.keys(_results).map(function(category) {
       return {
         name: category,

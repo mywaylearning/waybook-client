@@ -7,7 +7,7 @@
       scope: {
         chartConfig: '='
       },
-      template: '<highchart id="chart1" config="chartConfig"></highchart>',
+      template: '<highchart config="chartConfig"></highchart>',
       link: function(scope, el, attrs) {
 
         $timeout(function() {

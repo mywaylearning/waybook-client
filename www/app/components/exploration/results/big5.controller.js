@@ -54,7 +54,7 @@
           enabled: false,
           overflow: 'justify'
         }
-      },{
+      }, {
         linkedTo: 0,
         title: {
           text: 'More'

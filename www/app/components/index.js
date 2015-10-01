@@ -44,9 +44,13 @@
   app.directive('wayComment', require('./comment/comment.directive.js'));
 
   app.directive('wayChart', require('./chart/chart.directive.js'));
+  app.directive('wayScoreChart', require('./chart/scoreChart.directive.js'));
 
 
   app.directive('wayBig5Result', require('./exploration/results/big5.directive.js'));
   app.controller('Big5Controller', require('./exploration/results/big5.controller.js'));
+
+  app.directive('wayAsqResult', require('./exploration/results/asq.directive.js'));
+  app.controller('AsqController', require('./exploration/results/asq.controller.js'));
 
 }());

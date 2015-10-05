@@ -123,7 +123,8 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
 
   function handleUnknownErrors(response, deferred) {
     console.log('handleUnknownErrors', response);
-    deferred.reject(response.data.error);
+    var _error = response.data ? response.data.error : false;
+    deferred.reject(_error);
   }
 }
 

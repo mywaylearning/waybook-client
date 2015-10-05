@@ -1,6 +1,9 @@
 'use strict';
 
-function MeEditController($scope, $stateParams, $state, currentUser, user, utils, USER_AGE) {
+function MeEditController($scope, $stateParams, $state, currentUser, user, utils, USER_AGE, errorHandler) {
+
+  // Form controllers
+  var _basicFormController, _passwordFormController, _ageFormController;
 
   currentUser.birthDate = currentUser.birthDate ? new Date(currentUser.birthDate) : null;
   currentUser.gender = !currentUser.gender ? '' : currentUser.gender;
@@ -43,16 +46,19 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
     }
   });
 
-  var _updateSelf = function(model) {
+  var _updateSelf = function(model, errorHandler) {
     user.updateSelf(model).then(function(response) {
       if ($scope.ageRequired) {
         return $state.go('app.main');
       }
       $state.transitionTo($state.current, {}, { reload: true });
-    });
+    }).catch(errorHandler);
   };
 
-  $scope.updateBasics = function() {
+  $scope.updateBasics = function(formController) {
+
+    _basicFormController = formController;
+
     var model = {
       firstName: $scope.user.firstName,
       lastName: $scope.user.lastName,
@@ -61,7 +67,7 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
       gender: $scope.user.gender
     };
 
-    _updateSelf(model);
+    _updateSelf(model, _basicHandleError);
   };
 
   $scope.updateAge = function() {
@@ -77,19 +83,48 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
 
   };
 
-  $scope.updatePassword = function() {
+  $scope.updatePassword = function(formController) {
     var model = {
       password: $scope.password.current,
       newPassword: $scope.password.new,
       confirmPassword: $scope.password.confirm
     };
 
-    _updateSelf(model);
+    _passwordFormController = formController;
+
+    _updateSelf(model, _passwordHandleError);
   }
+
+  /**
+   * Handle invalid fields on password form
+   */
+  var _passwordHandleError = function(error) {
+    error.error = 'ValidationError';
+    error.details = {
+      messages: {
+        password: ['The current password is wrong']
+      }
+    };
+
+    var _errorHandler = errorHandler.getInstance($scope);
+
+    _errorHandler.setFormController(_passwordFormController);
+    _errorHandler.handle(error);
+  };
+
+  /**
+   * Handle invalid fields on password form
+   */
+  var _basicHandleError = function(error) {
+    var _errorHandler = errorHandler.getInstance($scope);
+
+    _errorHandler.setFormController(_basicFormController);
+    _errorHandler.handle(error);
+  };
 
 
 }
 
-MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'user', 'utils', 'USER_AGE'];
+MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'user', 'utils', 'USER_AGE', 'errorHandler'];
 
 module.exports = MeEditController;

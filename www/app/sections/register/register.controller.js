@@ -50,7 +50,6 @@ function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
    * Handle invalid fields
    */
   var handleError = function(error) {
-    console.log(error);
     var _errorHandler = errorHandler.getInstance($scope);
 
     _errorHandler.setFormController($scope.$$childHead.registerForm);

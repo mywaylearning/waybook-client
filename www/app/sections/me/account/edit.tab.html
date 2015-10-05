@@ -1,37 +1,58 @@
 <ion-view view-title="Edit your information" hide-back-button="ageRequired">
   <ion-content padding="true" class="me">
-    <form name="basicForm" ng-submit="updateBasics()" ng-if="!ageRequired">
+    <form name="basicForm" ng-submit="updateBasics(basicForm)" ng-if="!ageRequired">
       <div class="card">
         <div class="item item-divider">Basic information:</div>
-        <label class="item item-input">
+        <label class="item item-input"
+          ng-class="{ 'has-error' : basicForm.firstName.$dirty && basicForm.firstName.$invalid}">
           <span class="input-label">First name:</span>
-          <input type="text" ng-model="user.firstName" placeholder="First name" required>
+          <input type="text" ng-model="user.firstName" name="firstName" placeholder="First name" required>
         </label>
-        <label class="item item-input">
+        <div class="form-errors" multiple ng-messages="basicForm.firstName.$dirty && basicForm.firstName.$error">
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+        <label class="item item-input"
+          ng-class="{ 'has-error' : basicForm.lastName.$dirty && basicForm.lastName.$invalid}">
           <span class="input-label">Last name:</span>
-          <input type="text" ng-model="user.lastName" placeholder="Last name" required>
+          <input type="text" ng-model="user.lastName" name="lastName" placeholder="Last name" required>
         </label>
+        <div class="form-errors" multiple ng-messages="basicForm.lastName.$dirty && basicForm.lastName.$error">
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
         <label class="item item-input">
           <span class="input-label">E-mail:</span>
           <input type="email" ng-model="user.email" placeholder="E-mail" disabled>
         </label>
-        <label class="item item-input">
+        <label class="item item-input"
+          ng-class="{ 'has-error' : basicForm.username.$dirty && basicForm.username.$invalid}">
           <span class="input-label">Username:</span>
-          <input type="text" ng-model="user.username" placeholder="Username" required>
+          <input type="text" ng-model="user.username" name="username" placeholder="Username" required reset-validation>
         </label>
-        <label class="item item-input">
+        <div class="form-errors" multiple ng-messages="basicForm.username.$dirty && basicForm.username.$error">
+          <div class="form-error" ng-message="ValidationError">{{errors.username}}</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+        <label class="item item-input"
+          ng-class="{ 'has-error' : basicForm.postCode.$dirty && basicForm.postCode.$invalid}">
           <span class="input-label">Post code:</span>
-          <input type="text" ng-model="user.postalCode" placeholder="Post code" required>
+          <input type="text" ng-model="user.postalCode" name="postCode" placeholder="Post code" required>
         </label>
-        <label class="item item-input item-select">
+        <div class="form-errors" multiple ng-messages="basicForm.postCode.$dirty && basicForm.postCode.$error">
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+        <label class="item item-input item-select"
+          ng-class="{ 'has-error' : basicForm.gender.$dirty && basicForm.gender.$invalid}">
           <span class="input-label">Gender:</span>
-          <select ng-model="user.gender" required>
+          <select ng-model="user.gender" name="gender" required>
             <option value="">Select</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
           </select>
         </label>
+        <div class="form-errors" multiple ng-messages="basicForm.gender.$dirty && basicForm.gender.$error">
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
       </div>
       <button class="button button-block button-positive" ng-disabled="basicForm.$invalid" type="submit">Update basic info</button>
     </form>
@@ -78,27 +99,36 @@
       <button class="button button-block button-positive" ng-disabled="ageForm.$invalid || accountData.underAge" type="submit" ng-bind="ageRequired ? 'Get started' : 'Update age'">Update</button>
     </form>
 
-    <form name="passwordForm" ng-submit="updatePassword()" class="padding-top" ng-if="!ageRequired">
+    <form name="passwordForm" ng-submit="updatePassword(passwordForm)" class="padding-top" ng-if="!ageRequired">
       <div class="card">
         <div class="item item-divider">Password:</div>
-        <label class="item item-input">
+        <label class="item item-input"
+          ng-class="{ 'has-error' : passwordForm.password.$dirty && passwordForm.password.$invalid}">
           <span class="input-label">Current password:</span>
-          <input type="password" ng-model="password.current" placeholder="Your current password" required>
+          <input type="password" ng-model="password.current" name="password" placeholder="Your current password" required reset-validation>
         </label>
-        <label class="item item-input">
-          <span class="input-label">New password:</span>
-          <input type="password" ng-model="password.new" placeholder="New password" name="newPassword" required check-pw>
-        </label>
-        <div class="list">
-          <label class="item item-input">
-            <span class="input-label"></span>
-            <p class="password-helper">Use at least one uppercase letter, one numeral and seven characters.</p>
-          </label>
+        <div class="form-errors" ng-messages="passwordForm.password.$dirty && passwordForm.password.$error">
+          <div class="form-error" ng-message="ValidationError">{{errors.password}}</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
         </div>
-        <label class="item item-input">
-          <span class="input-label" ng-class="{'assertive': passwordForm.confirmPassword.$invalid && passwordForm.newPassword.$dirty}">Confirm password:</span>
+        <label class="item item-input"
+          ng-class="{ 'has-error' : passwordForm.newPassword.$dirty && passwordForm.newPassword.$invalid}">
+          <span class="input-label">New password:</span>
+          <input type="password" ng-model="password.new" name="newPassword" placeholder="New password" required check-pw ng-minlength="7">
+        </label>
+        <div class="form-errors" multiple ng-messages="passwordForm.newPassword.$dirty && passwordForm.newPassword.$error">
+          <div class="form-error" ng-message="minlength">Your password must contain at least 7 characters.</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
+        <label class="item item-input"
+          ng-class="{ 'has-error' : passwordForm.confirmPassword.$dirty && passwordForm.confirmPassword.$invalid}">
+          <span class="input-label">Confirm password:</span>
           <input type="password" name="confirmPassword" ng-model="password.confirm" placeholder="Type again your new password" required password-match="password.new">
         </label>
+        <div class="form-errors" multiple ng-messages="passwordForm.confirmPassword.$dirty && passwordForm.confirmPassword.$error">
+          <div class="form-error" ng-message="compareTo">This field don't match with your new password.</div>
+          <div ng-messages-include="app/core/errors/messages.html"></div>
+        </div>
       </div>
       <button class="button button-block button-positive" ng-disabled="passwordForm.$invalid" type="submit">Update password</button>
     </form>

@@ -126,7 +126,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('public.intro', {
-    url: '/intro',
+    url: '/',
     views: {
       'publicContent': {
         templateUrl: 'app/sections/intro/intro.publicContent.html',
@@ -388,14 +388,16 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   });
 
-  // if none of the above states are matched, use this as the fallback
-  key = LOCAL_STORAGE_KEYS.introSeen;
+  $urlRouterProvider.otherwise('/');
 
-  if (store.get(key)) {
-    $urlRouterProvider.otherwise('/');
-  } else {
-    $urlRouterProvider.otherwise('/intro');
-  }
+  // if none of the above states are matched, use this as the fallback
+  // key = LOCAL_STORAGE_KEYS.introSeen;
+  //
+  // if (store.get(key)) {
+  //   $urlRouterProvider.otherwise('/');
+  // } else {
+  //   $urlRouterProvider.otherwise('/intro');
+  // }
 
   // .state('app.search', {
   //   url: '^/search',

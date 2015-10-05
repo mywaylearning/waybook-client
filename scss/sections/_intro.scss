@@ -17,10 +17,19 @@
 
     h2 {
       font-size: 34px;
+
+      @media (max-width: 320px) {
+        font-size: 32px;
+        letter-spacing: -1px;
+      }
     }
 
     h4 {
       font-size: 24px;
+
+      @media (max-width: 320px) {
+        font-size: 20px;
+      }
     }
 
     @media (orientation: landscape) {
@@ -90,9 +99,7 @@
 
   .buttons-bottom {
     position: absolute;
-    bottom: 10px;
-    text-align: center;
-    width: 100%;
+    bottom: 0;
 
     &.last-slide {
       .button {
@@ -102,9 +109,7 @@
 
     .button {
       opacity: 0.8;
-      margin: 0 20px;
-      padding-left: 40px;
-      padding-right: 40px;
+      margin: 0;
     }
   }
 }

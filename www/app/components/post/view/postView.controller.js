@@ -32,6 +32,18 @@
       });
     };
 
+    $scope.habitCalendarConfig = {
+      titleLabel: 'Select the days when you completed this habit',
+      showTodayButton: 'false',
+      to: new Date(),
+      selectMultiple: true,
+      callback: function (val) {
+        if (val) {
+          console.log(val, true);
+        }
+      }
+    };
+
 
     $scope.editStatus = function(post, status) {
       $scope.popoverStatus.hide();

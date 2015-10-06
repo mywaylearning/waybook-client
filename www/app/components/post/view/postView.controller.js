@@ -35,6 +35,7 @@
     $scope.habitCalendarConfig = {
       titleLabel: 'Select the days when you completed this habit',
       showTodayButton: 'false',
+      inputDate: new Date(),
       to: new Date(),
       selectMultiple: true,
       callback: function (val) {

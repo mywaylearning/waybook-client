@@ -97,9 +97,18 @@
     bottom: 70px;
   }
 
-  .buttons-bottom {
+  .buttons-container {
     position: absolute;
     bottom: 0;
+    width: 100%;
+  }
+
+  .buttons {
+
+    @media (min-width: 890px) {
+      width: 600px;
+      margin: 0 auto;
+    }
 
     &.last-slide {
       .button {

@@ -11,8 +11,6 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
    */
   $scope.doLogin = function(form) {
 
-    console.log(form.$error);
-
     if (form.$invalid) {
       if (!form.$error.invalid_grant) {
         return;

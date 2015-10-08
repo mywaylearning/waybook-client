@@ -33,14 +33,16 @@
     };
 
     $scope.habitCalendarConfig = {
-      titleLabel: 'Select the days when you completed this habit',
-      showTodayButton: 'false',
-      inputDate: new Date(),
+      titleLabel: 'Track the days when you completed this habit',
+      showTodayButton: false,
+      showSetButton: false,
+      closeLabel: 'Done',
+      inputDate: [new Date().toString()],
       to: new Date(),
-      selectMultiple: true,
-      callback: function (val) {
+      selectMultipleDates: true,
+      callbackOnDateClick: function(val) {
         if (val) {
-          console.log(val, true);
+          console.log(val);
         }
       }
     };

@@ -37,12 +37,13 @@
       showTodayButton: false,
       showSetButton: false,
       closeLabel: 'Done',
-      inputDate: [new Date().toString()],
+      inputDate: $scope.post.habitDates,
       to: new Date(),
       selectMultipleDates: true,
       callbackOnDateClick: function(val) {
         if (val) {
-          console.log(val);
+          $scope.post.habitDates = val;
+          $scope.post.save();
         }
       }
     };

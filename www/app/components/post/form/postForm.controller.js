@@ -303,6 +303,7 @@
           ctrl.model.share.push(_contact);
         });
 
+        ctrl.model.systemTags = [];
         ctrl.model.tags = [];
 
         // define tags
@@ -310,12 +311,12 @@
           ctrl.model.tags = detectTags(ctrl.model.content);
         }
 
-        // Append the post type to tags
-        ctrl.model.tags.push(ctrl.model.postType);
+        // Append the post type to systemTags
+        ctrl.model.systemTags.push(ctrl.model.postType);
 
         // Add tag habit if it's one
         if (ctrl.model.gRecurringEnabled) {
-          ctrl.model.tags.push('habit');
+          ctrl.model.systemTags.push('habit');
         }
 
         if (!ctrl.model.id) {

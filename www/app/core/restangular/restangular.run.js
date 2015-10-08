@@ -1,6 +1,6 @@
 'use strict';
 
-function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) {
+function RestangularRun($rootScope, $http, Restangular, auth, authStore, router, ERROR) {
 
   /**
    * Configure any request interceptors that we want to add to our
@@ -79,41 +79,49 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
    * see https://github.com/mgonto/restangular#seterrorinterceptor
    */
   function handleExpiredToken(response, deferred) {
-    var restangularizedResponse;
 
-    var accessToken = authStore.getAccessToken();
+    /**
+     * Remove auth information,
+     * deferred request
+     * go to login page
+     */
+    auth.destroy();
+    deferred.reject(response.data);
+    return router.goToLoggedOut();
+
+    // var restangularizedResponse;
+    // var accessToken = authStore.getAccessToken();
 
     /**
      * If no accessToken, then reject handleExpiredToken, it hapens on invalid
      * user credentials
      */
-    if (!accessToken) {
-      return deferred.reject(response.data);
-    }
+    // if (!accessToken) {
+    //   return deferred.reject(response.data);
+    // }
 
-    auth.authRefresh().then(function() {
+    // auth.authRefresh().then(function() {
 
-      var newAccessToken = authStore.getAccessToken();
+    //   var newAccessToken = authStore.getAccessToken();
 
-      /**
-       * We have to do this because we're using $http restangular request
-       * interceptors won't be called. Udate the headers with the new access token
-       */
-      response.config.headers.Authorization = 'Bearer ' + newAccessToken;
+    //   /**
+    //    * We have to do this because we're using $http restangular request
+    //    * interceptors won't be called. Udate the headers with the new access token
+    //    */
+    //   response.config.headers.Authorization = 'Bearer ' + newAccessToken;
 
-      /**
-       * Repeat the request and then call the handlers the usual way.
-       */
-      $http(response.config).then(function(httpResponse) {
+    //   /**
+    //    * Repeat the request and then call the handlers the usual way.
+    //    */
+    //   $http(response.config).then(function(httpResponse) {
 
-        restangularizedResponse = Restangular.restangularizeElement(
-          null, httpResponse.data, 'expiredToken'
-        );
+    //     restangularizedResponse = Restangular.restangularizeElement(
+    //       null, httpResponse.data, 'expiredToken'
+    //     );
 
-        deferred.resolve(restangularizedResponse);
-      }).catch(deferred.reject);
-
-    });
+    //     deferred.resolve(restangularizedResponse);
+    //   }).catch(deferred.reject);
+    // });
   }
 
   function handleKnownErrors(response, deferred) {
@@ -129,6 +137,6 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, ERROR) 
 }
 
 module.exports = [
-  '$rootScope', '$http', 'Restangular', 'auth', 'authStore',
+  '$rootScope', '$http', 'Restangular', 'auth', 'authStore', 'router',
   'ERROR', RestangularRun
 ];

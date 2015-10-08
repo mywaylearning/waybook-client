@@ -1,3 +1,13 @@
-.selected_date_full {
-  display: none;
+.ionic_datepicker {
+  .selected_date_full {
+    display: none;
+  }
+
+  .date_selected {
+    background-color: $balanced !important;
+  }
+
+  .date_col:hover {
+  background-color: rgba($balanced, 0.5);
+  }
 }

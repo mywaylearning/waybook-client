@@ -8,6 +8,12 @@
         </div>
       </div>
 
+      <div>
+        <a href="" class="button button-success" ng-click="facebook()">
+          login with facebook
+        </a>
+      </div>
+
       <form name="loginForm" ng-submit="doLogin(loginForm)" novalidate="">
         <ion-list>
           <div class="form-errors" multiple ng-messages="loginForm.$submitted && loginForm.$error">

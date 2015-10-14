@@ -1,20 +1,21 @@
 <ion-view title="Discover">
   <ion-content padding="true" class="has-header">
 
-  <div class="list" ng-repeat="category in viewData.categories track by $index">
+    <div class="small-on-wide">
+      <div class="list" ng-repeat="category in viewData.categories track by $index">
 
-    <div class="item item-divider">{{category.category}}</div>
+        <div class="item item-divider">{{category.category}}</div>
 
-    <a
-      ng-repeat="exploration in category.explorations"
-      ui-sref="app.discover.exploration({exploration: exploration.slug})"
-      class="item item-thumbnail-left">
-      <img ng-src="{{exploration.image}}">
-      <h2>{{exploration.name}}</h2>
-      <p>{{exploration.description}}</p>
-    </a>
+        <a
+          ng-repeat="exploration in category.explorations"
+          ui-sref="app.discover.exploration({exploration: exploration.slug})"
+          class="item item-thumbnail-left">
+          <img ng-src="{{exploration.image}}">
+          <h2>{{exploration.name}}</h2>
+          <p>{{exploration.description}}</p>
+        </a>
 
-  </div>
-
+      </div>
+    </div>
   </ion-content>
 </ion-view>

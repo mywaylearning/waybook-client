@@ -1,25 +1,26 @@
 <ion-view view-title="Unite" class="unite">
   <div class="bar bar-subheader" ng-if="contacts.length">
-    <h2 class="title"></h2>
     <div class="buttons">
       <button class="button button-clear button-positive ion ion-person-add" ng-click="openModalAddSupporter()"> Add supporter</button>
     </div>
   </div>
   <ion-content padding="true" ng-class="{'has-subheader': contacts.length}">
-    <div class="card no-contacts" ng-if="!contacts.length">
-      <div class="item item-text-wrap">
-        <i class="icon ion-person-stalker"></i>
-        <button class="button button-block button-positive icon ion-person-add" ng-click="openModalAddSupporter()"> Add a supporter</button>
+    <div class="small-on-wide">
+      <div class="card no-contacts" ng-if="!contacts.length">
+        <div class="item item-text-wrap">
+          <i class="icon ion-person-stalker"></i>
+          <button class="button button-block button-positive icon ion-person-add" ng-click="openModalAddSupporter()"> Add a supporter</button>
+        </div>
       </div>
+      <ion-list ng-if="contacts.length">
+        <ion-item class="item-avatar item-remove-animate" ng-repeat="contact in contacts track by contact.id | orderBy: 'firstName'" item="product" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
+          <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
+          <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+          <p>{{contact.email}}</p>
+          <ion-option-button class="button-positive icon ion-edit" ui-sref="app.unite.edit({contactId:contact.id})"></ion-option-button>
+          <ion-option-button class="button-assertive icon ion-trash-b" ng-click="deleteSupporter(contact)"></ion-option-button>
+        </ion-item>
+      </ion-list>    
     </div>
-    <ion-list ng-if="contacts.length">
-      <ion-item class="item-avatar item-remove-animate" ng-repeat="contact in contacts track by contact.id | orderBy: 'firstName'" item="product" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
-        <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
-        <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-        <p>{{contact.email}}</p>
-        <ion-option-button class="button-positive icon ion-edit" ui-sref="app.unite.edit({contactId:contact.id})"></ion-option-button>
-        <ion-option-button class="button-assertive icon ion-trash-b" ng-click="deleteSupporter(contact)"></ion-option-button>
-      </ion-item>
-    </ion-list>
   </ion-content>
 </ion-view>

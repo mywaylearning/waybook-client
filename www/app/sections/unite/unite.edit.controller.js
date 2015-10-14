@@ -1,6 +1,10 @@
 'use strict';
 
-function UniteDetailController($scope, $state, contact) {
+function UniteDetailController($scope, $state, contact, $ionicHistory) {
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+
   $scope.voice1 = $scope.voice2 = {};
   $scope.contact = angular.copy(contact);
 
@@ -21,6 +25,6 @@ function UniteDetailController($scope, $state, contact) {
   };
 }
 
-UniteDetailController.$inject = ['$scope', '$state', 'contact'];
+UniteDetailController.$inject = ['$scope', '$state', 'contact', '$ionicHistory'];
 
 module.exports = UniteDetailController;

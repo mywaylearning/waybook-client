@@ -4,12 +4,12 @@
   require('angular');
 
   angular.module('app.config', [])
-  .constant('AUTH_URL', process.env.AUTH_URL)
-  .constant('API_URL', process.env.API_URL)
-  .constant('store', require('store'))
-  .constant('Moment', require('moment'))
-  //.constant('_', require('lodash'))
-  //.constant('$', require('jquery'))
+    .constant('AUTH_URL', process.env.AUTH_URL)
+    .constant('API_URL', process.env.API_URL)
+    .constant('store', require('store'))
+    .constant('Moment', require('moment'))
+    //.constant('_', require('lodash'))
+    //.constant('$', require('jquery'))
 
   .constant('EMBEDLY_CONFIG', {
     'url': process.env.EMBEDLY_URL,
@@ -19,7 +19,8 @@
   .constant('FILEPICKER_API_KEY', 'AHVaoDU9JRwao92AZiuRpz')
 
   .constant('HELLO_IDS', {
-    'facebook': process.env.FACEBOOK_CLIENT_ID
+    'facebook': process.env.FACEBOOK_CLIENT_ID,
+    google: process.env.GOOGLE_CLIENT_ID
   })
 
   .constant('ROLES', {
@@ -66,7 +67,7 @@
   })
 
   .constant('DEFAULT_PER_PAGE', 20)
-  .constant('SWAGGER', require('./app.swagger.js'))
+    .constant('SWAGGER', require('./app.swagger.js'))
 
   .config(AppConfig);
 
@@ -79,12 +80,13 @@
 
     hello.init({
       facebook: HELLO_IDS.facebook,
-      access_token: ''
+      google: HELLO_IDS.google,
+      'access_token': ''
     }, {
-      redirect_uri: '',
-      oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
+      'redirect_uri': '/',
+      'oauth_proxy': 'https://auth-server.herokuapp.com/proxy',
       scope: 'publish_actions,email',
-      oauth_version: '1.0a',
+      'oauth_version': '1.0a',
     });
   }
 

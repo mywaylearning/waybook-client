@@ -24,7 +24,8 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
     getUploadImageUrl: _getUploadImageUrl,
     getSelf: _getSelf,
     updateSelf: _updateSelf,
-    logout: _logout
+    logout: _logout,
+    socialLoginCheck: _socialLoginCheck
   };
 
   /**
@@ -159,6 +160,13 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    */
   function getUserComplete() {
     userRequest = null;
+  }
+
+  /**
+   * Based on social login response, check if a user exists
+   */
+  function _socialLoginCheck(user) {
+    return Users.post(user);
   }
 
 }

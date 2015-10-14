@@ -24,13 +24,132 @@
     ],
     produces: ['application/json'],
     paths: {
-      '/goals': {
+      '/categories': {
         get: {
-          operationId: 'listGoals',
-          'x-loopback-model': 'Goal',
-          description: 'Returns a collection of goals for the authenticated user',
-          summary: 'Fetch a list of goals',
-          tags: ['goals'],
+          operationId: 'indexCategory',
+          'x-loopback-model': 'Category',
+          description: 'Returns a collection of categories',
+          summary: 'Fetch a list of categories',
+          tags: ['categories'],
+          produces: ['application/json'],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Collection'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        }
+      },
+      '/comments': {
+        post: {
+          operationId: 'createComment',
+          'x-loopback-model': 'Comment',
+          summary: 'Creates a new comment via post',
+          description: 'Creates a new comment via post',
+          tags: ['comments'],
+          consumes: ['application/json'],
+          produces: ['application/json'],
+          parameters: [{
+            name: 'comment',
+            required: true,
+            'in': 'body',
+            schema: {
+              '$ref': '#/definitions/Comment'
+            }
+          }],
+          responses: {
+            '201': {
+              description: 'Created',
+              schema: {
+                '$ref': '#/definitions/Comment'
+              }
+            },
+            '400': {
+              description: 'Bad Request. Details provided in payload.',
+              schema: {
+                '$ref': '#/definitions/Error'
+              }
+            }
+          }
+        }
+      },
+      '/comments/{id}': {
+        delete: {
+          operationId: 'deleteComment',
+          'x-loopback-model': 'Comment',
+          summary: 'Removes a comment',
+          description: 'Removes a comment',
+          tags: ['comments'],
+          consumes: ['application/json'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to delete a comment',
+            type: 'string'
+          }],
+          responses: {
+            '200': {
+              description: 'Deleted',
+              schema: {
+                '$ref': '#/definitions/Comment'
+              }
+            }
+          }
+        },
+        put: {
+          operationId: 'updateComment',
+          description: 'Alter a Comment',
+          'x-loopback-model': 'Comment',
+          'x-loopback-method': 'put',
+          summary: 'Alters a comment',
+          tags: ['comments'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to delete a post',
+            type: 'string'
+          }, {
+            name: 'comment',
+            description: 'Patch document describing alterations.',
+            'in': 'body',
+            required: true,
+            schema: {
+              '$ref': '#/definitions/PatchDocument'
+            }
+          }],
+          responses: {
+            '204': {
+              description: 'Successful update',
+              schema: {
+                '$ref': '#/definitions/Comment'
+              }
+            },
+            '400': {
+              description: 'Malformed update document'
+            },
+            '415': {
+              description: 'Unsupported update document'
+            }
+          }
+        }
+      },
+      '/contacts': {
+        get: {
+          operationId: 'contactsIndex',
+          'x-loopback-model': 'Contact',
+          description: 'Returns a collection of contacts for the authenticated user',
+          summary: 'Fetch a list of contacts based on userId',
+          tags: ['contacts'],
           produces: ['application/json'],
           responses: {
             '200': {
@@ -47,14 +166,105 @@
             }
           }
         },
-        patch: {
-          operationId: 'patchGoal',
-          description: 'Alter a Goal using JSON-Patch',
-          'x-loopback-model': 'Goal',
-          'x-loopback-method': 'patch',
-          summary: 'Alters a goal',
-          tags: ['goals'],
+        post: {
+          operationId: 'createContact',
+          'x-loopback-model': 'Contact',
+          summary: 'Creates a new contact',
+          description: 'Creates a new contact',
+          tags: ['contacts'],
+          consumes: ['application/json'],
+          produces: ['application/json'],
           parameters: [{
+            name: 'contact',
+            required: true,
+            'in': 'body',
+            schema: {
+              '$ref': '#/definitions/Contact'
+            }
+          }],
+          responses: {
+            '201': {
+              description: 'Created',
+              schema: {
+                '$ref': '#/definitions/Contact'
+              }
+            },
+            '400': {
+              description: 'Bad Request. Details provided in payload.',
+              schema: {
+                '$ref': '#/definitions/Error'
+              }
+            }
+          }
+        }
+      },
+      '/contacts/{id}': {
+        delete: {
+          operationId: 'deleteContact',
+          'x-loopback-model': 'Contact',
+          summary: 'Removes a contact',
+          description: 'Removes a contact',
+          tags: ['contacts'],
+          consumes: ['application/json'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to delete a contact',
+            type: 'string'
+          }],
+          responses: {
+            '200': {
+              description: 'Deleted',
+              schema: {
+                '$ref': '#/definitions/Contact'
+              }
+            }
+          }
+        },
+        get: {
+          operationId: 'getContact',
+          'x-loopback-model': 'Contact',
+          description: 'Returns a contact based on provided id',
+          summary: 'Get a single contact',
+          tags: ['contacts'],
+          produces: ['application/json'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to fetch a contact',
+            type: 'string'
+          }],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Contact'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        },
+        put: {
+          operationId: 'updateContact',
+          description: 'Alter a Contact using JSON-Patch',
+          'x-loopback-model': 'Contact',
+          'x-loopback-method': 'put',
+          summary: 'Alters a contact',
+          tags: ['contacts'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to update a contact',
+            type: 'string'
+          }, {
             name: 'patch',
             description: 'Patch document describing alterations.',
             'in': 'body',
@@ -65,7 +275,10 @@
           }],
           responses: {
             '204': {
-              description: 'Successful patch'
+              description: 'Successful patch',
+              schema: {
+                '$ref': '#/definitions/Contact'
+              }
             },
             '400': {
               description: 'Malformed patch document'
@@ -74,29 +287,96 @@
               description: 'Unsupported patch document'
             }
           }
-        },
-        post: {
-          operationId: 'createNewGoal',
-          'x-loopback-model': 'Goal',
-          summary: 'Creates a new goal',
-          description: 'Creates a new goal',
-          tags: ['goals'],
-          consumes: ['application/json'],
+        }
+      },
+      '/explorations': {
+        get: {
+          operationId: 'indexExploration',
+          'x-loopback-model': 'Exploration',
+          description: 'Returns a collection of Explorations',
+          summary: 'Fetch a list of Explorations',
+          tags: ['explorations'],
+          produces: ['application/json'],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Collection'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        }
+      },
+      '/explorations/{id}': {
+        get: {
+          operationId: 'getExploration',
+          'x-loopback-model': 'Exploration',
+          description: 'Returns a Exploration based on provided slug',
+          summary: 'Get a single Exploration',
+          tags: ['explorations'],
+          produces: ['application/json'],
           parameters: [{
-            name: 'goal',
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'slug required to fetch a Exploration',
+            type: 'string'
+          }],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Exploration'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        },
+        put: {
+          operationId: 'updateExploration',
+          description: 'Alter a Exploration using JSON-Patch',
+          'x-loopback-model': 'Exploration',
+          'x-loopback-method': 'put',
+          summary: 'Alters a exploration',
+          tags: ['explorations'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to update a record',
+            type: 'string'
+          }, {
+            name: 'patch',
+            description: 'Patch document describing alterations.',
             'in': 'body',
             required: true,
-            description: 'A Goal object',
             schema: {
-              '$ref': '#/definitions/Goal'
+              '$ref': '#/definitions/PatchDocument'
             }
           }],
           responses: {
-            '201': {
-              description: 'Created',
+            '204': {
+              description: 'Successful patch',
               schema: {
-                '$ref': '#/definitions/Goal'
+                '$ref': '#/definitions/Exploration'
               }
+            },
+            '400': {
+              description: 'Malformed patch document'
+            },
+            '415': {
+              description: 'Unsupported patch document'
             }
           }
         }
@@ -166,6 +446,159 @@
           }
         }
       },
+      '/posts': {
+        get: {
+          operationId: 'indexPost',
+          'x-loopback-model': 'Post',
+          description: 'Returns a collection of xposts for the authenticated user',
+          summary: 'Fetch a list of posts',
+          tags: ['posts'],
+          parameters: [{
+            name: 'postType',
+            'in': 'query',
+            description: 'Type of post to query',
+            required: false,
+            type: 'string'
+          }],
+          produces: ['application/json'],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Collection'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        },
+        post: {
+          operationId: 'createPost',
+          'x-loopback-model': 'Post',
+          summary: 'Creates a new Post',
+          description: 'Creates a new Post',
+          tags: ['posts'],
+          consumes: ['application/json'],
+          parameters: [{
+            name: 'post',
+            'in': 'body',
+            required: true,
+            description: 'A Post object',
+            schema: {
+              '$ref': '#/definitions/Post'
+            }
+          }],
+          responses: {
+            '201': {
+              description: 'Created',
+              schema: {
+                '$ref': '#/definitions/Post'
+              }
+            }
+          }
+        }
+      },
+      '/posts/{id}': {
+        delete: {
+          operationId: 'deletePost',
+          'x-loopback-model': 'Post',
+          summary: 'Removes a post',
+          description: 'Removes a post',
+          tags: ['posts'],
+          consumes: ['application/json'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to delete a post',
+            type: 'string'
+          }],
+          responses: {
+            '200': {
+              description: 'Deleted',
+              schema: {
+                '$ref': '#/definitions/Post'
+              }
+            }
+          }
+        },
+        get: {
+          operationId: 'getPost',
+          'x-loopback-model': 'Post',
+          description: 'Returns a xpost based on provided id',
+          summary: 'Get a single xpost',
+          tags: ['posts'],
+          produces: ['application/json'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to fetch a xpost',
+            type: 'string'
+          }, {
+            name: 'shared',
+            'in': 'query',
+            required: false,
+            type: 'string',
+            description: 'return all contacts where xpost has been shared with'
+          }],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Post'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        },
+        put: {
+          operationId: 'updatePost',
+          description: 'Alter a Post using JSON-Patch',
+          'x-loopback-model': 'Post',
+          'x-loopback-method': 'put',
+          summary: 'Alters a post',
+          tags: ['posts'],
+          parameters: [{
+            name: 'id',
+            'in': 'path',
+            required: true,
+            description: 'ID required to delete a post',
+            type: 'string'
+          }, {
+            name: 'patch',
+            description: 'Patch document describing alterations.',
+            'in': 'body',
+            required: true,
+            schema: {
+              '$ref': '#/definitions/PatchDocument'
+            }
+          }],
+          responses: {
+            '204': {
+              description: 'Successful patch',
+              schema: {
+                '$ref': '#/definitions/Post'
+              }
+            },
+            '400': {
+              description: 'Malformed patch document'
+            },
+            '415': {
+              description: 'Unsupported patch document'
+            }
+          }
+        }
+      },
       '/tags': {
         get: {
           operationId: 'tagsIndex',
@@ -219,9 +652,70 @@
               }
             }
           }
+        },
+        put: {
+          operationId: 'updateUser',
+          description: 'Update user',
+          'x-loopback-model': 'WaybookUser',
+          'x-loopback-method': 'put',
+          summary: 'Alters an user',
+          tags: ['users'],
+          parameters: [{
+            name: 'patch',
+            description: 'Patch document describing alterations.',
+            'in': 'body',
+            required: true,
+            schema: {
+              '$ref': '#/definitions/PatchDocument'
+            }
+          }],
+          responses: {
+            '204': {
+              description: 'Successful patch',
+              schema: {
+                '$ref': '#/definitions/User'
+              }
+            },
+            '400': {
+              description: 'Malformed patch document'
+            },
+            '415': {
+              description: 'Unsupported patch document'
+            }
+          }
         }
       },
       '/users': {
+        get: {
+          operationId: 'usersIndex',
+          'x-loopback-model': 'WaybookUser',
+          summary: 'Return users public information to be used on share action',
+          description: 'Return an object with public filtered user information',
+          tags: ['users'],
+          consumes: ['application/json'],
+          produces: ['application/json'],
+          parameters: [{
+            name: 'search',
+            'in': 'query',
+            description: 'Text to search users that starts with input criteria',
+            required: false,
+            type: 'string'
+          }],
+          responses: {
+            '200': {
+              description: 'OK',
+              schema: {
+                '$ref': '#/definitions/Collection'
+              }
+            },
+            default: {
+              description: 'Unexpected error',
+              schema: {
+                '$ref': '#/definitions/UnexpectedError'
+              }
+            }
+          }
+        },
         post: {
           operationId: 'createUser',
           'x-loopback-model': 'WaybookUser',
@@ -288,6 +782,29 @@
         },
         required: ['access_token', 'token_type']
       },
+      Category: {
+        description: 'A category object',
+        type: 'object',
+        properties: {
+          id: {
+            type: 'integer',
+            readOnly: true
+          },
+          category: {
+            type: 'string'
+          },
+          createdAt: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          },
+          updatedAt: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          }
+        }
+      },
       Collection: {
         description: 'A collection of objects',
         properties: {
@@ -304,6 +821,70 @@
           }
         },
         required: ['count', 'members']
+      },
+      Comment: {
+        description: 'A comment object',
+        type: 'object',
+        properties: {
+          id: {
+            type: 'integer',
+            readOnly: true
+          },
+          comment: {
+            type: 'string'
+          },
+          userId: {
+            type: 'integer'
+          },
+          postId: {
+            type: 'integer'
+          },
+          created: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          },
+          lastUpdated: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          }
+        },
+        required: ['comment', 'userId']
+      },
+      Contact: {
+        description: 'A contact object',
+        type: 'object',
+        properties: {
+          id: {
+            type: 'integer',
+            readOnly: true
+          },
+          firstName: {
+            type: 'string'
+          },
+          lastName: {
+            type: 'string'
+          },
+          email: {
+            type: 'string',
+            format: 'email'
+          },
+          userId: {
+            type: 'integer'
+          },
+          createdAt: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          },
+          updatedAt: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          }
+        },
+        required: ['email', 'userId']
       },
       Error: {
         properties: {
@@ -335,50 +916,43 @@
         },
         required: ['status', '@context', '@id', 'code', 'message']
       },
-      Goal: {
-        description: 'A record describing a goal.',
+      Exploration: {
+        description: 'A comment object',
         type: 'object',
         properties: {
           id: {
             type: 'integer',
             readOnly: true
           },
-          userId: {
-            type: 'integer',
-            readOnly: true
+          name: {
+            type: 'string'
           },
-          link: {
-            type: 'string',
-            description: 'store link when user shares a link on a post'
+          slug: {
+            type: 'string'
           },
-          linkTitle: {
-            type: 'string',
-            description: 'Short description of posted link'
+          pattern: {
+            type: 'string'
           },
-          linkDescription: {
-            type: 'string',
-            description: 'Long description of shared link'
+          imgage: {
+            type: 'string'
           },
-          title: {
-            type: 'string',
-            description: 'Short description of this goal'
+          version: {
+            type: 'string'
           },
-          content: {
-            type: 'string',
-            description: 'primary data associated with this record'
+          description: {
+            type: 'string'
           },
-          created: {
+          createdAt: {
             type: 'string',
             format: 'date-time',
             readOnly: true
           },
-          lastUpdated: {
+          updatedAt: {
             type: 'string',
             format: 'date-time',
             readOnly: true
           }
-        },
-        required: ['content']
+        }
       },
       OAuthError: {
         properties: {
@@ -428,6 +1002,59 @@
         },
         required: ['op', 'path']
       },
+      Post: {
+        description: 'A record describing a goal.',
+        type: 'object',
+        properties: {
+          id: {
+            type: 'integer',
+            readOnly: true
+          },
+          userId: {
+            type: 'integer',
+            readOnly: true
+          },
+          link: {
+            type: 'string',
+            description: 'store link when user shares a link on a post'
+          },
+          linkTitle: {
+            type: 'string',
+            description: 'Short description of posted link'
+          },
+          linkDescription: {
+            type: 'string',
+            description: 'Long description of shared link'
+          },
+          title: {
+            type: 'string',
+            description: 'Short description of this goal'
+          },
+          content: {
+            type: 'string',
+            description: 'primary data associated with this record'
+          },
+          gAchievedDate: {
+            type: 'string',
+            format: 'date-time'
+          },
+          gAbandonedDate: {
+            type: 'string',
+            format: 'date-time'
+          },
+          created: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          },
+          lastUpdated: {
+            type: 'string',
+            format: 'date-time',
+            readOnly: true
+          }
+        },
+        required: ['content']
+      },
       UnexpectedError: {
         properties: {
           code: {
@@ -455,6 +1082,12 @@
           password: {
             type: 'string',
             format: 'password'
+          },
+          firstName: {
+            type: 'string'
+          },
+          lastName: {
+            type: 'string'
           },
           status: {
             type: 'string'

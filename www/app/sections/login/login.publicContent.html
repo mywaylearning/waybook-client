@@ -1,6 +1,6 @@
 <ion-view cache-view="false" view-title="Login on Waybook">
   <ion-content padding="true" class="has-header">
-    <div class="login">
+    <div class="login small-on-wide">
       <div ui-view="verify"></div>
       <div class="verify-account" ng-if="errorsData.message">
         <div class="message error">
@@ -8,11 +8,7 @@
         </div>
       </div>
 
-      <div>
-        <a href="" class="button button-success" ng-click="facebook()">
-          login with facebook
-        </a>
-      </div>
+      <way-social-login></way-social-login>
 
       <form name="loginForm" ng-submit="doLogin(loginForm)" novalidate="">
         <ion-list>
@@ -39,6 +35,7 @@
         <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>
         <button class="button button-stable button-block" type="submit">Log in</button>
         <a ui-sref="public.register" class="button button-positive button-clear button-block">Or create an account</a>
+
       </form>
     </div>
   </ion-content>

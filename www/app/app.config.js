@@ -18,6 +18,10 @@
 
   .constant('FILEPICKER_API_KEY', 'AHVaoDU9JRwao92AZiuRpz')
 
+  .constant('HELLO_IDS', {
+    'facebook': process.env.FACEBOOK_CLIENT_ID
+  })
+
   .constant('ROLES', {
     'guest': 'way.guest',
     'user': 'way.user'
@@ -66,14 +70,24 @@
 
   .config(AppConfig);
 
-  function AppConfig($sceDelegateProvider, FILEPICKER_API_KEY) {
+  function AppConfig($sceDelegateProvider, FILEPICKER_API_KEY, HELLO_IDS) {
     $sceDelegateProvider.resourceUrlWhitelist([
       'self'
     ]);
 
     filepicker.setKey(FILEPICKER_API_KEY);
+
+    hello.init({
+      facebook: HELLO_IDS.facebook,
+      access_token: ''
+    }, {
+      redirect_uri: '',
+      oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
+      scope: 'publish_actions,email',
+      oauth_version: '1.0a',
+    });
   }
 
-  AppConfig.$inject = ['$sceDelegateProvider', 'FILEPICKER_API_KEY'];
+  AppConfig.$inject = ['$sceDelegateProvider', 'FILEPICKER_API_KEY', 'HELLO_IDS'];
 
 }());

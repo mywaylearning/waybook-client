@@ -53,4 +53,6 @@
   app.directive('wayAsqResult', require('./exploration/results/asq.directive.js'));
   app.controller('AsqController', require('./exploration/results/asq.controller.js'));
 
+  app.directive('waySocialLogin', require('./social-login/social-login.directive.js'));
+
 }());

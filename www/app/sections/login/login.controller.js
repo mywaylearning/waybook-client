@@ -2,33 +2,6 @@
 
 var LoginController = function($scope, $state, $ionicPopup, router, auth, user, errorHandler) {
 
-  hello.init({
-    facebook: process.env.FACEBOOK_CLIENT_ID,
-    access_token: ''
-  }, {
-    redirect_uri: '',
-    oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
-    scope: 'publish_actions,email',
-    oauth_version: '1.0a',
-  });
-
-  /**
-   * https://github.com/MrSwitch/hello.js#4-add-listeners-for-the-user-login
-   */
-  hello.on('auth.login', function(auth) {
-
-    // Call user information, for the given network
-    hello(auth.network).api('/me').then(function(response) {
-      if (auth.network === 'facebook') {
-        // TODO: Get required info from FB
-      }
-    });
-  });
-
-  $scope.facebook = function(){
-    hello('facebook').login({scope: 'email'});
-  };
-
   $scope.loginData = {};
   $scope.errorsData = {};
 

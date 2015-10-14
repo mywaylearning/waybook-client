@@ -87,7 +87,12 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
      */
     auth.destroy();
     deferred.reject(response.data);
-    return router.goToLoggedOut();
+    if (response.data.error !== 'invalid_grant') {
+      router.goToLoggedOut();
+    }
+
+    return;
+
 
     // var restangularizedResponse;
     // var accessToken = authStore.getAccessToken();

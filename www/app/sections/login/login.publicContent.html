@@ -10,9 +10,11 @@
 
       <way-social-login></way-social-login>
 
-      <form name="loginForm" ng-submit="doLogin(loginForm)" novalidate="">
+      <pre>{{loginForm | json}}</pre>
+
+      <form name="loginForm" ng-submit="doLogin(loginForm)">
         <ion-list>
-          <div class="form-errors" multiple ng-messages="loginForm.$submitted && loginForm.$error">
+          <div class="form-errors" multiple ng-messages="loginForm.$touched || (loginForm.$submitted && loginForm.$error)">
             <div class="form-error" ng-message="required">You must provide an e-mail and a password</div>
             <div ng-messages-include="app/core/errors/messages.html"></div>
           </div>
@@ -33,7 +35,7 @@
 
         <div class="spacer" style="height: 40px;"></div>
         <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>
-        <button class="button button-stable button-block" type="submit">Log in</button>
+        <button class="button button-stable button-block" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
         <a ui-sref="public.register" class="button button-positive button-clear button-block">Or create an account</a>
 
       </form>

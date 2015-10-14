@@ -20,8 +20,16 @@
           });
         });
 
-        $scope.facebook = function(){
-          hello('facebook').login({scope: 'email'});
+        $scope.facebook = function() {
+          hello('facebook').login({
+            scope: 'email'
+          });
+        };
+
+        $scope.google = function() {
+          hello('google').login({
+            scope: 'email'
+          });
         };
       }
     }

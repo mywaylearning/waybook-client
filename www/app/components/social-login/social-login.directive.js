@@ -20,17 +20,25 @@
               avatar: response.picture
             }
 
+            var _user = {
+              email: response.email,
+              provider: auth.network,
+              providerId: response.id
+            };
+
+            console.log(_user);
+
+            user.socialLoginCheck(_user).then(function(_response) {
+              console.log(_response);
+            });
+
+
+
             if (auth.network === 'facebook') {
               console.log(response);
             }
 
             if (auth.network === 'google') {
-              _user.email = response.email;
-              _user.provider = 'google';
-              _user.providerId = response.id;
-              user.socialLoginCheck(_user).then(function(_response) {
-                console.log(_response);
-              });
               // console.log(hello('google').getAuthResponse());
             }
           });

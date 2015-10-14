@@ -193,10 +193,10 @@
 
     <!-- Begin of post button actions -->
     <div ng-if="ctrl.model.postType || ctrl.sharedPost" class="buttons padding">
-      <button class="button button-positive" type="submit" ng-disabled="postForm.$invalid || saving" ng-bind="saving ? 'Saving...' : ctrl.post ? 'Update' : 'Post'"></button>
+      <button class="button button-positive" type="submit" ng-disabled="postForm.$invalid || saving || ctrl.linkExtraction.started" ng-bind="saving ? 'Saving...' : ctrl.post ? 'Update' : 'Post'"></button>
       <a href="" class="button button-light" ng-click="ctrl.cancelPost()">Cancel</a>
     </div>
-    <!-- Begin of post button actions -->
+    <!-- End of post button actions -->
   </form>
   </div>
 </div>

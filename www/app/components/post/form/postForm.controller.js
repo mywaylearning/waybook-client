@@ -294,6 +294,10 @@
           return;
         }
 
+        if (ctrl.linkExtraction.started) {
+          return;
+        }
+
         $scope.saving = true;
 
         ctrl.model.share = [];

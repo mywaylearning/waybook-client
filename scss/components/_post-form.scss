@@ -9,6 +9,10 @@
     top: 26px;
     left: 28px;
     color: #afafaf;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 14px;
+    width: 88%;
 
     &.active {
       color: #000;
@@ -24,7 +28,7 @@
     word-wrap: break-word;
     border-radius: 3px;
     max-height: 138px;
-    min-height: 88px;
+    min-height: 100px;
     overflow-y: scroll;
 
     &.inactive {

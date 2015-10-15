@@ -102,8 +102,7 @@
     "shelljs": "^0.5.0",
     "uglifyify": "^3.0.1",
     "watch": "^0.16.0",
-    "watchify": "^3.2.3",
-    "waybook-api": "git://github@github.com:mywaylearning/waybook-api.git"
+    "watchify": "^3.2.3"
   },
   "scripts": {
     "-deploy-": "",
@@ -124,7 +123,6 @@
     "-dev-": "",
     "localdev-setup": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm run localdev-setup",
     "test": "npm run build-styles:dev && npm run build-js",
-    "update-api": "rm -rf node_modules/waybook-api && npm install",
     "-watch-": "",
     "watch:package-json": "",
     "watch:api-spec": "",
@@ -133,7 +131,6 @@
     "-runtime-": "",
     "preflight": "./scripts/flight-check",
     "serve": "ionic serve --nogulp",
-    "start": "npm run watch:styles & npm run watch:browserify & ionic serve --nogulp",
-    "start-api": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm start"
+    "start": "npm run watch:styles & npm run watch:browserify & ionic serve --nogulp"
   }
 }

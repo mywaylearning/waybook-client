@@ -25,7 +25,7 @@
   require('highcharts-more');
   require('highcharts-solidgauge');
   require('highcharts-ng');
-  require('hello');
+  window.hello = require('hello');
 
 
   window.debug = require('debug');

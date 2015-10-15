@@ -1,9 +1,7 @@
 'use strict';
 
-function HelpFeedbackController($scope, $stateParams) {
+function HelpFeedbackController($scope) {}
 
-}
-
-HelpFeedbackController.$inject = ['$scope', '$stateParams'];
+HelpFeedbackController.$inject = ['$scope'];
 
 module.exports = HelpFeedbackController;

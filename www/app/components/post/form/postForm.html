@@ -106,10 +106,10 @@
       </div>
       <div ng-if="!ctrl.model.link" class="item item-input-inset link-extraction">
         <label class="item-input-wrapper">
-          <input type="text" ng-model="ctrl.linkExtraction.url" ng-blur="ctrl.extractLink()" placeholder="Type or paste a link">
+          <input type="text" ng-model="ctrl.linkExtraction.url" ng-blur="ctrl.extractLink()" ng-enter="ctrl.extractLink()" placeholder="Type or paste a link">
         </label>
-        <button ng-click="ctrl.extractLink()" class="button button-balanced button-small" ng-show="!ctrl.linkExtraction.started">Add</button>
-        <button ng-click="ctrl.addLink = false" class="button button-light button-small icon ion-ios-close" ng-show="!ctrl.linkExtraction.started"></button>
+        <a href="" ng-click="ctrl.extractLink()" class="button button-balanced button-small" ng-show="!ctrl.linkExtraction.started">Add</a>
+        <a href="" ng-click="ctrl.addLink = false" class="button button-light button-small icon ion-ios-close" ng-show="!ctrl.linkExtraction.started"></a>
         <ion-spinner ng-show="ctrl.linkExtraction.started"></ion-spinner>
       </div>
       <div ng-if="ctrl.model.link" class="extract-result">

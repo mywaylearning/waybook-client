@@ -63,7 +63,7 @@
     $scope.deletePost = function() {
       $scope.popoverActions.hide();
 
-      var confirmPopup = $ionicPopup.confirm({
+      var confirmPopup = $ionicPopup.show({
         title: 'Delete post',
         template: 'Are you sure you want to delete this post?'
       });

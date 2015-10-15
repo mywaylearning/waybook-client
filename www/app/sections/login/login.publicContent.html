@@ -25,13 +25,9 @@
           </label>
         </ion-list>
 
-        <div class="row">
-          <div class="col col-50">
-            <button class="button button-positive button-block" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
-          </div>
-          <div class="col col-center">
-            <a href="" class="button button-small button-clear button-dark button-block" ng-click="recoverPassword()">Forgot your password?</a>
-          </div>
+        <div class="login-actions">
+          <button class="button button-balanced button-login" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
+          <a href="" class="button button-small button-clear button-positive button-recover-password" ng-click="recoverPassword()">Forgot your password?</a>
         </div>
 
         <div class="list">

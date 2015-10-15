@@ -1,8 +1,10 @@
 <ion-view view-title="Main" hide-back-button="true">
   <ion-content padding="true" class="has-header">
-    <div ui-view="way-post-form">
-      <way-post-form></way-post-form>
+    <div class="small-on-wide">
+      <div ui-view="way-post-form">
+        <way-post-form></way-post-form>
+      </div>
+      <way-feed posts="posts" user="app.user"></way-feed>
     </div>
-    <way-feed posts="posts" user="app.user"></way-feed>
   </ion-content>
 </ion-view>

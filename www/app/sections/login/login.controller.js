@@ -2,6 +2,8 @@
 
 var LoginController = function($scope, $state, $ionicPopup, router, auth, user, errorHandler) {
 
+  var _loginFormController
+
   $scope.loginData = {};
   $scope.errorsData = {};
 
@@ -11,25 +13,18 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
    */
   $scope.doLogin = function(form) {
 
+    _loginFormController = form;
+
     if (form.$invalid) {
       if (!form.$error.invalid_grant) {
         return;
       }
     }
 
-
+    $scope.isSubmitting = true;
 
     var email = $scope.loginData.email;
     var password = $scope.loginData.password;
-
-    /**
-     * Do nothing unless valid email and password content
-     */
-    if (!email || !password) {
-      // TODO: Display error messages properly
-      return;
-    }
-
 
     /**
      * Authenticate user with provided credentials
@@ -124,13 +119,14 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
    * Handle invalid credentials or token expiration errors
    */
   var handleError = function(error) {
+    $scope.isSubmitting = false;
     /**
      * Clean auth data stored
      */
     auth.destroy();
     var _errorHandler = errorHandler.getInstance($scope);
 
-    _errorHandler.setFormController($scope.$$childHead.loginForm);
+    _errorHandler.setFormController(_loginFormController);
     _errorHandler.handle(error);
   };
 

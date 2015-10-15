@@ -1,17 +1,19 @@
 <ion-view view-title="Supporter: {{contact.firstName}} {{contact.lastName}}">
   <ion-content padding="true" class="unite">
-    <div class="card">
-      <div class="item item-avatar">
-        <img gravatar-src="'{{contact.email}}'" gravatar-size="120" gravatar-default="mm">
-        <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-        <p>{{contact.email}}</p>
-        <button class="button button-more button-clear icon ion-chevron-down" ng-click="showPopover($event)"></button>
-      </div>
-      <div class="item item-divider" ng-if="contact.voice">Voice:</div>
-      <div class="item item-input" ng-repeat="voice in contact.voice">
-        <span class="input-label">Voice #{{$index+1}}:</span>
-        {{voice.number}}
-      </div>
+    <div class="small-on-wide">
+      <div class="card">
+        <div class="item item-avatar">
+          <img gravatar-src="'{{contact.email}}'" gravatar-size="120" gravatar-default="mm">
+          <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+          <p>{{contact.email}}</p>
+          <button class="button button-more button-clear icon ion-chevron-down" ng-click="showPopover($event)"></button>
+        </div>
+        <div class="item item-divider" ng-if="contact.voice">Voice:</div>
+        <div class="item item-input" ng-repeat="voice in contact.voice">
+          <span class="input-label">Voice #{{$index+1}}:</span>
+          {{voice.number}}
+        </div>
+      </div>    
     </div>
   </ion-content>
 </ion-view>

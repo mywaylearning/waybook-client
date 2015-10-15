@@ -42,3 +42,14 @@ ion-view.pane {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
+
+ .small-on-wide {
+   @media (min-width: $grid-responsive-md-break) {
+     width: $grid-responsive-md-break;
+     margin: 0 auto;
+
+     .aside-open & {
+       width: ($grid-responsive-md-break - 295);
+     }
+   }
+ }

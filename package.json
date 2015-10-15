@@ -26,7 +26,8 @@
     "highcharts": "./www/lib/highcharts/highcharts.js",
     "highcharts-more": "./www/lib/highcharts/highcharts-more.js",
     "highcharts-solidgauge": "./www/lib/highcharts/modules/solid-gauge.js",
-    "highcharts-ng": "./www/lib/highcharts-ng/dist/highcharts-ng.min.js"
+    "highcharts-ng": "./www/lib/highcharts-ng/dist/highcharts-ng.min.js",
+    "hello": "./www/lib/hello/dist/hello.all.min.js"
   },
   "browserify-shim": {
     "angular": "angular",

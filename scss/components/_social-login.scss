@@ -1,0 +1,14 @@
+.social-login {
+  @media (max-width: $grid-responsive-sm-break) {
+    .icon-left {
+      &:before {
+        float: none;
+        padding: 0;
+      }
+    }
+
+    .text {
+      display: none;
+    }
+  }
+}

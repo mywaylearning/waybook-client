@@ -12,10 +12,14 @@
     ></button>
 </div>
 <ion-content class="padding has-subheader">
-  <button class="button button-positive button-block" ng-if="slides.completed.length == slides.count" ui-sref="app.discover.exploration.results({exploration: exploration.slug})">Check your results</button>
-  <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" active-slide="slides.index">
-    <ion-slide ng-repeat="question in exploration.questions | orderBy:  'order'">
-      <way-exploration-question-multiple-choice exploration="exploration" question="question" on-answer="next()" on-complete="markAsCompleted"></way-exploration-question-multiple-choice>
-    </ion-slide>
-  </ion-slide-box>
+    <div class="small-on-wide">
+      <button class="button button-positive button-block" ng-if="slides.completed.length == slides.count" ui-sref="app.discover.exploration.results({exploration: exploration.slug})">Check your results</button>
+    </div>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" active-slide="slides.index">
+      <ion-slide ng-repeat="question in exploration.questions | orderBy:  'order'">
+        <div class="small-on-wide">
+          <way-exploration-question-multiple-choice exploration="exploration" question="question" on-answer="next()" on-complete="markAsCompleted"></way-exploration-question-multiple-choice>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
 </ion-content>

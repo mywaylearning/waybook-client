@@ -1,14 +1,17 @@
 .social-login {
-  @media (max-width: $grid-responsive-sm-break) {
-    .icon-left {
-      &:before {
-        float: none;
-        padding: 0;
-      }
-    }
+  text-align: center;
 
-    .text {
-      display: none;
+  .button {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    padding: 0;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 5px;
+
+    &:before {
+      font-size: 24px; 
     }
   }
 }

@@ -8,8 +8,6 @@
         </div>
       </div>
 
-      <way-social-login></way-social-login>
-
       <form name="loginForm" ng-submit="doLogin(loginForm)">
         <ion-list>
           <div class="form-errors" multiple ng-messages="loginForm.$submitted && loginForm.$error">
@@ -17,24 +15,35 @@
             <div ng-messages-include="app/core/errors/messages.html"></div>
           </div>
           <label class="item item-input">
-            <span class="input-label">Email</span>
+            <i class="icon ion-person placeholder-icon"></i>
             <input type="email" name="email" ng-model="loginData.email" placeholder="Email" required reset-validation>
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Password</span>
+            <i class="icon ion-locked placeholder-icon"></i>
             <input type="password" name="password" ng-model="loginData.password" placeholder="Password" required reset-validation>
           </label>
-
-          <div class="item item-body item-divider">
-            <a href="" class="button button-clear button-small" ng-click="recoverPassword()">Forgot your password?</a>
-          </div>
         </ion-list>
 
-        <div class="spacer" style="height: 40px;"></div>
+        <div class="row">
+          <div class="col col-50">
+            <button class="button button-positive button-block" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
+          </div>
+          <div class="col col-center">
+            <a href="" class="button button-small button-clear button-dark button-block" ng-click="recoverPassword()">Forgot your password?</a>
+          </div>
+        </div>
+
+        <div class="list">
+          <div class="item item-divider">
+            <way-social-login></way-social-login>
+          </div>
+        </div>
+
+
         <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>
-        <button class="button button-stable button-block" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
-        <a ui-sref="public.register" class="button button-positive button-clear button-block">Or create an account</a>
+
+        Not registered? <a ui-sref="public.register">Create an account</a>
 
       </form>
     </div>

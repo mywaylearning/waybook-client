@@ -31,15 +31,8 @@
               }
             });
 
-
-
-            if (_auth.network === 'facebook') {
-              console.log(response);
-            }
-
-            if (_auth.network === 'google') {
-              // console.log(hello('google').getAuthResponse());
-            }
+            if (_auth.network === 'facebook') {}
+            if (_auth.network === 'google') {}
           });
         });
 

@@ -15,6 +15,7 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
 
   svcInterface = {
     authenticate: _authenticate,
+    saveAuth: saveAuth,
     authRefresh: _authRefresh,
     isAuthenticated: _isAuthenticated,
     destroy: _destroy,
@@ -166,10 +167,8 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
    * @param  {Object} data - response object from the auth endpoint
    */
   function saveAuth(data) {
-    token = data.access_token;
-
     authStore.save({
-      access_token: token,
+      access_token: data.access_token,
       refresh_token: data.refresh_token
     });
   }

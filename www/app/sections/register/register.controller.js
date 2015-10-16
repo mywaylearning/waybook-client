@@ -1,8 +1,12 @@
 'use strict';
 
-function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
+function RegisterController($scope, $stateParams, router, user, errorHandler, $ionicPopup, auth) {
 
-  $scope.register = {};
+  if ($stateParams.userInfo) {
+    $scope.model = $stateParams.userInfo;
+  } else {
+    $scope.model = {};
+  }
 
   // Creates a modal instance in case of registration is successfull
   var emailSent = function(email) {
@@ -21,27 +25,15 @@ function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
    */
   $scope.onRegister = function() {
 
-    var model = {
-      name: $scope.register.name,
-      lastName: $scope.register.lastName,
-      username: $scope.register.username,
-      email: $scope.register.email,
-      password: $scope.register.password
-    };
-
-
-    /**
-     * Do nothing unless valid email and password content
-     */
-    if (!model.email || !model.password) {
-      // TODO: Display error messages properly
-      return;
-    }
-
     user
-      .register(model)
+      .register($scope.model)
       .then(function(data) {
-        emailSent(model.email);
+        if (data.access_token) {
+          auth.saveAuth(data);
+          window.location.reload(false);
+        } else {
+          emailSent(data.email);
+        }
       })
       .catch(handleError);
   };
@@ -59,9 +51,11 @@ function RegisterController($scope, router, user, errorHandler, $ionicPopup) {
 
 module.exports = [
   '$scope',
+  '$stateParams',
   'router',
   'user',
   'errorHandler',
   '$ionicPopup',
+  'auth',
   RegisterController
 ];

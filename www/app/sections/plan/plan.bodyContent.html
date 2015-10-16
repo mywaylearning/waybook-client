@@ -1,5 +1,23 @@
-<ion-view view-title="Plan">
-  <ion-content padding="true" class="has-header">
-    <a class="button" ui-sref="app.plan.subpage" ui-sref-opts="{reload: true}">Go to subpage</a>
+<ion-view view-title="Plan" class="plan">
+  <div class="bar bar-subheader">
+    <div class="small-on-wide">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Tag:
+        </div>
+        <select ng-model="test">
+          <option value="">Tag 1</option>
+          <option value="">Tag 2</option>
+          <option value="">Tag 3</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <ion-content padding="true" class="has-subheader">
+    <div class="small-on-wide">
+      <div class="list">
+        <div class="item">Posts goes here</div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

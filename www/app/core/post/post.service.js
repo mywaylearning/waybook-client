@@ -15,6 +15,7 @@
     svcInterface = {
       create: _create,
       collection: _collection,
+      goalsByTag: _goalsByTag,
       getById: _getById,
       extractLink: _extractLink
     };
@@ -44,6 +45,11 @@
        }
 
        return api.one('posts', id).get(_shares);
+     }
+
+     function _goalsByTag(tag) {
+       var tag = tag || '';
+       return Posts.getList({ tag: tag });
      }
 
     function _extractLink(url) {

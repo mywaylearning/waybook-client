@@ -202,22 +202,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       'bodyContent': {
         controller: 'PlanController'
       }
-    }
-  })
-
-  .state('app.plan.subpage', {
-    url: '/subpage',
-    views: {
-      'bodyContent@app': {
-        controller: function($scope, $state) {
-          console.log($state);
-        }
+    },
+    resolve: {
+      posts: function(PostService) {
+        return PostService.goalsByTag();
       }
     }
   })
-
-
-
 
   .state('app.unite', {
     url: '/unite',

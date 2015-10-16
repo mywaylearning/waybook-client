@@ -7,6 +7,7 @@
   app.controller('PostFormController', require('./post/form/postForm.controller.js'));
   app.directive('wayPostForm', require('./post/form/postForm.directive.js'));
   app.directive('contenteditable', require('./post/form/contenteditable.directive.js'));
+  app.directive('ngEnter', require('./post/form/ngenter.directive.js'));
   app.directive('multipleSelectModal', require('./post/form/multiple-select.directive.js'));
 
   app.controller('PostViewController', require('./post/view/postView.controller.js'));

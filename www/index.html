@@ -15,33 +15,20 @@
   <body id="App" ng-controller="AppController as app" ng-class="{'android': platform == 'android', 'ios': platform == 'ios', 'mac': platform.indexOf('mac') !== -1}">
     <ion-nav-view></ion-nav-view>
 
+    <script>
+      UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/DFeZUs24zJBwLXjcvc3mxw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+      // UserVoice.push(['set', {
+      //   target: false,
+      //   position: 'bottom-left',
+      //   accent_color: '#448dd6',
+      //   trigger_color: 'white',
+      //   trigger_background_color: 'rgba(46, 49, 51, 0.6)'
+      // }]);
+    </script>
+
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/intl-tel-input/build/js/intlTelInput.min.js"></script>
-    <script src="/lib/hello/dist/hello.all.min.js"></script>
     <script src="//api.filepicker.io/v2/filepicker.js"></script>
     <script src="/app/waybook-min.js"></script>
-
-    <script>
-      // Include the UserVoice JavaScript SDK (only needed once on a page)
-      UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/DFeZUs24zJBwLXjcvc3mxw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
-      //
-      // UserVoice Javascript SDK developer documentation:
-      // https://www.uservoice.com/o/javascript-sdk
-      //
-      // Set colors
-      UserVoice.push(['set', {
-        target: false,
-        position: 'bottom-left',
-        accent_color: '#448dd6',
-        trigger_color: 'white',
-        trigger_background_color: 'rgba(46, 49, 51, 0.6)'
-      }]);
-      // Add default trigger to the bottom-right corner of the window:
-      // UserVoice.push(['addTrigger', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
-      // Or, use your own custom trigger:
-      //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
-      // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
-      UserVoice.push(['autoprompt', {}]);
-      </script>
   </body>
 </html>

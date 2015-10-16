@@ -43,3 +43,9 @@
   border-color: darken($assertive, 5%);
   color: #FFF;
 }
+
+.item-radio input:checked ~ .item-content {
+  background-color: lighten($positive, 38%);
+  font-weight: bold;
+  padding-left: 25px;
+}

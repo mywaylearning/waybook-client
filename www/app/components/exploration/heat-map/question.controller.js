@@ -16,8 +16,6 @@
         }
       }
 
-      console.log(answer);
-
       // Assign class based on answer value
       switch (answer.order) {
         case '1':

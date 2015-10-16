@@ -32,8 +32,8 @@
     }
 
     function _goToLoggedOut() {
-      debug('routing to public.login');
-      var stateTo = 'public.login';
+      debug('routing to public.intro');
+      var stateTo = 'public.intro';
 
       if (stateTo === $state.current.name) {
         return $state.transitionTo(

@@ -29,6 +29,7 @@
   app.controller('MeSponsorsController', require('./me/sponsors.controller.js'));
 
   app.controller('HelpFeedbackController', require('./help-feedback/help-feedback.controller.js'));
+  app.directive('wayUserVoice', require('./help-feedback/uservoice.directive.js'));
   app.controller('AboutController', require('./about/about.controller.js'));
   app.controller('IntroController', require('./intro/intro.controller.js'));
   app.controller('VerifyController', require('./verify/verify.controller.js'));

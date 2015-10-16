@@ -20,4 +20,29 @@
       }
     }
   }
+
+  .login-actions {
+    margin: 15px 0;
+  }
+
+  .button-login {
+      width: 160px;
+  }
+
+  .button-recover-password {
+    margin: 10px 0 0 10px;
+    @media (max-width: $grid-responsive-sm-break) {
+      float: right;
+    }
+
+  }
+
+  .login-extras {
+    text-align: center;
+
+    a, a:visited, a:active {
+      font-weight: bold;
+      color: $positive;
+    }
+  }
 }

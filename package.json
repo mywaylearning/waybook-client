@@ -64,7 +64,14 @@
           "compress": {
             "sequences": true,
             "dead_code": true,
-            "angular": true
+            "angular": true,
+            "screw_ie8": true,
+            "join_vars": true,
+            "drop_console": true,
+            "unused": true
+          },
+          "output": {
+            "comments": false
           },
           "ignore": [
             "**/www/lib/angular*",
@@ -102,8 +109,7 @@
     "shelljs": "^0.5.0",
     "uglifyify": "^3.0.1",
     "watch": "^0.16.0",
-    "watchify": "^3.2.3",
-    "waybook-api": "git://github@github.com:mywaylearning/waybook-api.git"
+    "watchify": "^3.2.3"
   },
   "scripts": {
     "-deploy-": "",
@@ -114,7 +120,7 @@
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' www/lib/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o www/app/components/lodash.custom.min.js -p include={}",
     "build:browserify": "browserify www/app/app.js > www/app/waybook-min.js",
     "build-js:dev": "npm run build:import-api-spec && npm run build:lodash",
-    "build-js": "npm run build:import-api-spec && npm run build:lodash && npm run build:browserify",
+    "build-js": "npm run build:lodash && npm run build:browserify",
     "-css-": "",
     "build:sass:dev": "node-sass --precision 10 --linefeed cr --source-map www/css/ scss/ --output www/css/",
     "build:sass": "node-sass --precision 10 --linefeed cr --output-style compressed scss/ --output www/css/",
@@ -124,7 +130,6 @@
     "-dev-": "",
     "localdev-setup": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm run localdev-setup",
     "test": "npm run build-styles:dev && npm run build-js",
-    "update-api": "rm -rf node_modules/waybook-api && npm install",
     "-watch-": "",
     "watch:package-json": "",
     "watch:api-spec": "",
@@ -133,7 +138,6 @@
     "-runtime-": "",
     "preflight": "./scripts/flight-check",
     "serve": "ionic serve --nogulp",
-    "start": "npm run watch:styles & npm run watch:browserify & ionic serve --nogulp",
-    "start-api": "ln -vf .env node_modules/waybook-api/.env && cd node_modules/waybook-api && npm start"
+    "start": "npm run watch:styles & npm run watch:browserify & ionic serve --nogulp"
   }
 }

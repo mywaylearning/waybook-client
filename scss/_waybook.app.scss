@@ -43,13 +43,18 @@ ion-view.pane {
     font-weight: 300;
 }
 
- .small-on-wide {
-   @media (min-width: $grid-responsive-md-break) {
-     width: $grid-responsive-md-break;
-     margin: 0 auto;
+.small-on-wide {
+  a, a:visited, a:active {
+    font-weight: bold;
+    color: $positive;
+  }
 
-     .aside-open & {
-       width: ($grid-responsive-md-break - 295);
-     }
-   }
- }
+  @media (min-width: $grid-responsive-md-break) {
+    width: $grid-responsive-md-break;
+    margin: 0 auto;
+
+    .aside-open & {
+      width: ($grid-responsive-md-break - 295);
+    }
+  }
+}

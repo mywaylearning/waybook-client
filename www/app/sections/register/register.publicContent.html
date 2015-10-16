@@ -6,7 +6,7 @@
 
           <label class="item item-input" ng-class="{ 'has-error' : registerForm.firstName.$dirty && registerForm.firstName.$invalid}">
             <span class="input-label">First name:</span>
-            <input type="text" name="firstName" ng-model="register.name" placeholder="First name" required>
+            <input type="text" name="firstName" ng-model="model.firstName" placeholder="First name" required>
           </label>
 
           <div class="form-errors" ng-messages="registerForm.firstName.$dirty && registerForm.firstName.$error">
@@ -15,7 +15,7 @@
 
           <label class="item item-input" ng-class="{ 'has-error' : registerForm.lastName.$dirty && registerForm.lastName.$invalid}">
             <span class="input-label">Last name:</span>
-            <input type="text" name="lastName" ng-model="register.lastName" placeholder="Last name" required>
+            <input type="text" name="lastName" ng-model="model.lastName" placeholder="Last name" required>
           </label>
 
           <div class="form-errors" ng-messages="registerForm.lastName.$dirty && registerForm.lastName.$error">
@@ -24,7 +24,7 @@
 
           <label class="item item-input" ng-class="{ 'has-error' : registerForm.username.$dirty && registerForm.username.$invalid}">
             <span class="input-label">Username:</span>
-            <input type="text" ng-model="register.username" name="username" placeholder="Username" required reset-validation>
+            <input type="text" ng-model="model.username" name="username" placeholder="Username" required reset-validation>
           </label>
 
           <div class="form-errors" ng-messages="registerForm.username.$dirty && registerForm.username.$error">
@@ -34,7 +34,7 @@
 
           <label class="item item-input" ng-class="{ 'has-error' : registerForm.email.$dirty && registerForm.email.$invalid}">
             <span class="input-label">E-mail:</span>
-            <input type="email" name="email" ng-model="register.email" placeholder="E-mail" required reset-validation>
+            <input type="email" name="email" ng-model="model.email" placeholder="E-mail" required reset-validation>
           </label>
 
           <div class="form-errors" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
@@ -44,7 +44,7 @@
 
           <label class="item item-input" ng-class="{ 'has-error' : registerForm.password.$dirty && registerForm.password.$invalid}">
             <span class="input-label">Password:</span>
-            <input type="password" name="password" ng-model="register.password" placeholder="Create a password" required check-pw ng-minlength="7">
+            <input type="password" name="password" ng-model="model.password" placeholder="Create a password" required check-pw ng-minlength="7">
           </label>
 
           <div class="form-errors" multiple ng-messages="registerForm.password.$dirty && registerForm.password.$error">

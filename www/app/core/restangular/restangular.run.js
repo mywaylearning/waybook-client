@@ -130,12 +130,10 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
   }
 
   function handleKnownErrors(response, deferred) {
-    console.log('handleKnownErrors', response);
     deferred.reject(response.data.error);
   }
 
   function handleUnknownErrors(response, deferred) {
-    console.log('handleUnknownErrors', response);
     var _error = response.data ? response.data.error : false;
     deferred.reject(_error);
   }

@@ -117,6 +117,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('public.register', {
     url: '/register',
+    params: {
+      userInfo: false
+    },
     views: {
       'publicContent': {
         templateUrl: 'app/sections/register/register.publicContent.html',

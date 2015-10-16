@@ -67,7 +67,6 @@
             "angular": true,
             "screw_ie8": true,
             "join_vars": true,
-            "drop_console": true,
             "unused": true
           },
           "output": {

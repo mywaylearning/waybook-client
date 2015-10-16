@@ -137,6 +137,8 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
     if (redirect == null) {
       redirect = true;
     }
+    hello('facebook').logout();
+    hello('google').logout();
     auth.destroy();
     userObj = undefined;
     userRequest = null;

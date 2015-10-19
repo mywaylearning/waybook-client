@@ -87,6 +87,7 @@
       'oauth_proxy': 'https://auth-server.herokuapp.com/proxy',
       scope: 'publish_actions,email',
       'oauth_version': '1.0a',
+      display: 'page'
     });
   }
 

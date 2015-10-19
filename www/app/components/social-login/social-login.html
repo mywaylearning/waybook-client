@@ -1,4 +1,5 @@
-<div class="social-login">
-    <button class="button button-small button-positive icon ion-social-facebook" ng-click="facebook()"></button>
-    <button class="button button-small button-assertive icon ion-social-googleplus" ng-click="google()"></button>
+<div class="social-login" ng-class="{'on-login': onLogin}">
+    <p ng-if="onLogin">Please wait...</p>
+    <button class="button button-small button-positive icon ion-social-facebook" ng-disable="onLogin" ng-click="login('facebook')"></button>
+    <button class="button button-small button-assertive icon ion-social-googleplus" ng-disable="onLogin" ng-click="login('google')"></button>
 </div>

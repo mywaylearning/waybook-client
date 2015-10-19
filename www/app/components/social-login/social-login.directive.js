@@ -11,6 +11,7 @@
          * https://github.com/MrSwitch/hello.js#4-add-listeners-for-the-user-login
          */
         hello.on('auth.login', function(_auth) {
+          $scope.onLogin = true;
           // Call user information, for the given network
           hello(_auth.network).api('/me').then(function(response) {
             var _user = {
@@ -36,14 +37,8 @@
           });
         });
 
-        $scope.facebook = function() {
-          hello('facebook').login({
-            scope: 'email'
-          });
-        };
-
-        $scope.google = function() {
-          hello('google').login({
+        $scope.login = function(network) {
+          hello(network).login({
             scope: 'email'
           });
         };

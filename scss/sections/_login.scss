@@ -26,18 +26,17 @@
   }
 
   .button-login {
-      width: 160px;
+      width: 120px;
   }
 
   .button-recover-password {
     margin: 10px 0 0 10px;
-    @media (max-width: $grid-responsive-sm-break) {
-      float: right;
-    }
+    float: right;
 
   }
 
   .login-extras {
+    font-size: 12px;
     text-align: center;
   }
 }

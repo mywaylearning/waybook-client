@@ -66,7 +66,7 @@
     // Define default options based on type of post
     switch (ctrl.model.postType) {
       case 'thought':
-        ctrl.placeHolder = "Share what's in your mind..."
+        ctrl.placeHolder = "What's on your mind?"
         break;
       case 'goal':
         // Define default properties of goal

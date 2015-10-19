@@ -45,8 +45,8 @@ ion-view.pane {
 
 .small-on-wide {
   a, a:visited, a:active {
-    &:not(.button) {
-      font-weight: bold;
+    &:not(.button):not(.tab-item) {
+      text-decoration: none;
       color: $positive;
     }
   }

@@ -204,8 +204,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
+      tags: function(TagService) {
+        return TagService.timeline();
+      },
       posts: function(PostService) {
-        return PostService.goalsByTag();
+        return PostService.timelineByTag();
       }
     }
   })

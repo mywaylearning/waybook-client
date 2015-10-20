@@ -14,6 +14,7 @@
      */
     svcInterface = {
       collection: _collection,
+      timeline: _timeline,
     };
     return svcInterface;
 
@@ -24,6 +25,10 @@
     function _collection(search) {
       debug('in _collection');
       return Tags.getList({search: search});
+    }
+
+    function _timeline(search) {
+      return Tags.getList({timeline: true});
     }
   }
 

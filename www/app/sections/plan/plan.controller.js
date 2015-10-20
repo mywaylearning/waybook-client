@@ -4,11 +4,25 @@
 
   var debug = require('debug')('waybook:PlanController');
 
-  function PlanController($scope, $state, posts, tags) {
+  function PlanController($scope, $state, posts, tags, PostService, $ionicLoading) {
     $scope.tags = tags;
     $scope.timeline = posts[0].plain();
+
+    $scope.setTag = function() {
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+      PostService.timelineByTag($scope.selectedTag).then(function(response) {
+        $scope.timeline = response[0].plain();
+        $ionicLoading.hide();
+      });
+    }
   }
 
-  module.exports = ['$scope', '$state', 'posts', 'tags', PlanController];
+  module.exports = ['$scope', '$state', 'posts', 'tags', 'PostService', '$ionicLoading', PlanController];
 
 }());

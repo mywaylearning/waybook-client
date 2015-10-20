@@ -49,7 +49,7 @@
 
      function _timelineByTag(tag) {
        var tag = tag || '';
-       return Posts.getList({ timeline: true });
+       return Posts.getList({ timeline: true, tag: tag });
      }
 
     function _extractLink(url) {

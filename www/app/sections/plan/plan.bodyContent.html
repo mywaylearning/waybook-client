@@ -5,9 +5,8 @@
         <div class="input-label">
           Tag:
         </div>
-        <select ng-model="test">
+        <select ng-options="tag as tag for tag in tags" ng-model="selectedTag" ng-change="setTag()">
           <option value="">Select...</option>
-          <option value="{{tag}}" ng-repeat="tag in tags">{{tag}}</option>
         </select>
       </label>
     </div>

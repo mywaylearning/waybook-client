@@ -24,6 +24,8 @@
               } else {
                 doLogin(_auth);
               }
+            }, function(error) {
+              logout();
             });
           } else {
             doLogin(_auth);

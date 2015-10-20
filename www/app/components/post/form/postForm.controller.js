@@ -85,7 +85,7 @@
         ctrl.addLink = true;
         break;
       default:
-        ctrl.placeHolder = "Share something...";
+        ctrl.placeHolder = "What's on your mind?";
     }
 
     // Parse content to detect tags

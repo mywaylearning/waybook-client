@@ -71,24 +71,28 @@
 
   .config(AppConfig);
 
-  function AppConfig($sceDelegateProvider, FILEPICKER_API_KEY, HELLO_IDS) {
+  function AppConfig($sceDelegateProvider, $ionicConfigProvider, FILEPICKER_API_KEY, HELLO_IDS) {
     $sceDelegateProvider.resourceUrlWhitelist([
       'self'
     ]);
 
     filepicker.setKey(FILEPICKER_API_KEY);
 
-    var displayType;
+    var displayType, transitionType;
 
     switch (ionic.Platform.platform()) {
       case 'ios':
       case 'android':
       case 'windowsphone':
         displayType = 'popup';
+        transitionType = 'platform';
         break;
       default:
         displayType = 'page';
+        transitionType = 'none';
     }
+
+    $ionicConfigProvider.views.transition(transitionType);
 
     hello.init({
       facebook: HELLO_IDS.facebook,
@@ -103,6 +107,6 @@
     });
   }
 
-  AppConfig.$inject = ['$sceDelegateProvider', 'FILEPICKER_API_KEY', 'HELLO_IDS'];
+  AppConfig.$inject = ['$sceDelegateProvider', '$ionicConfigProvider', 'FILEPICKER_API_KEY', 'HELLO_IDS'];
 
 }());

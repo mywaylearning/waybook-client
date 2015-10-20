@@ -37,8 +37,8 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
 
    *                    Promise if authenticated
    */
-  function _currentUser() {
-    return auth.isAuthenticated() ? _getSelf() : {};
+  function _currentUser(forceRefresh) {
+    return auth.isAuthenticated() ? _getSelf(forceRefresh) : {};
   }
 
   function _userIsResolved() {

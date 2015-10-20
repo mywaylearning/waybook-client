@@ -3,7 +3,7 @@
 function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_STORAGE_KEYS) {
 
   hello.on('auth.login', function(_auth) {
-    $state.go('public.login', { reload: true });
+    $state.go('public.login', {}, { reload: true });
   });
 
   $scope.next = function() {

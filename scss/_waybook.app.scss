@@ -51,8 +51,8 @@ ion-view.pane {
     }
   }
 
-  @media (min-width: $grid-responsive-md-break) {
-    width: ($grid-responsive-md-break - 25);
+  @media (min-width: $grid-responsive-sm-break) {
+    width: ($grid-responsive-sm-break - 25);
     margin: 0 auto;
 
     .aside-open & {

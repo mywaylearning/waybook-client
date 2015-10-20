@@ -20,6 +20,14 @@
     margin-top: 0;
   }
 
+  .period {
+    margin-top: 10px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
   .timeline-date {
     position: relative;
 

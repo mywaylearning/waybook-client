@@ -81,14 +81,9 @@
         }
 
         $scope.login = function(network) {
-          var opts = {
+          hello(network).login({
             scope: 'email'
-          };
-
-          if (network === 'facebook') {
-            opts.redirect_uri = '/#!/login';
-          }
-          hello(network).login(opts);
+          });
         };
       }
     }

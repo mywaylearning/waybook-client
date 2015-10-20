@@ -78,6 +78,18 @@
 
     filepicker.setKey(FILEPICKER_API_KEY);
 
+    var displayType;
+
+    switch (ionic.Platform.platform()) {
+      case 'ios':
+      case 'android':
+      case 'windowsphone':
+        displayType = 'popup';
+        break;
+      default:
+        displayType = 'page';
+    }
+
     hello.init({
       facebook: HELLO_IDS.facebook,
       google: HELLO_IDS.google,
@@ -87,7 +99,7 @@
       'oauth_proxy': 'https://auth-server.herokuapp.com/proxy',
       scope: 'publish_actions,email',
       'oauth_version': '1.0a',
-      display: 'page'
+      display: displayType
     });
   }
 

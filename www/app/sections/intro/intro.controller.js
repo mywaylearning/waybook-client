@@ -2,12 +2,9 @@
 
 function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_STORAGE_KEYS) {
 
-  // var key = LOCAL_STORAGE_KEYS.introSeen;
-  //
-  // $scope.startApp = function(route) {
-  //   store.set(key, true);
-  //   return $state.go('public.' + route);
-  // };
+  hello.on('auth.login', function(_auth) {
+    $state.go('public.login', {}, { reload: true });
+  });
 
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();

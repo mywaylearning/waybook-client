@@ -45,14 +45,14 @@ ion-view.pane {
 
 .small-on-wide {
   a, a:visited, a:active {
-    &:not(.button) {
-      font-weight: bold;
+    &:not(.button):not(.tab-item) {
+      text-decoration: none;
       color: $positive;
     }
   }
 
   @media (min-width: $grid-responsive-md-break) {
-    width: $grid-responsive-md-break;
+    width: ($grid-responsive-md-break - 25);
     margin: 0 auto;
 
     .aside-open & {

@@ -12,9 +12,7 @@
       $ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
+        hideOnStateChange: true
       });
       PostService.timelineByTag($scope.selectedTag).then(function(response) {
         $scope.timeline = response[0].plain();

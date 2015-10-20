@@ -6,7 +6,7 @@
 
   function PlanController($scope, $state, posts, tags) {
     $scope.tags = tags;
-    $scope.posts = posts;
+    $scope.timeline = posts[0].plain();
   }
 
   module.exports = ['$scope', '$state', 'posts', 'tags', PlanController];

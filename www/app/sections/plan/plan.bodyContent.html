@@ -13,6 +13,7 @@
   </div>
   <ion-content padding="true" class="has-subheader">
     <div class="small-on-wide">
+      <button class="button" ng-click="createGoal()">Create goal</button>
       <div class="period" ng-repeat="(date, posts) in timeline">
         <p class="timeline-date">
           <span class="text">{{date}}</span>

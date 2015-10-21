@@ -14,6 +14,7 @@
         return;
       }
 
+      $ionicHistory.clearCache();
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
@@ -23,7 +24,7 @@
         hideOnStateChange: true
       });
 
-      $state.go('app.plan', { tag: $scope.selectedTag });
+      $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true, notify: true });
     }
   }
 

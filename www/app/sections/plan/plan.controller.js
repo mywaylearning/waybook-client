@@ -5,7 +5,6 @@
   var debug = require('debug')('waybook:PlanController');
 
   function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
-    console.log('reloaded');
     $scope.tags = tags;
     $scope.timeline = posts[0].plain();
     $scope.selectedTag = $stateParams.tag;

@@ -11,7 +11,8 @@
         posts: '=',
         postType: '=type',
         sharedPost: '=',
-        modalInstance: '='
+        modalInstance: '=',
+        onCreate: '&'
       },
       controller: 'PostFormController',
       controllerAs: 'ctrl',
@@ -23,6 +24,10 @@
             var contentElement = el.find('#tags');
             contentElement[0].focus();
           }, 100);
+        }
+
+        scope.hasCallbackOnCreate = function() {
+          return angular.isDefined(attrs.onCreate);
         }
 
       }

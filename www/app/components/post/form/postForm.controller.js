@@ -279,7 +279,7 @@
     };
 
     ctrl.cancelPost = function() {
-      if (ctrl.sharedPost) {
+      if (ctrl.sharedPost || $state.current.name === 'app.plan') {
         ctrl.modalInstance.hide();
       } else if (!ctrl.model.id) {
         $state.go('app.main');
@@ -329,8 +329,12 @@
 
         if (!ctrl.model.id) {
           debug('saving new post', ctrl.model);
-          PostService.create(ctrl.model).then(function(result){
-            PostService.getById(result.id).then(function(newPost){
+          PostService.create(ctrl.model).then(function(result) {
+            PostService.getById(result.id).then(function(newPost) {
+              if ($scope.hasCallbackOnCreate()) {
+                return ctrl.onCreate()(newPost);
+              }
+
               if (ctrl.sharedPost) {
                 ctrl.modalInstance.hide();
               }

@@ -17,7 +17,10 @@
         <p class="timeline-date">
           <span class="text">{{date}}</span>
         </p>
-        <div class="list" ng-repeat="post in posts">
+        <div class="no-posts" ng-click="createGoal()" ng-if="!posts.length">
+          Click/tap to create a goal/habit.
+        </div>
+        <div class="list" ng-repeat="post in posts" ng-if="posts.length">
           <div class="item item-body" ui-sref="app.main.post({id: post.id})">
             <div class="tag" ng-class="post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'">#{{post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'}}</div>
             <p class="dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>

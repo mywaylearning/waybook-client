@@ -19,7 +19,6 @@
       });
 
       $ionicLoading.show({
-        content: 'Loading',
         animation: 'fade-in',
         hideOnStateChange: true
       });

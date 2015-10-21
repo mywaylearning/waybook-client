@@ -4,12 +4,30 @@
 
   var debug = require('debug')('waybook:PlanController');
 
-  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory, $ionicModal) {
+  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory, $ionicModal, $ionicScrollDelegate, $timeout, $location, $window) {
+
+    if (!$stateParams.tag) {
+      var monthNames = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+      var todayDate = new Date();
+      var date = monthNames[todayDate.getMonth()] + '-' + todayDate.getFullYear();
+      $location.hash(date);
+      $timeout(function() {
+        $ionicScrollDelegate.$getByHandle('timelineScroll').anchorScroll();
+      }, 100);
+    }
+
+    $scope.hashMonth = function(date) {
+      return date.toLowerCase().replace(' ', '-');
+    };
+
     $scope.tags = tags;
-    $scope.timeline = posts[0].plain();
+    $scope.months = posts[1].plain().reverse();
+    $scope.posts = posts[0].plain();
     $scope.selectedTag = $stateParams.tag;
 
-    // var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    $scope.getPosts = function(date) {
+      return $scope.posts[date];
+    };
 
     $scope.setTag = function() {
       if ($stateParams.tag === $scope.selectedTag) {
@@ -41,7 +59,13 @@
     };
 
     $scope.onCreateGoal = function(post) {
-      window.location.reload();
+      $state.go('app.plan');
+      PostService.timelineByTag().then(function(response) {
+        $scope.months = response[1].plain().reverse();
+        $scope.posts = response[0].plain();
+        $scope.createPopup.hide();
+        console.log('handling response');
+      });
       // var endDate = new Date(post.gEndDate);
       // var period = monthNames[endDate.getMonth()] + ' ' + endDate.getFullYear();
       // var found = false;
@@ -63,6 +87,6 @@
     }
   }
 
-  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', PlanController];
+  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', '$ionicScrollDelegate', '$timeout', '$location', '$window', PlanController];
 
 }());

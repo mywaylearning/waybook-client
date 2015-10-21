@@ -57,6 +57,10 @@
       // }
       // $scope.createPopup.hide();
     };
+
+    $scope.onDoubleTap = function() {
+      console.log('doubled tapped!');
+    }
   }
 
   module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', PlanController];

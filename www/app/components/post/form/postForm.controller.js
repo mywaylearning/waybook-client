@@ -279,7 +279,7 @@
     };
 
     ctrl.cancelPost = function() {
-      if (ctrl.sharedPost) {
+      if (ctrl.sharedPost || $state.current.name === 'app.plan') {
         ctrl.modalInstance.hide();
       } else if (!ctrl.model.id) {
         $state.go('app.main');

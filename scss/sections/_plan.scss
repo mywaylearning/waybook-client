@@ -8,6 +8,22 @@
     border: 0;
   }
 
+  .tag {
+    color: #FFF;
+    position: absolute;
+    right: 15px;
+    font-size: 12px;
+    padding: 2px 4px;
+
+    &.goal {
+      background: $positive;
+    }
+
+    &.habit {
+      background: $balanced;
+    }
+  }
+
   .has-subheader {
     top: 92px
   }

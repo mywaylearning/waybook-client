@@ -6,14 +6,12 @@
 
   function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory, $ionicModal, $ionicScrollDelegate, $timeout, $location, $window) {
 
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
     if (!$stateParams.tag) {
-      var monthNames = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
       var todayDate = new Date();
-      var date = monthNames[todayDate.getMonth()] + '-' + todayDate.getFullYear();
-      $location.hash(date);
-      $timeout(function() {
-        $ionicScrollDelegate.$getByHandle('timelineScroll').anchorScroll();
-      }, 100);
+      var date = monthNames[todayDate.getMonth()].toLowerCase() + '-' + todayDate.getFullYear();
+      $scope.scrollTo = date;
     }
 
     $scope.hashMonth = function(date) {
@@ -44,10 +42,13 @@
         hideOnStateChange: true
       });
 
-      $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true, notify: true });
+      $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true });
     };
 
-    $scope.createGoal = function() {
+    $scope.createGoal = function(date) {
+      var tmp = date.split(' ');
+      var month = monthNames.indexOf(tmp[0]) + 1;
+      $scope.deadline = new Date(month + '/15/' + tmp[1]);
       $scope.postType = 'goal';
       $scope.createPopup = {};
       $ionicModal.fromTemplateUrl('app/sections/plan/create-goal.html', {

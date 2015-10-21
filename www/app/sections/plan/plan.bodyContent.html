@@ -11,13 +11,13 @@
       </label>
     </div>
   </div>
-  <ion-content padding="true" class="has-subheader" delegate-handle="timelineScroll">
+  <ion-content padding="true" class="has-subheader" delegate-handle="timelineScroll" overflow-scroll="true" way-timeline-scroll="{{scrollTo}}">
     <div class="small-on-wide">
       <div class="period" ng-repeat="date in months" id="{{hashMonth(date)}}">
         <p class="timeline-date">
           <span class="text">{{date}}</span>
         </p>
-        <div class="no-posts" ng-click="createGoal()" ng-if="!getPosts(date).length">
+        <div class="no-posts" ng-click="createGoal(date)" ng-if="!getPosts(date).length">
           <button class="button button-clear icon ion-plus-round button-large"></button>
         </div>
         <div class="list" ng-repeat="post in getPosts(date)" ng-if="getPosts(date).length">

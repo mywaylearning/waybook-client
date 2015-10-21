@@ -25,6 +25,7 @@
     ctrl.deadlineDateConfig = {
       titleLabel: 'Date you are planning to finish this goal',
       from: new Date(),
+
       callback: function (val) {
         if (val) {
           ctrl.model.gEndDate = val;
@@ -62,6 +63,11 @@
       }
       $state.go('app.main.type', {type: 'thought'});
     };
+
+    if (ctrl.deadline) {
+      ctrl.deadlineDateConfig.inputDate = ctrl.deadline;
+      ctrl.model.gEndDate = ctrl.deadline;
+    }
 
     // Define default options based on type of post
     switch (ctrl.model.postType) {

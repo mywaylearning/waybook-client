@@ -15,7 +15,9 @@
   app.controller('MainPostController', require('./main/post.controller.js'));
   app.controller('DiscoverController', require('./discover/discover.controller.js'));
   app.controller('ExplorationController', require('./discover/exploration.controller.js'));
+
   app.controller('PlanController', require('./plan/plan.controller.js'));
+  app.directive('wayTimelineScroll', require('./plan/timelineScroll.directive.js'));
 
   app.controller('UniteController', require('./unite/unite.controller.js'));
   app.controller('UniteDetailController', require('./unite/unite.detail.controller.js'));

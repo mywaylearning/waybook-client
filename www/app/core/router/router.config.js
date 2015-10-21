@@ -198,7 +198,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.plan', {
     cache: false,
-    url: '/plan',
+    url: '/plan?tag',
     views: {
       'bodyContent': {
         controller: 'PlanController'
@@ -208,8 +208,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       tags: function(TagService) {
         return TagService.timeline();
       },
-      posts: function(PostService) {
-        return PostService.timelineByTag();
+      posts: function(PostService, $stateParams) {
+        return PostService.timelineByTag($stateParams.tag);
       }
     }
   })

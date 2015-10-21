@@ -12,7 +12,8 @@
         postType: '=type',
         sharedPost: '=',
         modalInstance: '=',
-        onCreate: '&'
+        onCreate: '&',
+        deadline: '='
       },
       controller: 'PostFormController',
       controllerAs: 'ctrl',

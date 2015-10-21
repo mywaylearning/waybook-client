@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PlanController');
 
-  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory, $ionicModal, $ionicScrollDelegate, $timeout, $location, $window) {
+  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory, $ionicModal) {
 
     var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -88,6 +88,6 @@
     }
   }
 
-  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', '$ionicScrollDelegate', '$timeout', '$location', '$window', PlanController];
+  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', PlanController];
 
 }());

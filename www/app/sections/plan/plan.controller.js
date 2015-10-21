@@ -13,6 +13,7 @@
       if ($stateParams.tag === $scope.selectedTag) {
         return;
       }
+
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
@@ -23,11 +24,7 @@
         hideOnStateChange: true
       });
 
-      $state.go('app.plan', { tag: $scope.selectedTag }, { location: 'replace' });
-      // PostService.timelineByTag($scope.selectedTag).then(function(response) {
-      //   $scope.timeline = response[0].plain();
-      //   $ionicLoading.hide();
-      // });
+      $state.go('app.plan', { tag: $scope.selectedTag });
     }
   }
 

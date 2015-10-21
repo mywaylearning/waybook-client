@@ -141,7 +141,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app', {
     abstract: true,
     templateUrl: 'app/sections/app/base.html',
-    controller: function(app) {
+    controller: function($scope, $state, $ionicHistory, app) {
+
+      $scope.routeClearCache = function(route) {
+        $ionicHistory.clearCache();
+        $state.go(route);
+      }
+
       app.setUser();
     },
     resolve: userResolve

@@ -10,9 +10,9 @@
         $timeout(function() {
           var scrollTo = document.getElementById(attrs.wayTimelineScroll);
           if (scrollTo) {
-            $ionicScrollDelegate.scrollTo(0, scrollTo.offsetTop - ((window.innerHeight - 180) / 2));
+            $ionicScrollDelegate.scrollTo(0, scrollTo.offsetTop - ((window.innerHeight - 180) / 2), true);
           }
-        });
+        }, 1000);
       }
     };
   }

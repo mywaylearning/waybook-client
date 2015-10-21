@@ -197,7 +197,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan', {
-    cache: false,
     url: '/plan?tag',
     views: {
       'bodyContent': {

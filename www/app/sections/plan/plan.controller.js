@@ -5,6 +5,7 @@
   var debug = require('debug')('waybook:PlanController');
 
   function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
+    console.log('reloaded');
     $scope.tags = tags;
     $scope.timeline = posts[0].plain();
     $scope.selectedTag = $stateParams.tag;
@@ -14,6 +15,7 @@
         return;
       }
 
+      $ionicHistory.clearCache();
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
@@ -23,7 +25,7 @@
         hideOnStateChange: true
       });
 
-      $state.go('app.plan', { tag: $scope.selectedTag });
+      $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true, notify: true });
     }
   }
 

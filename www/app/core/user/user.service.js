@@ -146,6 +146,7 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
 
     if (redirect) {
       router.goToLoggedOut();
+      window.location.reload();
     }
   }
 

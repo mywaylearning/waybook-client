@@ -19,7 +19,7 @@
     };
 
     $scope.tags = tags;
-    $scope.months = posts[1].plain().reverse();
+    $scope.months = posts[1].plain();
     $scope.posts = posts[0].plain();
     $scope.selectedTag = $stateParams.tag;
 
@@ -66,7 +66,7 @@
         hideOnStateChange: true
       });
       PostService.timelineByTag().then(function(response) {
-        $scope.months = response[1].plain().reverse();
+        $scope.months = response[1].plain();
         $scope.posts = response[0].plain();
         $scope.createPopup.hide();
         $ionicLoading.hide();

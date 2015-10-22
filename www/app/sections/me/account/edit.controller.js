@@ -1,6 +1,6 @@
 'use strict';
 
-function MeEditController($scope, $stateParams, $state, currentUser, user, utils, USER_AGE, errorHandler) {
+function MeEditController($scope, $stateParams, $state, currentUser, UserService, utils, USER_AGE, errorHandler) {
 
   // Form controllers
   var _basicFormController, _passwordFormController, _ageFormController;
@@ -48,7 +48,7 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
   });
 
   var _updateSelf = function(model, errorHandler) {
-    user.updateSelf(model).then(function(response) {
+    UserService.updateSelf(model).then(function(response) {
       if ($scope.ageRequired) {
         return $state.go('app.main');
       }
@@ -126,6 +126,6 @@ function MeEditController($scope, $stateParams, $state, currentUser, user, utils
 
 }
 
-MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'user', 'utils', 'USER_AGE', 'errorHandler'];
+MeEditController.$inject = ['$scope', '$stateParams', '$state', 'currentUser', 'UserService', 'utils', 'USER_AGE', 'errorHandler'];
 
 module.exports = MeEditController;

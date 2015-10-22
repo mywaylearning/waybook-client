@@ -1,6 +1,6 @@
 'use strict';
 
-function RegisterController($scope, $stateParams, router, user, errorHandler, $ionicPopup, auth) {
+function RegisterController($scope, $stateParams, router, UserService, errorHandler, $ionicPopup, auth) {
 
   if ($stateParams.userInfo) {
     $scope.model = $stateParams.userInfo;
@@ -25,7 +25,7 @@ function RegisterController($scope, $stateParams, router, user, errorHandler, $i
    */
   $scope.onRegister = function() {
 
-    user
+    UserService
       .register($scope.model)
       .then(function(data) {
         if (data.access_token) {
@@ -53,7 +53,7 @@ module.exports = [
   '$scope',
   '$stateParams',
   'router',
-  'user',
+  'UserService',
   'errorHandler',
   '$ionicPopup',
   'auth',

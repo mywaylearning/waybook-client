@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:AppService');
 
-  function AppService($rootScope, user, EVENTS) {
+  function AppService($rootScope, UserService, EVENTS) {
     debug($rootScope);
     var service,
         scope;
@@ -36,7 +36,7 @@
     }
 
     function _setUser() {
-      scope.app.user = user.currentUser().$object;
+      scope.app.user = UserService.currentUser().$object;
     }
 
     function _getUser() {
@@ -48,6 +48,6 @@
     }
   }
 
-  module.exports = ['$rootScope', 'user', 'EVENTS', AppService];
+  module.exports = ['$rootScope', 'UserService', 'EVENTS', AppService];
 
 }());

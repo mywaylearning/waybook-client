@@ -1,6 +1,6 @@
 'use strict';
 
-function VerifyController($scope, $state, user, errorHandler) {
+function VerifyController($scope, $state, UserService, errorHandler) {
   var token = location.hash.split('t=');
 
   if (!token[1]) {
@@ -15,7 +15,7 @@ function VerifyController($scope, $state, user, errorHandler) {
     verify: token[1]
   };
 
-  user
+  UserService
     .register(model)
     .then(function(data) {
       $scope.data.verified = true;
@@ -31,7 +31,7 @@ function VerifyController($scope, $state, user, errorHandler) {
 module.exports = [
   '$scope',
   '$state',
-  'user',
+  'UserService',
   'errorHandler',
   VerifyController
 ];

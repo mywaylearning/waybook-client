@@ -83,7 +83,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('public', {
     abstract: true,
     template: '<ion-nav-bar class="bar-stable"><ion-nav-back-button state-nav-back-button></ion-nav-back-button></ion-nav-bar><ion-nav-view name="publicContent"></ion-nav-view>',
-    controller: function($scope, $state, user, auth) {
+    controller: function($scope, $state, UserService, auth) {
       /**
        * https://github.com/MrSwitch/hello.js#4-add-listeners-for-the-user-login
        */
@@ -122,7 +122,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             providerId: response.id
           }
 
-          user.socialLoginCheck(_user).then(function(data) {
+          UserService.socialLoginCheck(_user).then(function(data) {
             auth.saveAuth(data);
             window.location.reload(false);
           }).catch(function(error) {
@@ -363,8 +363,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     resolve: {
-      currentUser: function(user) {
-        return user.currentUser(true);
+      currentUser: function(UserService) {
+        return UserService.currentUser(true);
       }
     },
     params: {

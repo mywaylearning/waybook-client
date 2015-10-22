@@ -13,7 +13,7 @@
    * @param  {constant} ROLES
    * @return {Role}
    */
-  function init(Role, $rootScope, $timeout, $state, auth, user, ROLES) {
+  function init(Role, $rootScope, $timeout, $state, auth, UserService, ROLES) {
 
     return new Role(ROLES.user, validate);
 
@@ -23,7 +23,7 @@
       $rootScope.returnToStateParams = $rootScope.toStateParams;
       return auth.isAuthenticated(true)
                 .then(function() {
-                  return user.getSelf();
+                  return UserService.getSelf();
                 }).catch(function(error) {
                   $timeout(function() {
                     $state.go('public.login');
@@ -32,6 +32,6 @@
     }
   }
 
-  module.exports = ['Role', '$rootScope', '$timeout', '$state', 'auth', 'user', 'ROLES', init];
+  module.exports = ['Role', '$rootScope', '$timeout', '$state', 'auth', 'UserService', 'ROLES', init];
 
 }());

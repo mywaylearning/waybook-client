@@ -1,6 +1,6 @@
 'use strict';
 
-var LoginController = function($scope, $state, $ionicPopup, router, auth, user, errorHandler) {
+var LoginController = function($scope, $state, $ionicPopup, router, auth, UserService, errorHandler) {
 
   var _loginFormController
 
@@ -72,7 +72,7 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
     });
     recoverPopup.then(function(email) {
       if (email) {
-        user.recoverPasswordRequest(email).then(function(response) {
+        UserService.recoverPasswordRequest(email).then(function(response) {
           $ionicPopup.show({
             title: 'E-mail sent',
             subTitle: 'We sent an e-mail to <strong>' + email + '</strong>. Please follow the instructions there to set a new password.',
@@ -90,7 +90,7 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
    * @return {Promise}
    */
   function onAuthenticated() {
-    return user.getSelf();
+    return UserService.getSelf();
   };
 
   /**
@@ -99,7 +99,7 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, user, 
    */
   function onGetUserSuccess(userData) {
     if (userData.confirmationToken) {
-      user.logout(false);
+      UserService.logout(false);
       return $scope.errorsData.message = 'You need to verify your account';
     }
     $scope.errorsData = {};
@@ -138,7 +138,7 @@ module.exports = [
   '$ionicPopup',
   'router',
   'auth',
-  'user',
+  'UserService',
   'errorHandler',
   LoginController
 ];

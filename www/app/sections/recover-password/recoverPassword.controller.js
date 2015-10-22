@@ -1,6 +1,6 @@
 'use strict';
 
-var RecoverPasswordController = function($scope, $state, $stateParams, user) {
+var RecoverPasswordController = function($scope, $state, $stateParams, UserService) {
   $scope.password = {};
 
 
@@ -10,7 +10,7 @@ var RecoverPasswordController = function($scope, $state, $stateParams, user) {
       recoveryToken: $stateParams.token
     }
 
-    user.setRecoveryPassword($scope.password.new, $stateParams.token).then(function(result) {
+    UserService.setRecoveryPassword($scope.password.new, $stateParams.token).then(function(result) {
       $state.go('public.login');
     });
 
@@ -21,6 +21,6 @@ module.exports = [
   '$scope',
   '$state',
   '$stateParams',
-  'user',
+  'UserService',
   RecoverPasswordController
 ];

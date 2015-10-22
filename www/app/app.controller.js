@@ -4,17 +4,17 @@
 
   var debug = require('debug')('waybook:AppController');
 
-  function AppController($scope, $ionicModal, $timeout, app, user) {
+  function AppController($scope, $ionicModal, $timeout, app, UserService) {
     var scope = this;
     // debug(app);
     // debug($scope);
     // debug(scope);
     app.init($scope);
-   // $scope.$watch(function() { return scope.user; }, onUserUpdate);
+   // $scope.$watch(function() { return scope.UserService; }, onUserUpdate);
 
     scope.logout = function() {
       app.reset();
-      user.logout();
+      UserService.logout();
     };
 
     // Create the settings modal
@@ -69,6 +69,6 @@
     }
   }
 
-  module.exports = ['$scope', '$ionicModal', '$timeout', 'app', 'user', AppController];
+  module.exports = ['$scope', '$ionicModal', '$timeout', 'app', 'UserService', AppController];
 
 }());

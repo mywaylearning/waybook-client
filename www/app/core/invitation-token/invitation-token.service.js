@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function InvitationTokenService($location, router, invitationStore, user, $rootScope) {
+  function InvitationTokenService($location, router, invitationStore, UserService, $rootScope) {
     var service,
       token;
 
@@ -49,7 +49,7 @@
       invitationStore.save(data.plain(), { getData: true });
 
       //for logged users
-      var cUser = user.currentUser().$object;
+      var cUser = UserService.currentUser().$object;
 
 
       if (cUser) {
@@ -151,6 +151,6 @@
     }
 
 
-  module.exports = ['$location', 'router', 'invitationStore', 'user', '$rootScope', InvitationTokenService];
+  module.exports = ['$location', 'router', 'invitationStore', 'UserService', '$rootScope', InvitationTokenService];
 
 }());

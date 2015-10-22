@@ -2,11 +2,11 @@
 
   'use strict';
   var debug = require('debug')('waybook:GrantRun');
-  function GrantRun($timeout, $rootScope, $state, $stateParams, user, auth, ERROR) {
+  function GrantRun($timeout, $rootScope, $state, $stateParams, UserService, auth, ERROR) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
       if (auth.isAuthenticated()) {
-        user.currentUser().then(function(user) {
+        UserService.currentUser().then(function(user) {
           if (!user.birthDate) {
             event.preventDefault();
             $timeout(function() {
@@ -47,6 +47,6 @@
     }
   }
 
-  module.exports = ['$timeout', '$rootScope', '$state', '$stateParams', 'user', 'auth', 'ERROR', GrantRun];
+  module.exports = ['$timeout', '$rootScope', '$state', '$stateParams', 'UserService', 'auth', 'ERROR', GrantRun];
 
 }());

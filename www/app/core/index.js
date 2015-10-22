@@ -22,7 +22,7 @@
     .run(require('./role/role-guest.run.js'))
     .run(require('./role/role-user.run.js'))
 
-    .factory('user', require('./user/user.service.js'))
+    .factory('UserService', require('./user/user.service.js'))
 
     .factory('invitationToken', require('./invitation-token/invitation-token.service.js'))
     .run(['invitationToken', function(invitationToken) {

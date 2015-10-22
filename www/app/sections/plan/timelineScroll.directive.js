@@ -12,7 +12,7 @@
           if (scrollTo) {
             $ionicScrollDelegate.scrollTo(0, scrollTo.offsetTop - ((window.innerHeight - 180) / 2), true);
           }
-        }, 1000);
+        }, 500);
       }
     };
   }

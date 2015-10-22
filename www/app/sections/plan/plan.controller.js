@@ -61,31 +61,17 @@
 
     $scope.onCreateGoal = function(post) {
       $state.go('app.plan');
+      $ionicLoading.show({
+        animation: 'fade-in',
+        hideOnStateChange: true
+      });
       PostService.timelineByTag().then(function(response) {
         $scope.months = response[1].plain().reverse();
         $scope.posts = response[0].plain();
         $scope.createPopup.hide();
-        console.log('handling response');
+        $ionicLoading.hide();
       });
-      // var endDate = new Date(post.gEndDate);
-      // var period = monthNames[endDate.getMonth()] + ' ' + endDate.getFullYear();
-      // var found = false;
-      // angular.forEach(Object.keys($scope.timeline), function(key) {
-      //   if (period === key) {
-      //     $scope.timeline[key].push(post);
-      //     found = true;
-      //   }
-      // });
-      //
-      // if (!found) {
-      //   $scope.timeline[period] = [post];
-      // }
-      // $scope.createPopup.hide();
     };
-
-    $scope.onDoubleTap = function() {
-      console.log('doubled tapped!');
-    }
   }
 
   module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', PlanController];

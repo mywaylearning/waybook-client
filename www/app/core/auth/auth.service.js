@@ -171,6 +171,8 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
       access_token: data.access_token,
       refresh_token: data.refresh_token
     });
+
+    token = authStore.getAccessToken();
   }
 
   /**

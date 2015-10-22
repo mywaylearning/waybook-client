@@ -1,4 +1,11 @@
 .about {
+
+  p {
+    font-size: 16px;
+    margin-top: 0;
+    color: #444;
+  }
+
   ion-content {
     background-image: url(/img/intro/screen1.jpg);
     background-position: top center;
@@ -11,7 +18,7 @@
   }
 
   .card {
-    opacity: 0.9;
+    opacity: 0.97;
   }
 
   ol {

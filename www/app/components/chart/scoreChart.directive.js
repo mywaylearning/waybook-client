@@ -77,7 +77,7 @@
             },
             lineWidth: 0,
             minorTickInterval: null,
-            tickPixelInterval: scope.max * 1000,
+            tickInterval: scope.max,
             tickWidth: 0,
             labels: {
               y: 16

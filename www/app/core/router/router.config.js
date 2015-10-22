@@ -417,6 +417,15 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.dashboard', {
+    url: '/dashboard',
+    views: {
+      'bodyContent': {
+        controller: 'DashboardController'
+      }
+    }
+  })
+
   .state('app.main', {
     cache: false,
     url: '/',

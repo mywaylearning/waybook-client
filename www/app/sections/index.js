@@ -35,4 +35,6 @@
   app.controller('AboutController', require('./about/about.controller.js'));
   app.controller('IntroController', require('./intro/intro.controller.js'));
   app.controller('VerifyController', require('./verify/verify.controller.js'));
+
+  app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
 }());

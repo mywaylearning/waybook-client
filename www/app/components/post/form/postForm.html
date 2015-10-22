@@ -4,6 +4,7 @@
     <div class="item item-text-wrap">
       <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType}" ng-bind-html="ctrl.placeHolder"></div>
       <div ng-if="!ctrl.model.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
+      {{ctrl.model.originalPost | json}}
       <div ng-if="ctrl.model.postType">
           <div class="textarea"
             ng-model="ctrl.model.content"
@@ -12,7 +13,7 @@
             id="tags"
             mentio-typedTerm="typedTerm"
             mentio-require-leading-space="true"
-            ng-required="ctrl.modalInstance ? false : ctrl.model.originalShared ? false : true"
+            ng-required="ctrl.modalInstance ? (ctrl.sharedPost ? false : true) : true"
             ></div>
 
             <mentio-menu

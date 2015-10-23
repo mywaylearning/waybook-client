@@ -36,7 +36,7 @@
 
         _window.on('resize', onResize);
 
-        scope.$on('destroy', function() {
+        scope.$on('$destroy', function() {
           _window.off('resize', onResize);
         });
 
@@ -91,7 +91,7 @@
             tickInterval: max,
             tickWidth: 0,
             labels: {
-              y: 16
+              enabled: false
             }
           },
 
@@ -121,9 +121,6 @@
         };
 
         var chart = new Highcharts.Chart(config);
-
-        // el.highcharts(config);
-
       }
     }
   }

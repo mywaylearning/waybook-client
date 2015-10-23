@@ -14,7 +14,8 @@
         max: '@chartMax',
         increaseBy: '@chartIncreaseBy',
         title: '@chartTitle',
-        label: '@chartLabel'
+        label: '@chartLabel',
+        hideLabel: '=chartHideLabel'
       },
       link: function(scope, el, attrs) {
 
@@ -91,7 +92,7 @@
             tickInterval: max,
             tickWidth: 0,
             labels: {
-              enabled: false
+              y: 16
             }
           },
 
@@ -119,6 +120,10 @@
           }],
 
         };
+
+        if (scope.hideLabel) {
+          config.yAxis.labels.enabled = false;
+        }
 
         var chart = new Highcharts.Chart(config);
       }

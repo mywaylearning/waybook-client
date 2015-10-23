@@ -429,6 +429,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       'bodyContent': {
         controller: 'DashboardController'
       }
+    },
+    resolve: {
+      dashboardData: function(DashboardService) {
+        return DashboardService.get();
+      }
     }
   })
 

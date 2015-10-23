@@ -217,11 +217,17 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   .state('app', {
     abstract: true,
     templateUrl: 'app/sections/app/base.html',
-    controller: function($scope, $state, $ionicHistory, app) {
+    controller: function($scope, $state, $ionicHistory, $ionicPopover, app) {
       $scope.routeClearCache = function(route) {
         $ionicHistory.clearCache();
         $state.go(route);
-      }
+      };
+
+      $ionicPopover.fromTemplateUrl('templates/popover.html', {
+        scope: $scope,
+      }).then(function(popover) {
+        $scope.popover = popover;
+      });
 
       app.setUser();
     },

@@ -1,23 +1,4 @@
 <ion-side-menus enable-menu-with-back-views="true">
-  <ion-side-menu-content>
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button state-nav-back-button>
-      </ion-nav-back-button>
-      <ion-nav-buttons side="left">
-        <button hide-when="(min-width:1024px)" class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </ion-nav-buttons>
-
-      <ion-nav-buttons side="right">
-        <button class="button button-clear" ui-sref="app.me.account">
-          <img gravatar-src="'{{app.user.email}}'" gravatar-size="80" gravatar-default="mm" class="avatar-header">
-          {{app.user.firstName}}
-        </button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
-    <ion-nav-view name="bodyContent"></ion-nav-view>
-  </ion-side-menu-content>
-
   <ion-side-menu side="left" expose-aside-when="(min-width:1024px)">
     <ion-content>
       <ion-list>
@@ -66,4 +47,44 @@
       <button class="button button-clear ion-gear-a" menu-close ui-sref="app.me.account"></button>
     </ion-footer-bar>
   </ion-side-menu>
+
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button state-nav-back-button>
+      </ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button hide-when="(min-width:1024px)" class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-clear button-header-avatar" ng-click="popover.show($event)">
+          <img gravatar-src="'{{app.user.email}}'" gravatar-size="80" gravatar-default="mm">
+          <span>{{app.user.firstName}}</span>
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="bodyContent"></ion-nav-view>
+  </ion-side-menu-content>
 </ion-side-menus>
+
+<script id="templates/popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-content>
+      <div class="list" ng-click="popover.hide()">
+        <a class="item item-icon-left" ui-sref="app.dashboard">
+          <i class="icon ion-speedometer"></i>
+          Dashboard
+        </a>
+        <a class="item item-icon-left" ui-sref="app.me.account">
+          <i class="icon ion-gear-a"></i>
+          My Account
+        </a>
+        <a class="item item-icon-left" ng-click="app.logout()">
+          <i class="icon ion-power"></i>
+          Logout
+        </a>
+      </div>
+    </ion-content>
+  </ion-popover-view>
+</script>

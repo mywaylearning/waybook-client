@@ -42,6 +42,8 @@
 
     .factory('PostService', require('./post/post.service.js'))
 
-    .factory('ExplorationService', require('./exploration/exporation.service.js'));
+    .factory('ExplorationService', require('./exploration/exporation.service.js'))
+
+    .factory('DashboardService', require('./dashboard/dashboard.service.js'));
 
 }());

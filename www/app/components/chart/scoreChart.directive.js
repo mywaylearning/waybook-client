@@ -1,6 +1,10 @@
 (function() {
   'use strict';
 
+  function toInt(number) {
+    return parseInt(number, 10);
+  }
+
   function ScoreChart($timeout, $window) {
     return {
       restrict: 'AE',
@@ -8,13 +12,17 @@
         score: '@chartScore',
         min: '@chartMin',
         max: '@chartMax',
+        increaseBy: '@chartIncreaseBy',
         title: '@chartTitle',
         label: '@chartLabel'
       },
       link: function(scope, el, attrs) {
 
         var _window = angular.element($window),
-            maxHeight = 300;
+            maxHeight = 300,
+            score = toInt(scope.score),
+            min = toInt(scope.min),
+            max = toInt(scope.max);
 
         var onResize = function() {
           var height = el.width() * 0.70;
@@ -28,10 +36,13 @@
 
         _window.on('resize', onResize);
 
-        scope.$on('destroy', function() {
+        scope.$on('$destroy', function() {
           _window.off('resize', onResize);
         });
 
+        if (scope.increaseBy) {
+          max = score < max ? max : score + toInt(scope.increaseBy);
+        }
 
         var config = {
           chart: {
@@ -69,18 +80,18 @@
 
           // the value axis
           yAxis: {
-            min: scope.min,
-            max: scope.max,
+            min: min,
+            max: max,
             title: {
               y: -110,
               text: scope.title
             },
             lineWidth: 0,
             minorTickInterval: null,
-            tickPixelInterval: scope.max * 1000,
+            tickInterval: max,
             tickWidth: 0,
             labels: {
-              y: 16
+              enabled: false
             }
           },
 
@@ -90,13 +101,16 @@
                 y: 8,
                 borderWidth: 0,
                 useHTML: true
-              }
+              },
+              zones: [{
+                color: '#33cd5f'
+              }]
             }
           },
 
           series: [{
             name: 'score',
-            data: [parseInt(scope.score, 10)],
+            data: [score],
             dataLabels: {
               format: '<div style="text-align:center"><span style="font-size:40px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
@@ -107,9 +121,6 @@
         };
 
         var chart = new Highcharts.Chart(config);
-
-        // el.highcharts(config);
-
       }
     }
   }

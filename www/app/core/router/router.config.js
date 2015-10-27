@@ -242,6 +242,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         controller: 'DiscoverController'
       }
     },
+    params: {
+      categoryOpen: null
+    },
     resolve: {
       categories: function(ExplorationService) {
         return ExplorationService.getCategories();

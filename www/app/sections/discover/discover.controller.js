@@ -4,16 +4,24 @@
 
   var debug = require('debug')('waybook:DiscoveryController');
 
-  function DiscoveryController($scope, categories) {
+  function DiscoveryController($scope, $stateParams, categories) {
 
-    debug('here we are');
+    var _categories = categories.plain();
+
+    if ($stateParams.categoryOpen) {
+      angular.forEach(_categories, function(category) {
+        if (category.category.toLowerCase().indexOf($stateParams.categoryOpen.toLowerCase()) > -1) {
+          category.shown = true;
+        }
+      });
+    }
 
     $scope.viewData = {
-      categories: categories
+      categories: _categories
     };
 
   }
 
-  module.exports = ['$scope', 'categories', DiscoveryController];
+  module.exports = ['$scope', '$stateParams', 'categories', DiscoveryController];
 
 }());

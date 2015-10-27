@@ -8,10 +8,13 @@
 
     var ctrl = this;
 
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
     // Datepicker configurations
     ctrl.startDateConfig = {
       titleLabel: 'Date you are planning to start this goal',
-      from: new Date(),
+      from: yesterday,
       callback: function (val) {
         if (val) {
           ctrl.model.gStartDate = val;

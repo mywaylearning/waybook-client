@@ -4,10 +4,7 @@
 
   var debug = require('debug')('waybook:PostFormController');
 
-  function PostFormController($scope, $state, $timeout, SWAGGER, PostService, TagService, ContactService) {
-    debug('here we are (directive controller)');
-
-    debug(SWAGGER);
+  function PostFormController($scope, $state, $timeout, PostService, TagService, ContactService) {
 
     var ctrl = this;
 
@@ -357,6 +354,6 @@
 
   }
 
-  module.exports = ['$scope', '$state', '$timeout', 'SWAGGER', 'PostService', 'TagService', 'ContactService', PostFormController];
+  module.exports = ['$scope', '$state', '$timeout', 'PostService', 'TagService', 'ContactService', PostFormController];
 
 }());

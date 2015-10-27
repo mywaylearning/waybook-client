@@ -67,7 +67,6 @@
   })
 
   .constant('DEFAULT_PER_PAGE', 20)
-    .constant('SWAGGER', require('./app.swagger.js'))
 
   .config(AppConfig);
 

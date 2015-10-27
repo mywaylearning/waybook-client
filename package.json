@@ -87,7 +87,8 @@
   "dependencies": {
     "angular-moment": "^0.10.1",
     "debug": "^2.2.0",
-    "store": "^1.3.17"
+    "store": "^1.3.17",
+    "uglify-js": "^2.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^5.2.0",
@@ -117,8 +118,8 @@
     "-js-": "",
     "build:import-api-spec": "./scripts/import-api-spec",
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' www/lib/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o www/app/components/lodash.custom.min.js -p include={}",
-    "build:browserify": "browserify www/app/app.js > www/app/waybook-min.js",
-    "build-js:dev": "npm run build:import-api-spec && npm run build:lodash",
+    "build:browserify": "NODE_ENV=production browserify www/app/app.js | uglifyjs --compress > www/app/waybook-min.js",
+    "build-js:dev": "npm run build:lodash",
     "build-js": "npm run build:lodash && npm run build:browserify",
     "-css-": "",
     "build:sass:dev": "node-sass --precision 10 --linefeed cr --source-map www/css/ scss/ --output www/css/",

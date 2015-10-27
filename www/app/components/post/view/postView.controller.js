@@ -4,10 +4,7 @@
 
   var debug = require('debug')('waybook:PostViewController');
 
-  function PostViewController($scope, $state, $timeout, PostService, SWAGGER, $ionicPopover, $ionicPopup, $ionicModal) {
-    debug('here we are (directive controller)');
-
-    debug(SWAGGER);
+  function PostViewController($scope, $state, $timeout, PostService, $ionicPopover, $ionicPopup, $ionicModal) {
 
     $scope.state = $state.current;
 
@@ -139,6 +136,6 @@
     });
   }
 
-  module.exports = ['$scope', '$state', '$timeout', 'PostService', 'SWAGGER', '$ionicPopover', '$ionicPopup', '$ionicModal', PostViewController];
+  module.exports = ['$scope', '$state', '$timeout', 'PostService', '$ionicPopover', '$ionicPopup', '$ionicModal', PostViewController];
 
 }());

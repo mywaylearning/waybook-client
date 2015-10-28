@@ -13,8 +13,8 @@
   app.controller('MainController', require('./main/main.controller.js'));
   app.controller('MainTypeController', require('./main/mainType.controller.js'));
   app.controller('MainPostController', require('./main/post.controller.js'));
-  app.controller('DiscoverController', require('./discover/discover.controller.js'));
-  app.controller('ExplorationController', require('./discover/exploration.controller.js'));
+  app.controller('ExploreController', require('./explore/explore.controller.js'));
+  app.controller('ExplorationController', require('./explore/exploration.controller.js'));
 
   app.controller('PlanController', require('./plan/plan.controller.js'));
   app.directive('wayTimelineScroll', require('./plan/timelineScroll.directive.js'));

@@ -234,12 +234,12 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     resolve: userResolve
   })
 
-  .state('app.discover', {
-    url: '/discover',
+  .state('app.explore', {
+    url: '/explore',
     cache: false,
     views: {
       'bodyContent': {
-        controller: 'DiscoverController'
+        controller: 'ExploreController'
       }
     },
     params: {
@@ -252,7 +252,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
-  .state('app.discover.exploration', {
+  .state('app.explore.exploration', {
     url: '/:exploration',
     views: {
       'bodyContent@app': {
@@ -266,11 +266,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
-  .state('app.discover.exploration.results', {
+  .state('app.explore.exploration.results', {
     url: '/results',
     views: {
       'bodyContent@app': {
-        templateUrl: 'app/sections/discover/result.bodyContent.html',
+        templateUrl: 'app/sections/explore/result.bodyContent.html',
         controller: function($scope, exploration, results) {
           $scope.viewData = {
             exploration: exploration,

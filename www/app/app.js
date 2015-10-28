@@ -25,6 +25,7 @@
   require('highcharts-more');
   require('highcharts-solidgauge');
   require('highcharts-ng');
+  require('ng-segmentio');
   window.hello = require('hello');
 
 
@@ -49,7 +50,8 @@
     'internationalPhoneNumber',
     'stateBackButtonIonic',
     'ionic-datepicker',
-    'highcharts-ng'
+    'highcharts-ng',
+    'segmentio'
   ])
 
   .controller('AppController', require('./app.controller.js'))

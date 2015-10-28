@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:AppController');
 
-  function AppController($scope, $ionicModal, $timeout, app, UserService, segmentio) {
+  function AppController($scope, $ionicModal, $timeout, app, UserService) {
     var scope = this;
     // debug(app);
     // debug($scope);
@@ -39,8 +39,6 @@
         $scope.closeLogin();
       }, 1000);
     };
-
-    segmentio.load('gcb6avxous');
 
     // $scope.loginData = {};
     //

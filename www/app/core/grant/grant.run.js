@@ -40,7 +40,7 @@
       if (error && error.type === ERROR.unauthorizedRequest) {
         auth.isAuthenticated(true).then(function(response){
           if (response) {
-            user.logout();
+            UserService.logout();
           }
         });
       }

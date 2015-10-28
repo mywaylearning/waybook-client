@@ -87,7 +87,7 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
      */
     auth.destroy();
     deferred.reject(response.data);
-    if (response.data.error !== 'invalid_grant') {
+    if (router.getCurrentRoute().name !== 'public.login') {
       router.goToLoggedOut();
     }
 

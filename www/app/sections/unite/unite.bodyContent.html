@@ -1,7 +1,9 @@
 <ion-view view-title="Unite" class="unite">
   <div class="bar bar-subheader" ng-if="contacts.length">
-    <div class="buttons">
-      <button class="button button-clear button-positive ion ion-person-add" ng-click="openModalAddSupporter()"> Add supporter</button>
+    <div class="small-on-wide">
+      <div class="buttons">
+        <button class="button button-clear button-positive ion ion-person-add" ng-click="openModalAddSupporter()"> Add supporter</button>
+      </div>
     </div>
   </div>
   <ion-content padding="true" ng-class="{'has-subheader': contacts.length}">
@@ -20,7 +22,7 @@
           <ion-option-button class="button-positive icon ion-edit" ui-sref="app.unite.edit({contactId:contact.id})"></ion-option-button>
           <ion-option-button class="button-assertive icon ion-trash-b" ng-click="deleteSupporter(contact)"></ion-option-button>
         </ion-item>
-      </ion-list>    
+      </ion-list>
     </div>
   </ion-content>
 </ion-view>

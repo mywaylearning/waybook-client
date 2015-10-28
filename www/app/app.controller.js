@@ -69,6 +69,6 @@
     }
   }
 
-  module.exports = ['$scope', '$ionicModal', '$timeout', 'app', 'UserService', AppController];
+  module.exports = ['$scope', '$ionicModal', '$timeout', 'app', 'UserService', 'segmentio', AppController];
 
 }());

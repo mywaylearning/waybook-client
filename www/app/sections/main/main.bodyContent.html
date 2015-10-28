@@ -4,7 +4,13 @@
       <div ui-view="way-post-form">
         <way-post-form></way-post-form>
       </div>
-      <way-feed posts="posts" user="app.user"></way-feed>
+      <div class="card" ng-if="!posts.length">
+        <div class="item item-divider">Welcome your future. You own it.</div>
+        <div class="item item-body">
+          Get started by noting a Discovery about yourself, setting a Goal, or reflecting on your <a ui-sref="app.explore({categoryOpen: 'values'})">Values</a>.
+        </div>
+      </div>
+      <way-feed ng-if="posts.length" posts="posts" user="app.user"></way-feed>
     </div>
   </ion-content>
 </ion-view>

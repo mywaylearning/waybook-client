@@ -13,6 +13,7 @@
     service = {
       goToLoggedIn: _goToLoggedIn,
       goToLoggedOut: _goToLoggedOut,
+      getCurrentRoute: _getCurrentRoute,
       goTo: _goTo,
       clearParam: _clearParam
     };
@@ -55,6 +56,10 @@
       }
       debug('_goTo', stateName);
       return $state.transitionTo(stateName, paramsters, {reload: !noreload, inherit: false, notify: true});
+    }
+
+    function _getCurrentRoute() {
+      return $state.current;
     }
 
   }

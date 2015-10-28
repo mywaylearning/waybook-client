@@ -54,3 +54,4 @@ www/app/components/lodash.custom.min.js
 # --------------------
 .env
 .env.local
+*.gz

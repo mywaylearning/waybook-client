@@ -14,6 +14,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   $locationProvider.hashPrefix('!');
 
   userResolve = {
+    analytics: function(segmentio) {
+      return segmentio.load('gcb6avxous');
+    },
     userGrant: function(grant) {
       return grant.only([ROLES.user], ['app']);
     }

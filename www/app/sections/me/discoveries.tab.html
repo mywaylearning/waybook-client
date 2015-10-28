@@ -6,7 +6,7 @@
       </div>
     </div>
   </div>
-  <ion-content padding="true" class="has-subheader">
+  <ion-content padding="true" ng-class="{'has-subheader': discoveries.length}">
     <div class="small-on-wide">
       <div ng-if="!discoveries.length">
         <div class="card">

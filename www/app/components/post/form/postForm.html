@@ -43,18 +43,16 @@
           <option value="Nice to Complete">Nice to Complete</option>
         </select>
       </label>
-      <label class="item item-input">
+      <div class="item item-input">
         <span class="input-label">Start date:</span>
-        <ionic-datepicker input-obj="ctrl.startDateConfig">
-          <input type="text" way-format-date ng-model="ctrl.model.gStartDate" placeholder="Pick a date">
-        </ionic-datepicker>
-      </label>
-      <label class="item item-input">
+        <span ionic-datepicker input-obj="ctrl.startDateConfig" class="button button-clear button-dark button-small icon ion-calendar"></span>
+        <input type="date" class="hide-calendar-widget" ng-model="ctrl.model.gStartDate">
+      </div>
+      <div class="item item-input">
         <span class="input-label">Deadline:</span>
-        <ionic-datepicker input-obj="ctrl.deadlineDateConfig">
-          <input type="text" way-format-date ng-model="ctrl.model.gEndDate" placeholder="Pick a date" required>
-        </ionic-datepicker>
-      </label>
+        <span ionic-datepicker input-obj="ctrl.deadlineDateConfig" class="button button-clear button-dark button-small icon ion-calendar"></span>
+        <input type="date" class="hide-calendar-widget" ng-model="ctrl.model.gEndDate" required>
+      </div>
       <ion-toggle
           ng-model="ctrl.model.gRecurringEnabled"
           class="item item-text-wrap habit">

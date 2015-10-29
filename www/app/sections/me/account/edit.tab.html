@@ -64,12 +64,11 @@
           <div class="item item-body" ng-if="ageRequired">
             You need to provide your age information before start using Waybook.
           </div>
-          <label class="item item-input">
+          <div class="item item-input">
             <span class="input-label">Date of Birth:</span>
-            <ionic-datepicker input-obj="ageConfig">
-              <input type="text" ng-model="user.birthDate" way-format-date placeholder="Date of birth" required>
-            </ionic-datepicker>
-          </label>
+            <span class="button button-clear button-dark button-small icon ion-calendar" ionic-datepicker input-obj="ageConfig"></span>
+            <input type="date" class="hide-calendar-widget" ng-model="user.birthDate" required>
+          </div>
 
           <div class="item assertive" ng-show="accountData.underAge">
             Sorry but the minimum age for the Waybook is 13.

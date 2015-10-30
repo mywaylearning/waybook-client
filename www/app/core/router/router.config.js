@@ -336,12 +336,29 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.unite.add', {
+    url: '/add',
+    cache: false,
+    views: {
+      'bodyContent@app': {
+        templateUrl: 'app/sections/unite/form.bodyContent.html',
+        controller: 'UniteFormController'
+      }
+    },
+    resolve: {
+      contact: function() {
+        return false;
+      }
+    }
+  })
+
   .state('app.unite.edit', {
     url: '/edit/{contactId:[0-9]{1,4}}',
     cache: false,
     views: {
       'bodyContent@app': {
-        controller: 'UniteEditController'
+        templateUrl: 'app/sections/unite/form.bodyContent.html',
+        controller: 'UniteFormController'
       }
     },
     resolve: {

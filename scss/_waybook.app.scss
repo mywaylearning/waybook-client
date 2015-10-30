@@ -60,3 +60,22 @@ ion-view.pane {
     }
   }
 }
+
+.cancel-overlay {
+  overflow: visible;
+  z-index: 99;
+}
+
+.share-with {
+  width: 65%;
+  margin-right: 8px;
+
+  input {
+    padding-right: 0 !important;
+  }
+}
+
+tags-input .tags {
+  border: 0;
+  box-shadow: none;
+}

@@ -266,6 +266,10 @@ mentio-menu {
   }
 }
 
+.hide-calendar-widget::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
 // body.aside-open {
 //    {
 //

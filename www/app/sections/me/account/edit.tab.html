@@ -64,34 +64,33 @@
           <div class="item item-body" ng-if="ageRequired">
             You need to provide your age information before start using Waybook.
           </div>
-          <label class="item item-input">
+          <div class="item item-input">
             <span class="input-label">Date of Birth:</span>
-            <ionic-datepicker input-obj="ageConfig">
-              <input type="text" ng-model="user.birthDate" way-format-date placeholder="Date of birth" required>
-            </ionic-datepicker>
-          </label>
+            <span class="button button-clear button-dark button-small icon ion-calendar" ionic-datepicker input-obj="ageConfig"></span>
+            <input type="date" class="hide-calendar-widget" ng-model="user.birthDate" required>
+          </div>
 
           <div class="item assertive" ng-show="accountData.underAge">
             Sorry but the minimum age for the Waybook is 13.
           </div>
 
           <div ng-show="accountData.needParent">
-            <div class="item item-divider">Parent of guardian information:</div>
+            <div class="item item-divider">Parent or guardian information:</div>
             <label class="item item-input">
               <span class="input-label">First name:</span>
-              <input type="text" ng-model="user.parentFirstName" placeholder="Parent of guardian first name" ng-required="accountData.needParent">
+              <input type="text" ng-model="user.parentFirstName" placeholder="Parent or guardian first name" ng-required="accountData.needParent">
             </label>
             <label class="item item-input">
               <span class="input-label">Last name:</span>
-              <input type="text" ng-model="user.parentLastName" placeholder="Parent of guardian last name" ng-required="accountData.needParent">
+              <input type="text" ng-model="user.parentLastName" placeholder="Parent or guardian last name" ng-required="accountData.needParent">
             </label>
             <label class="item item-input">
               <span class="input-label">E-mail:</span>
-              <input type="email" ng-model="user.parentEmail" placeholder="Parent of guardian e-mail" ng-required="accountData.needParent">
+              <input type="email" ng-model="user.parentEmail" placeholder="Parent or guardian e-mail" ng-required="accountData.needParent">
             </label>
             <label class="item item-input">
               <span class="input-label">Phone:</span>
-              <input type="tel" ng-model="user.parentPhone" pattern="\d*" placeholder="Parent of guardian phone number" ng-required="accountData.needParent">
+              <input type="tel" ng-model="user.parentPhone" pattern="\d*" placeholder="Parent or guardian phone number" ng-required="accountData.needParent">
             </label>
           </div>
 

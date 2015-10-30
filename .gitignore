@@ -48,6 +48,7 @@ www/lib/
 www/app/waybook-min.js*
 www/css/waybook.css*
 www/app/components/lodash.custom.min.js
+npm-debug.log*
 
 # --------------------
 # localenv files

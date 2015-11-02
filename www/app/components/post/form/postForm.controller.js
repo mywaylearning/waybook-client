@@ -84,7 +84,7 @@
         ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
         break;
       case 'discovery':
-        ctrl.placeHolder = "#discovery<br>What did you learn about yourself, or how you engage with others and the world around you?"
+        ctrl.placeHolder = "#discovery<br>What do you know about yourself, or about how you engage with others and the world around you?"
         break;
       case 'resource':
         ctrl.placeHolder = "#resource<br>What will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."

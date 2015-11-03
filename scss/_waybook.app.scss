@@ -60,3 +60,36 @@ ion-view.pane {
     }
   }
 }
+
+.cancel-overlay {
+  overflow: visible;
+  z-index: 99;
+}
+
+.share-with {
+  width: 65%;
+  margin-right: 8px;
+
+  input {
+    padding-right: 0 !important;
+  }
+}
+
+tags-input .tags {
+  border: 0;
+  box-shadow: none;
+
+  &.focused {
+    box-shadow: none;
+  }
+}
+
+.tag-item {
+  background: $positive !important;
+  border-color: darken($positive, 20%) !important;
+  color: #FFF;
+
+  .remove-button {
+    color: #FFF !important;
+  }
+}

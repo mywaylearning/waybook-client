@@ -78,4 +78,18 @@ ion-view.pane {
 tags-input .tags {
   border: 0;
   box-shadow: none;
+
+  &.focused {
+    box-shadow: none;
+  }
+}
+
+.tag-item {
+  background: $positive !important;
+  border-color: darken($positive, 20%) !important;
+  color: #FFF;
+
+  .remove-button {
+    color: #FFF !important;
+  }
 }

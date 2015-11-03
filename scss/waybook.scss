@@ -1,3 +1,6 @@
+// External libraries
+@import '../lib/ng-tags-input/ng-tags-input.min.css';
+
 // Import ionic overrides and all ionic lib
 @import "ionic-override";
 
@@ -36,6 +39,3 @@
 @import "sections/plan";
 @import "sections/about";
 @import "sections/sponsors";
-
-// External libraries
-@import '../lib/ng-tags-input/ng-tags-input.min.css';

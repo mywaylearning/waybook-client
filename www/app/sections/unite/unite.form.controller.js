@@ -1,6 +1,6 @@
 'use strict';
 
-function UniteDetailController($scope, $state, $q, contact, $ionicHistory, ContactService, TagService) {
+function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHistory, ContactService, TagService) {
 
   var baseVoice = {
     number: ''
@@ -16,7 +16,6 @@ function UniteDetailController($scope, $state, $q, contact, $ionicHistory, Conta
   };
 
   $scope.contact = {};
-  $scope.tags = [];
 
   $ionicHistory.nextViewOptions({
     disableBack: true
@@ -30,7 +29,6 @@ function UniteDetailController($scope, $state, $q, contact, $ionicHistory, Conta
     $scope.viewData.editMode = true;
 
     $scope.contact = contact;
-    $scope.tags = contact.tags;
   }
 
   if (!$scope.contact.voice) {
@@ -55,28 +53,20 @@ function UniteDetailController($scope, $state, $q, contact, $ionicHistory, Conta
   };
 
   $scope.saveContact = function() {
-    if (contact.id) {
-      console.log($scope.contact);
-      $scope.contact.save().then(function(result) {
-        afterSave();
-      });
-    } else {
-      var _tags = [];
-      // Check tags
-      if ($scope.tags.length) {
-        angular.forEach($scope.tags, function(tag) {
-          _tags.push(tag.text.replace('#', ''));
+    $timeout(function() {
+      if (contact.id) {
+        $scope.contact.save().then(function(result) {
+          afterSave();
+        });
+      } else {
+        ContactService.create($scope.contact).then(function(result){
+          afterSave();
         });
       }
-      $scope.contact.tags = _tags;
-
-      ContactService.create($scope.contact).then(function(result){
-        afterSave();
-      });
-    }
+    }, 10)
   };
 }
 
-UniteDetailController.$inject = ['$scope', '$state', '$q', 'contact', '$ionicHistory', 'ContactService', 'TagService'];
+UniteDetailController.$inject = ['$scope', '$state', '$q', '$timeout', 'contact', '$ionicHistory', 'ContactService', 'TagService'];
 
 module.exports = UniteDetailController;

@@ -2,19 +2,17 @@
   <form name="postForm" novalidate ng-submit="ctrl.save()" >
   <div class="list cancel-overlay" ng-class="{'card': !ctrl.sharedPost}">
     <div class="item item-text-wrap">
-      <div class="placeholder" ng-show="ctrl.model.content ? (ctrl.model.content == '' ? true : false) : true" ng-class="{'active': !ctrl.model.postType}" ng-bind-html="ctrl.placeHolder"></div>
-      <div ng-if="!ctrl.model.postType" class="textarea inactive" ng-click="ctrl.goToThought()"></div>
-      {{ctrl.model.originalPost | json}}
+      <textarea ng-if="!ctrl.model.postType" placeholder="{{ctrl.placeHolder}}" class="textarea inactive" ng-click="ctrl.goToThought()"></textarea>
       <div ng-if="ctrl.model.postType">
-          <div class="textarea"
+          <textarea class="textarea"
             ng-model="ctrl.model.content"
-            contenteditable
+            placeholder="{{ctrl.placeHolder}}"
             mentio
             id="tags"
             mentio-typedTerm="typedTerm"
             mentio-require-leading-space="true"
             ng-required="ctrl.modalInstance ? (ctrl.sharedPost ? false : true) : true"
-            ></div>
+            ></textarea>
 
             <mentio-menu
                   mentio-for="'tags'"

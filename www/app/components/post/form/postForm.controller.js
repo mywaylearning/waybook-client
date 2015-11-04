@@ -334,7 +334,9 @@
           PostService.create(ctrl.model).then(function(result) {
             PostService.getById(result.id).then(function(newPost) {
               if ($scope.hasCallbackOnCreate()) {
-                return ctrl.onCreate()(newPost);
+                if (typeof ctrl.onCreate() === 'function') {
+                  return ctrl.onCreate()(newPost);
+                }
               }
 
               if (ctrl.sharedPost) {

@@ -1,7 +1,9 @@
 'use strict';
 
-function MainTypeController($scope, type) {
+function MainTypeController($scope, $stateParams, type) {
   $scope.type = type;
+  $scope.deadline = $stateParams.deadline;
+  $scope.onCreate = $stateParams.onCreate;
 }
 
-module.exports = ['$scope', 'type', MainTypeController];
+module.exports = ['$scope', '$stateParams', 'type', MainTypeController];

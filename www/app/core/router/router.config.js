@@ -223,7 +223,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     controller: function($scope, $state, $ionicHistory, $ionicPopover, app) {
       $scope.routeClearCache = function(route) {
         $ionicHistory.clearCache();
-        $state.go(route);
+        $state.go(route, {tag: null});
       };
 
       $ionicPopover.fromTemplateUrl('templates/popover.html', {

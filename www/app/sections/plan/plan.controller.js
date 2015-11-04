@@ -4,7 +4,7 @@
 
   var debug = require('debug')('waybook:PlanController');
 
-  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory, $ionicModal) {
+  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
 
     var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -48,32 +48,20 @@
     $scope.createGoal = function(date) {
       var tmp = date.split(' ');
       var month = monthNames.indexOf(tmp[0]) + 1;
-      $scope.deadline = new Date(month + '/15/' + tmp[1]);
-      $scope.postType = 'goal';
-      $scope.createPopup = {};
-      $ionicModal.fromTemplateUrl('app/sections/plan/create-goal.html', {
-        scope: $scope
-      }).then(function(popup){
-        $scope.createPopup = popup;
-        $scope.createPopup.show();
-      });
+      var deadline = new Date(month + '/15/' + tmp[1]);
+
+      $state.go('app.main.type', {type: 'goal', deadline: deadline, onCreate: onCreateGoal});
     };
 
-    $scope.onCreateGoal = function(post) {
+    var onCreateGoal = function(post) {
       $state.go('app.plan');
-      $ionicLoading.show({
-        animation: 'fade-in',
-        hideOnStateChange: true
-      });
       PostService.timelineByTag().then(function(response) {
         $scope.months = response[1].plain();
         $scope.posts = response[0].plain();
-        $scope.createPopup.hide();
-        $ionicLoading.hide();
       });
     };
   }
 
-  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', '$ionicModal', PlanController];
+  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', PlanController];
 
 }());

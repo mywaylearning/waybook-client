@@ -483,9 +483,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: ':type',
     views: {
       'way-post-form': {
-        template: '<way-post-form type="type" posts="posts"></way-post-form>',
+        template: '<way-post-form type="type" deadline="deadline" on-create="onCreate" posts="posts"></way-post-form>',
         controller: 'MainTypeController'
       }
+    },
+    params: {
+      deadline: null,
+      onCreate: null
     },
     resolve: {
       type: function($stateParams) {

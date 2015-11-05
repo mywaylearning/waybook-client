@@ -1,5 +1,15 @@
 .intro {
 
+  @media (min-width: 890px) {
+    .buttons-left {
+      margin-left: 32%;
+    }
+
+    .buttons-right {
+      right: 32% !important;
+    }
+  }
+
   .slider-slide {
     background-position: top center;
     background-size: cover;

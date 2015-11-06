@@ -24,8 +24,8 @@
 
     ctrl.deadlineDateConfig = {
       titleLabel: 'Date you are planning to finish this goal',
+      showTodayButton: false,
       from: new Date(),
-
       callback: function (val) {
         if (val) {
           ctrl.model.gEndDate = val;
@@ -81,13 +81,13 @@
           ctrl.model.gRecurringEnabled = false;
           ctrl.model.gRecurringRecurrence = 'Daily';
         }
-        ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
+        ctrl.placeHolder = "#goal\nWhat do you seek to accomplish? Is it measurable?"
         break;
       case 'discovery':
-        ctrl.placeHolder = "#discovery<br>What did you learn about yourself, or how you engage with others and the world around you?"
+        ctrl.placeHolder = "#discovery\nWhat do you know about yourself, or about how you engage with others and the world around you?"
         break;
       case 'resource':
-        ctrl.placeHolder = "#resource<br>What will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
+        ctrl.placeHolder = "#resource\nWhat will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
         ctrl.addLink = true;
         break;
       default:
@@ -127,9 +127,9 @@
       });
     };
 
-    // Add tag to div contenteditable with the #
+    // Add tag to textarea with the #
     ctrl.getTagText = function(item) {
-        return '<span>#' + item.text + '</span>';
+        return '#' + item.text;
     };
 
     // Validates each item added as contact to share. If there's no ID, it's an e-mail and we must validade it.
@@ -334,7 +334,9 @@
           PostService.create(ctrl.model).then(function(result) {
             PostService.getById(result.id).then(function(newPost) {
               if ($scope.hasCallbackOnCreate()) {
-                return ctrl.onCreate()(newPost);
+                if (typeof ctrl.onCreate() === 'function') {
+                  return ctrl.onCreate()(newPost);
+                }
               }
 
               if (ctrl.sharedPost) {

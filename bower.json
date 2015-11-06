@@ -16,7 +16,7 @@
     "ionic-ion-showWhen": "https://raw.githubusercontent.com/andrewmcgivery/ionic-ion-showWhen/v1.2.0/ionic.ion.showwhen.js",
     "jquery": "~2.1.4",
     "lodash": "^3.9.3",
-    "ment.io": "~0.9.23",
+    "ment.io": "~0.9.9",
     "ng-tags-input": "https://github.com/igorprado/ngTagsInput-bower/archive/v3.0.2.tar.gz",
     "restangular": "~1.5.1",
     "hello": "~1.9.4",

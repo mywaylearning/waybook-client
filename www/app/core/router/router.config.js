@@ -221,9 +221,10 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     templateUrl: 'app/sections/app/base.html',
     controller: function($scope, $state, $ionicHistory, $ionicPopover, app) {
-      $scope.routeClearCache = function(route) {
+      $scope.routeClearCache = function($event, route) {
+        $event.preventDefault();
         $ionicHistory.clearCache();
-        $state.go(route);
+        $state.go(route, {tag: null});
       };
 
       $ionicPopover.fromTemplateUrl('templates/popover.html', {
@@ -336,12 +337,29 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.unite.add', {
+    url: '/add',
+    cache: false,
+    views: {
+      'bodyContent@app': {
+        templateUrl: 'app/sections/unite/form.bodyContent.html',
+        controller: 'UniteFormController'
+      }
+    },
+    resolve: {
+      contact: function() {
+        return false;
+      }
+    }
+  })
+
   .state('app.unite.edit', {
     url: '/edit/{contactId:[0-9]{1,4}}',
     cache: false,
     views: {
       'bodyContent@app': {
-        controller: 'UniteEditController'
+        templateUrl: 'app/sections/unite/form.bodyContent.html',
+        controller: 'UniteFormController'
       }
     },
     resolve: {
@@ -466,9 +484,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: ':type',
     views: {
       'way-post-form': {
-        template: '<way-post-form type="type" posts="posts"></way-post-form>',
+        template: '<way-post-form type="type" deadline="deadline" on-create="onCreate" posts="posts"></way-post-form>',
         controller: 'MainTypeController'
       }
+    },
+    params: {
+      deadline: null,
+      onCreate: null
     },
     resolve: {
       type: function($stateParams) {

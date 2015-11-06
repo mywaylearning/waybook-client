@@ -5,7 +5,9 @@
         <div class="item item-avatar">
           <img gravatar-src="'{{contact.email}}'" gravatar-size="120" gravatar-default="mm">
           <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+          <span  ng-repeat="tag in contact.tags" class="item-note">#{{tag.text}}&nbsp;&nbsp;</span>
           <p>{{contact.email}}</p>
+
           <button class="button button-more button-clear icon ion-chevron-down" ng-click="showPopover($event)"></button>
         </div>
         <div class="item item-divider" ng-if="contact.voice">Voice:</div>
@@ -13,7 +15,7 @@
           <span class="input-label">Voice #{{$index+1}}:</span>
           {{voice.number}}
         </div>
-      </div>    
+      </div>
     </div>
   </ion-content>
 </ion-view>

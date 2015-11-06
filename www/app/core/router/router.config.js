@@ -221,7 +221,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     templateUrl: 'app/sections/app/base.html',
     controller: function($scope, $state, $ionicHistory, $ionicPopover, app) {
-      $scope.routeClearCache = function(route) {
+      $scope.routeClearCache = function($event, route) {
+        $event.preventDefault();
         $ionicHistory.clearCache();
         $state.go(route, {tag: null});
       };

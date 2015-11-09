@@ -78,6 +78,7 @@
         // Define default properties of goal
         if (!ctrl.post) {
           ctrl.model.gImportance = 'Should Complete';
+          ctrl.model.occurrences = 1;
           ctrl.model.gRecurringEnabled = false;
           ctrl.model.gRecurringRecurrence = 'Daily';
         }

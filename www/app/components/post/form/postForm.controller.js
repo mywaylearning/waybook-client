@@ -81,13 +81,13 @@
           ctrl.model.gRecurringEnabled = false;
           ctrl.model.gRecurringRecurrence = 'Daily';
         }
-        ctrl.placeHolder = "#goal\nWhat do you seek to accomplish? Is it measurable?"
+        ctrl.placeHolder = "What do you seek to accomplish in life? Set a goal that's measurable and achievable."
         break;
       case 'discovery':
-        ctrl.placeHolder = "#discovery\nWhat do you know about yourself, or about how you engage with others and the world around you?"
+        ctrl.placeHolder = "What do you know about yourself?"
         break;
       case 'resource':
-        ctrl.placeHolder = "#resource\nWhat will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
+        ctrl.placeHolder = "What resources will help you or others be successful?"
         ctrl.addLink = true;
         break;
       default:

@@ -7,6 +7,8 @@
   function CommentController($scope, CommentService, $state, $ionicPopover, $ionicPopup) {
     debug('here we are (directive controller)');
 
+    $scope.state = $state.current;
+
     $scope.options = {
       userCommentFocus: false,
       showAll: false,

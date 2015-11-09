@@ -19,7 +19,7 @@
     <img ng-src="{{post.image}}" />
   </div>
   <div class="item item-body">
-    <div class="post-content" ng-bind-html="post.content" read-more></div>
+    <div class="post-content" ng-bind-html="post.content" read-more="{{state.name}}"></div>
 
     <div ng-if="post.originalShared">
       <p>Originally posted by:</p>

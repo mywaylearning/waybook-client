@@ -9,9 +9,8 @@
       restrict: 'A',
       priority: 100,
       link: function ($scope, element, attrs, ctrl) {
-        var needToHide = $scope.$parent.state.name !== 'app.main.post';
 
-        if (!needToHide) {
+        if (attrs.readMore !== '' && attrs.readMore === 'app.main.post') {
           return;
         }
 

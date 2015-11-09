@@ -44,12 +44,12 @@
       <div class="item item-input">
         <span class="input-label">Start date:</span>
         <span ionic-datepicker input-obj="ctrl.startDateConfig" class="button button-clear button-dark button-small icon ion-calendar"></span>
-        <input type="date" class="hide-calendar-widget" ng-model="ctrl.model.gStartDate">
+        <input type="date" placeholder="yyyy-mm-dd" class="hide-calendar-widget" ng-model="ctrl.model.gStartDate">
       </div>
       <div class="item item-input">
         <span class="input-label">Deadline:</span>
         <span ionic-datepicker input-obj="ctrl.deadlineDateConfig" class="button button-clear button-dark button-small icon ion-calendar"></span>
-        <input type="date" class="hide-calendar-widget" ng-model="ctrl.model.gEndDate" required>
+        <input type="date" placeholder="yyyy-mm-dd" class="hide-calendar-widget" ng-model="ctrl.model.gEndDate" required>
       </div>
       <ion-toggle
           ng-model="ctrl.model.gRecurringEnabled"

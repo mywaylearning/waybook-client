@@ -57,11 +57,11 @@
     }
 
     // Handle content editable click based on type of post
-    ctrl.goToThought = function() {
+    ctrl.goToGoal = function() {
       if (ctrl.sharedPost) {
         return;
       }
-      $state.go('app.main.type', {type: 'thought'});
+      $state.go('app.main.type', {type: 'goal'});
     };
 
     if (ctrl.deadline) {

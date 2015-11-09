@@ -2,7 +2,7 @@
   <form name="postForm" novalidate ng-submit="ctrl.save()" >
   <div class="list cancel-overlay" ng-class="{'card': !ctrl.sharedPost}">
     <div class="item item-text-wrap">
-      <textarea ng-if="!ctrl.model.postType" placeholder="{{ctrl.placeHolder}}" class="textarea inactive" ng-click="ctrl.goToThought()"></textarea>
+      <textarea ng-if="!ctrl.model.postType" placeholder="{{ctrl.placeHolder}}" class="textarea inactive" ng-click="ctrl.goToGoal()"></textarea>
       <div ng-if="ctrl.model.postType">
           <textarea class="textarea"
             ng-model="ctrl.model.content"
@@ -24,8 +24,8 @@
                   ></mentio-menu>
       </div>
       <div ng-if="!ctrl.model.postType && !ctrl.sharedPost" class="button-bar">
-          <button class="button button-icon button-waybook-post icon ion-chatbubble balanced" ui-sref="app.main.type({type: 'thought'})"><span class="clearfix dark">Thought</span></button>
-          <button class="button button-icon button-waybook-post icon ion-pinpoint" ui-sref="app.main.type({type: 'goal'})"><span class="clearfix dark">Goal</span></button>
+          <button class="button button-icon button-waybook-post icon ion-pinpoint balanced" ui-sref="app.main.type({type: 'goal'})"><span class="clearfix dark">Goal</span></button>
+          <button class="button button-icon button-waybook-post icon ion-chatbubble" ui-sref="app.main.type({type: 'thought'})"><span class="clearfix dark">Thought</span></button>
           <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.type({type: 'discovery'})"><span class="clearfix dark">Discovery</span></button>
           <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.type({type: 'resource'})"><span class="clearfix dark">Resource</span></button>
       </div>

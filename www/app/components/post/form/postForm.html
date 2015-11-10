@@ -25,9 +25,9 @@
       </div>
       <div ng-if="!ctrl.model.postType && !ctrl.sharedPost" class="button-bar">
           <button class="button button-icon button-waybook-post icon ion-pinpoint balanced" ui-sref="app.main.type({type: 'goal'})"><span class="clearfix dark">Goal</span></button>
-          <button class="button button-icon button-waybook-post icon ion-chatbubble" ui-sref="app.main.type({type: 'thought'})"><span class="clearfix dark">Thought</span></button>
           <button class="button button-icon button-waybook-post icon ion-flash" ui-sref="app.main.type({type: 'discovery'})"><span class="clearfix dark">Discovery</span></button>
           <button class="button button-icon button-waybook-post icon ion-document-text" ui-sref="app.main.type({type: 'resource'})"><span class="clearfix dark">Resource</span></button>
+          <button class="button button-icon button-waybook-post icon ion-chatbubble" ui-sref="app.main.type({type: 'thought'})"><span class="clearfix dark">Thought</span></button>
       </div>
     </div>
     <div ng-if="ctrl.model.postType == 'goal'">

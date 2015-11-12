@@ -285,7 +285,7 @@
       if (ctrl.sharedPost || $state.current.name === 'app.plan') {
         ctrl.modalInstance.hide();
       } else if (!ctrl.model.id) {
-        $state.go('app.main');
+        $state.go('app.main.home');
       } else {
         ctrl.post.editMode = false;
         ctrl.post = originalPost;
@@ -345,7 +345,7 @@
               }
               newPost.justEdited = true;
               ctrl.posts.push(newPost);
-              $state.go('app.main');
+              $state.go('app.main.home');
             });
           });
         } else {

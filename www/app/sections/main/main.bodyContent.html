@@ -1,9 +1,7 @@
 <ion-view view-title="Main" hide-back-button="true">
   <ion-content padding="true" class="has-header">
     <div class="small-on-wide">
-      <div ui-view="way-post-form">
-        <way-post-form></way-post-form>
-      </div>
+      <way-post-form></way-post-form>
       <div class="card" ng-if="!posts.length">
         <div class="item item-divider text-center">Welcome to your future. You own it.</div>
         <div class="item item-body">
@@ -14,3 +12,4 @@
     </div>
   </ion-content>
 </ion-view>
+<way-help-overlay help="{{helpHtml}}"></way-help-overlay>

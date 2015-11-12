@@ -75,7 +75,7 @@
             if (index > -1) feed.items.splice(index, 1);
           } else {
             // if not, redirect to main feed
-            $state.go('app.main', {}, {reload: true});
+            $state.go('app.main.home', {}, {reload: true});
           }
 
 

@@ -2,6 +2,10 @@
 
 function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHistory, ContactService, TagService) {
 
+  if ($state.current.name === 'app.unite.add') {
+    $scope.helpHtml = 'app/sections/unite/help-add.html';
+  }
+
   var baseVoice = {
     number: ''
   };

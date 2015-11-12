@@ -50,7 +50,7 @@ function MeEditController($scope, $stateParams, $state, currentUser, UserService
   var _updateSelf = function(model, errorHandler) {
     UserService.updateSelf(model).then(function(response) {
       if ($scope.ageRequired) {
-        return $state.go('app.main');
+        return $state.go('app.main.home');
       }
       $state.transitionTo($state.current, {}, { reload: true });
     }).catch(errorHandler);

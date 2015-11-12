@@ -6,6 +6,11 @@
   z-index: 99999;
   display: none;
 
+  h1 {
+    font-weight: bolder;
+    margin-bottom: 20px;
+  }
+
   .slider-slide {
     min-height: 400px;
     padding: 40px;

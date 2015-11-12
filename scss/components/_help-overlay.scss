@@ -5,6 +5,7 @@
   position: absolute;
   z-index: 99999;
   display: none;
+  overflow-y: scroll;
 
   h1 {
     font-weight: bolder;

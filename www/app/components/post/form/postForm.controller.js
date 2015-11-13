@@ -344,7 +344,7 @@
                 ctrl.modalInstance.hide();
               }
               newPost.justEdited = true;
-              ctrl.posts.push(newPost);
+              // ctrl.posts.push(newPost);
               $state.go('app.main.home');
             });
           });

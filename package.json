@@ -89,14 +89,15 @@
     "angular-moment": "^0.10.1",
     "debug": "^2.2.0",
     "store": "^1.3.17",
-    "uglify-js": "^2.5.0"
+    "uglify-js": "^2.5.0",
+
+    "restangular": "^1.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^5.2.0",
     "bower": "^1.4.1",
-    "browserify": "^10.2.1",
     "browserify-ngannotate": "^1.0.1",
-    "browserify-shim": "^3.8.7",
+    "browserify-shim": "^3.8.11",
     "chalk": "^1.1.0",
     "exorcist": "^0.4.0",
     "ionic": "^1.6.1",
@@ -110,14 +111,59 @@
     "shelljs": "^0.5.0",
     "uglifyify": "^3.0.1",
     "watch": "^0.16.0",
-    "watchify": "^3.2.3"
+    "watchify": "^3.2.3",
+
+    "debowerify": "^1.3.1",
+    "del": "^0.1.3",
+    "babel-core": "^5.8.25",
+    "browser-sync": "^2.9.12",
+    "browserify": "^12.0.0",
+    "browserify-istanbul": "^0.2.1",
+    "browserify-ngannotate": "^1.0.1",
+    "eslint": "^1.8.0",
+    "eslint-config-airbnb": "^0.1.0",
+    "eslint-plugin-angular": "^0.13.0",
+    "gulp": "^3.8.8",
+    "gulp-angular-templatecache": "^1.3.0",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-changed": "^1.0.0",
+    "gulp-cssimport": "^2.1.1",
+    "gulp-eslint": "^1.0.0",
+    "gulp-gzip": "^0.0.8",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^1.1.0",
+    "gulp-notify": "^2.0.0",
+    "gulp-protractor": "^1.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-rev-all": "^0.8.22",
+    "gulp-rev-replace": "^0.4.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.4.2",
+    "gulp-util": "^3.0.1",
+    "imagemin-pngcrush": "^0.1.0",
+    "isparta": "^3.0.3",
+    "karma": "^0.13.14",
+    "karma-browserify": "^4.4.0",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-coverage": "douglasduteil/karma-coverage#next",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-jasmine": "^0.3.6",
+    "karma-source-map-support": "^1.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^0.1.1",
+    "run-sequence": "^0.3.6"
+
+
+
+
   },
   "scripts": {
     "-deploy-": "",
     "deploy:dev": "aws s3 sync www/ s3://uidev.way.me --delete --acl public-read --profile way",
     "deploy:staging": "aws s3 sync www/ s3://uidev.way.me --delete --acl public-read --region us-west-2",
     "-js-": "",
-    "build:import-api-spec": "./scripts/import-api-spec",
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' www/lib/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o www/app/components/lodash.custom.min.js -p include={}",
     "build:browserify": "NODE_ENV=production browserify www/app/app.js | uglifyjs --compress > www/app/waybook-min.js",
     "build-js:dev": "npm run build:lodash",
@@ -139,6 +185,7 @@
     "-runtime-": "",
     "preflight": "./scripts/flight-check",
     "serve": "ionic serve --nogulp",
-    "start": "npm run watch:styles & npm run watch:browserify & ionic serve --nogulp"
+    "start": "npm run watch:styles & npm run watch:browserify & ionic serve --nogulp",
+    "gulp": "gulp dev"
   }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_STORAGE_KEYS) {
+function IntroController($scope, $state, $ionicSlideBoxDelegate) {
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
   };
@@ -19,6 +19,6 @@ function IntroController($scope, $state, $ionicSlideBoxDelegate, store, LOCAL_ST
 }
 
 module.exports = [
-  '$scope', '$state', '$ionicSlideBoxDelegate', 'store', 'LOCAL_STORAGE_KEYS',
+  '$scope', '$state', '$ionicSlideBoxDelegate',
   IntroController
 ];

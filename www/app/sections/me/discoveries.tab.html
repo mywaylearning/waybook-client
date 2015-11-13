@@ -2,7 +2,7 @@
   <div class="bar bar-subheader" ng-if="discoveries.length">
     <div class="small-on-wide">
       <div class="buttons">
-        <button class="button button-clear button-positive ion-plus" ui-sref="app.main.type({type: 'discovery'})"> Discovery</button>
+        <button class="button button-clear button-positive ion-plus" ng-click="createDiscovery()"> Discovery</button>
       </div>
     </div>
   </div>
@@ -20,3 +20,4 @@
     </div>
   </ion-content>
 </ion-view>
+<way-help-overlay help="app/sections/main/help-discovery.html"></way-help-overlay>

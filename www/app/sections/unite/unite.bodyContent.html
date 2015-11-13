@@ -2,7 +2,7 @@
   <div class="bar bar-subheader" ng-if="contacts.length">
     <div class="small-on-wide">
       <div class="buttons">
-        <button class="button button-clear button-positive ion-plus" ng-click="openModalAddSupporter()"> Supporter</button>
+        <button class="button button-clear button-positive ion-plus" ui-sref="app.unite.add"> Supporter</button>
       </div>
     </div>
   </div>
@@ -11,7 +11,7 @@
       <div class="card no-contacts" ng-if="!contacts.length">
         <div class="item item-text-wrap">
           <i class="icon ion-person-stalker"></i>
-          <button class="button button-block button-positive icon ion-person-add" ng-click="openModalAddSupporter()"> Add a supporter</button>
+          <button class="button button-block button-positive icon ion-person-add" ui-sref="app.unite.add"> Add a supporter</button>
         </div>
       </div>
       <ion-list ng-if="contacts.length">
@@ -26,3 +26,4 @@
     </div>
   </ion-content>
 </ion-view>
+<way-help-overlay help="app/sections/unite/help.html"></way-help-overlay>

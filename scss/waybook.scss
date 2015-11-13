@@ -1,3 +1,6 @@
+// External libraries
+@import '../lib/ng-tags-input/ng-tags-input.min.css';
+
 // Import ionic overrides and all ionic lib
 @import "ionic-override";
 
@@ -26,6 +29,7 @@
 @import "components/explorations";
 @import "components/highcharts";
 @import "components/social-login";
+@import "components/help-overlay";
 
 // Import section styles
 @import "sections/unite";

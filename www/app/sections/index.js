@@ -21,7 +21,7 @@
 
   app.controller('UniteController', require('./unite/unite.controller.js'));
   app.controller('UniteDetailController', require('./unite/unite.detail.controller.js'));
-  app.controller('UniteEditController', require('./unite/unite.edit.controller.js'));
+  app.controller('UniteFormController', require('./unite/unite.form.controller.js'));
 
   app.controller('MeController', require('./me/me.controller.js'));
   app.controller('MeAccountEditController', require('./me/account/edit.controller.js'));

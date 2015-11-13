@@ -15,11 +15,11 @@
         </div>
       </div>
       <div class="item comment-body">
-        <p ng-if="!comment.editMode" class="post-content" ng-bind-html="comment.comment"></p>
+        <p ng-show="!comment.editMode" class="comment-content" ng-bind-html="comment.comment" read-more></p>
         <div ng-show="comment.editMode">
           <form name="singleCommentForm" ng-submit="updateComment(comment)">
             <div class="comment-input-holder">
-              <div class="comment-input" contenteditable="plaintext-only" ng-model="comment.comment" ng-focus="comment.editMode" required />
+              <textarea class="comment-input" ng-model="comment.comment" ng-focus="comment.editMode" required />
             </div>
             <button class="button button-balanced button-small" ng-disabled="!singleCommentForm.$valid">Update</button>
             <a href="" class="button button-stable button-small" ng-click="cancelUpdate(comment)">Cancel</a>
@@ -33,8 +33,8 @@
   <div class="comment-form">
     <form name="commentForm" ng-submit="createComment()" novalidate>
       <div class="comment-input-holder">
-        <div class="placeholder" ng-show="!options.userCommentFocus">Add a comment</div>
-        <div class="comment-input" contenteditable="plaintext-only" ng-click="options.userCommentFocus = true" ng-model="model.comment" ng-class="{'inactive': !options.userCommentFocus}" required />
+        <!-- <div class="placeholder" ng-show="!options.userCommentFocus">Add a comment</div> -->
+        <textarea class="comment-input" ng-click="options.userCommentFocus = true" ng-model="model.comment" ng-class="{'inactive': !options.userCommentFocus}" placeholder="Add a comment" required />
       </div>
       <div ng-show="options.userCommentFocus">
         <button class="button button-balanced button-small" ng-disabled="!commentForm.$valid" type="submit">Comment</button>

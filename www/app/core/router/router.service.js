@@ -29,7 +29,7 @@
      */
     function _goToLoggedIn() {
       debug('routing to app.main');
-      return $state.go('app.main');
+      return $state.go('app.main.home');
     }
 
     function _goToLoggedOut() {

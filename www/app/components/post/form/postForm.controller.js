@@ -24,8 +24,8 @@
 
     ctrl.deadlineDateConfig = {
       titleLabel: 'Date you are planning to finish this goal',
+      showTodayButton: false,
       from: new Date(),
-
       callback: function (val) {
         if (val) {
           ctrl.model.gEndDate = val;
@@ -57,11 +57,11 @@
     }
 
     // Handle content editable click based on type of post
-    ctrl.goToThought = function() {
+    ctrl.goToGoal = function() {
       if (ctrl.sharedPost) {
         return;
       }
-      $state.go('app.main.type', {type: 'thought'});
+      $state.go('app.main.type', {type: 'goal'});
     };
 
     if (ctrl.deadline) {
@@ -78,16 +78,17 @@
         // Define default properties of goal
         if (!ctrl.post) {
           ctrl.model.gImportance = 'Should Complete';
+          ctrl.model.occurrences = 1;
           ctrl.model.gRecurringEnabled = false;
           ctrl.model.gRecurringRecurrence = 'Daily';
         }
-        ctrl.placeHolder = "#goal<br>What do you seek to accomplish? Is it measurable?"
+        ctrl.placeHolder = "What do you seek to accomplish in life? Set a goal that's measurable and achievable."
         break;
       case 'discovery':
-        ctrl.placeHolder = "#discovery<br>What did you learn about yourself, or how you engage with others and the world around you?"
+        ctrl.placeHolder = "What do you know about yourself?"
         break;
       case 'resource':
-        ctrl.placeHolder = "#resource<br>What will help you or others be successful? A resource can be a service, website, book, video, article, event, person, or something else. It’s most helpful if they are identified by a URL so they are easy to access."
+        ctrl.placeHolder = "What resources will help you or others be successful?"
         ctrl.addLink = true;
         break;
       default:
@@ -127,9 +128,9 @@
       });
     };
 
-    // Add tag to div contenteditable with the #
+    // Add tag to textarea with the #
     ctrl.getTagText = function(item) {
-        return '<span>#' + item.text + '</span>';
+        return '#' + item.text;
     };
 
     // Validates each item added as contact to share. If there's no ID, it's an e-mail and we must validade it.
@@ -284,7 +285,7 @@
       if (ctrl.sharedPost || $state.current.name === 'app.plan') {
         ctrl.modalInstance.hide();
       } else if (!ctrl.model.id) {
-        $state.go('app.main');
+        $state.go('app.main.home');
       } else {
         ctrl.post.editMode = false;
         ctrl.post = originalPost;
@@ -334,7 +335,9 @@
           PostService.create(ctrl.model).then(function(result) {
             PostService.getById(result.id).then(function(newPost) {
               if ($scope.hasCallbackOnCreate()) {
-                return ctrl.onCreate()(newPost);
+                if (typeof ctrl.onCreate() === 'function') {
+                  return ctrl.onCreate()(newPost);
+                }
               }
 
               if (ctrl.sharedPost) {
@@ -342,7 +345,7 @@
               }
               newPost.justEdited = true;
               ctrl.posts.push(newPost);
-              $state.go('app.main');
+              $state.go('app.main.home');
             });
           });
         } else {

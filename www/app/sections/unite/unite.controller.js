@@ -3,16 +3,6 @@
 function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionSheet, contacts, ContactService) {
   $scope.contacts = contacts;
 
-  $scope.modalAddSupporter = {};
-
-  $ionicModal.fromTemplateUrl('app/sections/unite/add.bodyContent.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.newSupporter = {};
-    $scope.modalAddSupporter = modal;
-  });
-
   // Triggered on a button click, or some other target
   $scope.showMenu = function(contact) {
     var actionList = $ionicActionSheet.show({
@@ -31,18 +21,6 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
         }
        return true;
       }
-    });
-  };
-
-  $scope.openModalAddSupporter = function() {
-    $scope.modalAddSupporter.show();
-  };
-
-
-  $scope.addSupporter = function(supporter) {
-    ContactService.create(supporter).then(function(result){
-      $scope.modalAddSupporter.hide();
-      $state.reload();
     });
   };
 

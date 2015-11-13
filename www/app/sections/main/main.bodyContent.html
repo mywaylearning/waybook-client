@@ -1,16 +1,15 @@
 <ion-view view-title="Main" hide-back-button="true">
   <ion-content padding="true" class="has-header">
     <div class="small-on-wide">
-      <div ui-view="way-post-form">
-        <way-post-form></way-post-form>
-      </div>
+      <way-post-form></way-post-form>
       <div class="card" ng-if="!posts.length">
         <div class="item item-divider text-center">Welcome to your future. You own it.</div>
         <div class="item item-body">
-          Get started by noting a Discovery about yourself, setting a Goal, or reflecting on your <a ui-sref="app.explore({categoryOpen: 'values'})">Values</a>.
+          Get started. Set a Goal, note a Discovery about yourself, or reflect on your <a ui-sref="app.explore({categoryOpen: 'values'})">Values</a>.
         </div>
       </div>
       <way-feed ng-if="posts.length" posts="posts" user="app.user"></way-feed>
     </div>
   </ion-content>
 </ion-view>
+<way-help-overlay help="{{helpHtml}}"></way-help-overlay>

@@ -20,7 +20,7 @@
       var authenticated = auth.isAuthenticated();
       if (authenticated) {
         $timeout(function(){
-          $state.go('app.main');
+          $state.go('app.main.home');
         });
       }
       return !authenticated;

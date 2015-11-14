@@ -92,7 +92,7 @@
         ctrl.addLink = true;
         break;
       default:
-        ctrl.placeHolder = "What's on your mind?";
+        ctrl.placeHolder = "What do you seek to accomplish in life?";
     }
 
     // Parse content to detect tags

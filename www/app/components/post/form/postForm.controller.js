@@ -92,7 +92,7 @@
         ctrl.addLink = true;
         break;
       default:
-        ctrl.placeHolder = "What do you seek to accomplish in life? Set a goal that's measurable and achievable.";
+        ctrl.placeHolder = "What do you seek to accomplish in life?";
     }
 
     // Parse content to detect tags

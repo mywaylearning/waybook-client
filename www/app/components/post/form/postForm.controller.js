@@ -92,7 +92,7 @@
         ctrl.addLink = true;
         break;
       default:
-        ctrl.placeHolder = "What's on your mind?";
+        ctrl.placeHolder = "What do you seek to accomplish in life? Set a goal that's measurable and achievable.";
     }
 
     // Parse content to detect tags

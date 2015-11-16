@@ -2,7 +2,8 @@ function HelpOverlayController($scope, $state, $stateParams, $ionicTemplateLoade
   'ngInject';
 
   var storeKey = 'way.help.' + $state.current.name;
-  var firstTime = !store.get(storeKey);
+  var firstTime;
+
   $scope.preventHelp = false;
 
   if (!$scope.helpHtml) {
@@ -12,6 +13,8 @@ function HelpOverlayController($scope, $state, $stateParams, $ionicTemplateLoade
   if ($stateParams.type) {
     storeKey = storeKey + '.' + $stateParams.type;
   }
+
+  firstTime = !store.get(storeKey);
 
   function showHelp() {
     $scope.showHelp = true;

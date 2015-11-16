@@ -1,0 +1,46 @@
+<ion-view cache-view="false" view-title="Login on Waybook">
+  <ion-content padding="true" class="has-header">
+    <div class="login small-on-wide">
+      <div ui-view="verify"></div>
+      <div class="verify-account" ng-if="errorsData.message">
+        <div class="message error">
+          <p>{{errorsData.message}}</p>
+        </div>
+      </div>
+
+      <form name="loginForm" ng-submit="doLogin(loginForm)">
+        <ion-list>
+          <div class="form-errors" multiple ng-messages="loginForm.$submitted && loginForm.$error">
+            <div class="form-error" ng-message="required">You must provide an e-mail and a password</div>
+            <div ng-messages-include="core/errors/messages.html"></div>
+          </div>
+          <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="email" name="email" ng-model="loginData.email" placeholder="Email" required reset-validation>
+          </label>
+
+          <label class="item item-input">
+            <i class="icon ion-locked placeholder-icon"></i>
+            <input type="password" name="password" ng-model="loginData.password" placeholder="Password" required reset-validation>
+          </label>
+        </ion-list>
+
+        <div class="login-actions">
+          <button class="button button-balanced button-login" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
+          <a href="" class="button button-small button-clear button-positive button-recover-password" ng-click="recoverPassword()">Forgot your password?</a>
+        </div>
+
+        <div class="list">
+          <div class="item item-divider item-body">
+            <way-social-login></way-social-login>
+          </div>
+        </div>
+
+        <div class="login-extras">
+          <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>
+          <p>Not registered? <a ui-sref="public.register">Create an account!</a></p>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

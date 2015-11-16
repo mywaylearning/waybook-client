@@ -1,0 +1,47 @@
+<ion-view view-title="{{viewData.title}}" class="unite">
+  <ion-content padding="true">
+    <div class="small-on-wide">
+      <div class="card cancel-overlay">
+        <form name="editSupporterForm" novalidate>
+          <div class="item item-divider">Name and e-mail</div>
+          <label class="item item-input">
+            <span class="input-label">First Name:</span>
+            <input ng-model="contact.firstName" type="text" required>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Last Name:</span>
+            <input ng-model="contact.lastName" type="text" required>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email:</span>
+            <input ng-model="contact.email" type="email" required>
+          </label>
+          <div class="item item-input cancel-overlay">
+              <span class="input-label">Tags:</span>
+              <tags-input
+                class="share-with"
+                name="share"
+                placeholder="Add tags"
+                ng-model="contact.tags"
+                replace-spaces-with-dashes="false"
+                add-on-space="true">
+                <auto-complete
+                  source="loadTags($query)"
+                  min-length="0"></auto-complete>
+              </tags-input>
+          </div>
+          <div class="item item-divider">Voice:</div>
+          <label class="item item-input" ng-repeat="voice in contact.voice track by $index">
+            <span class="input-label">Voice #{{$index + 1}}:</span>
+            <input ng-model="voice.number" international-phone-number skip-util-script-download type="tel">
+          </label>
+          <div class="item">
+            <button class="button button-positive" ng-click="saveContact()" ng-disabled="editSupporterForm.$invalid" ng-bind="viewData.editMode ? 'Update' : 'Add'"></button>
+            <button class="button button-stable" ui-sref="^">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+<way-help-overlay help="{{helpHtml}}"></way-help-overlay>

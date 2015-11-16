@@ -43,11 +43,11 @@ npm-debug.log
 # --------------------
 # App Files
 # --------------------
-scss/.sass-cache/
-www/lib/
-www/app/waybook-min.js*
-www/css/waybook.css*
-www/app/components/lodash.custom.min.js
+app/css/.sass-cache/
+bower_components/
+www/*
+app/js/components/lodash.custom.min.js
+app/js/templates.js
 npm-debug.log*
 
 # --------------------

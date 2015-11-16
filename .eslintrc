@@ -1,0 +1,35 @@
+{
+  "extends": "airbnb/legacy",
+  "plugins": ["angular"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": false,
+    "mocha": true
+  },
+  "globals": {
+    "angular": true,
+    "ionic": true,
+    "cordova": true
+  },
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "rules": {
+    "angular/log": 0,
+    "angular/module-setter": 0,
+    "angular/window-service": 0,
+
+    "quotes": [2, "single", "avoid-escape"],
+    "comma-dangle": [2, "never"],
+    "indent": [2, 2],
+    "object-curly-spacing": [2, "always"],
+    "no-undef": 2,
+    "no-underscore-dangle": 0,
+    "func-names": 0,
+    "no-else-return": 0,
+    "no-console": 0,
+    "no-throw-literal": 0,
+    "id-length": 0
+  }
+}

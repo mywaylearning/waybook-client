@@ -15,7 +15,9 @@ function wayHelpOverlay($compile) {
           return;
         }
 
-        if (angular.isDefined(iAttrs.hideButton)) {
+        scope.hideButton = false;
+
+        if (angular.isDefined(iAttrs.hideButton) && iAttrs.hideButton === 'true') {
           scope.hideButton = true;
         }
 

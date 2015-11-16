@@ -1,4 +1,4 @@
-function HelpOverlayController($scope, $state, $stateParams, $ionicTemplateLoader, store) {
+function HelpOverlayController($scope, $state, $stateParams, $ionicTemplateLoader, $ionicSlideBoxDelegate, store) {
   'ngInject';
 
   var storeKey = 'way.help.' + $state.current.name;
@@ -35,9 +35,19 @@ function HelpOverlayController($scope, $state, $stateParams, $ionicTemplateLoade
     };
 
     $scope.$on('showHelp', function() {
+      $ionicSlideBoxDelegate.slide(0);
       showHelp();
     });
   }
+
+  $scope.nextSlide = function(event) {
+    event.stopPropagation();
+    $ionicSlideBoxDelegate.next();
+  };
+
+  $scope.slidesCount = function() {
+    return $ionicSlideBoxDelegate.slidesCount();
+  };
 }
 
 module.exports = HelpOverlayController;

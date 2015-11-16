@@ -10,9 +10,13 @@ function wayHelpOverlay($compile) {
     controller: 'HelpOverlayController',
     templateUrl: 'components/help-overlay/help-overlay.html',
     link: {
-      pre: function(scope, iElement) {
+      pre: function(scope, iElement, iAttrs) {
         if (scope.preventHelp) {
           return;
+        }
+
+        if (angular.isDefined(iAttrs.hideButton)) {
+          scope.hideButton = true;
         }
 
         iElement.addClass('help-overlay');

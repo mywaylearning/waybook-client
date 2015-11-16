@@ -19,8 +19,10 @@
   }
 
   .slider-slide {
-    min-height: 400px;
+    height: 500px;
     padding: 40px;
+    overflow-y: scroll;
+    margin-bottom: 40px;
   }
 
   .normal-text {

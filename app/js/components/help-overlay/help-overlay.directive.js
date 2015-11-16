@@ -1,5 +1,5 @@
 /* eslint angular/document-service:0 */
-function wayHelpOverlay($compile) {
+function wayHelpOverlay($window, $timeout, $compile) {
   'ngInject';
 
   return {
@@ -10,7 +10,8 @@ function wayHelpOverlay($compile) {
     controller: 'HelpOverlayController',
     templateUrl: 'components/help-overlay/help-overlay.html',
     link: {
-      pre: function(scope, iElement, iAttrs) {
+      post: function(scope, iElement, iAttrs) {
+        var event = document.createEvent('Event');
         if (scope.preventHelp) {
           return;
         }
@@ -25,7 +26,6 @@ function wayHelpOverlay($compile) {
 
         scope.loadHelpPromise.then(function(templateString) {
           var template = $compile(templateString)(scope);
-          // console.log(template);
           iElement.find('.dynamic-content').prepend(template);
           angular.element(document.body).append(iElement);
 
@@ -33,14 +33,11 @@ function wayHelpOverlay($compile) {
             iElement.fadeIn();
           }
         });
-      },
-      post: function(scope, iElement) {
-        if (scope.preventHelp) {
-          return;
-        }
 
         scope.$watch('showHelp', function(newValue) {
           if (newValue) {
+            event.initEvent('resize', true, true);
+            window.dispatchEvent(event);
             iElement.fadeIn();
           } else {
             iElement.fadeOut();

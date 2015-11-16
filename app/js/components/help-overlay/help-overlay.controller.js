@@ -47,10 +47,6 @@ function HelpOverlayController($scope, $state, $stateParams, $ionicTemplateLoade
     event.stopPropagation();
     $ionicSlideBoxDelegate.next();
   };
-
-  $scope.slidesCount = function() {
-    return $ionicSlideBoxDelegate.slidesCount();
-  };
 }
 
 module.exports = HelpOverlayController;

@@ -37,14 +37,13 @@ function buildScript(file) {
   }
 
   const transforms = [
-    { 'name':'browserify-shim', 'options': {} },
     { 'name':'debowerify', 'options': {} },
     { 'name':'browserify-ngannotate', 'options': {} },
-    { 'name':'localenvify', 'options': {} }
+    { 'name':'localenvify', 'options': {} },
   ];
 
   transforms.forEach(function(transform) {
-    bundler.transform(transform.name, transform.options);
+    bundler.transform(transform.options, transform.name);
   });
 
   function rebundle() {
@@ -56,10 +55,19 @@ function buildScript(file) {
       .pipe(gulpif(createSourcemap, buffer()))
       .pipe(gulpif(createSourcemap, sourcemaps.init()))
       .pipe(gulpif(global.isProd, streamify(uglify({
-        mangle: false,
         compress: {
+          sequences: true,
+          dead_code: true,
+          angular: true,
+          screw_ie8: true,
+          join_vars: true,
+          unused: true,
+          drop_debugger: true,
           drop_console: true
-        }
+        },
+        output: {
+          comments: false
+        },
       }))))
       .pipe(gulpif(createSourcemap, sourcemaps.write('./')))
       .pipe(gulp.dest(config.scripts.dest))

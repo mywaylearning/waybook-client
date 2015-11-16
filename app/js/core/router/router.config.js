@@ -11,15 +11,18 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   userResolve = {
     analytics: function(segmentio) {
+      'ngInject';
       return segmentio.load('gcb6avxous');
     },
     userGrant: function(grant) {
+      'ngInject';
       return grant.only([ROLES.user], ['app']);
     }
   };
 
   guestResolve = {
     guestGrant: function(grant) {
+      'ngInject';
       return grant.only([ROLES.guest], ['public']);
     }
   };

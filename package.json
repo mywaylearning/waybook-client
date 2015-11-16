@@ -21,13 +21,10 @@
     "hello": "./bower_components/hello/dist/hello.all.min.js",
     "ng-segmentio": "./bower_components/ng-segmentio/build/ng-segmentio.min.js"
   },
-  "browserify-shim": {},
   "dependencies": {
     "angular-messages": "^1.4.3",
     "angular-moment": "^0.10.1",
     "debug": "^2.2.0",
-    "jquery": "^2.1.4",
-    "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "restangular": "^1.5.1",
     "store": "^1.3.17"

@@ -16,13 +16,13 @@ gulp.task('styles', function () {
 
   const createSourcemap = !global.isProd || config.styles.prodSourcemap;
 
-  return gulp.src(config.styles.src)
+  return gulp.src([config.styles.src])
     .pipe(gulpif(createSourcemap, sourcemaps.init()))
     .pipe(sass({
       sourceComments: !global.isProd,
       outputStyle: global.isProd ? 'compressed' : 'nested',
       includePaths: config.styles.sassIncludePaths
-    }))
+    }).on('error', sass.logError))
     .pipe(cssImport())
     .on('error', handleErrors)
     .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))

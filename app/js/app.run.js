@@ -1,7 +1,4 @@
-'use strict';
-
-var debug = require('debug')('waybook:AppRun');
-var util = require('util');
+/* globals StatusBar */
 
 function AppRun($rootScope, $window, $ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -53,8 +50,6 @@ function AppRun($rootScope, $window, $ionicPlatform) {
     //     $rootScope.bodyClass = false;
     //   }
     // });
-    debug('platform is %s', ionic.Platform.platform());
-    debug(ionic.Platform.platforms);
   });
 }
 

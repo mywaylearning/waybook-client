@@ -1,21 +1,14 @@
-(function() {
+function wayFeed() {
+  return {
+    restrict: 'EA',
+    scope: {
+      posts: '=',
+      postType: '@type',
+      user: '='
+    },
+    controller: 'FeedController',
+    templateUrl: 'components/feed/feed.html'
+  };
+}
 
-  'use strict';
-
-  function wayFeed() {
-
-    return {
-      restrict: 'EA',
-      scope: {
-        posts: '=',
-        postType: '@type',
-        user: '='
-      },
-      controller: 'FeedController',
-      templateUrl: '/app/components/feed/feed.html'
-    };
-  }
-
-  module.exports = wayFeed;
-
-}());
+module.exports = wayFeed;

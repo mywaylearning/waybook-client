@@ -1,7 +1,6 @@
-'use strict';
-
 function PostController($scope, post) {
+  'ngInject';
   $scope.post = post;
 }
 
-module.exports = ['$scope', 'post', PostController];
+module.exports = PostController;

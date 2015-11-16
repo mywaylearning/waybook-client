@@ -1,6 +1,6 @@
-'use strict';
-
 function IntroController($scope, $state, $ionicSlideBoxDelegate) {
+  'ngInject';
+
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
   };
@@ -15,10 +15,7 @@ function IntroController($scope, $state, $ionicSlideBoxDelegate) {
 
   $scope.goToSlide = function(index) {
     $ionicSlideBoxDelegate.slide(index);
-  }
+  };
 }
 
-module.exports = [
-  '$scope', '$state', '$ionicSlideBoxDelegate',
-  IntroController
-];
+module.exports = IntroController;

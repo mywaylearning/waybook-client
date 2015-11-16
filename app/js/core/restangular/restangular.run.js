@@ -1,14 +1,12 @@
-'use strict';
-
 function RestangularRun($rootScope, $http, Restangular, auth, authStore, router, ERROR) {
-
+  'ngInject';
   /**
    * Configure any request interceptors that we want to add to our
    * requests before sending to the API.
    *
    * see https://github.com/mgonto/restangular#addrequestinterceptor
    */
-  Restangular.addRequestInterceptor(function(elem, operation, model, url) {
+  Restangular.addRequestInterceptor(function(elem) {
     return elem;
   });
 
@@ -22,26 +20,26 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
     var stopErrorPropagation = false;
 
     switch (response.status) {
-      case 401:
-        handleUnauthorized(response, deferred);
-        stopErrorPropagation = false;
-        break;
+    case 401:
+      handleUnauthorized(response, deferred);
+      stopErrorPropagation = false;
+      break;
 
-      case 403:
-        handleExpiredToken(response, deferred);
-        stopErrorPropagation = true;
-        break;
+    case 403:
+      handleExpiredToken(response, deferred);
+      stopErrorPropagation = true;
+      break;
 
-      case 400:
-      case 409:
-        handleKnownErrors(response, deferred);
-        stopErrorPropagation = false;
-        break;
+    case 400:
+    case 409:
+      handleKnownErrors(response, deferred);
+      stopErrorPropagation = false;
+      break;
 
-      default:
-        handleUnknownErrors(response, deferred);
-        stopErrorPropagation = false;
-        break;
+    default:
+      handleUnknownErrors(response, deferred);
+      stopErrorPropagation = false;
+      break;
     }
 
     return !stopErrorPropagation;
@@ -54,12 +52,8 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
    * @param  {object} response  Raw response from the server.
    * @param  {Promise} deferred
    */
-  function handleUnauthorized(response, deferred) {
+  function handleUnauthorized() {
     var error;
-
-    //console.log('handleUnauthorized', response);
-
-    // deferred.reject();
 
     // create a custom ui-router error for 401 unauthorized
     error = {
@@ -79,7 +73,6 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
    * see https://github.com/mgonto/restangular#seterrorinterceptor
    */
   function handleExpiredToken(response, deferred) {
-
     /**
      * Remove auth information,
      * deferred request

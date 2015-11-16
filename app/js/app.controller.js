@@ -1,74 +1,62 @@
-(function() {
+function AppController($scope, app, UserService) {
+  'ngInject';
 
-  'use strict';
+  app.init($scope);
 
-  var debug = require('debug')('waybook:AppController');
+  $scope.logout = function() {
+    app.reset();
+    UserService.logout();
+  };
 
-  function AppController($scope, $ionicModal, $timeout, app, UserService) {
-    var scope = this;
-    // debug(app);
-    // debug($scope);
-    // debug(scope);
-    app.init($scope);
-   // $scope.$watch(function() { return scope.UserService; }, onUserUpdate);
+  // Create the settings modal
+  // $scope.settingsData = {
+  //   volume: 11
+  // };
 
-    scope.logout = function() {
-      app.reset();
-      UserService.logout();
-    };
+  // $ionicModal.fromTemplateUrl('sections/settings/settings.html', {
+  //   scope: $scope
+  // }).then(function(modal) {
+  //   $scope.modal = modal;
+  // });
 
-    // Create the settings modal
-    $scope.settingsData = { volume: 11 };
+  // $scope.closeSettings = function() {
+  //   $scope.modal.hide();
+  // };
 
-    $ionicModal.fromTemplateUrl('app/sections/settings/settings.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.modal = modal;
-    });
+  // $scope.showSettings = function() {
+  //   $scope.modal.show();
+  // };
 
-    $scope.closeSettings = function() {
-      $scope.modal.hide();
-    };
+  // $scope.saveSettings = function() {
+  //   $timeout(function() {
+  //     $scope.closeLogin();
+  //   }, 1000);
+  // };
 
-    $scope.showSettings = function() {
-      $scope.modal.show();
-    };
+  // $scope.loginData = {};
+  //
+  // $ionicModal.fromTemplateUrl('sections/app/login.html', {
+  //   scope: $scope
+  // }).then(function(modal) {
+  //   $scope.modal = modal;
+  // });
+  //
+  // $scope.closeLogin = function() {
+  //   $scope.modal.hide();
+  // };
+  //
+  // $scope.login = function() {
+  //   $scope.modal.show();
+  // };
+  //
+  // $scope.doLogin = function() {
+  //   debug('doing login', $scope.loginData);
+  //
+  //   // simulation -- remove this and put real login logic
+  //   $timeout(function() {
+  //     $scope.closeLogin();
+  //   }, 3000);
+  // };
+}
 
-    $scope.saveSettings = function() {
-      $timeout(function() {
-        $scope.closeLogin();
-      }, 1000);
-    };
-
-    // $scope.loginData = {};
-    //
-    // $ionicModal.fromTemplateUrl('app/sections/app/login.html', {
-    //   scope: $scope
-    // }).then(function(modal) {
-    //   $scope.modal = modal;
-    // });
-    //
-    // $scope.closeLogin = function() {
-    //   $scope.modal.hide();
-    // };
-    //
-    // $scope.login = function() {
-    //   $scope.modal.show();
-    // };
-    //
-    // $scope.doLogin = function() {
-    //   debug('doing login', $scope.loginData);
-    //
-    //   // simulation -- remove this and put real login logic
-    //   $timeout(function() {
-    //     $scope.closeLogin();
-    //   }, 3000);
-    // };
-    function onUserUpdate(newVal, oldVal) {
-
-    }
-  }
-
-  module.exports = ['$scope', '$ionicModal', '$timeout', 'app', 'UserService', 'segmentio', AppController];
-
-}());
+module.exports = AppController;

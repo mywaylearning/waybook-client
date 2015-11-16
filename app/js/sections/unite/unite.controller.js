@@ -1,6 +1,5 @@
-'use strict';
-
-function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionSheet, contacts, ContactService) {
+function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionSheet, contacts) {
+  'ngInject';
   $scope.contacts = contacts;
 
   // Triggered on a button click, or some other target
@@ -17,9 +16,9 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
       },
       buttonClicked: function(index) {
         if (index === 0) {
-          $state.go('app.unite.edit', {contactId: contact.id});
+          $state.go('app.unite.edit', { contactId: contact.id });
         }
-       return true;
+        return true;
       }
     });
   };
@@ -34,15 +33,13 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
 
 
     confirmPopup.then(function(res) {
-      if(res) {
-        supporter.remove().then(function(result){
+      if (res) {
+        supporter.remove().then(function() {
           $scope.contacts.splice(contacts.indexOf(supporter), 1);
         });
       }
     });
   };
 }
-
-UniteController.$inject = ['$scope', '$state', '$ionicModal', '$ionicPopup', '$ionicActionSheet', 'contacts', 'ContactService'];
 
 module.exports = UniteController;

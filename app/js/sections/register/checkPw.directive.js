@@ -1,10 +1,5 @@
-(function() {
-
-  'use strict';
-
-  function checkPw() {
-
-    return {
+function checkPw() {
+  return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
       ctrl.$parsers.unshift(function(viewValue) {
@@ -16,15 +11,12 @@
 
         if (containsUpperLetter && containsDigit) {
           return viewValue;
-        }
-        else {
+        } else {
           return undefined;
         }
       });
     }
   };
-  }
+}
 
-  module.exports = [checkPw];
-
-}());
+module.exports = checkPw;

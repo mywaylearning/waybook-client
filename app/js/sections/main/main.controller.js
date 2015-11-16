@@ -1,8 +1,7 @@
-'use strict';
-
 function MainController($scope, $state, posts) {
+  'ngInject';
   $scope.posts = posts;
-  $scope.helpHtml = 'app/sections/main/help.html';
+  $scope.helpHtml = 'sections/main/help.html';
 }
 
-module.exports = ['$scope', '$state', 'posts', MainController];
+module.exports = MainController;

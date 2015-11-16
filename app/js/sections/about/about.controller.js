@@ -1,8 +1,4 @@
-'use strict';
-
-function AboutController($scope) {
+function AboutController() {
 }
-
-AboutController.$inject = ['$scope'];
 
 module.exports = AboutController;

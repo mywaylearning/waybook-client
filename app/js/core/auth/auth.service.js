@@ -1,28 +1,14 @@
-'use strict';
-
-var debug = require('debug')('waybook:AuthService');
-
 function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, authStore) {
-  var svcInterface, Oauth, Refresh, token, headers, oauthToken;
+  'ngInject';
 
-  Oauth = Restangular.all('login');
-  Refresh = Restangular.all('refresh');
-  token = authStore.getAccessToken();
-  headers = {
+  var svcInterface;
+  var Oauth = Restangular.all('login');
+  var Refresh = Restangular.all('refresh');
+  var token = authStore.getAccessToken();
+  var headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   };
-  oauthToken = null;
-
-  svcInterface = {
-    authenticate: _authenticate,
-    saveAuth: saveAuth,
-    authRefresh: _authRefresh,
-    isAuthenticated: _isAuthenticated,
-    destroy: _destroy,
-    getAuthHeader: _getAuthHeader
-  };
-
-  return svcInterface;
+  var oauthToken = null;
 
   /**
    * The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -30,34 +16,66 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
    * @return {String}
    */
   function param(obj) {
-    var query = '',
-      name, value, fullSubName, subName, subValue, innerObj, i;
+    var query = '';
+    var name;
+    var value;
+    var fullSubName;
+    var subName;
+    var subValue;
+    var innerObj;
+    var i;
 
     for (name in obj) {
-      value = obj[name];
+      if (obj.hasOwnProperty(name)) {
+        value = obj[name];
 
-      if (value instanceof Array) {
-        for (i = 0; i < value.length; ++i) {
-          subValue = value[i];
-          fullSubName = name + '[' + i + ']';
-          innerObj = {};
-          innerObj[fullSubName] = subValue;
-          query += param(innerObj) + '&';
+        if (value instanceof Array) {
+          for (i = 0; i < value.length; ++i) {
+            subValue = value[i];
+            fullSubName = name + '[' + i + ']';
+            innerObj = {};
+            innerObj[fullSubName] = subValue;
+            query += param(innerObj) + '&';
+          }
+        } else if (value instanceof Object) {
+          for (subName in value) {
+            if (value.hasOwnProperty(subName)) {
+              subValue = value[subName];
+              fullSubName = name + '[' + subName + ']';
+              innerObj = {};
+              innerObj[fullSubName] = subValue;
+              query += param(innerObj) + '&';
+            }
+          }
+        } else if (angular.isDefined(value) && value !== null) {
+          query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
         }
-      } else if (value instanceof Object) {
-        for (subName in value) {
-          subValue = value[subName];
-          fullSubName = name + '[' + subName + ']';
-          innerObj = {};
-          innerObj[fullSubName] = subValue;
-          query += param(innerObj) + '&';
-        }
-      } else if (value !== undefined && value !== null) {
-        query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
       }
     }
 
     return query.length ? query.substr(0, query.length - 1) : query;
+  }
+
+  /**
+   * Upon successful authentication save the access_token
+   * and refresh_token for this user in local storage.
+   * @param  {Object} data - response object from the auth endpoint
+   */
+  function saveAuth(data) {
+    authStore.save({
+      access_token: data.access_token,
+      refresh_token: data.refresh_token
+    });
+
+    token = authStore.getAccessToken();
+  }
+
+  /**
+   * Clear all references to Restangular auth elements
+   * used during authenticate and refresh calls.
+   */
+  function authComplete() {
+    oauthToken = null;
   }
 
   function _authenticate(username, password) {
@@ -97,7 +115,6 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
     });
 
     oauthToken = Refresh.post(data, null, headers);
-
     /**
      * If we get to this point, access token has expired, and we are going to
      * use refresh token to get new access token, so, remove invalid data
@@ -125,12 +142,11 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
    * @return {mixed}              Can return Boolean or Promise
    */
   function _isAuthenticated(promisify) {
-
-    if (promisify === undefined || !promisify) {
-      debug('returning angular.isDefined token, token: %s', token);
+    var deferred;
+    if (angular.isUndefined(promisify) || !promisify) {
       return angular.isDefined(token);
     }
-    var deferred = $q.defer();
+    deferred = $q.defer();
 
     if (angular.isDefined(token)) {
       deferred.resolve(token);
@@ -161,27 +177,16 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
     return header;
   }
 
-  /**
-   * Upon successful authentication save the access_token
-   * and refresh_token for this user in local storage.
-   * @param  {Object} data - response object from the auth endpoint
-   */
-  function saveAuth(data) {
-    authStore.save({
-      access_token: data.access_token,
-      refresh_token: data.refresh_token
-    });
+  svcInterface = {
+    authenticate: _authenticate,
+    saveAuth: saveAuth,
+    authRefresh: _authRefresh,
+    isAuthenticated: _isAuthenticated,
+    destroy: _destroy,
+    getAuthHeader: _getAuthHeader
+  };
 
-    token = authStore.getAccessToken();
-  }
-
-  /**
-   * Clear all references to Restangular auth elements
-   * used during authenticate and refresh calls.
-   */
-  function authComplete() {
-    oauthToken = null;
-  }
+  return svcInterface;
 }
 
 module.exports = ['$timeout', '$rootScope', '$state', '$location', '$q', 'Restangular', 'authStore', AuthService];

@@ -1,22 +1,18 @@
-(function() {
-  'use strict';
-
-  function ExplorationQuestionHeatMapDirective() {
-    return {
-      restrict: 'E',
-      templateUrl: 'app/components/exploration/heat-map/question.html',
-      controller: 'ExplorationQuestionHeatMapController',
-      scope: {
-        exploration: '=',
-        question: '='
-      },
-      link: function(scope, el, attrs) {
-        el.on('click', function() {
-          scope.onClick();
-        });
-      }
+function ExplorationQuestionHeatMapDirective() {
+  return {
+    restrict: 'E',
+    templateUrl: 'components/exploration/heat-map/question.html',
+    controller: 'ExplorationQuestionHeatMapController',
+    scope: {
+      exploration: '=',
+      question: '='
+    },
+    link: function(scope, el) {
+      el.on('click', function() {
+        scope.onClick();
+      });
     }
-  }
+  };
+}
 
-  module.exports = ExplorationQuestionHeatMapDirective;
-}());
+module.exports = ExplorationQuestionHeatMapDirective;

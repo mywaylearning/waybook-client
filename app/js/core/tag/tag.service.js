@@ -1,37 +1,29 @@
-(function() {
-  'use strict';
+function TagService(api) {
+  'ngInject';
 
-  var debug = require('debug')('waybook:TagService');
+  var svcInterface;
+  var Tags = api.all('tags');
 
-  function TagService(api, EVENTS, API_URL) {
+  /**
+   * Private
+   */
 
-    var svcInterface, Tags;
-
-    Tags = api.all('tags');
-
-    /**
-     * Public
-     */
-    svcInterface = {
-      collection: _collection,
-      timeline: _timeline,
-    };
-    return svcInterface;
-
-    /**
-     * Private
-     */
-
-    function _collection(search) {
-      debug('in _collection');
-      return Tags.getList({search: search});
-    }
-
-    function _timeline(search) {
-      return Tags.getList({timeline: true});
-    }
+  function _collection(search) {
+    return Tags.getList({ search: search });
   }
 
-  module.exports = ['api', 'EVENTS', 'API_URL', TagService];
+  function _timeline() {
+    return Tags.getList({ timeline: true });
+  }
 
-}());
+  /**
+   * Public
+   */
+  svcInterface = {
+    collection: _collection,
+    timeline: _timeline
+  };
+  return svcInterface;
+}
+
+module.exports = TagService;

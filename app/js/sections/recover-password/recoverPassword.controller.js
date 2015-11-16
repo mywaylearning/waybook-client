@@ -1,26 +1,12 @@
-'use strict';
-
 var RecoverPasswordController = function($scope, $state, $stateParams, UserService) {
+  'ngInject';
   $scope.password = {};
 
-
   $scope.setNewPassword = function() {
-    var model = {
-      password: $scope.password.new,
-      recoveryToken: $stateParams.token
-    }
-
-    UserService.setRecoveryPassword($scope.password.new, $stateParams.token).then(function(result) {
+    UserService.setRecoveryPassword($scope.password.new, $stateParams.token).then(function() {
       $state.go('public.login');
     });
-
-  }
+  };
 };
 
-module.exports = [
-  '$scope',
-  '$state',
-  '$stateParams',
-  'UserService',
-  RecoverPasswordController
-];
+module.exports = RecoverPasswordController;

@@ -1,7 +1,7 @@
-'use strict';
-
 function DashboardController($scope, $state, dashboardData) {
+  'ngInject';
+
   $scope.viewData = dashboardData;
 }
 
-module.exports = ['$scope', '$state', 'dashboardData', DashboardController];
+module.exports = DashboardController;

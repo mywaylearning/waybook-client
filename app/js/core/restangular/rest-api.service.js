@@ -1,6 +1,3 @@
-'use strict';
-
-
 /**
  * Create a new Restangualr service with custom config
  * for api calls that require an access_token.
@@ -10,7 +7,16 @@
  * @return {service}
  */
 function RestangularApi(Restangular, auth, authStore, API_URL) {
+  'ngInject';
+
   var service;
+
+  function restangularConfig(RestangularConfigurer) {
+    /**
+     *  Set api base url
+     */
+    RestangularConfigurer.setBaseUrl(API_URL);
+  }
 
   service = Restangular.withConfig(restangularConfig);
 
@@ -20,20 +26,13 @@ function RestangularApi(Restangular, auth, authStore, API_URL) {
   // abort.resolve();
 
   // add the access token header to all requests
-  service.addFullRequestInterceptor(function(elem, operation, model, url, headers) {
+  service.addFullRequestInterceptor(function() {
     return {
       headers: auth.getAuthHeader()
     };
   });
 
   return service;
-
-  function restangularConfig(RestangularConfigurer) {
-    /**
-     *  Set api base url
-     */
-    RestangularConfigurer.setBaseUrl(API_URL);
-  }
 }
 
-module.exports = ['Restangular', 'auth', 'authStore', 'API_URL', RestangularApi];
+module.exports = RestangularApi;

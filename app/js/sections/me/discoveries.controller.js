@@ -1,17 +1,15 @@
-'use strict';
-
 function MeController($scope, $state, discoveries) {
-  $scope.discoveries = discoveries;
+  'ngInject';
 
   var onCreateDiscovery = function() {
     $state.go('app.me.discoveries');
   };
 
+  $scope.discoveries = discoveries;
+
   $scope.createDiscovery = function() {
-    $state.go('app.main.type', {type: 'discovery', onCreate: onCreateDiscovery});
+    $state.go('app.main.type', { type: 'discovery', onCreate: onCreateDiscovery });
   };
 }
-
-MeController.$inject = ['$scope', '$state', 'discoveries'];
 
 module.exports = MeController;

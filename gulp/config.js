@@ -3,7 +3,7 @@
 export default {
 
   browserSync: {
-    appName: 'MyApp',
+    appName: 'Waybook',
     browserPort: 3000,
     UIPort: 3001
   },
@@ -17,7 +17,7 @@ export default {
     prodSourcemap: false,
     sassIncludePaths: [
       './node_modules/',
-      './app/lib/'
+      './bower_components/'
     ]
   },
 
@@ -27,12 +27,12 @@ export default {
   },
 
   images: {
-    src: 'app/images/**/*',
-    dest: 'www/images'
+    src: ['app/images/**/*', 'bower_components/intl-tel-input/build/img/*'],
+    dest: 'www/img'
   },
 
   fonts: {
-    src: ['app/fonts/**/*'],
+    src: ['app/fonts/**/*', 'bower_components/ionic/fonts/*'],
     dest: 'www/fonts'
   },
 

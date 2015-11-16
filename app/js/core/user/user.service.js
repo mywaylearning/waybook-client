@@ -1,9 +1,11 @@
-'use strict';
-
-var debug = require('debug')('waybook:UserService');
-
+/* globals hello */
 function UserService(api, auth, router, utils, EVENTS, API_URL) {
-  var svcInterface, Users, User, userObj, userRequest;
+  'ngInject';
+
+  var Users;
+  var User;
+  var userObj;
+  var userRequest;
 
   Users = api.all('users');
   User = api.one('user');
@@ -12,21 +14,40 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
   userRequest = null;
 
   /**
-   * Public
+   * Clear all references to Restangular user elements
+   * used during get user calls.
    */
-  return {
-    register: _register,
-    recoverPasswordRequest: _recoverPasswordRequest,
-    setRecoveryPassword: _setRecoveryPassword,
-    currentUser: _currentUser,
-    isUserResolved: _userIsResolved,
-    getByUsername: _getByUsername,
-    getUploadImageUrl: _getUploadImageUrl,
-    getSelf: _getSelf,
-    updateSelf: _updateSelf,
-    logout: _logout,
-    socialLoginCheck: _socialLoginCheck
-  };
+  function getUserComplete() {
+    userRequest = null;
+  }
+
+  /**
+   * Store user information in userObj
+   */
+  function setUser(user) {
+    userObj = user;
+  }
+
+  /**
+   * Get the authenticated user's information.
+   * if userObj already exists mimic restangular promise and resolve with userObj
+   * @param  {Boolean} forceRefresh if true will force a fresh get user API call.
+   * @return {Promise}
+   */
+  function _getSelf(forceRefresh) {
+    if (userObj && !forceRefresh) {
+      return utils.promisify(userObj);
+    }
+
+    if (userRequest) {
+      return userRequest;
+    }
+
+    userRequest = User.customGET();
+    userRequest.then(setUser).finally(getUserComplete);
+
+    return userRequest;
+  }
 
   /**
    * Helper method to retreive logged in user's information.
@@ -87,45 +108,23 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    * @param  {String} email
    * @return {Promise}
    */
-   function _recoverPasswordRequest(email) {
-     return Users.post({
-       recovery: email
-     });
-   }
-
-   /**
-    * Set new password from recovery
-    * @param  {String} email,
-    * @param  {String} token
-    * @return {Promise}
-    */
-    function _setRecoveryPassword(password, token) {
-      return Users.post({
-        password: password,
-        recoveryToken: token
-      });
-    }
-
+  function _recoverPasswordRequest(email) {
+    return Users.post({
+      recovery: email
+    });
+  }
 
   /**
-   * Get the authenticated user's information.
-   * if userObj already exists mimic restangular promise and resolve with userObj
-   * @param  {Boolean} forceRefresh if true will force a fresh get user API call.
+   * Set new password from recovery
+   * @param  {String} email,
+   * @param  {String} token
    * @return {Promise}
    */
-  function _getSelf(forceRefresh) {
-    if (userObj && !forceRefresh) {
-      return utils.promisify(userObj);
-    }
-
-    if (userRequest) {
-      return userRequest;
-    }
-
-    userRequest = User.customGET();
-    userRequest.then(setUser).finally(getUserComplete);
-
-    return userRequest;
+  function _setRecoveryPassword(password, token) {
+    return Users.post({
+      password: password,
+      recoveryToken: token
+    });
   }
 
   /**
@@ -134,9 +133,8 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    * and redirect to logged out page.
    */
   function _logout(redirect) {
-    if (redirect == null) {
-      redirect = true;
-    }
+    var _redirect = angular.isUndefined(redirect) ? true : redirect;
+
     hello('facebook').logout();
     hello('google').logout();
     auth.destroy();
@@ -144,25 +142,10 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
     userRequest = null;
 
 
-    if (redirect) {
+    if (_redirect) {
       router.goToLoggedOut();
       window.location.reload();
     }
-  }
-
-  /**
-   * Store user information in userObj
-   */
-  function setUser(user) {
-    userObj = user;
-  }
-
-  /**
-   * Clear all references to Restangular user elements
-   * used during get user calls.
-   */
-  function getUserComplete() {
-    userRequest = null;
   }
 
   /**
@@ -172,8 +155,22 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
     return Users.post(user);
   }
 
+  /**
+   * Public
+   */
+  return {
+    register: _register,
+    recoverPasswordRequest: _recoverPasswordRequest,
+    setRecoveryPassword: _setRecoveryPassword,
+    currentUser: _currentUser,
+    isUserResolved: _userIsResolved,
+    getByUsername: _getByUsername,
+    getUploadImageUrl: _getUploadImageUrl,
+    getSelf: _getSelf,
+    updateSelf: _updateSelf,
+    logout: _logout,
+    socialLoginCheck: _socialLoginCheck
+  };
 }
 
-module.exports = [
-  'api', 'auth', 'router', 'utils', 'EVENTS', 'API_URL', UserService
-];
+module.exports = UserService;

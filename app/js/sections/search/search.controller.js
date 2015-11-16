@@ -1,9 +1,3 @@
-'use strict';
-
-function SearchController($scope, $stateParams) {
-
-}
-
-SearchController.$inject = ['$scope', '$stateParams'];
+function SearchController() {}
 
 module.exports = SearchController;

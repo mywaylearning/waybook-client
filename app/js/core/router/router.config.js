@@ -1,12 +1,8 @@
-'use strict';
-
-var debug = require('debug')('waybook:RouterConfig');
-var fs = require('fs');
-
-require('ionic');
-
+/* globals hello */
 function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider, store, ROLES, LOCAL_STORAGE_KEYS, POST_TYPES) {
-  var userResolve, guestResolve, key;
+  'ngInject';
+  var userResolve;
+  var guestResolve;
 
   $urlMatcherFactoryProvider.strictMode(false);
   $urlMatcherFactoryProvider.caseInsensitive(true);
@@ -29,119 +25,63 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   };
 
   $stateProvider
-
   /**
    * CUSTOM DECORATOR
    * Because life is too short to type in full paths to template files.
    */
     .decorator('views', function(state, parent) {
-    var result = {};
-    var views = parent(state);
+      var result = {};
+      var views = parent(state);
+      var stateNameParts = state.name.split('.');
+      var section = '';
+      var sectionDir = '';
+      var platform = '';
 
-    var platform = '';
+      // If we ever need platform-specific views, we'll use this
+      // if (state.data && state.data.platformVariants !== undefined) {
+      //   if (ionic.Platform.isAndroid()) {
+      //     platform = '-droid-';
+      //   } else if (ionic.Platform.isIOS()) {
+      //     platform = '-ios-';
+      //   }
+      // }
 
-    // If we ever need platform-specific views, we'll use this
-    // if (state.data && state.data.platformVariants !== undefined) {
-    //   if (ionic.Platform.isAndroid()) {
-    //     platform = '-droid-';
-    //   } else if (ionic.Platform.isIOS()) {
-    //     platform = '-ios-';
-    //   }
-    // }
-
-    // if a templateUrl is already defined above the view, then we can skip all this.
-    if (state.templateUrl) {
-      return views;
-    }
-
-    // if it's abstract, we can skip it also
-    if (state.abstract) {
-      return views;
-    }
-
-    var stateNameParts = state.name.split('.');
-    var section = '';
-    var sectionDir = '';
-    if (stateNameParts.length === 2) {
-      sectionDir = '/' + stateNameParts[1];
-      section = stateNameParts[1];
-    } else if (stateNameParts.length === 3) {
-      sectionDir = '/' + stateNameParts[1];
-      section = stateNameParts[2];
-    }
-
-    angular.forEach(views, function(config, name) {
-      if (config.templateUrl) {
-        result[name] = config;
-      } else {
-        var viewNameParts = name.split('@');
-        config.templateUrl = '/app/sections' + sectionDir + '/' + section + '.' + viewNameParts[0] + platform + '.html';
-        result[name] = config;
+      // if a templateUrl is already defined above the view, then we can skip all this.
+      if (state.templateUrl) {
+        return views;
       }
-    });
 
-    return result;
-  })
+      // if it's abstract, we can skip it also
+      if (state.abstract) {
+        return views;
+      }
+
+      if (stateNameParts.length === 2) {
+        sectionDir = '/' + stateNameParts[1];
+        section = stateNameParts[1];
+      } else if (stateNameParts.length === 3) {
+        sectionDir = '/' + stateNameParts[1];
+        section = stateNameParts[2];
+      }
+
+      angular.forEach(views, function(config, name) {
+        var viewNameParts = name.split('@');
+        if (config.templateUrl) {
+          result[name] = config;
+        } else {
+          config.templateUrl = 'sections' + sectionDir + '/' + section + '.' + viewNameParts[0] + platform + '.html';
+          result[name] = config;
+        }
+      });
+      return result;
+    })
 
   .state('public', {
     cache: false,
     abstract: true,
     template: '<ion-nav-bar class="bar-stable"><ion-nav-back-button state-nav-back-button></ion-nav-back-button></ion-nav-bar><ion-nav-view name="publicContent"></ion-nav-view>',
+    controllerAs: '',
     controller: function($scope, $state, UserService, auth) {
-      /**
-       * https://github.com/MrSwitch/hello.js#4-add-listeners-for-the-user-login
-       */
-      hello.on('auth.login', function(_auth) {
-        $state.go('public.login');
-        $scope.onLogin = true;
-        if (_auth.network === 'facebook') {
-          hello(_auth.network).api('/me/permissions').then(function(response) {
-            if (!checkPermission(response.data, 'email')) {
-              // User didn't authorized e-mail
-              hello(_auth.network).api('/me/permissions', 'delete').then(function() {
-                logout();
-                $scope.noEmail = true;
-                $scope.$apply();
-              });
-            } else {
-              doLogin(_auth);
-            }
-          }, function(error) {
-            logout();
-          });
-        } else {
-          doLogin(_auth);
-        }
-      });
-
-      function doLogin(_auth) {
-        // Call user information, for the given network
-        hello(_auth.network).api('/me').then(function(response) {
-          var _user = {
-            email: response.email,
-            firstName: response.first_name,
-            lastName: response.last_name,
-            // avatar: response.picture,
-            provider: _auth.network,
-            providerId: response.id
-          }
-
-          UserService.socialLoginCheck(_user).then(function(data) {
-            auth.saveAuth(data);
-            window.location.reload(false);
-          }).catch(function(error) {
-            if (error.error === 'not found') {
-              $state.go('public.register', { userInfo: _user });
-            }
-          });
-
-          if (_auth.network === 'facebook') {}
-          if (_auth.network === 'google') {}
-        }, function(error) {
-          logout();
-        });
-      }
-
       function checkPermission(data, permission) {
         var toReturn = false;
         angular.forEach(data, function(item) {
@@ -161,6 +101,61 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         $scope.onLogin = false;
         $scope.$apply();
       }
+      /**
+       * https://github.com/MrSwitch/hello.js#4-add-listeners-for-the-user-login
+       */
+      hello.on('auth.login', function(_auth) {
+        $state.go('public.login');
+        $scope.onLogin = true;
+        if (_auth.network === 'facebook') {
+          hello(_auth.network).api('/me/permissions').then(function(response) {
+            if (!checkPermission(response.data, 'email')) {
+              // User didn't authorized e-mail
+              hello(_auth.network).api('/me/permissions', 'delete').then(function() {
+                logout();
+                $scope.noEmail = true;
+                $scope.$apply();
+              });
+            } else {
+              doLogin(_auth);
+            }
+          }, function() {
+            logout();
+          });
+        } else {
+          doLogin(_auth);
+        }
+      });
+
+      function doLogin(_auth) {
+        // Call user information, for the given network
+        hello(_auth.network).api('/me').then(function(response) {
+          var _user = {
+            email: response.email,
+            firstName: response.first_name,
+            lastName: response.last_name,
+            // avatar: response.picture,
+            provider: _auth.network,
+            providerId: response.id
+          };
+
+          UserService.socialLoginCheck(_user).then(function(data) {
+            auth.saveAuth(data);
+            window.location.reload(false);
+          }).catch(function(error) {
+            if (error.error === 'not found') {
+              $state.go('public.register', {
+                userInfo: _user
+              });
+            }
+          });
+
+          // if (_auth.network === 'facebook') {}
+          // if (_auth.network === 'google') {}
+        }, function() {
+          logout();
+        });
+      }
     },
     resolve: guestResolve
   })
@@ -169,7 +164,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/login',
     views: {
       'publicContent': {
-        templateUrl: 'app/sections/login/login.publicContent.html',
+        templateUrl: 'sections/login/login.publicContent.html',
         controller: 'LoginController'
       }
     }
@@ -179,7 +174,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/verify',
     views: {
       'verify': {
-        templateUrl: 'app/sections/verify/verify.publicContent.html',
+        templateUrl: 'sections/verify/verify.publicContent.html',
         controller: 'VerifyController'
       }
     }
@@ -201,7 +196,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     views: {
       'publicContent': {
-        templateUrl: 'app/sections/register/register.publicContent.html',
+        templateUrl: 'sections/register/register.publicContent.html',
         controller: 'RegisterController'
       }
     }
@@ -211,7 +206,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/',
     views: {
       'publicContent': {
-        templateUrl: 'app/sections/intro/intro.publicContent.html',
+        templateUrl: 'sections/intro/intro.publicContent.html',
         controller: 'IntroController'
       }
     }
@@ -219,12 +214,15 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app', {
     abstract: true,
-    templateUrl: 'app/sections/app/base.html',
+    templateUrl: 'sections/app/base.html',
+    controllerAs: '',
     controller: function($rootScope, $scope, $state, $ionicHistory, $ionicPopover, app) {
       $scope.routeClearCache = function($event, route) {
         $event.preventDefault();
         $ionicHistory.clearCache();
-        $state.go(route, {tag: null});
+        $state.go(route, {
+          tag: null
+        });
       };
 
       $scope.showHelp = function() {
@@ -232,7 +230,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       };
 
       $ionicPopover.fromTemplateUrl('templates/popover.html', {
-        scope: $scope,
+        scope: $scope
       }).then(function(popover) {
         $scope.popover = popover;
       });
@@ -278,7 +276,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/results',
     views: {
       'bodyContent@app': {
-        templateUrl: 'app/sections/explore/result.bodyContent.html',
+        templateUrl: 'sections/explore/result.bodyContent.html',
         controller: function($scope, exploration, results) {
           $scope.viewData = {
             exploration: exploration,
@@ -346,7 +344,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     cache: false,
     views: {
       'bodyContent@app': {
-        templateUrl: 'app/sections/unite/form.bodyContent.html',
+        templateUrl: 'sections/unite/form.bodyContent.html',
         controller: 'UniteFormController'
       }
     },
@@ -362,7 +360,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     cache: false,
     views: {
       'bodyContent@app': {
-        templateUrl: 'app/sections/unite/form.bodyContent.html',
+        templateUrl: 'sections/unite/form.bodyContent.html',
         controller: 'UniteFormController'
       }
     },
@@ -378,7 +376,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     views: {
       'bodyContent': {
-        templateUrl: 'app/sections/me/me.bodyContent.html',
+        templateUrl: 'sections/me/me.bodyContent.html',
         controller: function($scope, $state) {
           $scope.goTab = function(tab) {
             $state.go('app.me.' + tab);
@@ -393,7 +391,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     cache: false,
     views: {
       'account-tab': {
-        templateUrl: 'app/sections/me/account/edit.tab.html',
+        templateUrl: 'sections/me/account/edit.tab.html',
         controller: 'MeAccountEditController'
       }
     },
@@ -412,7 +410,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     cache: false,
     views: {
       'discoveries-tab': {
-        templateUrl: 'app/sections/me/discoveries.tab.html',
+        templateUrl: 'sections/me/discoveries.tab.html',
         controller: 'MeDiscoveriesController'
       }
     },
@@ -427,7 +425,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/sponsors',
     views: {
       'sponsors-tab': {
-        templateUrl: 'app/sections/me/sponsors.tab.html',
+        templateUrl: 'sections/me/sponsors.tab.html',
         controller: 'MeSponsorsController'
       }
     }
@@ -470,9 +468,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '/',
     views: {
       'bodyContent': {
-        template: '<span ui-view></span>',
+        template: '<span ui-view></span>'
       }
-    },
+    }
   })
 
   .state('app.main.home', {
@@ -480,7 +478,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: '',
     views: {
       'bodyContent@app': {
-        templateUrl: 'app/sections/main/main.bodyContent.html',
+        templateUrl: 'sections/main/main.bodyContent.html',
         controller: 'MainController'
       }
     },
@@ -495,7 +493,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     url: ':type',
     views: {
       'bodyContent@app': {
-        templateUrl: 'app/sections/main/type.bodyContent.html',
+        templateUrl: 'sections/main/type.bodyContent.html',
         controller: 'MainTypeController'
       }
     },

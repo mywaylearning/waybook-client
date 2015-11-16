@@ -1,9 +1,3 @@
-'use strict';
+function SponsorsController() {}
 
-function MeController($scope, $stateParams) {
-
-}
-
-MeController.$inject = ['$scope', '$stateParams'];
-
-module.exports = MeController;
+module.exports = SponsorsController;

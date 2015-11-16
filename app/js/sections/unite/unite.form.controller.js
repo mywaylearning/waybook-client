@@ -1,18 +1,17 @@
-'use strict';
-
 function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHistory, ContactService, TagService) {
-
-  if ($state.current.name === 'app.unite.add') {
-    $scope.helpHtml = 'app/sections/unite/help-add.html';
-  }
-
   var baseVoice = {
     number: ''
   };
 
   var afterSave = function() {
-    $state.go('app.unite', {}, {reload: true});
+    $state.go('app.unite', {}, {
+      reload: true
+    });
   };
+
+  if ($state.current.name === 'app.unite.add') {
+    $scope.helpHtml = 'sections/unite/help-add.html';
+  }
 
   $scope.viewData = {
     title: 'Add a supporter',
@@ -40,8 +39,8 @@ function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHist
   }
 
   $scope.loadTags = function(query) {
-    var deferred = $q.defer(),
-        tags = [];
+    var deferred = $q.defer();
+    var tags = [];
 
     TagService.collection(query).then(function(response) {
       angular.forEach(response, function(tag) {
@@ -59,18 +58,16 @@ function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHist
   $scope.saveContact = function() {
     $timeout(function() {
       if (contact.id) {
-        $scope.contact.save().then(function(result) {
+        $scope.contact.save().then(function() {
           afterSave();
         });
       } else {
-        ContactService.create($scope.contact).then(function(result){
+        ContactService.create($scope.contact).then(function() {
           afterSave();
         });
       }
-    }, 10)
+    }, 10);
   };
 }
-
-UniteDetailController.$inject = ['$scope', '$state', '$q', '$timeout', 'contact', '$ionicHistory', 'ContactService', 'TagService'];
 
 module.exports = UniteDetailController;

@@ -1,11 +1,10 @@
-'use strict';
-
 /**
  * Set default config for all Restangular instances.
  * @param {provider} RestangularProvider
  * @param {constant} AUTH_URL The proxy domain is used for authenticate calls.
  */
 function RestangularConfig(RestangularProvider, AUTH_URL) {
+  'ngInject';
   /**
    *  Set default base url
    */
@@ -41,4 +40,4 @@ function RestangularConfig(RestangularProvider, AUTH_URL) {
   });
 }
 
-module.exports = ['RestangularProvider', 'AUTH_URL', RestangularConfig];
+module.exports = RestangularConfig;

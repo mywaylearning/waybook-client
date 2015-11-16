@@ -1,29 +1,23 @@
-(function() {
-  'use strict';
+function DashboardService(api) {
+  'ngInject';
+  var svcInterface;
+  var Dashboard = api.one('dashboard');
 
-  function DashboardService(api) {
-
-    var svcInterface, Dashboard;
-
-    Dashboard = api.one('dashboard');
-
-    /**
-     * Public
-     */
-    svcInterface = {
-      get: _get
-    };
-
-    return svcInterface;
-
-    /**
-     * Private
-     */
-     function _get() {
-       return Dashboard.get();
-     }
+  /**
+   * Private
+   */
+  function _get() {
+    return Dashboard.get();
   }
 
-  module.exports = ['api', DashboardService];
+  /**
+   * Public
+   */
+  svcInterface = {
+    get: _get
+  };
 
-}());
+  return svcInterface;
+}
+
+module.exports = DashboardService;

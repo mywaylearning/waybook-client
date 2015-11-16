@@ -1,0 +1,249 @@
+.post-form {
+
+  .textarea {
+    width: 100%;
+    -webkit-user-select: auto !important;
+    border: 1px solid #d4d4d4;
+    padding: 10px;
+    position: relative;
+    cursor: text;
+    word-wrap: break-word;
+    border-radius: 3px;
+    max-height: 138px;
+    min-height: 100px;
+    overflow-y: scroll;
+
+    &.inactive {
+      max-height: 40px;
+      min-height: 40px;
+      overflow: visible;
+
+      &::after, &::before {
+        top: 100%;
+      	left: 13%;
+      	border: solid transparent;
+      	content: " ";
+      	height: 0;
+      	width: 0;
+      	position: absolute;
+      	pointer-events: none;
+      }
+
+      &::after {
+        border-color: rgba(255, 255, 255, 0);
+      	border-top-color: #ffffff;
+      	border-width: 10px;
+      	margin-left: -10px;
+      }
+
+      &::before {
+        border-color: #ffffff;
+      	border-top-color: #d4d4d4;
+      	border-width: 11px;
+      	margin-left: -11px;
+      }
+    }
+  }
+
+  .item-input {
+    textarea {
+      padding-right: 44px;
+      height: 40px;
+    }
+  }
+
+
+  .post-content-container {
+    position: relative;
+    width: 100%;
+    margin-right: 5px;
+    font-size: 90%;
+  }
+
+  .post-content {
+    width: 100%;
+    max-height: 120px;
+    min-height: 70px;
+    overflow-y: scroll;
+    cursor: text;
+    word-wrap: break-word;
+  }
+
+  .button-bar {
+    margin-top: 20px;
+  }
+
+  // Photo attached
+  .item-image {
+    img:first-child {
+      @media (min-width: 640px) {
+        max-height: 300px;
+        width: auto;
+      }
+    }
+  }
+
+  .remove-photo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .button-remove-link {
+    &::before {
+      font-size: 16px;
+    }
+  }
+
+  .attach-action {
+    margin: 0 10px 5px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    top: 4px;
+
+    i {
+      font-size: 150%;
+    }
+  }
+
+  .button-add-contact {
+    padding: 0 12px 0 10px;
+    margin-right: 8px;
+  }
+
+  .re-share {
+    z-index: 1;
+  }
+
+  .tags {
+    .tag-item {
+      background: $balanced !important;
+      color: #FFF;
+      border-color: darken($balanced, 10) !important;
+
+      &.selected {
+        background: $assertive;
+        border-color: darken($assertive, 10);
+
+        .ion-close-circled {
+          color: darken($assertive, 25);
+        }
+      }
+    }
+
+    .ion-close-circled {
+      color: darken($balanced, 25);
+    }
+  }
+
+  .tag-template div:first-child {
+    float: left;
+  }
+
+  .tag-template div:first-child img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
+
+  .tag-template div:last-child {
+    float: left;
+    margin-left: 5px;
+  }
+
+  .autocomplete-template {
+    .left-panel {
+      float: left;
+
+      img {
+        width: 48px;
+        height: 48px;
+        vertical-align: middle;
+      }
+    }
+
+    .right-panel {
+      float: left;
+      margin-left: 5px;
+
+      .name {
+      }
+
+      .email {
+        color: #a2a2a2;
+        font-size: 70%;
+
+        em {
+          font-size: 110%;
+        }
+      }
+    }
+
+  }
+
+  .autocomplete {
+    .selected {
+      .email {
+        color: #FFF;
+      }
+    }
+  }
+}
+
+.menu-highlighted {
+    font-weight: bold;
+}
+
+.hashtag-search {
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    background-clip: padding-box;
+    outline: 0;
+    background-color: #FFF;
+    cursor: pointer;
+
+    .list-group-item.active {
+      color: #fff;
+      background-color: #428bca;
+      border-color: #428bca;
+    }
+
+  .list-group-item.active .text-muted {
+    color: #ccc;
+  }
+
+    .list-group-item.active .text-primary {
+      color: #fff;
+    }
+
+    .list-group-item {
+      padding: 6px 15px;;
+    }
+}
+
+mentio-menu {
+  .aside-open & {
+    margin-left: 276px;
+  }
+
+  .modal-open & {
+    margin-left: 0;
+  }
+}
+
+.hide-calendar-widget::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
+// body.aside-open {
+//    {
+//
+//   }
+//
+//   .is-modal mentio-menu {
+//     margin-left: 0;
+//   }
+// }

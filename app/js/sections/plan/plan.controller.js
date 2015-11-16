@@ -1,67 +1,58 @@
-(function() {
+function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
+  'ngInject';
 
-  'use strict';
+  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var todayDate = new Date();
+  var date = monthNames[todayDate.getMonth()].toLowerCase() + '-' + todayDate.getFullYear();
 
-  var debug = require('debug')('waybook:PlanController');
+  var onCreateGoal = function() {
+    $state.go('app.plan');
+    PostService.timelineByTag().then(function(response) {
+      $scope.months = response[1].plain();
+      $scope.posts = response[0].plain();
+    });
+  };
 
-  function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
+  $scope.scrollTo = date;
 
-    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  $scope.hashMonth = function(_date) {
+    return _date.toLowerCase().replace(' ', '-');
+  };
 
-    if (!$stateParams.tag) {
-      var todayDate = new Date();
-      var date = monthNames[todayDate.getMonth()].toLowerCase() + '-' + todayDate.getFullYear();
-      $scope.scrollTo = date;
+  $scope.tags = tags;
+  $scope.months = posts[1].plain();
+  $scope.posts = posts[0].plain();
+  $scope.selectedTag = $stateParams.tag;
+
+  $scope.getPosts = function(_date) {
+    return $scope.posts[_date];
+  };
+
+  $scope.setTag = function() {
+    if ($stateParams.tag === $scope.selectedTag) {
+      return;
     }
 
-    $scope.hashMonth = function(date) {
-      return date.toLowerCase().replace(' ', '-');
-    };
+    // $ionicHistory.clearCache();
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
 
-    $scope.tags = tags;
-    $scope.months = posts[1].plain();
-    $scope.posts = posts[0].plain();
-    $scope.selectedTag = $stateParams.tag;
+    $ionicLoading.show({
+      animation: 'fade-in',
+      hideOnStateChange: true
+    });
 
-    $scope.getPosts = function(date) {
-      return $scope.posts[date];
-    };
+    $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true });
+  };
 
-    $scope.setTag = function() {
-      if ($stateParams.tag === $scope.selectedTag) {
-        return;
-      }
+  $scope.createGoal = function(_date) {
+    var tmp = _date.split(' ');
+    var month = monthNames.indexOf(tmp[0]) + 1;
+    var deadline = new Date(month + '/15/' + tmp[1]);
 
-      $ionicHistory.clearCache();
-      $ionicHistory.nextViewOptions({
-        disableBack: true
-      });
+    $state.go('app.main.type', { type: 'goal', deadline: deadline, onCreate: onCreateGoal });
+  };
+}
 
-      $ionicLoading.show({
-        animation: 'fade-in',
-        hideOnStateChange: true
-      });
-
-      $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true });
-    };
-
-    $scope.createGoal = function(date) {
-      var tmp = date.split(' ');
-      var month = monthNames.indexOf(tmp[0]) + 1;
-      var deadline = new Date(month + '/15/' + tmp[1]);
-
-      $state.go('app.main.type', {type: 'goal', deadline: deadline, onCreate: onCreateGoal});
-    };
-
-    var onCreateGoal = function(post) {
-      $state.go('app.plan');
-      PostService.timelineByTag().then(function(response) {
-        $scope.months = response[1].plain();
-        $scope.posts = response[0].plain();
-      });
-    };
-  }
-
-  module.exports = ['$scope', '$state', '$stateParams', 'posts', 'tags', 'PostService', '$ionicLoading', '$ionicHistory', PlanController];
-
-}());
+module.exports = PlanController;

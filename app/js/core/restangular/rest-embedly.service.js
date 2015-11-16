@@ -1,6 +1,3 @@
-'use strict';
-
-
 /**
  * Create a new Restangualr service with custom config
  * for api calls that require an access_token.
@@ -10,7 +7,16 @@
  * @return {service}
  */
 function RestangularEmbedLy(Restangular, EMBEDLY_CONFIG) {
+  'ngInject';
   var service;
+
+  function restangularConfig(RestangularConfigurer) {
+    /**
+     *  Set api base url
+     */
+    RestangularConfigurer.setBaseUrl(EMBEDLY_CONFIG.url);
+    RestangularConfigurer.setDefaultRequestParams('get', { key: EMBEDLY_CONFIG.key });
+  }
 
   service = Restangular.withConfig(restangularConfig);
 
@@ -20,14 +26,6 @@ function RestangularEmbedLy(Restangular, EMBEDLY_CONFIG) {
   // abort.resolve();
 
   return service;
-
-  function restangularConfig(RestangularConfigurer) {
-    /**
-     *  Set api base url
-     */
-    RestangularConfigurer.setBaseUrl(EMBEDLY_CONFIG.url);
-    RestangularConfigurer.setDefaultRequestParams('get', {key: EMBEDLY_CONFIG.key});
-  }
 }
 
-module.exports = ['Restangular', 'EMBEDLY_CONFIG', RestangularEmbedLy];
+module.exports = RestangularEmbedLy;

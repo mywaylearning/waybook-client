@@ -1,53 +1,52 @@
 <ion-view view-title="Create your account" cache-view="false">
   <ion-content padding="true" class="has-header">
     <div class="small-on-wide">
-      <form name="registerForm" ng-submit="onRegister(registerForm)">
+      <form name="registerForm" ng-submit="onRegister(registerForm)" novalidate>
         <ion-list>
-
-          <label class="item item-input" ng-class="{ 'has-error' : registerForm.firstName.$dirty && registerForm.firstName.$invalid}">
+          <label class="item item-input" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.firstName.$invalid}">
             <span class="input-label">First name:</span>
             <input type="text" name="firstName" ng-model="model.firstName" placeholder="First name" required>
           </label>
 
-          <div class="form-errors" ng-messages="registerForm.firstName.$dirty && registerForm.firstName.$error">
+          <div class="form-errors" ng-messages="registerForm.$submitted && registerForm.firstName.$error">
             <div ng-messages-include="core/errors/messages.html"></div>
           </div>
 
-          <label class="item item-input" ng-class="{ 'has-error' : registerForm.lastName.$dirty && registerForm.lastName.$invalid}">
+          <label class="item item-input" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.lastName.$invalid}">
             <span class="input-label">Last name:</span>
             <input type="text" name="lastName" ng-model="model.lastName" placeholder="Last name" required>
           </label>
 
-          <div class="form-errors" ng-messages="registerForm.lastName.$dirty && registerForm.lastName.$error">
+          <div class="form-errors" ng-messages="registerForm.$submitted && registerForm.lastName.$error">
             <div ng-messages-include="core/errors/messages.html"></div>
           </div>
 
-          <label class="item item-input" ng-class="{ 'has-error' : registerForm.username.$dirty && registerForm.username.$invalid}">
+          <label class="item item-input" ng-class="{ 'has-error' : rregisterForm.$submitted && registerForm.username.$invalid}">
             <span class="input-label">Username:</span>
             <input type="text" ng-model="model.username" name="username" placeholder="Username" required reset-validation>
           </label>
 
-          <div class="form-errors" ng-messages="registerForm.username.$dirty && registerForm.username.$error">
+          <div class="form-errors" ng-messages="registerForm.$submitted && registerForm.username.$error">
             <div class="form-error" ng-message="ValidationError">{{errors.username}}</div>
             <div ng-messages-include="core/errors/messages.html"></div>
           </div>
 
-          <label class="item item-input" ng-class="{ 'has-error' : registerForm.email.$dirty && registerForm.email.$invalid}">
+          <label class="item item-input" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.email.$invalid}">
             <span class="input-label">E-mail:</span>
             <input type="email" name="email" ng-model="model.email" placeholder="E-mail" required reset-validation>
           </label>
 
-          <div class="form-errors" ng-messages="registerForm.email.$dirty && registerForm.email.$error">
+          <div class="form-errors" ng-messages="registerForm.$submitted && registerForm.email.$error">
             <div class="form-error" ng-message="ValidationError">{{errors.email}}</div>
             <div ng-messages-include="core/errors/messages.html"></div>
           </div>
 
-          <label class="item item-input" ng-class="{ 'has-error' : registerForm.password.$dirty && registerForm.password.$invalid}">
+          <label class="item item-input" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.password.$invalid}">
             <span class="input-label">Password:</span>
-            <input type="password" name="password" ng-model="model.password" placeholder="Create a password" required check-pw ng-minlength="7">
+            <input type="password" name="password" ng-model="model.password" placeholder="At least 01 digit and 01 uppercase letter" required check-pw ng-minlength="7">
           </label>
 
-          <div class="form-errors" multiple ng-messages="registerForm.password.$dirty && registerForm.password.$error">
+          <div class="form-errors" multiple ng-messages="registerForm.$submitted && registerForm.password.$error">
             <div class="form-error" ng-message="minlength">Your password must contain at least 7 characters.</div>
             <div ng-messages-include="core/errors/messages.html"></div>
           </div>
@@ -59,7 +58,7 @@
           <strong>"Sign up"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub"
           target="_blank">privacy policy</a>.</p>
 
-        <button class="button button-stable button-block" ng-disabled="registerForm.$invalid" type="submit">
+        <button class="button button-stable button-block" type="submit">
           Sign up
         </button>
 

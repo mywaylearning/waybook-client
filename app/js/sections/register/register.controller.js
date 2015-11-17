@@ -35,6 +35,10 @@ function RegisterController($scope, $stateParams, router, UserService, errorHand
    * successfully authenticated we will be redirec to appropriate page.
    */
   $scope.onRegister = function(form) {
+    if (form.$invalid) {
+      return;
+    }
+
     formInstance = form;
     UserService
       .register($scope.model)

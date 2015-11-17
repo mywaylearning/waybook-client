@@ -43,7 +43,7 @@
 
           <label class="item item-input" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.password.$invalid}">
             <span class="input-label">Password:</span>
-            <input type="password" name="password" ng-model="model.password" placeholder="At least 01 digit and 01 uppercase letter" required check-pw ng-minlength="7">
+            <input type="password" name="password" ng-model="model.password" placeholder="At least one digit and one uppercase letter" required check-pw ng-minlength="7">
           </label>
 
           <div class="form-errors" multiple ng-messages="registerForm.$submitted && registerForm.password.$error">

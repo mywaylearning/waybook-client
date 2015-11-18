@@ -1,4 +1,5 @@
 function formatDate($filter) {
+  'ngInject';
   return {
     restrict: 'A',
     require: 'ngModel',
@@ -11,4 +12,4 @@ function formatDate($filter) {
   };
 }
 
-module.exports = ['$filter', formatDate];
+module.exports = formatDate;

@@ -1,4 +1,5 @@
 function VerifyController($scope, $state, UserService) {
+  'ngInject';
   var token = location.hash.split('t=');
   var model = {
     verify: token[1]

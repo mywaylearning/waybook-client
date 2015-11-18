@@ -1,4 +1,5 @@
 function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHistory, ContactService, TagService) {
+  'ngInject';
   var baseVoice = {
     number: ''
   };

@@ -26,6 +26,7 @@ require('highcharts-more');
 require('highcharts-solidgauge');
 require('highcharts-ng');
 require('state-nav-back-button');
+require('angular-recaptcha');
 
 angular.module('waybook', [
   'ionic',
@@ -44,7 +45,8 @@ angular.module('waybook', [
   'internationalPhoneNumber',
   'segmentio',
   'highcharts-ng',
-  'stateBackButtonIonic'
+  'stateBackButtonIonic',
+  'vcRecaptcha'
 ])
 
 .controller('AppController', require('./app.controller.js'))

@@ -24,6 +24,7 @@
   "dependencies": {
     "angular-messages": "^1.4.3",
     "angular-moment": "^0.10.1",
+    "angular-recaptcha": "^2.2.5",
     "debug": "^2.2.0",
     "moment": "^2.10.6",
     "restangular": "^1.5.1",

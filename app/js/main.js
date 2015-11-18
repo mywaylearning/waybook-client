@@ -25,6 +25,7 @@ require('highcharts');
 require('highcharts-more');
 require('highcharts-solidgauge');
 require('highcharts-ng');
+require('state-nav-back-button');
 
 angular.module('waybook', [
   'ionic',
@@ -42,7 +43,8 @@ angular.module('waybook', [
   'ionic-datepicker',
   'internationalPhoneNumber',
   'segmentio',
-  'highcharts-ng'
+  'highcharts-ng',
+  'stateBackButtonIonic'
 ])
 
 .controller('AppController', require('./app.controller.js'))

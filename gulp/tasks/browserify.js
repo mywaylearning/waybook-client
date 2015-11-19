@@ -38,9 +38,12 @@ function buildScript(file) {
 
   const transforms = [
     { 'name':'debowerify', 'options': {} },
-    { 'name':'browserify-ngannotate', 'options': {} },
-    { 'name':'localenvify', 'options': {} },
+    { 'name':'browserify-ngannotate', 'options': {} }
   ];
+
+  if (!global.isProd) {
+    transforms.push({ 'name':'localenvify', 'options': {} });
+  }
 
   transforms.forEach(function(transform) {
     bundler.transform(transform.options, transform.name);

@@ -39,7 +39,9 @@ function buildScript(file) {
   const transforms = [
     { 'name':'debowerify', 'options': {} },
     { 'name':'browserify-ngannotate', 'options': {} },
-    { 'name':'localenvify', 'options': {} },
+    { 'name':'localenvify', 'options': {
+      'envfile': global.isProd ? '.env.prod' : '.env'
+    } },
   ];
 
   transforms.forEach(function(transform) {

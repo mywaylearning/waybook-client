@@ -1,0 +1,50 @@
+var Moment = require('moment');
+
+function UtilsService($q) {
+  'ngInject';
+  var service;
+
+  /**
+   * Mimics a Restangular enhanced promise by
+   * returning a promise that resolves with the
+   * provided value.
+   *
+   * An additional $object property is also added
+   * to the promise object that also stores the
+   * provided value.
+   *
+   * See https://github.com/mgonto/restangular#enhanced-promises
+   * @param  {mixed} value
+   * @return {Promise}
+   */
+  function _promisify(value) {
+    var deferred = $q.defer();
+
+    deferred.promise.$object = value;
+
+    deferred.resolve(value);
+
+    return deferred.promise;
+  }
+
+  function _dateAgo(fromDate, toDate) {
+    return new Moment(toDate).from(fromDate);
+  }
+
+  function _age(birth) {
+    return new Moment().diff(birth, 'years');
+  }
+
+
+  /**
+   * Public
+   */
+  service = {
+    promisify: _promisify,
+    dateAgo: _dateAgo,
+    age: _age
+  };
+  return service;
+}
+
+module.exports = UtilsService;

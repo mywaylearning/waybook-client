@@ -1,14 +1,10 @@
 machine:
   node:
-    version: 0.12
+    version: 4
 
 dependencies:
   pre:
-    - sudo apt-get update; sudo pip install closure-linter awscli; sudo apt-get install gzip
-
-test:
-  pre:
-    - bower install
+    - sudo pip install closure-linter awscli;
 
 deployment:
   staging:

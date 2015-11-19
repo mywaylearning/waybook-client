@@ -1,7 +1,0 @@
-Hi Igor,
-
-This is Fabrice, I was working for John to make a timeline frontend. I didn't get it done - the timeline was once meant to be drawn in 3d, but I couldn't get that to work responsively and went to just a basic 2d timeline. This I never ended up finishing because of cross platform responsiveness bugs - things drawing offscreen and so forth.
-
-The basic idea was that the timeline would receive a JSON object representing commitments (of a type similar to what's in testdata.json), parse it, draw points on the page corresponding to the data in the JSON object, and then attach handlers to the points (so when you clicked on a point relevant information would show up in a pop-up overlay). The timeline had some design put into it from a designer I got to spend an hour or two on the side. The user would be able to reselect the timeline's length (week, month, year) as well as reselect tags and resize the screen, and each one would trigger a redraw of the points visible on screen. I used fabric.js to handle most of my draws, but their API wasn't great.
-
-Tell John I'm sorry about the whole thing and that I promise to make it up to him. My failure here is something I deeply regret.

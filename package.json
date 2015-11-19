@@ -98,7 +98,7 @@
     "deploy:uidev:gzip:css": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --content-encoding 'gzip'  --cache-control 'max-age 86400' --exclude '*' --include '*.css.gz'",
     "deploy:uidev:gzip:html": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.html.gz'",
     "deploy:uidev:gzip:js": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.js.gz'",
-    "deploy:uidev:all": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --exclude '.gz*'",
+    "deploy:uidev:all": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --exclude '*.gz'",
     "deploy:uidev:delete": "aws s3 sync www/ s3://uidev.way.me --delete --region us-west-2",
     "deploy:staging": "npm run deploy:uidev:all && npm run deploy:uidev:gzip:css && npm run deploy:uidev:gzip:js && npm run deploy:uidev:gzip:html && npm run deploy:uidev:delete",
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' node_modules/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o app/js/components/lodash.custom.min.js -p include={}",

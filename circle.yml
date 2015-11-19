@@ -10,8 +10,10 @@ deployment:
   staging:
     branch: master
     commands:
+      - npm run build:staging
       - npm run deploy:staging
   wayme:
     branch: wayme
     commands:
+      - npm run build:production
       - npm run deploy:production

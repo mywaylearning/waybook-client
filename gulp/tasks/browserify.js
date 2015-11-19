@@ -36,10 +36,27 @@ function buildScript(file) {
     });
   }
 
+  let envFile;
+  switch (process.env.NODE_ENV) {
+    case 'staging':
+      envFile = '.env.staging';
+      break;
+    case 'production':
+      envFile = '.env.prod';
+      break;
+    default:
+      envFile = '.env';
+      break;
+  }
+
+  console.log(envFile);
+
   const transforms = [
     { 'name':'debowerify', 'options': {} },
     { 'name':'browserify-ngannotate', 'options': {} },
-    { 'name':'localenvify', 'options': {} },
+    { 'name':'localenvify', 'options': {
+      'envfile': envFile
+    } },
   ];
 
   transforms.forEach(function(transform) {

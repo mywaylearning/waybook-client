@@ -103,7 +103,7 @@
     "deploy:staging": "npm run deploy:uidev:all && npm run deploy:uidev:gzip:css && npm run deploy:uidev:gzip:js && npm run deploy:uidev:gzip:html && npm run deploy:uidev:delete",
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' node_modules/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o app/js/components/lodash.custom.min.js -p include={}",
     "preflight": "./scripts/flight-check",
-    "test": "bower install && npm run build:lodash && AUTH_URL=https://authorize.way.me/ API_URL=https://api.way.me gulp prod",
+    "test": "bower install && npm run build:lodash && NODE_ENV=production AUTH_URL=https://authorize.way.me/ API_URL=https://api.way.me gulp prod",
     "start": "bower install && npm run build:lodash && gulp dev"
   }
 }

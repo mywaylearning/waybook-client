@@ -2,7 +2,6 @@ machine:
   node:
     version: 4
   environment:
-    NODE_ENV: production
     AUTH_URL: https://authorize.way.me/
     API_URL: https://api.way.me
 

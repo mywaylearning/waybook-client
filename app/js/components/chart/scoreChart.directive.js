@@ -1,5 +1,5 @@
+/* globals Highcharts */
 /* eslint no-new: 0 */
-var Highcharts = require('highcharts');
 
 function toInt(number) {
   return parseInt(number, 10);

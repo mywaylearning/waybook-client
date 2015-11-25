@@ -50,6 +50,16 @@
             <div class="form-error" ng-message="minlength">Your password must contain at least 7 characters.</div>
             <div ng-messages-include="core/errors/messages.html"></div>
           </div>
+          <div class="item text-center">
+            <div
+              class="recaptcha"
+              vc-recaptcha
+              key="reCaptcha.key"
+              on-create="setCaptchaWidgetId(widgetId)"
+              on-success="setCaptchaResponse(response)"
+              on-expire="cbCaptchaExpiration()"></div>
+            <span ng-if="reCaptcha.message" class="assertive">{{reCaptcha.message}}</span>
+          </div>
         </ion-list>
 
         <div class="spacer" style="height: 40px;"></div>
@@ -63,6 +73,11 @@
         </button>
 
         <a href="#!/login" class="button button-positive button-clear button-block">Already have an account? Log in now</a>
+        <!-- <div class="spacer" style="height: 40px;"></div> -->
+
+        <div class="login-extras" style="font-size: 80%;">
+          <p>The waybook runs in Chrome, Safari, or Firefox browsers on Mac, Windows, iOS, or Android devices.</p>
+        </div>
 
       </form>
 

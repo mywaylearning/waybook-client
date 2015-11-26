@@ -1,4 +1,4 @@
-function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHistory, ContactService, TagService) {
+function UniteDetailController($scope, $state, $q, $timeout, $stateParams, contact, $ionicHistory, ContactService, TagService) {
   'ngInject';
   var baseVoice = {
     number: ''
@@ -20,6 +20,10 @@ function UniteDetailController($scope, $state, $q, $timeout, contact, $ionicHist
   };
 
   $scope.contact = {};
+
+  if ($stateParams.tags) {
+    $scope.contact.tags = $stateParams.tags;
+  }
 
   $ionicHistory.nextViewOptions({
     disableBack: true

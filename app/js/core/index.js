@@ -42,4 +42,6 @@ angular.module('waybook')
 
   .factory('ExplorationService', require('./exploration/exporation.service.js'))
 
-  .factory('DashboardService', require('./dashboard/dashboard.service.js'));
+  .factory('DashboardService', require('./dashboard/dashboard.service.js'))
+
+  .factory('GuideService', require('./guide/guide.service.js'));

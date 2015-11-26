@@ -9,7 +9,8 @@ function wayPostForm($timeout) {
       sharedPost: '=',
       modalInstance: '=',
       onCreate: '&',
-      deadline: '='
+      deadline: '=',
+      tags: '='
     },
     controller: 'PostFormController',
     controllerAs: 'ctrl',

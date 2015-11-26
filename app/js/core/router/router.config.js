@@ -352,6 +352,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         controller: 'UniteFormController'
       }
     },
+    params: {
+      tags: null
+    },
     resolve: {
       contact: function() {
         return false;
@@ -467,6 +470,20 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.guideme', {
+    url: '/guide-me',
+    views: {
+      'bodyContent': {
+        controller: 'GuideMeController'
+      }
+    },
+    resolve: {
+      tasks: function(GuideService) {
+        return GuideService.collection();
+      }
+    }
+  })
+
   .state('app.main', {
     abstract: true,
     url: '/',
@@ -503,7 +520,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     params: {
       deadline: null,
-      onCreate: null
+      onCreate: null,
+      tags: null
     },
     resolve: {
       type: function($stateParams) {

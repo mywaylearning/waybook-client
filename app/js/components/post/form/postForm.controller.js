@@ -82,6 +82,12 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
     ctrl.model.gEndDate = ctrl.deadline;
   }
 
+  if (ctrl.tags) {
+    angular.forEach(ctrl.tags, function(tag) {
+      ctrl.model.content = '#' + tag + ' ';
+    });
+  }
+
   // Define default options based on type of post
   switch (ctrl.model.postType) {
   case 'thought':

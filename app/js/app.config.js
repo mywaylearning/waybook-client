@@ -45,6 +45,7 @@ angular.module('app.config', [])
   .constant('AUTH_URL', process.env.AUTH_URL)
   .constant('API_URL', process.env.API_URL)
   .constant('store', require('store'))
+  .constant('RECAPTCHA_KEY', process.env.RECAPTCHA_KEY)
 
 .constant('EMBEDLY_CONFIG', {
   'url': process.env.EMBEDLY_URL,

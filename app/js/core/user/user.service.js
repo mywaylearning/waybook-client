@@ -108,9 +108,10 @@ function UserService(api, auth, router, utils, EVENTS, API_URL) {
    * @param  {String} email
    * @return {Promise}
    */
-  function _recoverPasswordRequest(email) {
+  function _recoverPasswordRequest(data) {
     return Users.post({
-      recovery: email
+      recovery: data.recoverEmail,
+      reCaptcha: data.reCaptcha
     });
   }
 

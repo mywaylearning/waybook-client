@@ -2,7 +2,10 @@ var RecoverPasswordController = function($scope, $state, $stateParams, UserServi
   'ngInject';
   $scope.password = {};
 
-  $scope.setNewPassword = function() {
+  $scope.setNewPassword = function(form) {
+    if (form.$invalid) {
+      return;
+    }
     UserService.setRecoveryPassword($scope.password.new, $stateParams.token).then(function() {
       $state.go('public.login');
     });

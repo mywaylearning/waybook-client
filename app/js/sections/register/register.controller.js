@@ -44,12 +44,10 @@ function RegisterController($scope, $stateParams, router, UserService, errorHand
   console.log($scope.reCaptcha);
 
   $scope.setCaptchaResponse = function(response) {
-    console.info('Response available');
     $scope.model.reCaptcha = response;
   };
 
   $scope.setCaptchaWidgetId = function(widgetId) {
-    console.info('Created widget ID: %s', widgetId);
     $scope.reCaptcha.widget = widgetId;
   };
 

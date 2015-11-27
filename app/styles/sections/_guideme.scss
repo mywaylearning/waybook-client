@@ -3,4 +3,10 @@
     text-decoration: line-through;
     opacity: 0.5;
   }
+
+  .item-content {
+    overflow: auto !important;
+    text-overflow: inherit !important;
+    white-space: normal !important;
+  }
 }

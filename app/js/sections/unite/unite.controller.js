@@ -1,4 +1,4 @@
-function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionSheet, contacts) {
+function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicPopover, $ionicActionSheet, contacts) {
   'ngInject';
   $scope.contacts = contacts;
 
@@ -20,6 +20,18 @@ function UniteController($scope, $state, $ionicModal, $ionicPopup, $ionicActionS
         }
         return true;
       }
+    });
+  };
+
+  $scope.showPopover = function($event, contact) {
+    $event.stopPropagation();
+    $scope.contact = contact;
+
+    $ionicPopover.fromTemplateUrl('sections/unite/contact.actions.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popover = popover;
+      $scope.popover.show($event);
     });
   };
 

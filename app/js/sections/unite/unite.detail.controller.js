@@ -19,18 +19,17 @@ function UniteDetailController($scope, $state, $stateParams, $ionicPopover, $ion
     $state.go('app.unite.edit', { contactId: contact.id });
   };
 
-  $scope.deleteSupporter = function() {
+  $scope.deleteSupporter = function(_contact) {
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Delete ' + contact.firstName,
+      title: 'Delete ' + _contact.firstName,
       template: 'Are you sure that you want to delete this contact?',
       cancelText: 'No',
       okText: 'Yes'
     });
-    $scope.popover.hide();
 
     confirmPopup.then(function(res) {
       if (res) {
-        contact.remove().then(function() {
+        _contact.remove().then(function() {
           $state.go('^', {}, { reload: true });
         });
       }

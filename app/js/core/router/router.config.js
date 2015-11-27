@@ -471,6 +471,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.guideme', {
+    cache: false,
     url: '/guide-me',
     views: {
       'bodyContent': {

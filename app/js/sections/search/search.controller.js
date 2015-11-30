@@ -1,18 +1,30 @@
-function SearchController($scope, results, $stateParams, $ionicSideMenuDelegate) {
+function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results) {
   'ngInject';
 
-  $ionicSideMenuDelegate.toggleLeft();
+  $ionicSideMenuDelegate.toggleLeft(false);
 
   $scope.viewData = {
     title: 'Search'
   };
 
-  $scope.query = $stateParams.query;
-  $scope.results = results;
+  $scope.search = {
+    query: null
+  };
 
-  if ($scope.query) {
-    $scope.viewData.title = 'Searching "' + $scope.query + '"';
+  $scope.doSearch = function() {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+    $state.go('app.search', { query: $scope.search.query }, { reload: true });
+  };
+
+
+  if ($stateParams.query) {
+    $scope.search.query = $stateParams.query;
+    $scope.viewData.title = 'Searching "' + $scope.search.query + '"';
   }
+
+  $scope.results = results;
 }
 
 module.exports = SearchController;

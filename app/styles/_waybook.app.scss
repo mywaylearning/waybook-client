@@ -101,3 +101,16 @@ tags-input .tags {
     margin: 0 auto;
   }
 }
+
+.item-as-link {
+  cursor: pointer;
+}
+
+.tag {
+  color: #FFF;
+  position: absolute;
+  right: 15px;
+  font-size: 12px;
+  padding: 2px 4px;
+  background: $positive;
+}

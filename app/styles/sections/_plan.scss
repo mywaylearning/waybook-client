@@ -9,11 +9,7 @@
   }
 
   .tag {
-    color: #FFF;
-    position: absolute;
-    right: 15px;
-    font-size: 12px;
-    padding: 2px 4px;
+    background: none;
 
     &.goal {
       background: $positive;
@@ -23,6 +19,7 @@
       background: $balanced;
     }
   }
+
 
   .has-subheader {
     top: 92px

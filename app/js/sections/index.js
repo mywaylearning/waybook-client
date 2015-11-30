@@ -35,3 +35,5 @@ app.controller('VerifyController', require('./verify/verify.controller.js'));
 app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
 
 app.controller('GuideMeController', require('./guideme/guideme.controller.js'));
+
+app.controller('SearchController', require('./search/search.controller.js'));

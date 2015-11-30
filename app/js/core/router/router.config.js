@@ -228,6 +228,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         });
       };
 
+      $scope.search = {
+        query: null
+      };
+      $scope.doSearch = function() {
+        $state.go('app.search', { query: $scope.search.query }, { reload: true });
+      };
+
       $scope.showHelp = function() {
         $rootScope.$broadcast('showHelp');
       };
@@ -470,6 +477,21 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.search', {
+    cache: false,
+    url: '/search?query',
+    views: {
+      'bodyContent': {
+        controller: 'SearchController'
+      }
+    },
+    resolve: {
+      results: function(SearchService, $stateParams) {
+        return SearchService.collection({ tag: $stateParams.query });
+      }
+    }
+  })
+
   .state('app.guideme', {
     cache: false,
     url: '/guide-me',
@@ -547,31 +569,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   });
 
   $urlRouterProvider.otherwise('/');
-
-  // if none of the above states are matched, use this as the fallback
-  // key = LOCAL_STORAGE_KEYS.introSeen;
-  //
-  // if (store.get(key)) {
-  //   $urlRouterProvider.otherwise('/');
-  // } else {
-  //   $urlRouterProvider.otherwise('/intro');
-  // }
-
-  // .state('app.search', {
-  //   url: '^/search',
-  //   views: {
-  //     'bodyContent': { controller: 'SearchController' }
-  //   }
-  // })
-  //
-  //
-  //
-  // .state('app.single', {
-  //   url: '^/playlists/:playlistId',
-  //   views: {
-  //     'bodyContent': { controller: 'PlaylistController' }
-  //   }
-  // });
 }
 
 RouterConfig.$inject = [

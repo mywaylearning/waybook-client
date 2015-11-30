@@ -2,14 +2,14 @@
   <ion-side-menu side="left" expose-aside-when="(min-width:1024px)">
     <ion-content>
       <ion-list>
-
-        <div class="item item-input-inset item-dark">
-          <label class="item-input-wrapper">
-            <input type="text" name="waysearch" ng-model="search" placeholder="Search">
-          </label>
-          <button class="button button-stable button-small">Search</button>
-        </div>
-
+        <form ng-submit="doSearch()">
+          <div class="item item-input-inset item-dark">
+            <label class="item-input-wrapper">
+              <input type="text" name="waysearch" ng-model="search.query" placeholder="Search">
+            </label>
+            <button class="button button-stable button-small">Search</button>
+          </div>
+        </form>
 
         <a nav-clear menu-close ui-sref="app.main.home" ui-sref-active="active" class="item item-dark">
            Main

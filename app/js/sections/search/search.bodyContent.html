@@ -17,24 +17,24 @@
       <div class="list" ng-repeat="post in results.posts" ng-if="results.posts.length">
         <div class="item item-body item-as-link" ui-sref="app.main.post({id: post.id})">
           <div class="tags">
-            <div class="tag" ng-repeat="tag in post.systemTags">#{{tag}}</div>
-            <div class="tag" ng-repeat="tag in post.tags">#{{tag}}</div>
+            <div class="tag" ng-repeat="tag in post.systemTags">#{{tag}}</div><!--
+            --><div class="tag" ng-repeat="tag in post.tags">#{{tag}}</div>
           </div>
           <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
           <div ng-bind-html="post.content"></div>
         </div>
       </div>
 
-      <ion-list ng-repeat="contact in results.contacts track by contact.id | orderBy: 'firstName'" ng-if="results.contacts.length">
-        <ion-item class="item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
+      <div class="list" ng-repeat="contact in results.contacts track by contact.id | orderBy: 'firstName'" ng-if="results.contacts.length">
+        <div class="item item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
           <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
           <h2>{{contact.firstName}} {{contact.lastName}}</h2>
           <div class="tags">
             <div class="tag" ng-repeat="tag in contact.tags">#{{tag.text}}</div>
           </div>
           <p>{{contact.email}}</p>
-        </ion-item>
-      </ion-list>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>

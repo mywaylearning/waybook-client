@@ -6,7 +6,7 @@
         <div class="custom-label-wrapper">
           <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
-            <input type="search" placeholder="Search for #tags" ng-model="search.query">
+            <input type="text" id="search-page" mentio placeholder="Search for #tags" ng-model="search.query">
           </label>
           <i class="icon ion-close-circled placeholder-icon" ng-if="search.query" ng-click="search.query = null"></i>
         </div>
@@ -14,6 +14,15 @@
           Search
         </button>
       </div>
+      <mentio-menu
+            class="mentio-search-page"
+            mentio-for="'search-page'"
+            mentio-trigger-char="'#'"
+            mentio-items="tagsView"
+            mentio-template-url="/tags.tpl"
+            mentio-search="searchTag(term)"
+            mentio-select="getTagText(item)"
+            ></mentio-menu>
     </div>
   </div>
   </form>

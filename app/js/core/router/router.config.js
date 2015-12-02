@@ -232,6 +232,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         query: null
       };
       $scope.doSearch = function() {
+        if ($state.current.name === 'app.search') {
+          $ionicHistory.nextViewOptions({
+            disableBack: true
+          });
+        }
         $state.go('app.search', { query: $scope.search.query }, { reload: true });
       };
 

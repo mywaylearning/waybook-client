@@ -12,3 +12,14 @@
     z-index: 9999;
   }
 }
+
+mentio-menu.mentio-search-page {
+  margin-top: 6px !important;
+  .aside-open & {
+    margin-left: 276px;
+  }
+
+  .modal-open & {
+    margin-left: 0;
+  }
+}

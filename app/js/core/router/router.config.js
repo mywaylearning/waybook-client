@@ -219,13 +219,50 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     templateUrl: 'sections/app/base.html',
     controllerAs: '',
-    controller: function($rootScope, $scope, $state, $ionicHistory, $ionicPopover, app) {
+    controller: function($rootScope, $scope, $state, $ionicHistory, $ionicPopover, app, TagService) {
       $scope.routeClearCache = function($event, route) {
         $event.preventDefault();
         $ionicHistory.clearCache();
         $state.go(route, {
           tag: null
         });
+      };
+
+      $scope.search = {
+        query: null
+      };
+      $scope.doSearch = function() {
+        if ($state.current.name === 'app.search') {
+          $ionicHistory.nextViewOptions({
+            disableBack: true
+          });
+        }
+        $state.go('app.search', { query: $scope.search.query }, { reload: true });
+      };
+
+      // Search for tags on API based on user input
+      $scope.searchTag = function(term) {
+        if (!term.length) {
+          return;
+        }
+        TagService.collection(term).then(function(response) {
+          var count = 0;
+          $scope.tagsView = [];
+          angular.forEach(response, function(tag) {
+            if (count > 10) {
+              return;
+            }
+            if (tag.text) {
+              $scope.tagsView.push(tag);
+              count++;
+            }
+          });
+        });
+      };
+
+      // Add tag to textarea with the #
+      $scope.getTagText = function(item) {
+        return '#' + item.text;
       };
 
       $scope.showHelp = function() {
@@ -352,6 +389,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         controller: 'UniteFormController'
       }
     },
+    params: {
+      tags: null
+    },
     resolve: {
       contact: function() {
         return false;
@@ -467,6 +507,37 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.search', {
+    cache: false,
+    url: '/search?query',
+    views: {
+      'bodyContent': {
+        controller: 'SearchController'
+      }
+    },
+    resolve: {
+      results: function(SearchService, $stateParams) {
+        var query = $stateParams.query.replace('#', '');
+        return SearchService.collection({ tag: query });
+      }
+    }
+  })
+
+  .state('app.guideme', {
+    cache: false,
+    url: '/guide-me',
+    views: {
+      'bodyContent': {
+        controller: 'GuideMeController'
+      }
+    },
+    resolve: {
+      tasks: function(GuideService) {
+        return GuideService.collection();
+      }
+    }
+  })
+
   .state('app.main', {
     abstract: true,
     url: '/',
@@ -503,7 +574,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     params: {
       deadline: null,
-      onCreate: null
+      onCreate: null,
+      tags: null
     },
     resolve: {
       type: function($stateParams) {
@@ -528,31 +600,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   });
 
   $urlRouterProvider.otherwise('/');
-
-  // if none of the above states are matched, use this as the fallback
-  // key = LOCAL_STORAGE_KEYS.introSeen;
-  //
-  // if (store.get(key)) {
-  //   $urlRouterProvider.otherwise('/');
-  // } else {
-  //   $urlRouterProvider.otherwise('/intro');
-  // }
-
-  // .state('app.search', {
-  //   url: '^/search',
-  //   views: {
-  //     'bodyContent': { controller: 'SearchController' }
-  //   }
-  // })
-  //
-  //
-  //
-  // .state('app.single', {
-  //   url: '^/playlists/:playlistId',
-  //   views: {
-  //     'bodyContent': { controller: 'PlaylistController' }
-  //   }
-  // });
 }
 
 RouterConfig.$inject = [

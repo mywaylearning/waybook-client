@@ -2,14 +2,25 @@
   <ion-side-menu side="left" expose-aside-when="(min-width:1024px)">
     <ion-content>
       <ion-list>
-
-        <div class="item item-input-inset item-dark">
-          <label class="item-input-wrapper">
-            <input type="text" name="waysearch" ng-model="search" placeholder="Search">
-          </label>
-          <button class="button button-stable button-small">Search</button>
-        </div>
-
+        <form ng-submit="doSearch()">
+          <div class="item item-input-inset item-dark">
+            <div class="item-input-wrapper">
+              <i class="icon ion-ios-search placeholder-icon"></i>
+              <input id="search-tags" type="text" name="waysearch" ng-model="search.query" mentio placeholder="Search for #tags">
+              <i class="icon ion-close-circled placeholder-icon" ng-if="search.query" ng-click="search.query = null"></i>
+            </div>
+            <button class="button button-stable button-small">Search</button>
+          </div>
+          <mentio-menu
+                class="mentio-search-menu"
+                mentio-for="'search-tags'"
+                mentio-trigger-char="'#'"
+                mentio-items="tagsView"
+                mentio-template-url="/tags.tpl"
+                mentio-search="searchTag(term)"
+                mentio-select="getTagText(item)"
+                ></mentio-menu>
+        </form>
 
         <a nav-clear menu-close ui-sref="app.main.home" ui-sref-active="active" class="item item-dark">
            Main
@@ -27,6 +38,9 @@
         <a nav-clear menu-close ui-sref="app.me.discoveries" ui-sref-active="active" class="item item-dark">
           Me
         </a>
+        <!-- <a nav-clear menu-close ui-sref="app.guideme" ui-sref-active="active" class="item item-dark">
+          Guide me
+        </a> -->
 
         <div class="spacer" style="height: 40px;"></div>
         <a nav-clear menu-close ui-sref="app.help-feedback" ui-sref-active="active" class="item item-dark">
@@ -87,4 +101,12 @@
       </div>
     </ion-content>
   </ion-popover-view>
+</script>
+
+<script type="text/ng-template" id="/tags.tpl">
+<ul class="list-group hashtag-search">
+    <li mentio-menu-item="tag" ng-repeat="tag in items" class="list-group-item">
+        <span class="text-primary" ng-bind-html="tag.text | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+    </li>
+</ul>
 </script>

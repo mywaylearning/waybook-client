@@ -1,5 +1,54 @@
-<ion-view view-title="Search">
-  <ion-content>
-    <h1>Search</h1>
+<ion-view view-title="{{viewData.title}}" class="search">
+  <form ng-submit="doSearch()">
+  <div class="bar bar-subheader">
+    <div class="small-on-wide">
+      <div class="item-input-inset search-on-bar">
+        <div class="custom-label-wrapper">
+          <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="text" id="search-page" mentio placeholder="Search for #tags" ng-model="search.query">
+          </label>
+          <i class="icon ion-close-circled placeholder-icon" ng-if="search.query" ng-click="search.query = null"></i>
+        </div>
+        <button class="button button-clear">
+          Search
+        </button>
+      </div>
+      <mentio-menu
+            class="mentio-search-page"
+            mentio-for="'search-page'"
+            mentio-trigger-char="'#'"
+            mentio-items="tagsView"
+            mentio-template-url="/tags.tpl"
+            mentio-search="searchTag(term)"
+            mentio-select="getTagText(item)"
+            ></mentio-menu>
+    </div>
+  </div>
+  </form>
+  <ion-content padding="true" class="has-subheader">
+    <div class="small-on-wide">
+      <div class="list" ng-repeat="post in viewData.results.posts" ng-if="viewData.results.posts.length">
+        <div class="item item-body item-as-link" ui-sref="app.main.post({id: post.id})">
+          <div class="tags">
+            <div class="tag" ng-repeat="tag in post.systemTags">#{{tag}}</div><!--
+            --><div class="tag" ng-repeat="tag in post.tags">#{{tag}}</div>
+          </div>
+          <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
+          <div ng-bind-html="post.content"></div>
+        </div>
+      </div>
+
+      <div class="list" ng-repeat="contact in viewData.results.contacts track by contact.id | orderBy: 'firstName'" ng-if="viewData.results.contacts.length">
+        <div class="item item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
+          <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
+          <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+          <div class="tags">
+            <div class="tag" ng-repeat="tag in contact.tags">#{{tag.text}}</div>
+          </div>
+          <p>{{contact.email}}</p>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

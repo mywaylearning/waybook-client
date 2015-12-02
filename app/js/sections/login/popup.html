@@ -1,0 +1,3 @@
+<input type="email" ng-model="recoverPasswordData.recoverEmail">
+<div class="recaptcha" style="margin-top: 10px" size="compact" vc-recaptcha key="reCaptcha.key" on-create="setCaptchaWidgetId(widgetId)" on-success="setCaptchaResponse(response)" on-expire="cbCaptchaExpiration()"></div>
+<span ng-if="reCaptcha.message" class="assertive">{{reCaptcha.message}}</span>

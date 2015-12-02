@@ -4,14 +4,16 @@
       <ion-list>
         <form ng-submit="doSearch()">
           <div class="item item-input-inset item-dark">
-            <label class="item-input-wrapper">
-              <input id="tags" type="text" name="waysearch" ng-model="search.query" mentio placeholder="Search for #tags">
-            </label>
+            <div class="item-input-wrapper">
+              <i class="icon ion-ios-search placeholder-icon"></i>
+              <input id="search-tags" type="text" name="waysearch" ng-model="search.query" mentio placeholder="Search for #tags">
+              <i class="icon ion-close-circled placeholder-icon" ng-if="search.query" ng-click="search.query = null"></i>
+            </div>
             <button class="button button-stable button-small">Search</button>
           </div>
           <mentio-menu
                 class="mentio-search-menu"
-                mentio-for="'tags'"
+                mentio-for="'search-tags'"
                 mentio-trigger-char="'#'"
                 mentio-items="tagsView"
                 mentio-template-url="/tags.tpl"

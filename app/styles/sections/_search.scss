@@ -1,0 +1,14 @@
+.search {
+  .custom-label-wrapper {
+    position: relative;
+    display: flex;
+    flex: 1 0;
+  }
+
+  .ion-close-circled {
+    position: absolute;
+    right: 5px;
+    top: 6px;
+    z-index: 9999;
+  }
+}

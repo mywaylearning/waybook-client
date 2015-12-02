@@ -5,10 +5,19 @@
         <form ng-submit="doSearch()">
           <div class="item item-input-inset item-dark">
             <label class="item-input-wrapper">
-              <input type="text" name="waysearch" ng-model="search.query" placeholder="Search">
+              <input id="tags" type="text" name="waysearch" ng-model="search.query" mentio placeholder="Search for #tags">
             </label>
             <button class="button button-stable button-small">Search</button>
           </div>
+          <mentio-menu
+                class="mentio-search-menu"
+                mentio-for="'tags'"
+                mentio-trigger-char="'#'"
+                mentio-items="tagsView"
+                mentio-template-url="/tags.tpl"
+                mentio-search="searchTag(term)"
+                mentio-select="getTagText(item)"
+                ></mentio-menu>
         </form>
 
         <a nav-clear menu-close ui-sref="app.main.home" ui-sref-active="active" class="item item-dark">
@@ -90,4 +99,12 @@
       </div>
     </ion-content>
   </ion-popover-view>
+</script>
+
+<script type="text/ng-template" id="/tags.tpl">
+<ul class="list-group hashtag-search">
+    <li mentio-menu-item="tag" ng-repeat="tag in items" class="list-group-item">
+        <span class="text-primary" ng-bind-html="tag.text | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+    </li>
+</ul>
 </script>

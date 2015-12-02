@@ -219,7 +219,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     abstract: true,
     templateUrl: 'sections/app/base.html',
     controllerAs: '',
-    controller: function($rootScope, $scope, $state, $ionicHistory, $ionicPopover, app) {
+    controller: function($rootScope, $scope, $state, $ionicHistory, $ionicPopover, app, TagService) {
       $scope.routeClearCache = function($event, route) {
         $event.preventDefault();
         $ionicHistory.clearCache();
@@ -233,6 +233,31 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       };
       $scope.doSearch = function() {
         $state.go('app.search', { query: $scope.search.query }, { reload: true });
+      };
+
+      // Search for tags on API based on user input
+      $scope.searchTag = function(term) {
+        if (!term.length) {
+          return;
+        }
+        TagService.collection(term).then(function(response) {
+          var count = 0;
+          $scope.tagsView = [];
+          angular.forEach(response, function(tag) {
+            if (count > 10) {
+              return;
+            }
+            if (tag.text) {
+              $scope.tagsView.push(tag);
+              count++;
+            }
+          });
+        });
+      };
+
+      // Add tag to textarea with the #
+      $scope.getTagText = function(item) {
+        return '#' + item.text;
       };
 
       $scope.showHelp = function() {
@@ -487,7 +512,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       results: function(SearchService, $stateParams) {
-        return SearchService.collection({ tag: $stateParams.query });
+        var query = $stateParams.query.replace('#', '');
+        return SearchService.collection({ tag: query });
       }
     }
   })

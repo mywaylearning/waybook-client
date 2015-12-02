@@ -16,8 +16,11 @@
     <div class="small-on-wide">
       <div class="list" ng-repeat="post in results.posts" ng-if="results.posts.length">
         <div class="item item-body item-as-link" ui-sref="app.main.post({id: post.id})">
-          <div class="tag" ng-class="post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'">#{{post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'}}</div>
-          <p class="dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
+          <div class="tags">
+            <div class="tag" ng-repeat="tag in post.systemTags">#{{tag}}</div>
+            <div class="tag" ng-repeat="tag in post.tags">#{{tag}}</div>
+          </div>
+          <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
           <div ng-bind-html="post.content"></div>
         </div>
       </div>
@@ -26,7 +29,9 @@
         <ion-item class="item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
           <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
           <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-          <span  ng-repeat="tag in contact.tags" class="item-note">#{{tag.text}}&nbsp;&nbsp;</span>
+          <div class="tags">
+            <div class="tag" ng-repeat="tag in contact.tags">#{{tag.text}}</div>
+          </div>
           <p>{{contact.email}}</p>
         </ion-item>
       </ion-list>

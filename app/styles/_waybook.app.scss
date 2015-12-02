@@ -106,10 +106,19 @@ tags-input .tags {
   cursor: pointer;
 }
 
-.tag {
-  color: #FFF;
+.post-dates {
+  margin-top: 0 !important;
+}
+
+.tags {
   position: absolute;
   right: 15px;
+  top: 15px;
+}
+
+.tag {
+  color: #FFF;
+  display: inline-block;
   font-size: 12px;
   padding: 2px 4px;
   background: $positive;

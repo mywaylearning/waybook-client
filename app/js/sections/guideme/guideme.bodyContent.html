@@ -2,7 +2,7 @@
   <ion-content padding="true" class="has-header" overflow-scroll="true">
     <div class="small-on-wide">
       <div class="list">
-        <ion-checkbox class="item-body" ng-class="{'completed': task.completed}" ng-repeat="task in viewData.tasks track by $index" ng-click="openTask($event, task)" ng-model="task._completed">{{task.title}}</ion-checkbox>
+        <ion-checkbox class="item-body {{task.section}}" ng-class="{'completed': task.completed}" ng-repeat="task in viewData.tasks track by $index | orderBy: 'order'" ng-click="openTask($event, task)" ng-model="task._completed">{{task.title}}</ion-checkbox>
       </div>
     </div>
   </ion-content>

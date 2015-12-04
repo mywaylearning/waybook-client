@@ -135,3 +135,9 @@ tags-input .tags {
 .search-on-bar {
   padding: 0;
 }
+
+ion-side-menu {
+  .placeholder-icon:last-child {
+    padding-left: 0;
+  }
+}

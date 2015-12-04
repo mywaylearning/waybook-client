@@ -4,7 +4,7 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, UserSe
   var _loginFormController;
 
   $scope.loginData = {};
-  $scope.recoverMode = true;
+  $scope.recoverMode = false;
   $scope.errorsData = {};
 
   /**

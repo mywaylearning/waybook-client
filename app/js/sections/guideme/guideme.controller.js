@@ -29,8 +29,16 @@ function GuideMeController($scope, $state, tasks) {
     'unite': {
       state: 'app.unite.add',
       params: {}
+    },
+    'explore': {
+      state: 'app.explore.exploration',
+      params: {}
     }
   };
+
+  tasks.sort(function(a, b) {
+    return a.order - b.order;
+  });
 
   angular.forEach(tasks, function(task) {
     task._completed = task.completed;
@@ -50,7 +58,19 @@ function GuideMeController($scope, $state, tasks) {
     state = stateMap[task.section].state;
     params = stateMap[task.section].params;
 
-    params.tags = task.tags;
+    if (task.section !== 'explore') {
+      params.tags = task.tags;
+    }
+
+    if (task.section === 'explore') {
+      params.exploration = task.path;
+    }
+
+    if (state === 'app.main.type') {
+      params.onCreate = function() {
+        $state.go('app.guideme');
+      };
+    }
 
     $state.go(state, params, {});
   };

@@ -63,7 +63,7 @@ function GuideMeController($scope, $state, tasks) {
     }
 
     if (task.section === 'explore') {
-      params.exploration = task.slug;
+      params.exploration = task.path;
     }
 
     $state.go(state, params, {});

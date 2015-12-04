@@ -4,6 +4,7 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, UserSe
   var _loginFormController;
 
   $scope.loginData = {};
+  $scope.recoverMode = true;
   $scope.errorsData = {};
 
   /**
@@ -91,58 +92,38 @@ var LoginController = function($scope, $state, $ionicPopup, router, auth, UserSe
     $scope.recoverPasswordData.recoverEmail = email;
   });
 
+  $scope.reCaptcha = {
+    key: RECAPTCHA_KEY
+  };
+
+  $scope.setCaptchaResponse = function(response) {
+    $scope.recoverPasswordData.reCaptcha = response;
+  };
+
+  $scope.setCaptchaWidgetId = function(widgetId) {
+    $scope.reCaptcha.widget = widgetId;
+  };
+
+  $scope.cbCaptchaExpiration = function() {
+    $scope.recoverPasswordData.reCaptcha = null;
+  };
+
+  $scope.setRecoverMode = function(mode) {
+    $scope.recoverMode = mode;
+  };
+
   $scope.recoverPassword = function() {
-    var recoverPopup;
-
-    $scope.reCaptcha = {
-      key: RECAPTCHA_KEY
-    };
-
-    $scope.setCaptchaResponse = function(response) {
-      $scope.recoverPasswordData.reCaptcha = response;
-    };
-
-    $scope.setCaptchaWidgetId = function(widgetId) {
-      $scope.reCaptcha.widget = widgetId;
-    };
-
-    $scope.cbCaptchaExpiration = function() {
-      $scope.recoverPasswordData.reCaptcha = null;
-    };
-
-    recoverPopup = $ionicPopup.show({
-      templateUrl: 'sections/login/popup.html',
-      title: 'Enter your e-mail',
-      subTitle: 'You will receive an e-mail with instructions.',
-      scope: $scope,
-      buttons: [{
-        text: 'Cancel'
-      }, {
-        text: '<b>Send</b>',
-        type: 'button-positive',
-        onTap: function(e) {
-          if (!$scope.recoverPasswordData.recoverEmail || !$scope.recoverPasswordData.reCaptcha) {
-            // don't allow the user to close unless he enters an e-mail or isn't recaptcha checked
-            e.preventDefault();
-          } else {
-            return $scope.recoverPasswordData;
-          }
-        }
-      }]
-    });
-    recoverPopup.then(function(data) {
-      console.log(data);
-      if (data.recoverEmail && data.reCaptcha) {
-        UserService.recoverPasswordRequest(data).then(function() {
-          $ionicPopup.show({
-            title: 'E-mail sent',
-            subTitle: 'We sent an e-mail to <strong>' + data.recoverEmail + '</strong>. Please follow the instructions there to set a new password.',
-            buttons: [{
-              text: 'Ok'
-            }]
-          });
-        });
-      }
+    UserService.recoverPasswordRequest($scope.recoverPasswordData).then(function() {
+      $ionicPopup.show({
+        title: 'E-mail sent',
+        subTitle: 'We sent an e-mail to <strong>' + $scope.recoverPasswordData.recoverEmail + '</strong>. Please follow the instructions there to set a new password.',
+        buttons: [{
+          text: 'Ok',
+          type: 'button-positive'
+        }]
+      }).then(function() {
+        $scope.recoverMode = false;
+      });
     });
   };
 };

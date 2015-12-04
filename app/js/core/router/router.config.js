@@ -353,7 +353,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     params: {
-      tags: null
+      tags: null,
+      onCreate: null
     },
     resolve: {
       contact: function() {

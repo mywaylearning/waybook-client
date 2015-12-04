@@ -66,11 +66,9 @@ function GuideMeController($scope, $state, tasks) {
       params.exploration = task.path;
     }
 
-    if (state === 'app.main.type') {
-      params.onCreate = function() {
-        $state.go('app.guideme');
-      };
-    }
+    params.onCreate = function() {
+      $state.go('app.guideme');
+    };
 
     $state.go(state, params, {});
   };

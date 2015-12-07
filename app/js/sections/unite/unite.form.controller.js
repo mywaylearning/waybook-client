@@ -5,6 +5,9 @@ function UniteDetailController($scope, $state, $q, $timeout, $stateParams, conta
   };
 
   var afterSave = function() {
+    if (angular.isFunction($stateParams.onCreate)) {
+      return $stateParams.onCreate();
+    }
     $state.go('app.unite', {}, {
       reload: true
     });

@@ -1,4 +1,9 @@
 .search {
+
+  .small-on-wide {
+    position: relative;
+  }
+
   .custom-label-wrapper {
     position: relative;
     display: flex;
@@ -10,6 +15,28 @@
     right: 5px;
     top: 6px;
     z-index: 9999;
+  }
+
+  .search-on-bar {
+    float: left;
+    width: 60%;
+  }
+
+  .item-select {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    height: 30px;
+    width: 110px;
+    z-index: 11;
+
+    select {
+      max-width: 100%;
+    }
+  }
+
+  .select-type {
+    right: 90px;
   }
 }
 

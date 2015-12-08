@@ -1,11 +1,12 @@
-function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results, TagService) {
+function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results, contacts, TagService) {
   'ngInject';
 
   $ionicSideMenuDelegate.toggleLeft(false);
 
   $scope.viewData = {
     title: 'Search',
-    results: results
+    results: results,
+    contacts: contacts
   };
 
   $scope.search = {
@@ -16,7 +17,7 @@ function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, 
     $ionicHistory.nextViewOptions({
       disableBack: true
     });
-    $state.go('app.search', { query: $scope.search.query }, { reload: true });
+    $state.go('app.search', $scope.search, { reload: true });
   };
 
   // Search for tags on API based on user input
@@ -48,6 +49,14 @@ function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, 
   if ($stateParams.query) {
     $scope.search.query = $stateParams.query;
     $scope.viewData.title = 'Searching "' + $scope.search.query + '"';
+  }
+
+  if ($stateParams.type) {
+    $scope.search.type = $stateParams.type;
+  }
+
+  if ($stateParams.owner) {
+    $scope.search.owner = $stateParams.owner;
   }
 }
 

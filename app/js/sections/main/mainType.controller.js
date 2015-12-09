@@ -3,6 +3,7 @@ function MainTypeController($scope, $stateParams, type) {
   $scope.type = type;
   $scope.deadline = $stateParams.deadline;
   $scope.onCreate = $stateParams.onCreate;
+  $scope.onCancel = $stateParams.onCancel;
   $scope.tags = $stateParams.tags;
 
   if (type !== 'thought') {

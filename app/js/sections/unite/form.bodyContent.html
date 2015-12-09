@@ -37,7 +37,7 @@
           </label>
           <div class="item">
             <button class="button button-positive" ng-click="saveContact()" ng-disabled="editSupporterForm.$invalid" ng-bind="viewData.editMode ? 'Update' : 'Add'"></button>
-            <button class="button button-stable" ui-sref="^">Cancel</button>
+            <button class="button button-stable" ng-click="cancel()">Cancel</button>
           </div>
         </form>
       </div>

@@ -70,6 +70,10 @@ function GuideMeController($scope, $state, tasks) {
       $state.go('app.guideme');
     };
 
+    params.onCancel = function() {
+      $state.go('app.guideme');
+    };
+
     $state.go(state, params, {});
   };
 

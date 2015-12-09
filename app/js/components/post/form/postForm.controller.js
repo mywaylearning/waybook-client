@@ -289,6 +289,12 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
   };
 
   ctrl.cancelPost = function() {
+    if ($scope.hasCallbackOnCancel()) {
+      if (angular.isFunction(ctrl.onCancel())) {
+        return ctrl.onCancel()();
+      }
+    }
+
     if (ctrl.sharedPost || $state.current.name === 'app.plan') {
       ctrl.modalInstance.hide();
     } else if (!ctrl.model.id) {

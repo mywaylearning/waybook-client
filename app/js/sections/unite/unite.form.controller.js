@@ -76,6 +76,14 @@ function UniteDetailController($scope, $state, $q, $timeout, $stateParams, conta
       }
     }, 10);
   };
+
+  $scope.cancel = function() {
+    if (angular.isFunction($stateParams.onCancel)) {
+      return $stateParams.onCancel();
+    }
+
+    $state.go('^');
+  };
 }
 
 module.exports = UniteDetailController;

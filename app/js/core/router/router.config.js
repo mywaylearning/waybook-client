@@ -390,7 +390,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       }
     },
     params: {
-      tags: null
+      tags: null,
+      onCreate: null,
+      onCancel: null
     },
     resolve: {
       contact: function() {
@@ -577,6 +579,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     params: {
       deadline: null,
       onCreate: null,
+      onCancel: null,
       tags: null
     },
     resolve: {

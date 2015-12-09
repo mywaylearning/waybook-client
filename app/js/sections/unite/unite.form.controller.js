@@ -5,6 +5,9 @@ function UniteDetailController($scope, $state, $q, $timeout, $stateParams, conta
   };
 
   var afterSave = function() {
+    if (angular.isFunction($stateParams.onCreate)) {
+      return $stateParams.onCreate();
+    }
     $state.go('app.unite', {}, {
       reload: true
     });
@@ -72,6 +75,14 @@ function UniteDetailController($scope, $state, $q, $timeout, $stateParams, conta
         });
       }
     }, 10);
+  };
+
+  $scope.cancel = function() {
+    if (angular.isFunction($stateParams.onCancel)) {
+      return $stateParams.onCancel();
+    }
+
+    $state.go('^');
   };
 }
 

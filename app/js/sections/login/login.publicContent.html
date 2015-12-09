@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <form name="loginForm" ng-submit="doLogin(loginForm)">
+      <form name="loginForm" ng-submit="doLogin(loginForm)" ng-show="!recoverMode">
         <ion-list>
           <div class="form-errors" multiple ng-messages="loginForm.$submitted && loginForm.$error">
             <div class="form-error" ng-message="required">You must provide an e-mail and a password</div>
@@ -16,7 +16,7 @@
           </div>
           <label class="item item-input">
             <i class="icon ion-person placeholder-icon"></i>
-            <input type="email" name="email" ng-model="loginData.email" placeholder="Email" required reset-validation>
+            <input type="email" name="email" ng-model="loginData.email" placeholder="E-mail" required reset-validation>
           </label>
 
           <label class="item item-input">
@@ -27,7 +27,7 @@
 
         <div class="login-actions">
           <button class="button button-balanced button-login" ng-disabled="isSubmitting" type="submit" ng-bind="!isSubmitting ? 'Log in' : 'Logging in...'"></button>
-          <a href="" class="button button-small button-clear button-positive button-recover-password" ng-click="recoverPassword()">Forgot your password?</a>
+          <button class="button button-small button-clear button-positive button-recover-password" ng-click="setRecoverMode(true)">Forgot your password?</button>
         </div>
 
         <div class="list">
@@ -39,6 +39,24 @@
         <div class="login-extras">
           <p>By clicking on <strong>"Log in"</strong>, you agree to our <a href="https://docs.google.com/document/d/1-GbxwG3zPq9Wp4tTSboxDqHZs2R7Fdcb3RgDm28l8Hg/pub" target="_blank">terms of service</a> and <a href="https://docs.google.com/document/d/12v82D-09a-az9tNgrD7kd_SHmr5jfRzHefUULUfb6f8/pub" target="_blank">privacy policy</a>.</p>
           <p>Not registered? <a ui-sref="public.register">Create an account!</a></p>
+        </div>
+      </form>
+
+      <form name="recoverPasswordForm" ng-submit="recoverPassword(recoverPasswordForm)" ng-show="recoverMode">
+        <ion-list>
+          <label class="item item-input">
+
+            <i class="icon ion-email placeholder-icon"></i>
+            <input type="email" name="email" ng-model="recoverPasswordData.recoverEmail" placeholder="Your e-mail" required>
+          </label>
+          <div class="item">
+            <div class="recaptcha" vc-recaptcha key="reCaptcha.key" on-create="setCaptchaWidgetId(widgetId)" on-success="setCaptchaResponse(response)" on-expire="cbCaptchaExpiration()"></div>
+          </div>
+        </ion-list>
+
+        <div class="login-actions">
+          <button class="button button-balanced button-login" ng-disabled="recoverPasswordForm.$invalid || recoverPasswordData.reCaptcha === null" type="submit">Recover</button>
+          <button class="button button-small button-clear button-positive button-recover-password" ng-click="setRecoverMode(false)">Back to login</button>
         </div>
       </form>
     </div>

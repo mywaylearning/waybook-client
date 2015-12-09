@@ -110,19 +110,22 @@ tags-input .tags {
   margin-top: 0 !important;
 }
 
-.tags {
+.tags-on-block {
   position: absolute;
   right: 8px;
   top: 8px;
 }
 
-.tag {
-  color: #FFF;
+.item-tag {
   display: inline-block;
-  font-size: 10px;
   padding: 0 4px;
-  margin: 0px 2px;
-  background: $positive;
+  font-size: 12px;
+  margin-right: 4px;
+  background-color: #e6e6e6;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .mentio-search-menu {

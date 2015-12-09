@@ -9,4 +9,20 @@
     text-overflow: inherit !important;
     white-space: normal !important;
   }
+
+  .item-body {
+    border-left: 4px solid;
+  }
+
+  .goal {
+    border-left-color: $balanced;
+  }
+
+  .unite {
+    border-left-color: $energized;
+  }
+
+  .explore {
+    border-left-color: $positive;
+  }
 }

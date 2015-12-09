@@ -14,6 +14,23 @@
           Search
         </button>
       </div>
+      <div class="item-select select-type">
+        <select ng-model="search.type" name="type" ng-change="doSearch()">
+          <option value="">Type</option>
+          <option value="goal">Goal</option>
+          <option value="goal">Habit</option>
+          <option value="discovery">Discovery</option>
+          <option value="resource">Resource</option>
+          <option value="thought">Thought</option>
+        </select>
+      </div>
+      <div class="item-select select-owner">
+        <select ng-model="search.owner" name="owner" ng-change="doSearch()">
+          <option value="">Owner</option>
+          <option value="{{app.user.id}}">Me</option>
+          <option value="{{contact.id}}" ng-repeat="contact in viewData.contacts" ng-if="contact.waybookId">{{ contact.firstName }} {{ contact.lastName }}</option>
+        </select>
+      </div>
       <mentio-menu
             class="mentio-search-page"
             mentio-for="'search-page'"

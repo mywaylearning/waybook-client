@@ -237,7 +237,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             disableBack: true
           });
         }
-        $state.go('app.search', { query: $scope.search.query }, { reload: true });
+        $state.go('app.search', $scope.search, { reload: true });
       };
 
       // Search for tags on API based on user input
@@ -511,7 +511,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.search', {
     cache: false,
-    url: '/search?query',
+    url: '/search?query?type?owner',
     views: {
       'bodyContent': {
         controller: 'SearchController'
@@ -519,8 +519,10 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       results: function(SearchService, $stateParams) {
-        var query = $stateParams.query.replace('#', '');
-        return SearchService.collection({ tag: query });
+        return SearchService.collection($stateParams.query, $stateParams.type, $stateParams.owner);
+      },
+      contacts: function(ContactService) {
+        return ContactService.all();
       }
     }
   })

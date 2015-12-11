@@ -305,7 +305,11 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
     }
   };
 
-  ctrl.save = function() {
+  ctrl.save = function(form) {
+    if (form.$invalid) {
+      return;
+    }
+
     $timeout(function() {
       if ($scope.invalidContact) {
         return;

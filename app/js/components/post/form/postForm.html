@@ -49,7 +49,10 @@
       <div class="item item-input">
         <span class="input-label">Start date:</span>
         <span ionic-datepicker input-obj="ctrl.startDateConfig" class="button button-clear button-dark button-small icon ion-calendar"></span>
-        <input type="date" placeholder="yyyy-mm-dd" class="hide-calendar-widget" ng-model="ctrl.model.gStartDate">
+        <input type="date" name="start" placeholder="yyyy-mm-dd" class="hide-calendar-widget" ng-model="ctrl.model.gStartDate">
+      </div>
+      <div class="form-errors" ng-messages="postForm.$submitted && postForm.start.$error">
+        <div ng-messages-include="core/errors/messages.html"></div>
       </div>
       <div class="item item-input" ng-class="{ 'has-error' : postForm.$submitted && postForm.deadline.$invalid}">
         <span class="input-label"><strong>Deadline:</strong></span>

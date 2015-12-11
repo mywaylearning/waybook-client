@@ -83,7 +83,7 @@
           </select>
         </label>
         <label class="item item-input" ng-class="{ 'has-error' : postForm.$submitted && postForm.occurrences.$invalid}">
-          <span class="input-label"><strong>Occurrences in the period:</strong></span>
+          <span class="input-label">Occurrences in the period:</span>
           <input type="number" name="occurrences" min="1" step="1" pattern="\d*" ng-model="ctrl.model.occurrences" ng-required="ctrl.model.gRecurringEnabled">
         </label>
         <div class="form-errors" ng-messages="postForm.$submitted && postForm.occurrences.$error">

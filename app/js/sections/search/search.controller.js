@@ -1,4 +1,4 @@
-function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results, contacts, TagService) {
+function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results, contacts, SearchService, TagService) {
   'ngInject';
 
   $ionicSideMenuDelegate.toggleLeft(false);
@@ -18,6 +18,11 @@ function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, 
       disableBack: true
     });
     $state.go('app.search', $scope.search, { reload: true });
+  };
+
+  $scope.clearSearch = function() {
+    $scope.search.query = null;
+    $scope.doSearch();
   };
 
   // Search for tags on API based on user input

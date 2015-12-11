@@ -280,6 +280,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     resolve: userResolve
   })
 
+  .state('app.unauthorized', {
+    url: '/unauthorized',
+    views: {
+      'bodyContent': {}
+    }
+  })
+
   .state('app.explore', {
     url: '/explore',
     cache: false,

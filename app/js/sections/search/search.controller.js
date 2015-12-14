@@ -1,12 +1,11 @@
-function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results, contacts, SearchService, TagService) {
+function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, $ionicHistory, results, TagService) {
   'ngInject';
 
   $ionicSideMenuDelegate.toggleLeft(false);
 
   $scope.viewData = {
     title: 'Search',
-    results: results,
-    contacts: contacts
+    results: results
   };
 
   $scope.search = {

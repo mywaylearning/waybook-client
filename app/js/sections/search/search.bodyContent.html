@@ -27,8 +27,12 @@
       <div class="item-select select-owner">
         <select ng-model="search.owner" name="owner" ng-change="doSearch()">
           <option value="">Owner</option>
-          <option value="{{app.user.id}}">Me</option>
-          <option value="{{contact.waybookId}}" ng-repeat="contact in viewData.contacts" ng-if="contact.waybookId">{{ contact.firstName }} {{ contact.lastName }}</option>
+          <option
+            ng-selected="{{app.user.id == search.owner}}"
+            value="{{app.user.id}}">Me</option>
+          <option value="{{owner.id}}"
+            ng-selected="{{owner.id == search.owner}}"
+            ng-repeat="owner in viewData.results.owners">{{ owner.firstName }} {{ owner.lastName }}</option>
         </select>
       </div>
       <mentio-menu

@@ -49,7 +49,7 @@
   </form>
   <ion-content padding="true" class="has-subheader">
     <div class="small-on-wide">
-      <div class="list" ng-repeat="post in viewData.results.posts" ng-if="viewData.results.posts.length">
+      <div class="list item-as-link" ng-repeat="post in viewData.results.posts" ng-if="viewData.results.posts.length" ui-sref="app.main.post({id: post.id})">
         <div class="item item-avatar" ng-init="user = post.WaybookUser || app.user">
           <img gravatar-src="'{{user.email}}'" gravatar-size="80" gravatar-default="mm">
           <h2>{{user.firstName}} {{user.lastName}}</h2>
@@ -59,7 +59,7 @@
             --><div class="item-tag" ng-repeat="tag in post.tags">#{{tag}}</div>
           </div>
         </div>
-        <div class="item item-body item-as-link" ui-sref="app.main.post({id: post.id})">
+        <div class="item item-body">
           <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
           <div ng-bind-html="post.content"></div>
         </div>

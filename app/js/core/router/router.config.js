@@ -527,9 +527,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     resolve: {
       results: function(SearchService, $stateParams) {
         return SearchService.collection($stateParams.query, $stateParams.type, $stateParams.owner);
-      },
-      contacts: function(ContactService) {
-        return ContactService.all();
       }
     }
   })

@@ -61,11 +61,15 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
     confirmPopup.then(function(res) {
       if (res) {
         $scope.post.remove().then(function() {
-          var feed = $scope.$parent.$parent.feed;
-          var index = feed.items.indexOf($scope.post);
+          var posts = $scope.$parent.$parent.posts;
+          var index;
+
           // Check if it's child of items repeat
-          if ($scope.$parent.$parent.feed) {
-            if (index > -1) feed.items.splice(index, 1);
+          if (posts) {
+            index = posts.indexOf($scope.post);
+            if (index > -1) {
+              posts.splice(index, 1);
+            }
           } else {
             // if not, redirect to main feed
             $state.go('app.main.home', {}, {

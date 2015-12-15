@@ -10,11 +10,11 @@
   </div>
 
   <div class="card" ng-repeat="type in obj.tree.children">
-    <div class="item item-divider">
+    <div class="item item-divider item-title">
       {{ type.name }}
     </div>
     <span ng-repeat="child in type.children[0].children">
-      <div class="item item-group">
+      <div class="item item-group" ng-class="child.children ? 'item-divider' : ''">
         {{ child.name }}
         <span class="item-note">{{ child.percentage * 100 | number: 0 }}%</span>
       </div>

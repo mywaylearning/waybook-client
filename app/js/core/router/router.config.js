@@ -237,7 +237,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             disableBack: true
           });
         }
-        $state.go('app.search', { query: $scope.search.query }, { reload: true });
+        $state.go('app.search', $scope.search, { reload: true });
       };
 
       // Search for tags on API based on user input
@@ -280,6 +280,13 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     resolve: userResolve
   })
 
+  .state('app.unauthorized', {
+    url: '/unauthorized',
+    views: {
+      'bodyContent': {}
+    }
+  })
+
   .state('app.explore', {
     url: '/explore',
     cache: false,
@@ -307,6 +314,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       exploration: function(ExplorationService, $stateParams) {
+        if ($stateParams.exploration === 'watson') {
+          return 'watson';
+        }
         return ExplorationService.getBySlug($stateParams.exploration);
       }
     }
@@ -317,11 +327,17 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       'bodyContent@app': {
         templateUrl: 'sections/explore/result.bodyContent.html',
-        controller: function($scope, exploration, results) {
+        controller: function($scope, $stateParams, exploration, results) {
           $scope.viewData = {
             exploration: exploration,
             results: results
           };
+
+          if ($stateParams.exploration === 'watson') {
+            $scope.viewData.exploration = {
+              resultDisplayType: 'watson'
+            };
+          }
         }
       }
     },
@@ -391,7 +407,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     params: {
       tags: null,
-      onCreate: null
+      onCreate: null,
+      onCancel: null
     },
     resolve: {
       contact: function() {
@@ -510,7 +527,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
   .state('app.search', {
     cache: false,
-    url: '/search?query',
+    url: '/search?query?type?owner',
     views: {
       'bodyContent': {
         controller: 'SearchController'
@@ -518,8 +535,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       results: function(SearchService, $stateParams) {
-        var query = $stateParams.query.replace('#', '');
-        return SearchService.collection({ tag: query });
+        return SearchService.collection($stateParams.query, $stateParams.type, $stateParams.owner);
       }
     }
   })
@@ -576,6 +592,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     params: {
       deadline: null,
       onCreate: null,
+      onCancel: null,
       tags: null
     },
     resolve: {

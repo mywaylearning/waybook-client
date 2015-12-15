@@ -30,7 +30,9 @@ function GrantRun($timeout, $rootScope, $state, $stateParams, UserService, auth,
     if (error && error.type === ERROR.unauthorizedRequest) {
       auth.isAuthenticated(true).then(function(response) {
         if (response) {
-          UserService.logout();
+          $state.go('app.unauthorized');
+        } else {
+          $state.go('public.login');
         }
       });
     }

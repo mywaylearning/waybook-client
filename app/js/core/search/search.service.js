@@ -3,8 +3,15 @@ function SearchService(api) {
 
   var Result = api.one('search');
 
-  function _collection(query) {
-    return Result.customGET(null, query);
+  function _collection(query, type, owner) {
+    var _query = query ? query : '';
+    var search = {
+      tag: _query.replace('#', ''),
+      type: type,
+      owner: owner
+    };
+
+    return Result.customGET(null, search);
   }
 
   return {

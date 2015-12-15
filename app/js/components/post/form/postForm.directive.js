@@ -9,6 +9,7 @@ function wayPostForm($timeout) {
       sharedPost: '=',
       modalInstance: '=',
       onCreate: '&',
+      onCancel: '&',
       deadline: '=',
       tags: '='
     },
@@ -26,6 +27,10 @@ function wayPostForm($timeout) {
 
       scope.hasCallbackOnCreate = function() {
         return angular.isDefined(attrs.onCreate);
+      };
+
+      scope.hasCallbackOnCancel = function() {
+        return angular.isDefined(attrs.onCancel);
       };
     }
   };

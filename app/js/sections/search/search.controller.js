@@ -16,7 +16,12 @@ function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, 
     $ionicHistory.nextViewOptions({
       disableBack: true
     });
-    $state.go('app.search', { query: $scope.search.query }, { reload: true });
+    $state.go('app.search', $scope.search, { reload: true });
+  };
+
+  $scope.clearSearch = function() {
+    $scope.search.query = null;
+    $scope.doSearch();
   };
 
   // Search for tags on API based on user input
@@ -48,6 +53,14 @@ function SearchController($scope, $state, $stateParams, $ionicSideMenuDelegate, 
   if ($stateParams.query) {
     $scope.search.query = $stateParams.query;
     $scope.viewData.title = 'Searching "' + $scope.search.query + '"';
+  }
+
+  if ($stateParams.type) {
+    $scope.search.type = $stateParams.type;
+  }
+
+  if ($stateParams.owner) {
+    $scope.search.owner = $stateParams.owner;
   }
 }
 

@@ -8,11 +8,32 @@
             <i class="icon ion-ios-search placeholder-icon"></i>
             <input type="text" id="search-page" mentio placeholder="Search for #tags" ng-model="search.query">
           </label>
-          <i class="icon ion-close-circled placeholder-icon" ng-if="search.query" ng-click="search.query = null"></i>
+          <i class="icon ion-close-circled placeholder-icon" ng-if="search.query" ng-click="clearSearch()"></i>
         </div>
         <button class="button button-clear">
           Search
         </button>
+      </div>
+      <div class="item-select select-type">
+        <select ng-model="search.type" name="type" ng-change="doSearch()">
+          <option value="">Type</option>
+          <option value="goal">Goal</option>
+          <option value="habit">Habit</option>
+          <option value="discovery">Discovery</option>
+          <option value="resource">Resource</option>
+          <option value="thought">Thought</option>
+        </select>
+      </div>
+      <div class="item-select select-owner">
+        <select ng-model="search.owner" name="owner" ng-change="doSearch()">
+          <option value="">Owner</option>
+          <option
+            ng-selected="{{app.user.id == search.owner}}"
+            value="{{app.user.id}}">Me</option>
+          <option value="{{owner.id}}"
+            ng-selected="{{owner.id == search.owner}}"
+            ng-repeat="owner in viewData.results.owners">{{ owner.firstName }} {{ owner.lastName }}</option>
+        </select>
       </div>
       <mentio-menu
             class="mentio-search-page"
@@ -28,12 +49,17 @@
   </form>
   <ion-content padding="true" class="has-subheader">
     <div class="small-on-wide">
-      <div class="list" ng-repeat="post in viewData.results.posts" ng-if="viewData.results.posts.length">
-        <div class="item item-body item-as-link" ui-sref="app.main.post({id: post.id})">
+      <div class="list item-as-link" ng-repeat="post in viewData.results.posts" ng-if="viewData.results.posts.length" ui-sref="app.main.post({id: post.id})">
+        <div class="item item-avatar" ng-init="user = post.WaybookUser || app.user">
+          <img gravatar-src="'{{user.email}}'" gravatar-size="80" gravatar-default="mm">
+          <h2>{{user.firstName}} {{user.lastName}}</h2>
+          <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
           <div class="tags-on-block">
             <div class="item-tag" ng-repeat="tag in post.systemTags">#{{tag}}</div><!--
             --><div class="item-tag" ng-repeat="tag in post.tags">#{{tag}}</div>
           </div>
+        </div>
+        <div class="item item-body">
           <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
           <div ng-bind-html="post.content"></div>
         </div>
@@ -48,6 +74,12 @@
           </div>
           <p>{{contact.email}}</p>
         </div>
+      </div>
+
+      <!-- No results  -->
+      <div class="card" ng-if="!viewData.results.contacts.length && !viewData.results.posts.length">
+        <div class="item item-divider">No results.</div>
+        <div class="item item-body">Please try a different search.</div>
       </div>
     </div>
   </ion-content>

@@ -75,6 +75,12 @@
           <p>{{contact.email}}</p>
         </div>
       </div>
+
+      <!-- No results  -->
+      <div class="card" ng-if="!viewData.results.contacts.length && !viewData.results.posts.length">
+        <div class="item item-divider">No results.</div>
+        <div class="item item-body">Please try a different search.</div>
+      </div>
     </div>
   </ion-content>
 </ion-view>

@@ -314,6 +314,9 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     },
     resolve: {
       exploration: function(ExplorationService, $stateParams) {
+        if ($stateParams.exploration === 'watson') {
+          return 'watson';
+        }
         return ExplorationService.getBySlug($stateParams.exploration);
       }
     }
@@ -324,11 +327,17 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       'bodyContent@app': {
         templateUrl: 'sections/explore/result.bodyContent.html',
-        controller: function($scope, exploration, results) {
+        controller: function($scope, $stateParams, exploration, results) {
           $scope.viewData = {
             exploration: exploration,
             results: results
           };
+
+          if ($stateParams.exploration === 'watson') {
+            $scope.viewData.exploration = {
+              resultDisplayType: 'watson'
+            };
+          }
         }
       }
     },

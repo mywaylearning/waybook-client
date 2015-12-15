@@ -1,0 +1,31 @@
+<div class="small-on-wide watson">
+
+  <div class="card">
+    <div class="item item-divider">
+      Your Personality
+    </div>
+    <div class="item item-body">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  </div>
+
+  <div class="card" ng-repeat="type in obj.tree.children">
+    <div class="item item-divider item-title">
+      {{ type.name }}
+    </div>
+    <span ng-repeat="child in type.children[0].children">
+      <div class="item item-group" ng-class="child.children ? 'item-divider' : ''">
+        {{ child.name }}
+        <span class="item-note">{{ child.percentage * 100 | number: 0 }}%</span>
+      </div>
+      <div class="item item-group-child" ng-repeat="child2 in child.children">
+        {{ child2.name }}
+        <span class="item-note">{{ child2.percentage * 100 | number: 0 }}%</span>
+      </div>
+    </span>
+  </div>
+
+  <pre>
+    {{ obj | json }}
+  </pre>
+</div>

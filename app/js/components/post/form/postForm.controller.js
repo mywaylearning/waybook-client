@@ -119,7 +119,7 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
     if (!term.length) {
       return;
     }
-    return TagService.collection(term).then(function(response) {
+    TagService.collection(term).then(function(response) {
       var count = 0;
       ctrl.tagsView = [];
       angular.forEach(response, function(tag) {
@@ -311,11 +311,7 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
     }
 
     $timeout(function() {
-      if ($scope.invalidContact) {
-        return;
-      }
-
-      if (ctrl.linkExtraction.started) {
+      if ($scope.invalidContact || ctrl.linkExtraction.started) {
         return;
       }
 
@@ -355,9 +351,9 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
 
             if (ctrl.sharedPost) {
               ctrl.modalInstance.hide();
+              ctrl.posts.push(newPost);
             }
-            newPost.justEdited = true;
-            // ctrl.posts.push(newPost);
+
             $state.go('app.main.home');
           });
         });

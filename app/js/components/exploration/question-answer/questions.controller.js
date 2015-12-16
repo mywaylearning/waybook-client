@@ -5,7 +5,8 @@ function ExplorationQuestionsController($scope, $ionicSlideBoxDelegate) {
   $scope.slides = {
     index: 0,
     keepFirst: false,
-    count: Object.keys($scope.exploration.questions).length
+    count: Object.keys($scope.exploration.questions).length,
+    completed: []
   };
 
   angular.forEach($scope.exploration.questions, function(question) {
@@ -35,6 +36,12 @@ function ExplorationQuestionsController($scope, $ionicSlideBoxDelegate) {
 
   $scope.slideHasChanged = function(index) {
     $scope.slides.index = index;
+  };
+
+  $scope.markAsCompleted = function(id) {
+    if ($scope.slides.completed.indexOf(id) === -1) {
+      $scope.slides.completed.push(id);
+    }
   };
 }
 

@@ -38,7 +38,7 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
 
     default:
       handleUnknownErrors(response, deferred);
-      stopErrorPropagation = false;
+      stopErrorPropagation = true;
       break;
     }
 

@@ -2,7 +2,20 @@ function ExplorationQuestionController($scope, ExplorationService) {
   'ngInject';
   $scope.viewData = {
     question: $scope.question,
+    minimumWords: false,
     error: null
+  };
+
+  if ($scope.exploration.slug === 'personality-watson') {
+    $scope.viewData.minimumWords = 100;
+  }
+
+  $scope.displayWordCount = function() {
+    if (!$scope.viewData.minimumWords) {
+      return false;
+    }
+
+    return $scope.model.answer.split(/\s+/).length;
   };
 
 

@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="card" ng-repeat="type in obj.tree.children">
+  <div class="card" ng-repeat="type in results.result.tree.children">
     <div class="item item-divider item-title">
       {{ type.name }}
     </div>
@@ -24,8 +24,4 @@
       </div>
     </span>
   </div>
-
-  <pre>
-    {{ obj | json }}
-  </pre>
 </div>

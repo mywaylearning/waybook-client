@@ -1,5 +1,5 @@
 /* eslint angular/on-watch: 0 */
-function GrantRun($timeout, $rootScope, $state, $stateParams, $ionicPopup, UserService, auth, ERROR) {
+function GrantRun($timeout, $rootScope, $state, $stateParams, UserService, auth, ERROR) {
   'ngInject';
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {

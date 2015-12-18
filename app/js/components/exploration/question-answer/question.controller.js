@@ -15,7 +15,7 @@ function ExplorationQuestionController($scope, ExplorationService) {
       return false;
     }
 
-    return $scope.model.answer.split(/\s+/).length;
+    return $scope.model.answer ? $scope.model.answer.split(/\s+/).length : '0';
   };
 
 

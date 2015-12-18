@@ -5,7 +5,7 @@
       <div class="card" ng-if="!posts.length">
         <div class="item item-divider text-center">Welcome to your future. You own it.</div>
         <div class="item item-body">
-          Get started. Set a Goal, note a Discovery about yourself, or reflect on your <a ui-sref="app.explore({categoryOpen: 'values'})">Values</a> If you're feeling lazy, click 'Guide Me' on the left menu.
+          Get started. Set a Goal, note a Discovery about yourself, or reflect on your <a ui-sref="app.explore({categoryOpen: 'values'})">Values</a>. If you're feeling lazy, click 'Guide Me' on the left menu.
         </div>
       </div>
       <way-feed ng-if="posts.length" posts="posts" user="app.user"></way-feed>

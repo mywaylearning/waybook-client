@@ -13,14 +13,13 @@ function init(Role, $rootScope, $timeout, $state, auth, UserService, ROLES) {
   function validate() {
     $rootScope.returnToState = $rootScope.toState;
     $rootScope.returnToStateParams = $rootScope.toStateParams;
-    return auth.isAuthenticated(true)
-              .then(function() {
-                return UserService.getSelf();
-              }).catch(function() {
-                $timeout(function() {
-                  $state.go('public.login');
-                });
-              });
+    if (auth.isAuthenticated()) {
+      return UserService.getSelf();
+    } else {
+      $timeout(function() {
+        $state.go('public.login');
+      });
+    }
   }
 
   return new Role(ROLES.user, validate);

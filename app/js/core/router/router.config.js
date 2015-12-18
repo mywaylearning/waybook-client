@@ -79,6 +79,22 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       return result;
     })
 
+  .state('error', {
+    cache: false,
+    url: '/error',
+    template: '',
+    controllerAs: '',
+    controller: function($ionicPopup, $state) {
+      $ionicPopup.alert({
+        title: 'Sorry, but an error occurred.',
+        template: 'Please try again. If the error persists, come back later.',
+        okText: 'Try again'
+      }).then(function() {
+        $state.go('app.main.home');
+      });
+    }
+  })
+
   .state('public', {
     cache: false,
     abstract: true,

@@ -1,4 +1,5 @@
-function RestangularRun($rootScope, $http, Restangular, auth, authStore, router, ERROR) {
+/* eslint angular/on-watch: 0 */
+function RestangularRun($rootScope, $state, $http, Restangular, auth, authStore, router, ERROR) {
   'ngInject';
   /**
    * Configure any request interceptors that we want to add to our
@@ -22,7 +23,7 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
     switch (response.status) {
     case 401:
       handleUnauthorized(response, deferred);
-      stopErrorPropagation = false;
+      stopErrorPropagation = true;
       break;
 
     case 403:
@@ -127,12 +128,18 @@ function RestangularRun($rootScope, $http, Restangular, auth, authStore, router,
   }
 
   function handleUnknownErrors(response, deferred) {
+    var error;
     var _error = response.data ? response.data.error : false;
     deferred.reject(_error);
+
+    // create a custom ui-router error for 401 unauthorized
+    error = {
+      type: ERROR.unknown
+    };
+
+    // manually trigger ui-router state change event passing in custom error
+    $rootScope.$broadcast('$stateChangeError', null, null, null, null, error);
   }
 }
 
-module.exports = [
-  '$rootScope', '$http', 'Restangular', 'auth', 'authStore', 'router',
-  'ERROR', RestangularRun
-];
+module.exports = RestangularRun;

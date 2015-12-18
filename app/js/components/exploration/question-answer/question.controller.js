@@ -7,7 +7,7 @@ function ExplorationQuestionController($scope, ExplorationService) {
   };
 
   if ($scope.exploration.slug === 'personality-watson') {
-    $scope.viewData.minimumWords = 100;
+    $scope.viewData.minimumWords = 3500;
   }
 
   $scope.displayWordCount = function() {
@@ -15,7 +15,7 @@ function ExplorationQuestionController($scope, ExplorationService) {
       return false;
     }
 
-    return $scope.model.answer.split(/\s+/).length;
+    return $scope.model.answer ? $scope.model.answer.split(/\s+/).length : '0';
   };
 
 

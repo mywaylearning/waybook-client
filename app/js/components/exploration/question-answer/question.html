@@ -1,8 +1,11 @@
+<div class="small-on-wide">
+  <button class="button button-positive button-block" ng-if="displayResultButton()" ui-sref="app.explore.exploration.results({exploration: exploration.slug})">Check your results</button>
+</div>
 <form name="questionForm">
   <div class="list">
     <div class="item item-body item-divider item-question">{{viewData.question.question}}</div>
     <div class="item item-input">
-      <textarea name="question" placeholder="Type your answer here" ng-model="model.answer" rows="{{displayWordCount() ? '15': '5'}}" way-minimum-words="{{viewData.minimumWords}}" required></textarea>
+      <textarea name="question" placeholder="Type your answer here" ng-model="model.answer" rows="{{displayWordCount() ? '15': '5'}}" required></textarea>
     </div>
     <div class="item" ng-if="displayWordCount()">Minimum words: <strong>{{ viewData.minimumWords }}</strong>. Current: <strong>{{displayWordCount()}}.</strong></div>
     <div class="item item-body assertive" ng-if="viewData.error">{{viewData.error}}</div>

@@ -2,14 +2,14 @@
 
   <div class="card">
     <div class="item item-divider">
-      Your Personality
+      Overview
     </div>
     <div class="item item-body">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Take these results with a large grain of salt. Remember a machine can’t tell you who you are. However, Watson can at least help reflect on your personality. Based on the text you provided, Watson provides you with characteristics spanning: the Big 5 (Openness to experience, Conscientiousness, Extraversion, Agreeableness, Neuroticism), Values, and Needs.
     </div>
   </div>
 
-  <div class="card" ng-repeat="type in obj.tree.children">
+  <div class="card" ng-repeat="type in results.result.tree.children">
     <div class="item item-divider item-title">
       {{ type.name }}
     </div>
@@ -24,8 +24,4 @@
       </div>
     </span>
   </div>
-
-  <pre>
-    {{ obj | json }}
-  </pre>
 </div>

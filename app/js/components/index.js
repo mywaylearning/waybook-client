@@ -55,3 +55,5 @@ app.directive('waySocialLogin', require('./social-login/social-login.directive.j
 
 app.controller('HelpOverlayController', require('./help-overlay/help-overlay.controller.js'));
 app.directive('wayHelpOverlay', require('./help-overlay/help-overlay.directive.js'));
+
+app.directive('wayMinimumWords', require('./exploration/results/minimum-words.directive.js'));

@@ -6,8 +6,6 @@ function ExplorationQuestionController($scope, $state, ExplorationService) {
     error: null
   };
 
-  $scope.saved = false;
-
   if ($scope.exploration.slug === 'personality-watson') {
     $scope.viewData.minimumWords = 3500;
   }
@@ -16,14 +14,11 @@ function ExplorationQuestionController($scope, $state, ExplorationService) {
     return text ? text.split(/\s+/).length : 0;
   }
 
-  $scope.displayResultButton = function() {
+  $scope.displayResult = function() {
     var display = false;
     var countAnswerWords = countWords($scope.model.answer);
-    var countSavedAnswerWords = countWords($scope.question.answer);
-    if ($scope.exploration.slug === 'personality-watson') {
-      if ((countAnswerWords >= $scope.viewData.minimumWords && $scope.saved) || (countSavedAnswerWords >= $scope.viewData.minimumWords && !$scope.saved)) {
-        display = true;
-      }
+    if ($scope.exploration.slug === 'personality-watson' && countAnswerWords >= $scope.viewData.minimumWords) {
+      display = true;
     }
 
     return display;
@@ -51,7 +46,6 @@ function ExplorationQuestionController($scope, $state, ExplorationService) {
 
   $scope.saveAnswer = function() {
     ExplorationService.answerExplorationQuestion($scope.model).then(function() {
-      $scope.saved = true;
       if ($scope.exploration.slug === 'personality-watson' && countWords($scope.model.answer) >= $scope.viewData.minimumWords) {
         $state.go('app.explore.exploration.results', { exploration: $scope.exploration.slug });
       }
@@ -59,7 +53,6 @@ function ExplorationQuestionController($scope, $state, ExplorationService) {
       $scope.onAnswer();
       $scope.onComplete()($scope.question.order);
     }).catch(function() {
-      $scope.saved = false;
       $scope.viewData.error = 'We couldn\'t save your answer. Please try again.';
     });
   };

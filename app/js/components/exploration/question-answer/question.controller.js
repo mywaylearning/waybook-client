@@ -47,7 +47,13 @@ function ExplorationQuestionController($scope, $state, ExplorationService) {
   $scope.saveAnswer = function() {
     ExplorationService.answerExplorationQuestion($scope.model).then(function() {
       if ($scope.exploration.slug === 'personality-watson' && countWords($scope.model.answer) >= $scope.viewData.minimumWords) {
-        $state.go('app.explore.exploration.results', { exploration: $scope.exploration.slug });
+        // Check if results is available
+        ExplorationService.getExplorationResults($scope.exploration).then(function() {
+          $state.go('app.explore.exploration.results', { exploration: $scope.exploration.slug });
+        }).catch(function() {
+          // Handle error
+          $scope.viewData.error = 'Sorry but we can\'t proccess your results right now. Please try again later.';
+        });
       }
       $scope.viewData.error = null;
       $scope.onAnswer();

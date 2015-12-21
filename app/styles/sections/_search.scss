@@ -17,18 +17,35 @@
     z-index: 9999;
   }
 
+  .bar-subheader, .bar {
+    height: auto;
+
+    @media (min-width: $grid-responsive-sm-break) {
+      height: 44px;
+    }
+  }
+
   .search-on-bar {
-    float: left;
-    width: 55%;
+
+    @media (min-width: $grid-responsive-sm-break) {
+      float: left;
+      width: 55%;
+    }
   }
 
   .item-select {
-    position: absolute;
-    top: 3px;
-    right: 0;
-    height: 30px;
-    width: 110px;
-    z-index: 11;
+    width: 49%;
+    display: inline-block;
+    height: 38px;
+
+    @media (min-width: $grid-responsive-sm-break) {
+      position: absolute;
+      top: 3px;
+      right: 0;
+      height: 30px;
+      width: 110px;
+      z-index: 11;
+    }
 
     select {
       max-width: 100%;
@@ -36,8 +53,18 @@
   }
 
   .select-type {
-    right: 100px;
-    width: 145px;
+    @media (min-width: $grid-responsive-sm-break) {
+      right: 100px;
+      width: 145px;
+    }
+  }
+
+  .has-subheader {
+    top: 134px;
+
+    @media (min-width: $grid-responsive-sm-break) {
+      top: 88px;
+    }
   }
 }
 

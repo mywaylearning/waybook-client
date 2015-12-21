@@ -27,8 +27,12 @@ function GrantRun($timeout, $rootScope, $state, $stateParams, UserService, auth,
       }
     }
 
+    if (error && error.type === ERROR.unknown) {
+      return $state.go('error', {}, { reload: true });
+    }
+
     if (error && error.type === ERROR.unauthorizedRequest) {
-      auth.isAuthenticated(true).then(function(response) {
+      return auth.isAuthenticated(true).then(function(response) {
         if (response) {
           $state.go('app.unauthorized');
         } else {

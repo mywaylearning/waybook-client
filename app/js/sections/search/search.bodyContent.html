@@ -18,7 +18,7 @@
         <select ng-model="search.type" name="type" ng-change="doSearch()">
           <option value="">Type</option>
           <option value="goal">Goal</option>
-          <option value="goal">Habit</option>
+          <option value="habit">Habit</option>
           <option value="discovery">Discovery</option>
           <option value="resource">Resource</option>
           <option value="thought">Thought</option>
@@ -74,6 +74,12 @@
           </div>
           <p>{{contact.email}}</p>
         </div>
+      </div>
+
+      <!-- No results  -->
+      <div class="card" ng-if="!viewData.results.contacts.length && !viewData.results.posts.length">
+        <div class="item item-divider">No results.</div>
+        <div class="item item-body">Please try a different search.</div>
       </div>
     </div>
   </ion-content>

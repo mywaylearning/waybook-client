@@ -78,7 +78,8 @@ angular.module('app.config', [])
 
 .constant('ERROR', {
   'grantRejected': 'way.grant.rejected',
-  'unauthorizedRequest': 'way.unauthorized'
+  'unauthorizedRequest': 'way.unauthorized',
+  'unknown': 'way.unknown'
 })
 
 .constant('FORM_ERRORS', {

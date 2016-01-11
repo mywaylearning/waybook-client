@@ -28,7 +28,7 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
     titleLabel: _userIsOwner ? 'Track the days when you completed this habit' : 'Days that ' + $scope.post.WaybookUser.firstName + ' completed this habit',
     showTodayButton: false,
     showSetButton: false,
-    closeLabel: 'Done',
+    closeLabel: _userIsOwner ? 'Done' : 'Close',
     inputDate: $scope.post.habitDates,
     to: new Date(),
     readOnly: !_userIsOwner,

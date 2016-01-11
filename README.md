@@ -23,7 +23,7 @@ To start a local server, run:
 
 `$ npm start`
 
-This command will trigger a gulp task wich is reponsible to start local server, build and watch (with livereload) files.
+This command will trigger a gulp task which is responsible to start local server, build and watch (with livereload) files.
 
 ## Deploying
 

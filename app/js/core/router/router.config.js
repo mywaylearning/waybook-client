@@ -155,8 +155,11 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             lastName: response.last_name,
             // avatar: response.picture,
             provider: _auth.network,
-            providerId: response.id
+            providerId: response.id,
+            auth: hello(_auth.network).getAuthResponse()
           };
+
+
 
           UserService.socialLoginCheck(_user).then(function(data) {
             auth.saveAuth(data);

@@ -1,10 +1,10 @@
 <way-post-form ng-if="post.editMode" post="post"></way-post-form>
-<div class="list post-view" ng-if="(post.originalShared ? post.originalShared.canShare : true) && !post.editMode" ng-class="{'just-edited': post.justEdited, 'post-reshared': reshare}">
+<div class="list post-view" ng-if="(post.originalShared ? post.originalShared.canShare : true) && !post.editMode" ng-class="{'just-edited': post.justEdited, 'post-reshared': reshared}">
   <div class="item item-avatar">
     <img gravatar-src="'{{post.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
     <h2>{{post.WaybookUser.firstName}} {{post.WaybookUser.lastName}}</h2>
     <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
-    <div class="post-actions" ng-if="!reshare">
+    <div class="post-actions" ng-if="!reshared">
       <ionic-datepicker ng-if="post.systemTags.indexOf('habit') > -1" input-obj="habitCalendarConfig">
         <button class="button button-icon ion-calendar"></button>
       </ionic-datepicker>
@@ -23,7 +23,7 @@
 
     <div ng-if="post.originalShared">
       <p>Originally posted by:</p>
-      <way-post-view post="post.originalShared" reshare="true" user="user"></way-post-view>
+      <way-post-view post="post.originalShared" reshared="true" user="user"></way-post-view>
     </div>
 
   </div>
@@ -64,5 +64,5 @@
     <button class="button button-small ion-forward" ng-click="reshare()" ng-class="{'icon-left': post.shares, 'icon': !post.shares}">{{post.shares}}</button>
   </div>
 
-  <way-comment post="post" user="user" ng-if="!reshare"></way-comment>
+  <way-comment post="post" user="user" ng-if="!reshared"></way-comment>
 </div>

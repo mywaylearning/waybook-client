@@ -159,8 +159,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             auth: hello(_auth.network).getAuthResponse()
           };
 
-
-
           UserService.socialLoginCheck(_user).then(function(data) {
             auth.saveAuth(data);
             window.location.reload(false);

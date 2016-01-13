@@ -7,6 +7,7 @@ function wayPostForm($timeout) {
       posts: '=',
       postType: '=type',
       sharedPost: '=',
+      user: '=',
       modalInstance: '=',
       onCreate: '&',
       onCancel: '&',
@@ -36,4 +37,4 @@ function wayPostForm($timeout) {
   };
 }
 
-module.exports = ['$timeout', wayPostForm];
+module.exports = wayPostForm;

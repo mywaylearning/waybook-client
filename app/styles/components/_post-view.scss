@@ -45,44 +45,6 @@
     margin: 0;
   }
 
-  .item-body .post-reshared {
-    .item {
-      padding: 10px;
-    }
-
-    .item-avatar {
-      min-height: 45px;
-      padding-left: 50px;
-
-      img {
-        top: 10px;
-        left: 10px;
-        max-width: 30px;
-        max-height: 30px;
-      }
-
-      h2, p {
-        margin: 0;
-        font-size: 80%;
-      }
-    }
-
-    .item-body {
-      font-size: 80%;
-    }
-
-    .item-tag {
-      font-size: 10px;
-      line-height: 20px;
-    }
-  }
-
-  .button-see-original-post {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-
   .tab-item {
     font-size: 14px !important;
   }

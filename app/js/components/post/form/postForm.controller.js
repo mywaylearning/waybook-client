@@ -2,9 +2,7 @@
 function PostFormController($scope, $state, $timeout, PostService, TagService, ContactService) {
   'ngInject';
   var ctrl = this;
-
   var originalPost;
-
   var yesterday = new Date();
 
   // Parse content to detect tags

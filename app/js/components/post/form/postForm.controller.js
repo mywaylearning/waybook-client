@@ -349,6 +349,7 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
 
             if (ctrl.sharedPost) {
               ctrl.modalInstance.hide();
+              newPost.originalShared = ctrl.sharedPost;
               ctrl.posts.push(newPost);
             }
 

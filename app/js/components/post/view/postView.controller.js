@@ -111,7 +111,12 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
       $event.stopPropagation();
     }
 
-    $scope.sharingPost = post || $scope.post;
+    $scope.sharingPost = angular.copy(post) || angular.copy($scope.post);
+
+    if ($scope.sharingPost.originalShared) {
+      delete $scope.sharingPost.originalShared;
+    }
+
     $scope.postType = 'thought';
     $scope.resharePopup = {};
     $ionicModal.fromTemplateUrl('components/post/view/re-share.html', {

@@ -162,12 +162,8 @@
 
     <!-- Sharing a post -->
     <div class="item" ng-if="ctrl.sharedPost">
-      Originally posted by <strong>{{ctrl.sharedPost.WaybookUser.firstName}} {{ctrl.sharedPost.WaybookUser.lastName}}</strong>:
-      <div class="card">
-        <div class="item item-body">
-          <div ng-bind-html="ctrl.sharedPost.content"></div>
-        </div>
-      </div>
+      Original post:
+      <way-post-view post="ctrl.sharedPost" reshared="true" hide-share-button="true" user="ctrl.user"></way-post-view>
     </div>
 
     <!-- Share options -->

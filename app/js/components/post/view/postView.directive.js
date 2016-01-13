@@ -5,7 +5,8 @@ function wayPostView($compile) {
     scope: {
       post: '=',
       user: '=',
-      reshared: '@'
+      reshared: '@',
+      hideShareButton: '@'
     },
     controller: 'PostViewController',
     templateUrl: 'components/post/view/postView.html',

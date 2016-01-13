@@ -4,7 +4,6 @@ function readMore() {
     restrict: 'A',
     priority: 100,
     link: function($scope, element, attrs) {
-      var showMore = !$scope.$parent.post.originalShared;
       var showMoreElement = '<div class="read-more"><button class="button button-small button-clear icon-right ion-chevron-down">Show more</button></div>';
 
       if (attrs.readMore !== '' && attrs.readMore === 'app.main.post') {
@@ -26,17 +25,15 @@ function readMore() {
         }
       });
 
-      if (showMore) {
-        element.on('click', '.read-more', function(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          element.css({
-            maxHeight: 'inherit',
-            overflow: 'visible'
-          });
-          angular.element(this).remove();
+      element.on('click', '.read-more', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        element.css({
+          maxHeight: 'inherit',
+          overflow: 'visible'
         });
-      }
+        angular.element(this).remove();
+      });
     }
   };
 }

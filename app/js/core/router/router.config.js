@@ -520,6 +520,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.dashboard', {
+    cache: false,
     url: '/dashboard',
     views: {
       'bodyContent': {

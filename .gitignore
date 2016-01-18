@@ -56,3 +56,11 @@ npm-debug.log*
 .env
 .env.local
 *.gz
+
+
+# --------------------
+# Ionic files
+# --------------------
+platforms/
+plugins/
+resources/

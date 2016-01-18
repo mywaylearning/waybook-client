@@ -107,5 +107,9 @@
     "build:staging": "bower install && npm run build:lodash && NODE_ENV=staging gulp prod",
     "build:production": "bower install && npm run build:lodash && NODE_ENV=production gulp prod",
     "start": "bower install && npm run build:lodash && gulp dev"
-  }
+  },
+  "cordovaPlugins": [],
+  "cordovaPlatforms": [
+    "android"
+  ]
 }

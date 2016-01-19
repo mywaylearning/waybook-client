@@ -47,7 +47,7 @@ function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, Qu
       var now = new Date();
       var remaining;
       if ($rootScope.loadingStart) {
-        remaining = 2500 - (now - $rootScope.loadingStart);
+        remaining = 2000 - (now - $rootScope.loadingStart);
         $timeout(function() {
           $ionicLoading.hide();
         }, remaining);

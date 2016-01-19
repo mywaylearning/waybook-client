@@ -44,6 +44,7 @@
 		260E13E0D2D846FEB39029F7 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D373672ED422C8B5BB000 /* CDVLogger.m */; };
 		4A769C27345B4FC4A7B4252B /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4D2F023D33427BAA730F3E /* CDVDevice.m */; };
 		2A404B8DF53C476C8B2A641B /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC0D350DA7F465F91DCCF48 /* CDVStatusBar.m */; };
+		CB16DECAC70341ABBE2453A4 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 05527DE15B2A49AC9725ECF4 /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,8 @@
 		1F24B1EAFDA7489E98CDD19D /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		BAC0D350DA7F465F91DCCF48 /* CDVStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVStatusBar.m"; path = "org.apache.cordova.statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		0771A6F788E343DA89AFE746 /* CDVStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVStatusBar.h"; path = "org.apache.cordova.statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		05527DE15B2A49AC9725ECF4 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		CC5D1AE340D94A3C8F45FCB8 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +230,8 @@
 				1F24B1EAFDA7489E98CDD19D /* CDVDevice.h */,
 				BAC0D350DA7F465F91DCCF48 /* CDVStatusBar.m */,
 				0771A6F788E343DA89AFE746 /* CDVStatusBar.h */,
+				05527DE15B2A49AC9725ECF4 /* CDVInAppBrowser.m */,
+				CC5D1AE340D94A3C8F45FCB8 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = "client/Plugins";
@@ -416,6 +421,7 @@
 				260E13E0D2D846FEB39029F7 /* CDVLogger.m in Sources */,
 				4A769C27345B4FC4A7B4252B /* CDVDevice.m in Sources */,
 				2A404B8DF53C476C8B2A641B /* CDVStatusBar.m in Sources */,
+				CB16DECAC70341ABBE2453A4 /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

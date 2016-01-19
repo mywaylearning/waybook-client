@@ -3,8 +3,13 @@
     <div class="small-on-wide">
       <div class="card">
         <div class="item item-divider">Discover</div>
+        <div class="item item-subdivider">Discoveries</div>
         <div class="item item-body">
           <div way-score-chart chart-score="{{viewData.discoveries}}" chart-min="0" chart-max="12" chart-increase-by="3" chart-label="Discoveries" chart-hide-label="true"></div>
+        </div>
+        <div class="item item-subdivider">Explorations</div>
+        <div class="item item-body">
+          <div way-semi-pie-chart total-questions="{{viewData.questions}}" questions-completed="{{viewData.questionsCompleted}}" questions-pending="{{viewData.questionsPending}}" title="test"></div>
         </div>
       </div>
 

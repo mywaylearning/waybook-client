@@ -30,6 +30,7 @@ require('angular-recaptcha');
 
 angular.module('waybook', [
   'ionic',
+  'ui.gravatar',
   'app.config',
   'ionic.ion.showWhen',
   'templates',
@@ -38,7 +39,6 @@ angular.module('waybook', [
   'ngMessages',
   'ui.router',
   'restangular',
-  'ui.gravatar',
   'ngTagsInput',
   'mentio',
   'ionic-datepicker',

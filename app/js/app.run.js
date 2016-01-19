@@ -1,6 +1,8 @@
 /* globals StatusBar */
+/* eslint angular/on-watch: 0 */
 
-function AppRun($rootScope, $window, $ionicPlatform) {
+function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, QuotesService) {
+  'ngInject';
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -17,13 +19,17 @@ function AppRun($rootScope, $window, $ionicPlatform) {
     //   debug(unfoundState.options);
     // });
     //
-    // $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
-    //   debug('$stateChangeStart');
-    //   debug(toState);
-    //   debug(toParams);
-    //   debug(fromState);
-    //   debug(fromParams);
-    // });
+    $rootScope.$on('$stateChangeStart', function() {
+      $ionicLoading.show({
+        template: '<div class="quotes"><div class="loading-text">Loading</div><div class="quote">' + QuotesService.getQuote() + '</div></div>'
+      });
+      $rootScope.loadingStart = new Date();
+      // debug('$stateChangeStart');
+      // debug(toState);
+      // debug(toParams);
+      // debug(fromState);
+      // debug(fromParams);
+    });
     //
     // $rootScope.$on('$stateChangeError', function(evt, toState, toParams, fromState, fromParams, error) {
     //   debug('$stateChangeError');
@@ -34,13 +40,19 @@ function AppRun($rootScope, $window, $ionicPlatform) {
     //   debug(error);
     // });
     //
-    // $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState, fromParams) {
-    //   debug('$stateChangeSuccess');
-    //   debug(toState);
-    //   debug(toParams);
-    //   debug(fromState);
-    //   debug(fromParams);
-    // });
+    $rootScope.$on('$stateChangeSuccess', function() {
+      var now = new Date();
+      var remaining = 2500 - (now - $rootScope.loadingStart);
+
+      $timeout(function() {
+        $ionicLoading.hide();
+      }, remaining);
+      // debug('$stateChangeSuccess');
+      // debug(toState);
+      // debug(toParams);
+      // debug(fromState);
+      // debug(fromParams);
+    });
     //
     // $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState) {
     //   $window.scrollTo(0, 0);
@@ -53,4 +65,4 @@ function AppRun($rootScope, $window, $ionicPlatform) {
   });
 }
 
-module.exports = ['$rootScope', '$window', '$ionicPlatform', AppRun];
+module.exports = AppRun;

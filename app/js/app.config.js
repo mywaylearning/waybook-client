@@ -2,7 +2,7 @@
 
 require('angular');
 
-function AppConfig($sceDelegateProvider, $ionicConfigProvider, FILEPICKER_API_KEY, HELLO_IDS) {
+function AppConfig($sceDelegateProvider, $ionicConfigProvider, gravatarServiceProvider, FILEPICKER_API_KEY, HELLO_IDS) {
   'ngInject';
 
   var displayType;
@@ -11,6 +11,8 @@ function AppConfig($sceDelegateProvider, $ionicConfigProvider, FILEPICKER_API_KE
   $sceDelegateProvider.resourceUrlWhitelist([
     'self'
   ]);
+
+  gravatarServiceProvider.secure = true;
 
   filepicker.setKey(FILEPICKER_API_KEY);
 

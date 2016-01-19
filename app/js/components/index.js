@@ -57,3 +57,5 @@ app.controller('HelpOverlayController', require('./help-overlay/help-overlay.con
 app.directive('wayHelpOverlay', require('./help-overlay/help-overlay.directive.js'));
 
 app.directive('wayMinimumWords', require('./exploration/results/minimum-words.directive.js'));
+
+app.service('QuotesService', require('./quotes/quotes.service.js'));

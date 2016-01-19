@@ -6,10 +6,16 @@
         <div class="item item-subdivider">Discoveries</div>
         <div class="item item-body">
           <div way-score-chart chart-score="{{viewData.discoveries}}" chart-min="0" chart-max="12" chart-increase-by="3" chart-label="Discoveries" chart-hide-label="true"></div>
+          <div class="text-center">
+            <button class="button button-default icon-left ion-plus">Discovery</button>
+          </div>
         </div>
         <div class="item item-subdivider">Explorations</div>
         <div class="item item-body">
-          <div way-semi-pie-chart total-questions="{{viewData.questions}}" questions-completed="{{viewData.questionsCompleted}}" questions-pending="{{viewData.questionsPending}}" title="test"></div>
+          <div way-score-chart chart-score="{{viewData.questionsCompleted}}" chart-score-label="{{viewData.questionsCompletedPercentage}}" chart-min="0" chart-max="{{viewData.questions}}" chart-increase-by="0" chart-label="completed" chart-hide-label="true"></div>
+          <div class="text-center">
+            <button class="button button-default icon-left ion-plus">Discovery</button>
+          </div>
         </div>
       </div>
 

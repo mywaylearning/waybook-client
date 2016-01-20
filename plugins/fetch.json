@@ -1,27 +1,35 @@
 {
-    "org.apache.cordova.device": {
+    "cordova-plugin-device": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.device"
-        }
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "org.apache.cordova.console": {
+    "cordova-plugin-console": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.console"
-        }
+            "id": "cordova-plugin-console"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "com.ionic.keyboard": {
+    "ionic-plugin-keyboard": {
         "source": {
             "type": "registry",
-            "id": "com.ionic.keyboard"
-        }
+            "id": "ionic-plugin-keyboard"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "org.apache.cordova.statusbar": {
+    "cordova-plugin-statusbar": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.statusbar"
-        }
+            "id": "cordova-plugin-statusbar"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
     "cordova-plugin-whitelist": {
         "source": {

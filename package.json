@@ -112,10 +112,10 @@
     "android:staging": "npm run build:hybrid:staging && ionic run android"
   },
   "cordovaPlugins": [
-    "org.apache.cordova.device",
-    "org.apache.cordova.console",
-    "com.ionic.keyboard",
-    "org.apache.cordova.statusbar",
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
     "cordova-plugin-inappbrowser"
   ],

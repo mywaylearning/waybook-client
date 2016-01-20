@@ -61,5 +61,5 @@ npm-debug.log*
 # --------------------
 # Ionic files
 # --------------------
-platforms/^.*
-plugins
+platforms/
+plugins/

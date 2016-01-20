@@ -9,7 +9,7 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
                         {
@@ -17,7 +17,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
                         {
@@ -52,23 +52,23 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.client558508"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "me.way.waybook"
         },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ionicframework.client558508"
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "me.way.waybook"
         },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.client558508"
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "me.way.waybook"
         },
-        "org.apache.cordova.statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.client558508"
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "me.way.waybook"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.client558508"
+            "PACKAGE_NAME": "me.way.waybook"
         },
         "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.client558508"
+            "PACKAGE_NAME": "me.way.waybook"
         }
     },
     "dependent_plugins": {}

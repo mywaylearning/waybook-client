@@ -21,7 +21,6 @@ function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, Qu
     // });
     //
     $rootScope.$on('$stateChangeStart', function(evt, toState) {
-      console.log(toState.name);
       if (toState.name.indexOf('public') === -1) {
         $ionicLoading.show({
           template: '<div class="quotes"><div class="loading-text">Loading</div><div class="quote">' + QuotesService.getQuote() + '</div></div>'

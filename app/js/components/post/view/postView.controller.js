@@ -105,6 +105,13 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
     });
   };
 
+  $scope.mutePost = function(post, muted) {
+    post.mute = muted;
+    post.save().then(function() {
+      $scope.popoverActions.hide();
+    });
+  };
+
   $scope.reshare = function(post, $event) {
     if ($event) {
       $event.preventDefault();

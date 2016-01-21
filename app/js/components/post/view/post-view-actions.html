@@ -13,11 +13,10 @@
     <a ng-if="user.id == post.userId" class="item item-icon-left" ng-click="shareInfo()" href="">
       <i class="icon ion-information-circled"></i> View post activity
     </a>
-
-    <!-- <a class="item item-icon-left" href="" target="_blank">
+    <a class="item item-icon-left" href="" ng-click="mutePost(post, true)">
       <i class="icon ion-volume-mute"></i> Mute
     </a>
-    <a class="item item-icon-left" href="" target="_blank">
+    <!-- <a class="item item-icon-left" href="" target="_blank">
       <i class="icon ion-flag"></i> Report
     </a> -->
   </div>

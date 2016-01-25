@@ -106,7 +106,7 @@ angular.module('app.config', [])
 })
 
 .constant('STATE_LOADING', {
-  'timeout': 2000
+  'timeout': 3000
 })
 
 .constant('DEFAULT_PER_PAGE', 20)

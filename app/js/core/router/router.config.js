@@ -323,6 +323,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.explore.exploration', {
+    loading: true,
     url: '/:exploration',
     views: {
       'bodyContent@app': {
@@ -337,6 +338,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.explore.exploration.results', {
+    loading: true,
     url: '/results',
     views: {
       'bodyContent@app': {
@@ -357,6 +359,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan', {
+    loading: true,
     cache: false,
     url: '/plan?tag',
     views: {
@@ -476,6 +479,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.me.discoveries', {
+    loading: true,
     url: '/discoveries',
     cache: false,
     views: {
@@ -535,6 +539,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.search', {
+    loading: true,
     cache: false,
     url: '/search?query?type?owner',
     views: {
@@ -575,6 +580,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.home', {
+    loading: true,
     cache: false,
     url: '',
     views: {
@@ -613,6 +619,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.main.post', {
+    loading: true,
     url: 'post/:id',
     views: {
       'bodyContent@app': {

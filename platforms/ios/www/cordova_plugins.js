@@ -43,6 +43,13 @@ module.exports = [
             "cordova.InAppBrowser.open",
             "window.open"
         ]
+    },
+    {
+        "file": "plugins/phonegap-facebook-plugin/facebookConnectPlugin.js",
+        "id": "phonegap-facebook-plugin.FacebookConnectPlugin",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -53,7 +60,8 @@ module.exports.metadata =
     "ionic-plugin-keyboard": "1.0.8",
     "cordova-plugin-statusbar": "2.0.0",
     "cordova-plugin-whitelist": "1.2.0",
-    "cordova-plugin-inappbrowser": "1.1.1"
+    "cordova-plugin-inappbrowser": "1.1.1",
+    "phonegap-facebook-plugin": "0.12.0"
 }
 // BOTTOM OF METADATA
 });

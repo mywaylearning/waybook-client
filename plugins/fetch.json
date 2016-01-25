@@ -46,5 +46,16 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "phonegap-facebook-plugin": {
+        "source": {
+            "type": "local",
+            "path": "/Users/igorprado/projects/phonegap-facebook-plugin"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "1514679575427350",
+            "APP_NAME": "Waybook"
+        }
     }
 }

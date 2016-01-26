@@ -1,5 +1,5 @@
 /* globals hello, facebookConnectPlugin */
-function SocialLoginDirective($ionicLoading, $q, $state) {
+function SocialLoginDirective($ionicLoading, $q, $state, UserService) {
   return {
     restrict: 'E',
     templateUrl: 'components/social-login/social-login.html',
@@ -10,7 +10,7 @@ function SocialLoginDirective($ionicLoading, $q, $state) {
       var getFacebookProfileInfo = function(authResponse) {
         var info = $q.defer();
 
-        facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+        facebookConnectPlugin.api('/me?access_token=' + authResponse.accessToken, null,
           function(response) {
             console.log(response);
             info.resolve(response);
@@ -33,16 +33,26 @@ function SocialLoginDirective($ionicLoading, $q, $state) {
 
         getFacebookProfileInfo(authResponse)
           .then(function(profileInfo) {
-            // For the purpose of this example I will store user data on local storage
-            // UserService.setUser({
-            //   authResponse: authResponse,
-            //   userID: profileInfo.id,
-            //   name: profileInfo.name,
-            //   email: profileInfo.email,
-            //   picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-            // });
+            var _user = {
+              email: profileInfo.email,
+              firstName: profileInfo.first_name,
+              lastName: profileInfo.last_name,
+              provider: 'facebook',
+              providerId: profileInfo.id,
+              auth: authResponse
+            };
+
+            UserService.socialLoginCheck(_user).then(function(data) {
+              auth.saveAuth(data);
+              $state.go('app.main.home');
+            }).catch(function(error) {
+              if (error.error === 'not found') {
+                $state.go('public.register', {
+                  userInfo: _user
+                });
+              }
+            });
             $ionicLoading.hide();
-            $state.go('app.home');
           }, function(fail) {
             // Fail get profile info
             console.log('profile info fail', fail);
@@ -64,7 +74,7 @@ function SocialLoginDirective($ionicLoading, $q, $state) {
               // The user is logged in and has authenticated your app, and response.authResponse supplies
               // the user's ID, a valid access token, a signed request, and the time the access token
               // and signed request each expire
-              console.log('getLoginStatus', success.status);
+              fbLoginSuccess(success);
 
               // if (!user.userID) {
               //   getFacebookProfileInfo(success.authResponse)

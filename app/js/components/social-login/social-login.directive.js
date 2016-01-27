@@ -52,32 +52,27 @@ function SocialLoginDirective() {
       };
 
       // Perform login if everything is ok
-      var doLogin = function(authResponse) {
-        getFacebookProfileInfo(authResponse).then(function(profileInfo) {
-          var _user = {
-            email: profileInfo.email,
-            firstName: profileInfo.first_name,
-            lastName: profileInfo.last_name,
-            provider: 'facebook',
-            providerId: profileInfo.id,
-            auth: {
-              access_token: authResponse.accessToken
-            }
-          };
+      var doLogin = function(userData) {
+        var _user = {
+          email: userData.email,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          provider: userData.provider,
+          providerId: userData.providerId,
+          auth: {
+            access_token: userData.accessToken
+          }
+        };
 
-          UserService.socialLoginCheck(_user).then(function(data) {
-            auth.saveAuth(data);
-            $state.go('app.main.home');
-          }).catch(function(error) {
-            if (error.error === 'not found') {
-              $state.go('public.register', {
-                userInfo: _user
-              });
-            }
-          });
-        }, function(fail) {
-          // Fail get profile info
-          console.log('profile info fail', fail);
+        UserService.socialLoginCheck(_user).then(function(data) {
+          auth.saveAuth(data);
+          $state.go('app.main.home');
+        }).catch(function(error) {
+          if (error.error === 'not found') {
+            $state.go('public.register', {
+              userInfo: _user
+            });
+          }
         });
       };
 
@@ -97,7 +92,18 @@ function SocialLoginDirective() {
               $scope.noEmail = true;
             });
           } else {
-            doLogin(authResponse);
+            getFacebookProfileInfo(authResponse).then(function(profileInfo) {
+              var userData = {
+                email: profileInfo.email,
+                firstName: profileInfo.first_name,
+                lastName: profileInfo.last_name,
+                provider: 'facebook',
+                providerId: profileInfo.id,
+                accessToken: authResponse.accessToken
+              };
+
+              doLogin(userData);
+            });
           }
           $ionicLoading.hide();
         });
@@ -116,22 +122,45 @@ function SocialLoginDirective() {
             template: 'Please wait...'
           });
           $scope.noEmail = false;
-          facebookConnectPlugin.getLoginStatus(function(success) {
-            if (success.status === 'connected') {
-              // The user is logged in and has authenticated your app, and response.authResponse supplies
-              // the user's ID, a valid access token, a signed request, and the time the access token
-              // and signed request each expire
-              fbLoginSuccess(success);
-            } else {
-              // If (success.status === 'not_authorized') the user is logged in to Facebook,
-              // but has not authenticated your app
-              // Else the person is not logged into Facebook,
-              // so we're not sure if they are logged into this app or not.
 
-              // Ask the permissions you need. You can learn more about
-              facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
-            }
-          });
+          if (network === 'facebook') {
+            facebookConnectPlugin.getLoginStatus(function(success) {
+              if (success.status === 'connected') {
+                // The user is logged in and has authenticated your app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed request, and the time the access token
+                // and signed request each expire
+                fbLoginSuccess(success);
+              } else {
+                // If (success.status === 'not_authorized') the user is logged in to Facebook,
+                // but has not authenticated your app
+                // Else the person is not logged into Facebook,
+                // so we're not sure if they are logged into this app or not.
+
+                // Ask the permissions you need. You can learn more about
+                facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
+              }
+            });
+          }
+
+          if (network === 'google') {
+            window.plugins.googleplus.login({ offline: true },
+              function(profileInfo) {
+                var userData = {
+                  email: profileInfo.email,
+                  firstName: profileInfo.givenName,
+                  lastName: profileInfo.familyName,
+                  provider: 'google',
+                  providerId: profileInfo.userId,
+                  accessToken: profileInfo.oauthToken
+                };
+
+                doLogin(userData);
+              },
+              function(msg) {
+                console.log(msg);
+              }
+            );
+          }
         } else {
           hello(network).login({
             scope: 'email'

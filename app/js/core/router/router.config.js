@@ -117,6 +117,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       $scope.logout = function() {
         if (ionic.Platform.isWebView()) {
           facebookConnectPlugin.logout();
+          window.plugins.googleplus.logout();
         } else {
           hello.logout('facebook');
           hello.logout('google');

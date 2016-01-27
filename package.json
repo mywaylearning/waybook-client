@@ -117,19 +117,24 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
-    "cordova-plugin-inappbrowser"
-  ],
-  "cordovaPlatforms": [
-    "android",
+    "cordova-plugin-inappbrowser",
     {
-      "platform": "android",
-      "version": "",
-      "locator": "android"
+      "variables": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
+      },
+      "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+      "id": "cordova-plugin-googleplus"
     },
     {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
+      "variables": {
+        "APP_ID": "1514679575427350",
+        "APP_NAME": "Waybook"
+      },
+      "locator": "cordova-plugin-facebook4",
+      "id": "cordova-plugin-facebook4"
     }
+  ],
+  "cordovaPlatforms": [
+    "android"
   ]
 }

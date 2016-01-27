@@ -1,4 +1,4 @@
-/* globals hello */
+/* globals hello, facebookConnectPlugin */
 function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider, store, ROLES, LOCAL_STORAGE_KEYS, POST_TYPES) {
   'ngInject';
   var userResolve;
@@ -101,7 +101,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     template: '<ion-nav-bar class="bar-stable"><ion-nav-back-button state-nav-back-button></ion-nav-back-button></ion-nav-bar><ion-nav-view name="publicContent"></ion-nav-view>',
     controllerAs: '',
     controller: function($scope, $state, UserService, auth) {
-      function checkPermission(data, permission) {
+      $scope.checkPermission = function(data, permission) {
         var toReturn = false;
         angular.forEach(data, function(item) {
           if (item.permission === permission) {
@@ -112,14 +112,18 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         });
 
         return toReturn;
-      }
+      };
 
-      function logout() {
-        hello.logout('facebook');
-        hello.logout('google');
+      $scope.logout = function() {
+        if (ionic.Platform.isWebView()) {
+          facebookConnectPlugin.logout();
+          window.plugins.googleplus.logout();
+        } else {
+          hello.logout('facebook');
+          hello.logout('google');
+        }
         $scope.onLogin = false;
-        $scope.$apply();
-      }
+      };
       /**
        * https://github.com/MrSwitch/hello.js#4-add-listeners-for-the-user-login
        */
@@ -128,10 +132,10 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         $scope.onLogin = true;
         if (_auth.network === 'facebook') {
           hello(_auth.network).api('/me/permissions').then(function(response) {
-            if (!checkPermission(response.data, 'email')) {
+            if (!$scope.checkPermission(response.data, 'email')) {
               // User didn't authorized e-mail
               hello(_auth.network).api('/me/permissions', 'delete').then(function() {
-                logout();
+                $scope.logout();
                 $scope.noEmail = true;
                 $scope.$apply();
               });
@@ -139,7 +143,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
               doLogin(_auth);
             }
           }, function() {
-            logout();
+            $scope.logout();
           });
         } else {
           doLogin(_auth);
@@ -173,7 +177,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
           // if (_auth.network === 'facebook') {}
           // if (_auth.network === 'google') {}
         }, function() {
-          logout();
+          $scope.logout();
         });
       }
     },
@@ -460,6 +464,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.me.account', {
+    loading: true,
     url: '',
     cache: false,
     views: {
@@ -506,6 +511,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.help-feedback', {
+    loading: true,
     url: '/help-feedback',
     views: {
       'bodyContent': {

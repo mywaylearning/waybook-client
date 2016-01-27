@@ -1,4 +1,15 @@
 {
+    "cordova-plugin-facebook4": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-facebook4@^1.4.1"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "1514679575427350",
+            "APP_NAME": "Waybook"
+        }
+    },
     "cordova-plugin-device": {
         "source": {
             "type": "registry",
@@ -46,5 +57,16 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-googleplus": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {
+            "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
+        }
     }
 }

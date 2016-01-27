@@ -64,7 +64,12 @@ function SocialLoginDirective() {
           }
         };
 
+        $ionicLoading.show({
+          template: 'Checking information...'
+        });
+
         UserService.socialLoginCheck(_user).then(function(data) {
+          $ionicLoading.hide();
           auth.saveAuth(data);
           $state.go('app.main.home');
         }).catch(function(error) {

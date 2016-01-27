@@ -115,9 +115,12 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       };
 
       $scope.logout = function() {
-        facebookConnectPlugin.logout();
-        hello.logout('facebook');
-        hello.logout('google');
+        if (ionic.Platform.isWebView()) {
+          facebookConnectPlugin.logout();
+        } else {
+          hello.logout('facebook');
+          hello.logout('google');
+        }
         $scope.onLogin = false;
       };
       /**

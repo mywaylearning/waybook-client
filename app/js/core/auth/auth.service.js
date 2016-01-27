@@ -189,4 +189,4 @@ function AuthService($timeout, $rootScope, $state, $location, $q, Restangular, a
   return svcInterface;
 }
 
-module.exports = ['$timeout', '$rootScope', '$state', '$location', '$q', 'Restangular', 'authStore', AuthService];
+module.exports = AuthService;

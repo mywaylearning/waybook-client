@@ -156,8 +156,8 @@ function SocialLoginDirective() {
 
                 doLogin(userData);
               },
-              function(msg) {
-                console.log(msg);
+              function() {
+                $ionicLoading.hide();
               }
             );
           }

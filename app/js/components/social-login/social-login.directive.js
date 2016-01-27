@@ -10,7 +10,7 @@ function SocialLoginDirective() {
       var getFacebookProfileInfo = function(authResponse) {
         var info = $q.defer();
 
-        facebookConnectPlugin.api('/me?access_token=' + authResponse.accessToken, null,
+        facebookConnectPlugin.api('/me?fields=id,email,first_name,last_name&access_token=' + authResponse.accessToken, null,
           function(response) {
             info.resolve(response);
           },

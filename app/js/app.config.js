@@ -33,12 +33,12 @@ function AppConfig($sceDelegateProvider, $ionicConfigProvider, gravatarServicePr
   hello.init({
     facebook: HELLO_IDS.facebook,
     google: HELLO_IDS.google,
-    'access_token': ''
+    access_token: ''
   }, {
-    'redirect_uri': '/',
-    'oauth_proxy': 'https://auth-server.herokuapp.com/proxy',
+    redirect_uri: '/',
+    oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
     scope: 'publish_actions,email',
-    'oauth_version': '1.0a',
+    oauth_version: '1.0a',
     display: displayType
   });
 }

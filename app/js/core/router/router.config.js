@@ -165,7 +165,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
 
           UserService.socialLoginCheck(_user).then(function(data) {
             auth.saveAuth(data);
-            window.location.reload(false);
+            $state.go('app.main.home');
           }).catch(function(error) {
             if (error.error === 'not found') {
               $state.go('public.register', {

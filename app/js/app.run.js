@@ -1,7 +1,7 @@
 /* globals StatusBar */
 /* eslint angular/on-watch: 0 */
 
-function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, QuotesService, STATE_LOADING) {
+function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, $location, QuotesService, STATE_LOADING) {
   'ngInject';
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -14,12 +14,7 @@ function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, Qu
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    // $rootScope.$on('$stateNotFound', function(evt, unfoundState, fromState, fromParams) {
-    //   debug(unfoundState.to);
-    //   debug(unfoundState.toParams);
-    //   debug(unfoundState.options);
-    // });
-    //
+
     $rootScope.$on('$stateChangeStart', function(evt, toState) {
       if (toState.loading) {
         $ionicLoading.show({
@@ -27,22 +22,8 @@ function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, Qu
         });
         $rootScope.loadingStart = new Date();
       }
-      // debug('$stateChangeStart');
-      // debug(toState);
-      // debug(toParams);
-      // debug(fromState);
-      // debug(fromParams);
     });
-    //
-    // $rootScope.$on('$stateChangeError', function(evt, toState, toParams, fromState, fromParams, error) {
-    //   debug('$stateChangeError');
-    //   debug(toState);
-    //   debug(toParams);
-    //   debug(fromState);
-    //   debug(fromParams);
-    //   debug(error);
-    // });
-    //
+
     $rootScope.$on('$stateChangeSuccess', function() {
       var now = new Date();
       var remaining;
@@ -52,21 +33,7 @@ function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, Qu
           $ionicLoading.hide();
         }, remaining);
       }
-      // debug('$stateChangeSuccess');
-      // debug(toState);
-      // debug(toParams);
-      // debug(fromState);
-      // debug(fromParams);
     });
-    //
-    // $rootScope.$on('$stateChangeSuccess', function(evt, toState, toParams, fromState) {
-    //   $window.scrollTo(0, 0);
-    //   if (toState.data) {
-    //
-    //   } else {
-    //     $rootScope.bodyClass = false;
-    //   }
-    // });
   });
 }
 

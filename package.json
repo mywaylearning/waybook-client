@@ -104,11 +104,11 @@
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' node_modules/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o app/js/components/lodash.custom.min.js -p include={}",
     "preflight": "./scripts/flight-check",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build:hybrid:staging": "bower install && npm run build:lodash && NODE_ENV=staging gulp hybrid",
-    "build:hybrid:production": "bower install && npm run build:lodash && NODE_ENV=production gulp hybrid",
-    "build:staging": "bower install && npm run build:lodash && NODE_ENV=staging gulp prod",
-    "build:production": "bower install && npm run build:lodash && NODE_ENV=production gulp prod",
-    "start": "bower install && npm run build:lodash && gulp dev",
+    "build:hybrid:staging": "npm run build:lodash && NODE_ENV=staging gulp hybrid",
+    "build:hybrid:production": "npm run build:lodash && NODE_ENV=production gulp hybrid",
+    "build:staging": "npm run build:lodash && NODE_ENV=staging gulp prod",
+    "build:production": "npm run build:lodash && NODE_ENV=production gulp prod",
+    "start": "npm run build:lodash && gulp dev",
     "android:staging": "npm run build:hybrid:staging && ionic run android"
   },
   "cordovaPlugins": [

@@ -5,11 +5,11 @@
     <img gravatar-src="'{{post.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
     <h2>{{post.WaybookUser.firstName}} {{post.WaybookUser.lastName}}</h2>
     <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
-    <div class="post-actions" ng-if="!reshared">
-      <ionic-datepicker ng-if="post.systemTags.indexOf('habit') > -1" input-obj="habitCalendarConfig">
+    <div class="post-actions">
+      <ionic-datepicker ng-if="post.systemTags.indexOf('habit') > -1 && !hideShareButton" input-obj="habitCalendarConfig">
         <button class="button button-icon ion-calendar"></button>
       </ionic-datepicker>
-      <button class="button button-icon ion-chevron-down" ng-click="showPopoverActions($event)"></button>
+      <button class="button button-icon ion-chevron-down" ng-if="!reshared" ng-click="showPopoverActions($event)"></button>
     </div>
     <div class="item-tags">
       <span class="item-tag item-system-tag" ng-repeat="tag in post.systemTags track by $index">#{{tag}}</span>

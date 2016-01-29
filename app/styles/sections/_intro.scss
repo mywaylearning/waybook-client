@@ -10,10 +10,20 @@
     }
   }
 
-  .slider-slide {
+  .swiper-container {
+    height: 100%;
+  }
+
+  .swiper-slide {
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-top: 80px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
   }
 
   .screen-1 {
@@ -52,7 +62,6 @@
       .text {
         text-align: center;
         float: none;
-        margin: 0;
       }
     }
   }
@@ -103,7 +112,7 @@
     }
   }
 
-  .slider-pager {
+  .swiper-pagination {
     bottom: 70px;
   }
 
@@ -111,6 +120,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    z-index: 1;
   }
 
   .buttons-footer {

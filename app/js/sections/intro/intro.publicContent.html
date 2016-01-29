@@ -1,37 +1,37 @@
 <ion-view view-title="Waybook" class="intro">
   <ion-nav-bar class="bar-stable">
     <ion-nav-buttons side="left">
-      <button class="button button-positive button-clear icon ion-chevron-left" ng-click="previous()" ng-if="slideIndex > 0"></button>
+      <button class="button button-positive button-clear icon ion-chevron-left" ng-click="previous()"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-      <button class="button button-positive button-clear icon ion-chevron-right" ng-click="next()" ng-if="slideIndex != 2"></button>
+      <button class="button button-positive button-clear icon ion-chevron-right" ng-click="next()"></button>
     </ion-nav-buttons>
   </ion-nav-bar>
 
-  <ion-slide-box show-page="true" pager-click="goToSlide(index)" on-slide-changed="slideChanged($index)" does-continue="true">
-    <ion-slide class="screen-1">
+  <ion-slides options="sliderOptions" slider="slider">
+    <ion-slide-page class="screen-1">
       <div class="text">
         <h2>Everyone has genius.</h2>
         <h4>Discover yours.</h4>
       </div>
 
-    </ion-slide>
+    </ion-slide-page>
 
-    <ion-slide class="screen-2">
+    <ion-slide-page class="screen-2">
       <div class="text">
         <h2>Own your future.</h2>
         <h4>There’s magic in a goal.</h4>
       </div>
 
-    </ion-slide>
+    </ion-slide-page>
 
-    <ion-slide class="screen-3">
+    <ion-slide-page class="screen-3">
       <div class="text">
         <h2>Success comes easier</h2>
         <h4>...with help from your supporters.</h4>
       </div>
-    </ion-slide>
-  </ion-slide-box>
+    </ion-slide-page>
+  </ion-slides>
   <div class="buttons-container">
     <div class="buttons-footer" ng-class="{'last-slide': slideIndex == 2}">
       <div class="row">

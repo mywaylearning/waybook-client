@@ -1,20 +1,25 @@
-function IntroController($scope, $state, $ionicSlideBoxDelegate) {
+function IntroController($scope) {
   'ngInject';
 
+  var swiper = {};
+
+  $scope.sliderOptions = {
+    initialSlide: 0,
+    loop: true
+  };
+
+  $scope.$watch('slider', function(_swiper) {
+    if (_swiper) {
+      swiper = _swiper;
+    }
+  });
+
   $scope.next = function() {
-    $ionicSlideBoxDelegate.next();
+    swiper.slideNext();
   };
 
   $scope.previous = function() {
-    $ionicSlideBoxDelegate.previous();
-  };
-
-  $scope.slideChanged = function(index) {
-    $scope.slideIndex = index;
-  };
-
-  $scope.goToSlide = function(index) {
-    $ionicSlideBoxDelegate.slide(index);
+    swiper.slidePrev();
   };
 }
 

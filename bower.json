@@ -9,7 +9,7 @@
     "highcharts": "highcharts-release#4.1.8",
     "highcharts-ng": "~0.0.11",
     "international-phone-number": "~0.0.8",
-    "ionic": "driftyco/ionic-bower#1.1.0",
+    "ionic": "driftyco/ionic-bower#1.2.4",
     "ionic-datepicker": "https://github.com/igorprado/ionic-datepicker/archive/select-multiple-days.zip",
     "ionic-ion-showWhen": "https://raw.githubusercontent.com/andrewmcgivery/ionic-ion-showWhen/v1.2.0/ionic.ion.showwhen.js",
     "ment.io": "~0.9.9",

@@ -23,12 +23,12 @@
     <div class="post-content" ng-bind-html="post.content | linky:'_blank'" read-more="{{state.name}}"></div>
 
     <div ng-if="post.originalShared">
-      <p>Originally posted by:</p>
+      <p style="margin-bottom: 5px;">Originally shared by:</p>
       <way-post-view post="post.originalShared" reshared="true" user="user"></way-post-view>
     </div>
 
   </div>
-  <div ng-if="post.postType === 'goal'" class="item item-body">
+  <div ng-if="post.postType === 'goal' && !hideShareButton" class="item item-body">
     <p>Status:
       <strong ng-if="user.id !== post.userId">{{post.gStatus}}</strong>
       <button ng-if="user.id === post.userId" class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
@@ -40,7 +40,7 @@
     </p>
     <p>This goal is a <strong>{{post.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{post.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{post.gEndDate | date: 'longDate'}}</strong>.</p>
   </div>
-  <div class="item" ng-if="post.link || post.files.length">
+  <div class="item" ng-if="(post.link || post.files.length) && !hideShareButton">
     <div ng-if="post.link" class="row responsive-sm">
       <div class="col col-80 col-offset-10">
         <link-preview link="post.link"></link-preview>
@@ -50,7 +50,7 @@
       <strong ng-if="post.files.length" ng-click="post.showFiles = ! post.showFiles" class="subdued"><span ng-bind="post.showFiles ? 'Hide' : 'Show'"></span> {{post.files.length}} files attached</strong>
     </p>
   </div>
-  <div ng-if="post.showFiles">
+  <div ng-if="post.showFiles && !hideShareButton">
     <div class="item item-divider">
       Files
     </div>
@@ -61,8 +61,8 @@
       </a>
     </div>
   </div>
-  <div class="item" ng-if="post.canShare && !hideShareButton">
-    <button class="button button-small ion-forward" ng-click="reshare()" ng-class="{'icon-left': post.shares, 'icon': !post.shares}">{{post.shares}}</button>
+  <div class="item" ng-if="post.canShare && !hideShareButton && !reshared">
+    <button class="button button-stable icon ion-share" ng-click="reshare()"></i></button>
   </div>
 
   <way-comment post="post" user="user" ng-if="!reshared"></way-comment>

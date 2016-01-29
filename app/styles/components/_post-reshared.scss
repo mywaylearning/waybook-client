@@ -24,6 +24,16 @@
     font-size: 80%;
   }
 
+  .post-content {
+    min-height: auto;
+  }
+
+  .item-tags {
+    position: absolute;
+    right: 10px;
+    top: 25px;
+  }
+
   .item-tag {
     font-size: 10px;
     line-height: 20px;

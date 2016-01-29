@@ -29,6 +29,19 @@ To start a local server, run:
 
 This command will trigger a gulp task which is responsible to start local server, build and watch (with livereload) files.
 
+## Building hybrid app
+
+First, restore all ionic platforms and plugins running:
+
+`$ ionic state restore`
+
+For Android builds run:
+
+```
+$ npm run android:staging
+$ npm run android:production
+```
+
 ## Deploying
 
 To deploy, we currently use two branches:

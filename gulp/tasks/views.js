@@ -4,12 +4,14 @@ import config        from '../config';
 import gulp          from 'gulp';
 import browserSync   from 'browser-sync';
 import templateCache from 'gulp-angular-templatecache';
+import removeCode    from 'gulp-remove-code';
 
 // Views task
 gulp.task('views', function() {
 
   // Put our index.html in the dist folder
   gulp.src(config.views.index)
+    .pipe(removeCode({ web: process.env.APP_ENV === 'web' }))
     .pipe(gulp.dest(config.buildDir));
 
   // Process any other view files from app/views

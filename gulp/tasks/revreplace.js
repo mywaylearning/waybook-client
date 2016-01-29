@@ -8,7 +8,7 @@ gulp.task('revreplace', function(cb) {
 
   var manifest = gulp.src(config.buildDir + '/rev-manifest.json');
 
-  return gulp.src(config.sourceDir + 'index.html')
+  return gulp.src(config.buildDir + 'index.html')
     .pipe(revReplace({manifest: manifest}))
     .pipe(gulp.dest(config.buildDir));
 

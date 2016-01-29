@@ -4,7 +4,7 @@
       <div class="list">
 
         <div ng-repeat="category in viewData.categories track by $index">
-          <div class="item item-divider" ng-click="category.shown = !category.shown">{{category.category}}</div>
+          <div class="item item-divider" ng-click="category.shown = !category.shown"><i class="icon" ng-class="{'ion-chevron-down': !category.shown, 'ion-chevron-up': category.shown}"></i> {{category.category}}</div>
           <a
             ng-repeat="exploration in category.explorations"
             ui-sref="app.explore.exploration({exploration: exploration.slug})"

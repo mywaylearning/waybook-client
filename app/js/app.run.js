@@ -1,7 +1,7 @@
 /* globals StatusBar */
 /* eslint angular/on-watch: 0 */
 
-function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, $location, QuotesService, STATE_LOADING) {
+function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, $location, QuotesService) {
   'ngInject';
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -15,23 +15,18 @@ function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, $l
       StatusBar.styleDefault();
     }
 
-    $rootScope.$on('$stateChangeStart', function(evt, toState) {
+    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
+      var template = '<ion-spinner icon="spiral" class="spinner-positive"></ion-spinner>';
+
+      if (fromState.name === 'public.login') {
+        template = '<div class="quotes"><div class="loading-text"><ion-spinner icon="spiral" class="spinner-positive"></ion-spinner></div><div class="quote">' + QuotesService.getQuote() + '</div></div>';
+      }
+
       if (toState.loading) {
         $ionicLoading.show({
-          template: '<div class="quotes"><div class="loading-text"><ion-spinner icon="spiral" class="spinner-positive"></ion-spinner></div><div class="quote">' + QuotesService.getQuote() + '</div></div>'
+          template: template,
+          hideOnStateChange: true
         });
-        $rootScope.loadingStart = new Date();
-      }
-    });
-
-    $rootScope.$on('$stateChangeSuccess', function() {
-      var now = new Date();
-      var remaining;
-      if ($rootScope.loadingStart) {
-        remaining = STATE_LOADING.timeout - (now - $rootScope.loadingStart);
-        $timeout(function() {
-          $ionicLoading.hide();
-        }, remaining);
       }
     });
   });

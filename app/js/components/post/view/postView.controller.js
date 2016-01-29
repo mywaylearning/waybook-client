@@ -1,5 +1,6 @@
 function PostViewController($scope, $state, $timeout, PostService, $ionicPopover, $ionicPopup, $ionicModal) {
   'ngInject';
+  var _userIsOwner = $scope.user.id === $scope.post.userId;
   $scope.state = $state.current;
 
   $scope.posts = $scope.$parent.$parent.posts;
@@ -24,12 +25,13 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
   };
 
   $scope.habitCalendarConfig = {
-    titleLabel: 'Track the days when you completed this habit',
+    titleLabel: _userIsOwner ? 'Track the days when you completed this habit' : 'Days that ' + $scope.post.WaybookUser.firstName + ' completed this habit',
     showTodayButton: false,
     showSetButton: false,
-    closeLabel: 'Done',
+    closeLabel: _userIsOwner ? 'Done' : 'Close',
     inputDate: $scope.post.habitDates,
     to: new Date(),
+    readOnly: !_userIsOwner,
     selectMultipleDates: true,
     callbackOnDateClick: function(val) {
       if (val) {
@@ -103,13 +105,17 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
     });
   };
 
-  $scope.reshare = function(post, $event) {
-    if ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-    }
+  $scope.mutePost = function(post, muted) {
+    post.mute = muted;
+    post.save().then(function() {
+      $scope.popoverActions.hide();
+    });
+  };
 
-    $scope.sharingPost = post || $scope.post;
+  $scope.reshare = function() {
+    var postToBeShared = $scope.post.originalShared || $scope.post;
+    $scope.sharingPost = angular.copy(postToBeShared);
+
     $scope.postType = 'thought';
     $scope.resharePopup = {};
     $ionicModal.fromTemplateUrl('components/post/view/re-share.html', {

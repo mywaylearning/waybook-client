@@ -49,7 +49,7 @@ function buildScript(file) {
       break;
   }
 
-  console.log(envFile);
+  gutil.log('Env file used:', gutil.colors.green(envFile));
 
   const transforms = [
     { 'name':'debowerify', 'options': {} },

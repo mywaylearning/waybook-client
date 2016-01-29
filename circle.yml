@@ -5,6 +5,9 @@ machine:
 dependencies:
   pre:
     - sudo pip install closure-linter awscli;
+  override:
+    - npm install
+    - bower install
 
 deployment:
   staging:

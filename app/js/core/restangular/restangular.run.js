@@ -132,6 +132,11 @@ function RestangularRun($rootScope, $state, $http, Restangular, auth, authStore,
     var _error = response.data ? response.data.error : false;
     deferred.reject(_error);
 
+    // TODO: Improve this error handler. Must change API as well
+    if (_error.help && _error.help.indexOf('ibm') > -1) {
+      return;
+    }
+
     // create a custom ui-router error for 401 unauthorized
     error = {
       type: ERROR.unknown

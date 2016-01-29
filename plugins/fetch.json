@@ -1,26 +1,72 @@
 {
-    "org.apache.cordova.device": {
+    "cordova-plugin-facebook4": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.device"
+            "id": "cordova-plugin-facebook4@^1.4.1"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "1514679575427350",
+            "APP_NAME": "Waybook"
         }
     },
-    "org.apache.cordova.console": {
+    "cordova-plugin-device": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.console"
-        }
+            "id": "cordova-plugin-device@~1.1.1"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "com.ionic.keyboard": {
+    "cordova-plugin-console": {
         "source": {
             "type": "registry",
-            "id": "com.ionic.keyboard"
-        }
+            "id": "cordova-plugin-console@~1.0.2"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "org.apache.cordova.statusbar": {
+    "ionic-plugin-keyboard": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.statusbar"
+            "id": "ionic-plugin-keyboard"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-statusbar@~2.1.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist@~1.2.1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-googleplus": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {
+            "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
         }
     }
 }

@@ -10,14 +10,24 @@
     }
   }
 
-  .slider-slide {
+  .swiper-container {
+    height: 100%;
+  }
+
+  .swiper-slide {
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-top: 80px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
   }
 
   .screen-1 {
-    background-image: url(/img/intro/screen1.jpg);
+    background-image: url(../img/intro/screen1.jpg);
 
     .text {
       text-align: left;
@@ -52,13 +62,12 @@
       .text {
         text-align: center;
         float: none;
-        margin: 0;
       }
     }
   }
 
   .screen-2 {
-    background-image: url(/img/intro/screen2.jpg);
+    background-image: url(../img/intro/screen2.jpg);
 
     h2, h4 {
       color: #FFF;
@@ -82,7 +91,7 @@
   }
 
   .screen-3 {
-    background-image: url(/img/intro/screen3.jpg);
+    background-image: url(../img/intro/screen3.jpg);
 
     .text {
       position: absolute;
@@ -103,7 +112,7 @@
     }
   }
 
-  .slider-pager {
+  .swiper-pagination {
     bottom: 70px;
   }
 
@@ -111,6 +120,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    z-index: 1;
   }
 
   .buttons-footer {

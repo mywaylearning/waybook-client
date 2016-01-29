@@ -1,0 +1,16 @@
+.quotes {
+  .loading-text {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .quote {
+    font-size: 14px;
+    max-width: 280px;
+
+    @media (min-width: $grid-responsive-sm-break) {
+      max-width: 400px;
+    }
+
+  }
+}

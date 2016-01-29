@@ -59,6 +59,7 @@
     "gulp-import-css": "^0.1.2",
     "gulp-notify": "^2.0.0",
     "gulp-protractor": "^1.0.0",
+    "gulp-remove-code": "^1.0.2",
     "gulp-rename": "^1.2.0",
     "gulp-rev-all": "^0.8.22",
     "gulp-rev-replace": "^0.4.2",
@@ -104,8 +105,37 @@
     "build:lodash": "grep -o -C 0 '_\\.[^(]*' node_modules/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o app/js/components/lodash.custom.min.js -p include={}",
     "preflight": "./scripts/flight-check",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build:staging": "bower install && npm run build:lodash && NODE_ENV=staging gulp prod",
-    "build:production": "bower install && npm run build:lodash && NODE_ENV=production gulp prod",
-    "start": "bower install && npm run build:lodash && gulp dev"
-  }
+    "build:hybrid:staging": "npm run build:lodash && NODE_ENV=staging gulp hybrid",
+    "build:hybrid:production": "npm run build:lodash && NODE_ENV=production gulp hybrid",
+    "build:staging": "npm run build:lodash && NODE_ENV=staging APP_ENV=web gulp prod",
+    "build:production": "npm run build:lodash && NODE_ENV=production APP_ENV=web gulp prod",
+    "start": "npm run build:lodash && APP_ENV=web gulp dev",
+    "android:staging": "npm run build:hybrid:staging && ionic run android"
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist",
+    {
+      "variables": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
+      },
+      "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+      "id": "cordova-plugin-googleplus"
+    },
+    {
+      "variables": {
+        "APP_ID": "1514679575427350",
+        "APP_NAME": "Waybook"
+      },
+      "locator": "cordova-plugin-facebook4",
+      "id": "cordova-plugin-facebook4"
+    }
+  ],
+  "cordovaPlatforms": [
+    "android",
+    "ios"
+  ]
 }

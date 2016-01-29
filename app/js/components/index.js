@@ -41,6 +41,7 @@ app.directive('wayComment', require('./comment/comment.directive.js'));
 
 app.directive('wayChart', require('./chart/chart.directive.js'));
 app.directive('wayScoreChart', require('./chart/scoreChart.directive.js'));
+app.directive('waySemiPieChart', require('./chart/semiPieChart.directive.js'));
 
 app.directive('wayBig5Result', require('./exploration/results/big5.directive.js'));
 app.controller('Big5Controller', require('./exploration/results/big5.controller.js'));
@@ -57,3 +58,5 @@ app.controller('HelpOverlayController', require('./help-overlay/help-overlay.con
 app.directive('wayHelpOverlay', require('./help-overlay/help-overlay.directive.js'));
 
 app.directive('wayMinimumWords', require('./exploration/results/minimum-words.directive.js'));
+
+app.service('QuotesService', require('./quotes/quotes.service.js'));

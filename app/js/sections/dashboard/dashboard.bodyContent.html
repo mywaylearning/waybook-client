@@ -1,10 +1,21 @@
-<ion-view view-title="Dashboard" class="dashboard">
+<ion-view view-title="Dashboard" class="dashboard" hide-back-button="true">
   <ion-content>
     <div class="small-on-wide">
       <div class="card">
         <div class="item item-divider">Discover</div>
+        <div class="item item-subdivider">Discoveries</div>
         <div class="item item-body">
           <div way-score-chart chart-score="{{viewData.discoveries}}" chart-min="0" chart-max="12" chart-increase-by="3" chart-label="Discoveries" chart-hide-label="true"></div>
+          <div class="text-center">
+            <button class="button button-clear button-positive icon-left ion-plus" ui-sref="app.main.type({ type: 'discovery' })">Discovery</button>
+          </div>
+        </div>
+        <div class="item item-subdivider">Explorations</div>
+        <div class="item item-body">
+          <div way-score-chart chart-score="{{viewData.questionsCompleted}}" chart-score-label="{{viewData.questionsCompletedPercentage}}" chart-min="0" chart-max="{{viewData.questions}}" chart-increase-by="0" chart-label="completed" chart-hide-label="true"></div>
+          <div class="text-center">
+            <button class="button button-clear button-positive icon-left ion-plus" ui-sref="app.explore">Exploration</button>
+          </div>
         </div>
       </div>
 
@@ -12,6 +23,9 @@
         <div class="item item-divider">Plan</div>
         <div class="item item-body">
           <div way-score-chart chart-score="{{viewData.goals}}" chart-min="0" chart-max="12" chart-increase-by="1" chart-label="Goals" chart-hide-label="true"></div>
+          <div class="text-center">
+            <button class="button button-clear button-positive icon-left ion-plus" ui-sref="app.main.type({ type: 'goal' })">Goal</button>
+          </div>
         </div>
       </div>
 
@@ -19,6 +33,9 @@
         <div class="item item-divider">Unite</div>
         <div class="item item-body">
           <div way-score-chart chart-score="{{viewData.supporters}}" chart-min="0" chart-max="6" chart-increase-by="1" chart-label="Supporters" chart-hide-label="true"></div>
+          <div class="text-center">
+            <button class="button button-clear button-positive icon-left ion-plus" ui-sref="app.unite.add">Supporter</button>
+          </div>
         </div>
       </div>
     </div>

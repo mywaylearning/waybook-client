@@ -1,0 +1,45 @@
+.post-reshared {
+  .item {
+    padding: 10px;
+  }
+
+  .item-avatar {
+    min-height: 45px;
+    padding-left: 50px;
+
+    img {
+      top: 10px;
+      left: 10px;
+      max-width: 30px;
+      max-height: 30px;
+    }
+
+    h2, p {
+      margin: 0;
+      font-size: 80%;
+    }
+  }
+
+  .item-body {
+    font-size: 80%;
+  }
+
+  .post-content {
+    min-height: auto;
+  }
+
+  .post-actions {
+    top: -8px;
+  }
+
+  .item-tags {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+  }
+
+  .item-tag {
+    font-size: 10px;
+    line-height: 20px;
+  }
+}

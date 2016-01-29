@@ -11,6 +11,7 @@ function ScoreChart($timeout, $window) {
     restrict: 'AE',
     scope: {
       score: '@chartScore',
+      scoreLabel: '@chartScoreLabel',
       min: '@chartMin',
       max: '@chartMax',
       increaseBy: '@chartIncreaseBy',
@@ -25,6 +26,7 @@ function ScoreChart($timeout, $window) {
       var min = toInt(scope.min);
       var max = toInt(scope.max);
       var config;
+      var scoreLabel = scope.scoreLabel ? scope.scoreLabel : score;
 
       var onResize = function() {
         var height = el.width() * 0.70;
@@ -76,6 +78,10 @@ function ScoreChart($timeout, $window) {
           enabled: false
         },
 
+        exporting: {
+          enabled: false
+        },
+
         credits: {
           enabled: false
         },
@@ -115,7 +121,7 @@ function ScoreChart($timeout, $window) {
           data: [score],
           dataLabels: {
             format: '<div style="text-align:center"><span style="font-size:40px;color:' +
-              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">' + scoreLabel + '</span><br/>' +
               '<span style="font-size:22px;color:silver">' + scope.label + '</span></div>'
           }
         }]

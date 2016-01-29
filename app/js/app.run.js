@@ -1,7 +1,7 @@
 /* globals StatusBar */
 /* eslint angular/on-watch: 0 */
 
-function AppRun($rootScope, $window, $timeout, $ionicPlatform, $ionicLoading, $location, QuotesService) {
+function AppRun($rootScope, $ionicPlatform, $ionicLoading, QuotesService) {
   'ngInject';
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

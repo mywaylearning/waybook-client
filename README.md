@@ -10,8 +10,11 @@ In order to develop and build this project, you will need:
 
 * Node >= 4
 * NPM >= 2
-* Ionic CLI - `$ npm install -g ionic`
 * Bower - `$ npm install -g bower`
+* Ionic CLI - `$ npm install -g ionic`
+* Cordova - `$ npm install -g cordova`
+
+Refer to http://ionicframework.com/docs/guide/installation.html for more details.
 
 ## Installing
 

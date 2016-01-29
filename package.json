@@ -118,7 +118,6 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
-    "cordova-plugin-inappbrowser",
     {
       "variables": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"

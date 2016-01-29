@@ -6,14 +6,18 @@ By using these underlying libraries, we're able to build a hybrid application wh
 
 ## Requirements
 
+In order to develop and build this project, you will need:
+
 * Node >= 4
 * NPM >= 2
+* Ionic CLI - `$ npm install -g ionic`
+* Bower - `$ npm install -g bower`
 
 ## Installing
 
 Clone this repo and inside the root dir, run:
 
-`$ npm install`
+`$ npm install & bower install`
 
 This will install all dependencies and dev dependencies.
 

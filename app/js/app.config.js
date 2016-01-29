@@ -4,9 +4,7 @@ require('angular');
 
 function AppConfig($sceDelegateProvider, $ionicConfigProvider, gravatarServiceProvider, FILEPICKER_API_KEY, HELLO_IDS) {
   'ngInject';
-
-  var displayType;
-  var transitionType;
+  var transitionType = 'platform';
 
   $sceDelegateProvider.resourceUrlWhitelist([
     'self'
@@ -16,31 +14,24 @@ function AppConfig($sceDelegateProvider, $ionicConfigProvider, gravatarServicePr
 
   filepicker.setKey(FILEPICKER_API_KEY);
 
-  switch (ionic.Platform.platform()) {
-  case 'ios':
-  case 'android':
-  case 'windowsphone':
-    displayType = 'popup';
-    transitionType = 'platform';
-    break;
-  default:
-    displayType = 'page';
+  if (!ionic.Platform.isWebView()) {
     transitionType = 'none';
+    hello.init({
+      facebook: HELLO_IDS.facebook,
+      google: HELLO_IDS.google,
+      access_token: ''
+    }, {
+      redirect_uri: '/',
+      oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
+      scope: 'publish_actions,email',
+      oauth_version: '1.0a',
+      display: 'page'
+    });
   }
 
+  // Ionic configuration
   $ionicConfigProvider.views.transition(transitionType);
-
-  hello.init({
-    facebook: HELLO_IDS.facebook,
-    google: HELLO_IDS.google,
-    access_token: ''
-  }, {
-    redirect_uri: '/',
-    oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
-    scope: 'publish_actions,email',
-    oauth_version: '1.0a',
-    display: displayType
-  });
+  $ionicConfigProvider.navBar.alignTitle('center');
 }
 
 angular.module('app.config', [])

@@ -11,7 +11,7 @@ gulp.task('favicon', function(cb) {
         appDescription: 'Waybook',
         developerName: 'Waybook',
         developerURL: 'http://way.me/',
-        background: '#020307',
+        background: '#ffffff',
         path: 'favicons/',
         url: 'http://way.me/',
         display: 'standalone',

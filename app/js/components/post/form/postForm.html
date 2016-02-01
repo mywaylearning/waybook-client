@@ -12,7 +12,7 @@
             id="tags"
             mentio-typedTerm="typedTerm"
             mentio-require-leading-space="true"
-            ng-required="ctrl.modalInstance ? (ctrl.sharedPost ? false : true) : true"
+            ng-required="ctrl.sharedPost || ctrl.model.originalShared ? false : true"
             ></textarea>
 
             <mentio-menu
@@ -167,7 +167,7 @@
     </div>
 
     <!-- Share options -->
-    <div ng-if="(ctrl.model.postType && !ctrl.model.id) || ctrl.sharedPost" class="item item-input cancel-overlay">
+    <div ng-if="ctrl.model.postType || ctrl.sharedPost" class="item item-input cancel-overlay">
         <span class="input-label">Share with:</span>
         <tags-input
           class="share-with"
@@ -191,7 +191,7 @@
                             multi-select="true" /> -->
     </div>
     <ion-toggle
-        ng-if="ctrl.model.postType || ctrl.sharedPost"
+        ng-if="ctrl.model.postType && !ctrl.sharedPost && !ctrl.model.originalShared"
         ng-model="ctrl.model.canShare"
         class="item item-text-wrap re-share">
       Re-sharing:

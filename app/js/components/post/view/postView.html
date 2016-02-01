@@ -61,7 +61,7 @@
       </a>
     </div>
   </div>
-  <div class="item" ng-if="post.canShare && !hideShareButton && !reshared">
+  <div class="item" ng-if="(post.originalShared ? post.originalShared.canShare : post.canShare) && !hideShareButton && !reshared">
     <button class="button button-stable icon ion-share" ng-click="reshare()"></i></button>
   </div>
 

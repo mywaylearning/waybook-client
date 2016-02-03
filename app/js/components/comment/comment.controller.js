@@ -15,18 +15,16 @@ function CommentController($scope, CommentService, $state, $ionicPopover, $ionic
   };
 
   $scope.popoverComment = {};
-
   $scope.activeComment = {};
 
-  $ionicPopover.fromTemplateUrl('components/comment/comment-actions.html', {
-    scope: $scope
-  }).then(function(popover) {
-    $scope.popoverComment = popover;
-  });
-
   $scope.showPopoverComment = function($event, comment) {
-    $scope.activeComment = comment;
-    $scope.popoverComment.show($event);
+    $ionicPopover.fromTemplateUrl('components/comment/comment-actions.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.activeComment = comment;
+      $scope.popoverComment = popover;
+      $scope.popoverComment.show($event);
+    });
   };
 
   $scope.createComment = function() {

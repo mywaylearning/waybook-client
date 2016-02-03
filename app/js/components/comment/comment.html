@@ -6,12 +6,8 @@
         <img gravatar-src="'{{comment.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
         <h2>{{comment.WaybookUser.firstName}} {{comment.WaybookUser.lastName}}</h2>
         <p><span title="{{comment.created | date: 'medium'}}">{{comment.created | date: 'MMM d, y'}}</span></p>
-        <!-- <div ng-if="user.id === comment.WaybookUser.id" class="comment-actions">
-          <button class="button button-icon ion-chevron-down" ng-click="showPopover($event, item)"></button>
-        </div> -->
-        <div class="comment-actions" ng-if="user.id === comment.WaybookUser.id" >
-          <button class="button button-small button-light" ng-click="deleteComment(comment)">Delete</button>
-          <button class="button button-small button-light" ng-click="showUpdateComment(comment)" ng-disabled="comment.editMode">Update</button>
+        <div ng-if="user.id === comment.WaybookUser.id" class="comment-actions">
+          <button class="button button-small button-icon ion-chevron-down" ng-click="showPopoverComment($event, comment)"></button>
         </div>
       </div>
       <div class="item comment-body">
@@ -33,7 +29,6 @@
   <div class="comment-form">
     <form name="commentForm" ng-submit="createComment()" novalidate>
       <div class="comment-input-holder">
-        <!-- <div class="placeholder" ng-show="!options.userCommentFocus">Add a comment</div> -->
         <textarea class="comment-input" ng-click="options.userCommentFocus = true" ng-model="model.comment" ng-class="{'inactive': !options.userCommentFocus}" placeholder="Add a comment" required />
       </div>
       <div ng-show="options.userCommentFocus">

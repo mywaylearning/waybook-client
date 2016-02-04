@@ -113,29 +113,40 @@
     "android:staging": "npm run build:hybrid:staging && ionic run android"
   },
   "cordovaPlugins": [
+    {
+      "id": "cordova-plugin-facebook4",
+      "locator": "cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "1514679575427350",
+        "APP_NAME": "Waybook"
+      }
+    },
     "cordova-plugin-device",
     "cordova-plugin-console",
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
     {
-      "variables": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
-      },
       "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
       "id": "cordova-plugin-googleplus"
     },
     {
-      "variables": {
-        "APP_ID": "1514679575427350",
-        "APP_NAME": "Waybook"
-      },
-      "locator": "cordova-plugin-facebook4",
-      "id": "cordova-plugin-facebook4"
+      "locator": "https://github.com/katzer/cordova-plugin-printer.git",
+      "id": "de.appplant.cordova.plugin.printer"
     }
   ],
   "cordovaPlatforms": [
     "android",
-    "ios"
+    "ios",
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ]
 }

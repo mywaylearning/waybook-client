@@ -1,0 +1,68 @@
+// All styles for a better printing
+@media print {
+
+  body {
+    overflow: auto;
+  }
+
+  .view-container {
+    position: relative;
+  }
+
+  .pane, .view {
+    position: relative;
+  }
+
+  ion-side-menu {
+    display: none;
+  }
+
+  ion-side-menu-content {
+    transform: translate3d(0, 0, 0);
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  ion-content {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .scroll-content {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .overflow-scroll {
+    overflow: auto;
+  }
+
+
+  way-post-view {
+    .share {
+      display: none;
+    }
+
+    .post-actions {
+      display: none;
+    }
+
+    .item-tags {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+
+    .list {
+      break-inside: avoid-page;
+      border: 1px solid #404040;
+      box-shadow: none;
+      padding: 0;
+    }
+  }
+
+  way-comment {
+    display: none;
+  }
+}

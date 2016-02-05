@@ -510,6 +510,16 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     }
   })
 
+  .state('app.me.10-year-plan', {
+    url: '/10-year-plan',
+    views: {
+      '10-year-plan-tab': {
+        templateUrl: 'sections/me/10YearPlan.tab.html',
+        controller: function() {}
+      }
+    }
+  })
+
   .state('app.help-feedback', {
     loading: true,
     url: '/help-feedback',

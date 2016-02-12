@@ -515,7 +515,18 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       '10-year-plan-tab': {
         templateUrl: 'sections/me/10YearPlan.tab.html',
-        controller: function() {}
+        controller: function($scope, $timeout) {
+          $scope.loaded = false;
+          $scope.loading = false;
+
+          $scope.load = function() {
+            $scope.loading = true;
+            $timeout(function() {
+              $scope.loading = false;
+              $scope.loaded = true;
+            }, 2000);
+          };
+        }
       }
     }
   })

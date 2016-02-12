@@ -1,0 +1,36 @@
+<ion-view view-title="Plan" class="plan" cache-view="false" hide-back-button="true">
+  <div class="bar bar-subheader">
+    <div class="small-on-wide">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Tag:
+        </div>
+        <select ng-options="tag as tag for tag in tags" ng-model="selectedTag" ng-change="setTag()">
+          <option value="">All tags</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <ion-content padding="true" class="has-subheader" way-timeline-scroll="{{scrollTo}}">
+    <div class="small-on-wide">
+      <div class="period" ng-repeat="date in months" id="{{hashMonth(date)}}">
+        <p class="timeline-date">
+          <span class="text">{{date}}</span>
+        </p>
+        <div class="no-posts" ng-click="createGoal(date)" ng-if="!getPosts(date).length">
+          <button class="button button-clear icon ion-plus-round button-large"></button>
+        </div>
+        <div class="list" ng-repeat="post in getPosts(date)" ng-if="getPosts(date).length">
+          <div class="item item-body" ui-sref="app.main.post({id: post.id})">
+            <div class="tags-on-block">
+              <div class="item-tag" ng-class="post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'">#{{post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'}}</div>
+            </div>
+            <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
+            <div ng-bind-html="post.content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+<way-help-overlay help="sections/plan/help.html"></way-help-overlay>

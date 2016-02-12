@@ -6,7 +6,7 @@ import favicons from 'gulp-favicons';
 
 gulp.task('favicon', function(cb) {
 
-  return gulp.src('resources/icon.png').pipe(favicons({
+  return gulp.src('resources/favicon.png').pipe(favicons({
         appName: 'Waybook',
         appDescription: 'Waybook',
         developerName: 'Waybook',

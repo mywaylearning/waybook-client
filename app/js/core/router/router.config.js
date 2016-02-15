@@ -363,12 +363,27 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan', {
-    loading: true,
-    cache: false,
-    url: '/plan?tag',
+    abstract: true,
+    url: '/plan',
     views: {
       'bodyContent': {
-        controller: 'PlanController'
+        templateUrl: 'sections/plan/plan.bodyContent.html',
+        controller: function($scope, $state) {
+          $scope.goTab = function(tab) {
+            $state.go('app.plan.' + tab);
+          };
+        }
+      }
+    }
+  })
+
+  .state('app.plan.commitments', {
+    loading: true,
+    cache: false,
+    url: '/commitments?tag',
+    views: {
+      'commitments-tab': {
+        controller: 'CommitmentsController'
       }
     },
     resolve: {
@@ -377,6 +392,27 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       },
       posts: function(PostService, $stateParams) {
         return PostService.timelineByTag($stateParams.tag);
+      }
+    }
+  })
+
+  .state('app.plan.my-plan', {
+    url: '/my-plan',
+    views: {
+      'my-plan-tab': {
+        templateUrl: 'sections/plan/myPlan.tab.html',
+        controller: function($scope, $timeout) {
+          $scope.loaded = false;
+          $scope.loading = false;
+
+          $scope.load = function() {
+            $scope.loading = true;
+            $timeout(function() {
+              $scope.loading = false;
+              $scope.loaded = true;
+            }, 2000);
+          };
+        }
       }
     }
   })
@@ -506,27 +542,6 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       'sponsors-tab': {
         templateUrl: 'sections/me/sponsors.tab.html',
         controller: 'MeSponsorsController'
-      }
-    }
-  })
-
-  .state('app.me.10-year-plan', {
-    url: '/10-year-plan',
-    views: {
-      '10-year-plan-tab': {
-        templateUrl: 'sections/me/10YearPlan.tab.html',
-        controller: function($scope, $timeout) {
-          $scope.loaded = false;
-          $scope.loading = false;
-
-          $scope.load = function() {
-            $scope.loading = true;
-            $timeout(function() {
-              $scope.loading = false;
-              $scope.loaded = true;
-            }, 2000);
-          };
-        }
       }
     }
   })

@@ -31,6 +31,12 @@ function RestangularRun($rootScope, $state, $http, Restangular, auth, authStore,
       stopErrorPropagation = true;
       break;
 
+    case 422:
+      // Usually errors of already existing records on database. Can to be addressed on controllers
+      deferred.reject(response.data.error);
+      stopErrorPropagation = true;
+      break;
+
     case 400:
     case 409:
       handleKnownErrors(response, deferred);

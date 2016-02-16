@@ -5,7 +5,8 @@ function Big5Directive() {
     controller: 'Big5Controller',
     scope: {
       results: '=',
-      exploration: '='
+      exploration: '=',
+      fromPost: '='
     }
   };
 }

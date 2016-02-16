@@ -30,6 +30,10 @@ function ExplorationService(api) {
     });
   }
 
+  function _createPostWithResults(exploration) {
+    return api.one('explorations', exploration.id).customPUT({ shareResults: true });
+  }
+
 
   Explorations = api.all('explorations');
   Categories = api.all('categories');
@@ -39,7 +43,8 @@ function ExplorationService(api) {
     collection: _collection,
     getBySlug: _getBySlug,
     answerExplorationQuestion: _answerExplorationQuestion,
-    getExplorationResults: _getExplorationResults
+    getExplorationResults: _getExplorationResults,
+    createPostWithResults: _createPostWithResults
   };
 
   return svcInterface;

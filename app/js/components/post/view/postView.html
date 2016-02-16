@@ -24,6 +24,7 @@
 
     <div ng-if="post.results">
       <way-big5-result ng-if="post.results[0].resultDisplayType == 'bars'" exploration="post.results[0]" results="post.results[1]" from-post="true"></way-big5-result>
+      <way-asq-result ng-if="post.results[0].resultDisplayType == 'pie'" exploration="post.results[0]" results="post.results[1]" from-post="true"></way-asq-result>
     </div>
 
     <div ng-if="post.originalShared">

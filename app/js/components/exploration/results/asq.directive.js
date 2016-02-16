@@ -5,7 +5,8 @@ function AsqController() {
     controller: 'AsqController',
     scope: {
       results: '=',
-      exploration: '='
+      exploration: '=',
+      fromPost: '='
     }
   };
 }

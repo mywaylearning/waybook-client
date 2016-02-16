@@ -1,6 +1,9 @@
-function Big5Controller($scope) {
+function Big5Controller($scope, $state, ExplorationService) {
   'ngInject';
-  var _results = $scope.results.plain();
+
+  console.log($scope);
+
+  var _results = $scope.results.fromServer ? $scope.results.plain() : $scope.results;
 
   var series = Object.keys(_results).map(function(category) {
     return {
@@ -79,6 +82,12 @@ function Big5Controller($scope) {
       text: null
     },
     series: series
+  };
+
+  $scope.postResult = function() {
+    ExplorationService.createPostWithResults($scope.exploration).then(function() {
+      $state.go('app.main.home');
+    });
   };
 }
 

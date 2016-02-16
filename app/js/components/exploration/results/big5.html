@@ -1,9 +1,10 @@
-<div class="small-on-wide">
-  <div class="card">
-    <div class="item item-body">
+<div ng-class="{'small-on-wide': !fromPost}">
+  <button class="button button-positive button-block" ng-click="postResult()" ng-if="!fromPost">Post your results</button>
+  <div ng-class="{'card': !fromPost}">
+    <div ng-class="{'item item-body': !fromPost}">
       <div way-chart chart-config="chartConfig"></div>
     </div>
-    <div class="item item-body">
+    <div class="item item-body" ng-if="!fromPost">
       {{exploration.resultExplanation}}
     </div>
   </div>

@@ -1,0 +1,19 @@
+<div class="post-view-compact">
+  <div class="item item-avatar" ng-init="user = post.WaybookUser || user">
+    <img gravatar-src="'{{user.email}}'" gravatar-size="80" gravatar-default="mm">
+    <h2>{{user.firstName}} {{user.lastName}}</h2>
+    <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
+    <div class="tags-on-block">
+      <div class="item-tag" ng-repeat="tag in post.systemTags">#{{tag}}</div><!--
+      --><div class="item-tag" ng-repeat="tag in post.tags">#{{tag}}</div>
+    </div>
+  </div>
+  <div class="item item-body">
+    <div class="post-image" ng-if="post.image">
+      <img ng-src="{{post.image}}" />
+    </div>
+    <p class="post-dates" ng-if="post.postType === 'goal' || post.postType === 'habit'">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
+    <div ng-bind-html="post.content" ng-if="post.content"></div>
+    <h3 ng-if="post.results" class="results-title text-center">{{ post.results[0].name }} - My Results</h3>
+  </div>
+</div>

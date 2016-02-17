@@ -132,7 +132,9 @@ function ScoreChart($timeout, $window) {
         config.yAxis.labels.enabled = false;
       }
 
-      new Highcharts.Chart(config);
+      $timeout(function() {
+        new Highcharts.Chart(config);
+      });
     }
   };
 }

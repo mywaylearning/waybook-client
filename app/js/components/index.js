@@ -9,6 +9,8 @@ app.controller('PostViewController', require('./post/view/postView.controller.js
 app.directive('wayPostView', require('./post/view/postView.directive.js'));
 app.directive('readMore', require('./post/view/readMore.directive.js'));
 
+app.directive('wayPostViewCompact', require('./post/view/postViewCompact.directive.js'));
+
 app.controller('ExplorationQuestionsMultipleChoiceController', require('./exploration/multiple-choice/questions.controller.js'));
 app.directive('wayExplorationQuestionsMultipleChoice', require('./exploration/multiple-choice/questions.directive.js'));
 

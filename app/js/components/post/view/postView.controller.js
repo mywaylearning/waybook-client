@@ -1,6 +1,11 @@
 function PostViewController($scope, $state, $timeout, PostService, $ionicPopover, $ionicPopup, $ionicModal) {
   'ngInject';
   var _userIsOwner = $scope.user.id === $scope.post.userId;
+
+  if (!$scope.post.WaybookUser && $scope.owner) {
+    $scope.post.WaybookUser = $scope.owner;
+  }
+
   $scope.state = $state.current;
 
   $scope.posts = $scope.$parent.$parent.posts;

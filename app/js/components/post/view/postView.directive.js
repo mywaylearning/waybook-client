@@ -5,6 +5,8 @@ function wayPostView($compile) {
     scope: {
       post: '=',
       user: '=',
+      owner: '=',
+      viewMode: '=',
       reshared: '@',
       hideShareButton: '@'
     },

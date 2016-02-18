@@ -6,6 +6,7 @@ function wayPostView($compile) {
       post: '=',
       user: '=',
       owner: '=',
+      viewMode: '=',
       reshared: '@',
       hideShareButton: '@'
     },

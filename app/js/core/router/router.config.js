@@ -397,6 +397,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan.my-plan', {
+    loading: true,
     url: '/my-plan',
     views: {
       'my-plan-tab': {

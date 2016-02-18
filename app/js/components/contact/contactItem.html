@@ -1,0 +1,8 @@
+<div class="item item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})">
+  <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
+  <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+  <div class="tags-on-block">
+    <div class="item-tag" ng-repeat="tag in contact.tags">#{{tag.text}}</div>
+  </div>
+  <p>{{contact.email}}</p>
+</div>

@@ -401,18 +401,15 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       'my-plan-tab': {
         templateUrl: 'sections/plan/myPlan.tab.html',
-        controller: function($scope, $timeout) {
-          $scope.loaded = false;
-          $scope.loading = false;
-
-          $scope.load = function() {
-            $scope.loading = true;
-            $timeout(function() {
-              $scope.loading = false;
-              $scope.loaded = true;
-            }, 2000);
-          };
+        controller: function($scope, report) {
+          $scope.report = report.plain();
+          console.log($scope.report);
         }
+      }
+    },
+    resolve: {
+      report: function(ReportService) {
+        return ReportService.collection();
       }
     }
   })

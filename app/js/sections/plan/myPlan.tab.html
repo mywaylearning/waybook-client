@@ -1,30 +1,36 @@
 <ion-view title="My plan">
-  <ion-content padding="true" scroll="false">
+  <ion-content padding="true">
     <div class="small-on-wide">
-      <div class="card" ng-if="!loaded">
+      <div class="card">
         <div class="item item-body">
-          <p>It costs time and money to deliver the waybook. We want to keep the experience focused and rich, so we don’t place ads. We want to ensure all will have access, so we don’t require that you pay for access.</p>
-          <p>It may take a while to generate your data.</p>
           <div class="text-center">
-            <button class="button button-positive" ng-disabled="loading" ng-click="load()">
-              <ion-spinner class="spinner-light" ng-if="loading"></ion-spinner> Check your 10 year plan
-            </button>
+            <button class="button button-positive icon-left ion-document-text">Save as PDF</button>
           </div>
         </div>
       </div>
 
-
-      <div class="card" ng-if="loaded">
-        <div class="item item-divider">Save as PDF</div>
-        <div class="item item-body">
-          Instructions to save as PDF..
-          <div class="text-center">
-            <button class="button button-positive icon-left ion-document-text">Save</button>
-          </div>
-        </div>
+      <div ng-if="report.goals.length" ng-repeat="post in report.goals | orderBy: '-created'">
+        <way-post-view post="post" user="app.user" owner="app.user"></way-post-view>
       </div>
 
-      <div ng-if="loaded">[Posts]</div>
+      <div ng-if="report.habits.length" ng-repeat="post in report.habits | orderBy: '-created'">
+        <way-post-view post="post" user="app.user" owner="app.user"></way-post-view>
+      </div>
+
+      <div ng-if="report.discoveries.length" ng-repeat="post in report.discoveries | orderBy: '-created'">
+        <way-post-view post="post" user="app.user" owner="app.user"></way-post-view>
+      </div>
+
+      <div ng-if="report.resources.length" ng-repeat="post in report.resources | orderBy: '-created'">
+        <way-post-view post="post" user="app.user"></way-post-view>
+      </div>
+
+      <div class="list" ng-if="report.contacts.length" ng-repeat="contact in report.contacts | orderBy: '-created'">
+        <way-contact-item contact="contact"></way-contact-item>
+      </div>
+
+
+
     </div>
   </ion-content>
 </ion-view>

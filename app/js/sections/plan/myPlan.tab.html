@@ -22,7 +22,7 @@
       </div>
 
       <div ng-if="report.resources.length" ng-repeat="post in report.resources | orderBy: '-created'">
-        <way-post-view post="post" user="app.user" view-mode="true"></way-post-view>
+        <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
       </div>
 
       <div class="list" ng-if="report.contacts.length" ng-repeat="contact in report.contacts | orderBy: '-created'">

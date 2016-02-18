@@ -25,6 +25,9 @@
             <div class="tags-on-block">
               <div class="item-tag" ng-class="post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'">#{{post.systemTags.indexOf('habit') > -1 ? 'habit' : 'goal'}}</div>
             </div>
+            <div class="post-image" ng-if="post.image">
+              <img ng-src="{{post.image}}" />
+            </div>
             <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
             <div ng-bind-html="post.content"></div>
           </div>

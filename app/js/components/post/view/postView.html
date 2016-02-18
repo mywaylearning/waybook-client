@@ -28,6 +28,10 @@
       <way-asq-result ng-if="post.results[0].resultDisplayType == 'pie'" exploration="post.results[0]" results="post.results[1]" from-post="true"></way-asq-result>
     </div>
 
+    <div ng-if="!post.originalShared && post.sharedFrom">
+      <p class="original-post-deleted">Original post has been deleted.</p>
+    </div>
+
     <div ng-if="post.originalShared">
       <p style="margin-bottom: 5px;">Originally shared by:</p>
       <way-post-view post="post.originalShared" reshared="true" user="user"></way-post-view>

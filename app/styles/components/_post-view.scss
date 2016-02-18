@@ -54,6 +54,11 @@
     font-size: 18px;
     margin: 0;
   }
+
+  .original-post-deleted {
+    font-style: italic;
+    color: $assertive;
+  }
 }
 
 .post-content {

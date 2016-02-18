@@ -401,9 +401,20 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       'my-plan-tab': {
         templateUrl: 'sections/plan/myPlan.tab.html',
-        controller: function($scope, report) {
+        controller: function($scope, $cordovaPrinter, report) {
           $scope.report = report.plain();
-          console.log($scope.report);
+
+          $scope.print = function() {
+            var page = location.href;
+
+            if (ionic.Platform.isWebView()) {
+              if ($cordovaPrinter.isAvailable()) {
+                $cordovaPrinter.print(page);
+              }
+            } else {
+              window.print();
+            }
+          };
         }
       }
     },

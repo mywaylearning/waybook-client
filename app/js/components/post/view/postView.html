@@ -5,7 +5,7 @@
     <img gravatar-src="'{{post.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
     <h2>{{post.WaybookUser.firstName}} {{post.WaybookUser.lastName}}</h2>
     <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
-    <div class="post-actions">
+    <div class="post-actions" ng-if="!viewMode">
       <ionic-datepicker ng-if="post.systemTags.indexOf('habit') > -1 && !hideShareButton" input-obj="habitCalendarConfig">
         <button class="button button-icon ion-calendar"></button>
       </ionic-datepicker>
@@ -61,9 +61,9 @@
       </a>
     </div>
   </div>
-  <div class="item share" ng-if="(post.originalShared ? post.originalShared.canShare : post.canShare) && !hideShareButton && !reshared">
+  <div class="item share" ng-if="(post.originalShared ? post.originalShared.canShare : post.canShare) && !hideShareButton && !reshared && !viewMode">
     <button class="button button-stable icon ion-share" ng-click="reshare()"></i></button>
   </div>
 
-  <way-comment post="post" user="user" ng-if="!reshared"></way-comment>
+  <way-comment ng-if="!viewMode" post="post" user="user" ng-if="!reshared"></way-comment>
 </div>

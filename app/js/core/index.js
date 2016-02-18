@@ -46,4 +46,6 @@ angular.module('waybook')
 
   .factory('GuideService', require('./guide/guide.service.js'))
 
-  .factory('SearchService', require('./search/search.service.js'));
+  .factory('SearchService', require('./search/search.service.js'))
+
+  .factory('ReportService', require('./report/report.service.js'));

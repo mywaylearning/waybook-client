@@ -62,3 +62,5 @@ app.directive('wayHelpOverlay', require('./help-overlay/help-overlay.directive.j
 app.directive('wayMinimumWords', require('./exploration/results/minimum-words.directive.js'));
 
 app.service('QuotesService', require('./quotes/quotes.service.js'));
+
+app.directive('wayContactItem', require('./contact/contactItem.directive.js'));

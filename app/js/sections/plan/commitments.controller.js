@@ -1,4 +1,4 @@
-function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
+function CommitmentsController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
   'ngInject';
 
   var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -55,4 +55,4 @@ function PlanController($scope, $state, $stateParams, posts, tags, PostService, 
   };
 }
 
-module.exports = PlanController;
+module.exports = CommitmentsController;

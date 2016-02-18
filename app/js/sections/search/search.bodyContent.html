@@ -53,14 +53,7 @@
       <div class="list item-as-link" way-post-view-compact ng-repeat="post in viewData.results.posts | orderBy: '-created'" post="post" user="app.user" ng-if="viewData.results.posts.length" ui-sref="app.main.post({id: post.id})"></div>
 
       <div class="list" ng-repeat="contact in viewData.results.contacts track by contact.id | orderBy: 'firstName'" ng-if="viewData.results.contacts.length">
-        <div class="item item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
-          <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
-          <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-          <div class="tags-on-block">
-            <div class="item-tag" ng-repeat="tag in contact.tags">#{{tag.text}}</div>
-          </div>
-          <p>{{contact.email}}</p>
-        </div>
+        <way-contact-item contact="contact"></way-contact-item>
       </div>
 
       <!-- No results  -->

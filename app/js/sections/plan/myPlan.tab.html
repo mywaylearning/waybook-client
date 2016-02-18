@@ -1,0 +1,36 @@
+<ion-view title="My plan">
+  <ion-content padding="true">
+    <div class="small-on-wide">
+      <div class="card">
+        <div class="item item-body">
+          <div class="text-center">
+            <button class="button button-positive icon-left ion-document-text" ng-click="print()">Print / Save as PDF</button>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="report.goals.length" ng-repeat="post in report.goals | orderBy: '-created'">
+        <way-post-view post="post" user="app.user" owner="app.user"></way-post-view>
+      </div>
+
+      <div ng-if="report.habits.length" ng-repeat="post in report.habits | orderBy: '-created'">
+        <way-post-view post="post" user="app.user" owner="app.user"></way-post-view>
+      </div>
+
+      <div ng-if="report.discoveries.length" ng-repeat="post in report.discoveries | orderBy: '-created'">
+        <way-post-view post="post" user="app.user" owner="app.user"></way-post-view>
+      </div>
+
+      <div ng-if="report.resources.length" ng-repeat="post in report.resources | orderBy: '-created'">
+        <way-post-view post="post" user="app.user"></way-post-view>
+      </div>
+
+      <div class="list" ng-if="report.contacts.length" ng-repeat="contact in report.contacts | orderBy: '-created'">
+        <way-contact-item contact="contact"></way-contact-item>
+      </div>
+
+
+
+    </div>
+  </ion-content>
+</ion-view>

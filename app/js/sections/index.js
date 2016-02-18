@@ -12,7 +12,7 @@ app.controller('MainPostController', require('./main/post.controller.js'));
 app.controller('ExploreController', require('./explore/explore.controller.js'));
 app.controller('ExplorationController', require('./explore/exploration.controller.js'));
 
-app.controller('PlanController', require('./plan/plan.controller.js'));
+app.controller('CommitmentsController', require('./plan/commitments.controller.js'));
 app.directive('wayTimelineScroll', require('./plan/timelineScroll.directive.js'));
 
 app.controller('UniteController', require('./unite/unite.controller.js'));

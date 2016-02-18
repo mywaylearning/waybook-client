@@ -363,12 +363,27 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan', {
-    loading: true,
-    cache: false,
-    url: '/plan?tag',
+    abstract: true,
+    url: '/plan',
     views: {
       'bodyContent': {
-        controller: 'PlanController'
+        templateUrl: 'sections/plan/plan.bodyContent.html',
+        controller: function($scope, $state) {
+          $scope.goTab = function(tab) {
+            $state.go('app.plan.' + tab);
+          };
+        }
+      }
+    }
+  })
+
+  .state('app.plan.commitments', {
+    loading: true,
+    cache: false,
+    url: '/commitments?tag',
+    views: {
+      'commitments-tab': {
+        controller: 'CommitmentsController'
       }
     },
     resolve: {
@@ -377,6 +392,35 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       },
       posts: function(PostService, $stateParams) {
         return PostService.timelineByTag($stateParams.tag);
+      }
+    }
+  })
+
+  .state('app.plan.my-plan', {
+    url: '/my-plan',
+    views: {
+      'my-plan-tab': {
+        templateUrl: 'sections/plan/myPlan.tab.html',
+        controller: function($scope, $cordovaPrinter, report) {
+          $scope.report = report.plain();
+
+          $scope.print = function() {
+            var page = location.href;
+
+            if (ionic.Platform.isWebView()) {
+              if ($cordovaPrinter.isAvailable()) {
+                $cordovaPrinter.print(page);
+              }
+            } else {
+              window.print();
+            }
+          };
+        }
+      }
+    },
+    resolve: {
+      report: function(ReportService) {
+        return ReportService.collection();
       }
     }
   })

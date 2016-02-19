@@ -405,6 +405,8 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
         controller: function($scope, $cordovaPrinter, report) {
           $scope.report = report.plain();
 
+          $scope.now = new Date();
+
           $scope.print = function() {
             var page = location.href;
 

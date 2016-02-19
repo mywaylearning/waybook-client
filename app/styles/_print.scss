@@ -9,6 +9,24 @@
     position: relative;
   }
 
+  .bar-header {
+    display: none !important;
+
+    .left-buttons {
+      display: none !important;
+    }
+  }
+
+  .my-plan-heading {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .has-subheader {
+    top: 0;
+  }
+
   .pane, .view {
     position: relative;
   }
@@ -36,6 +54,12 @@
   }
   .overflow-scroll {
     overflow: auto;
+  }
+
+  .block-title {
+    .text {
+      background-color: white !important;
+    }
   }
 
 

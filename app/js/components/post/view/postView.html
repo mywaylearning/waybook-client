@@ -20,7 +20,7 @@
     <img ng-src="{{post.image}}" />
   </div>
   <div class="item item-body">
-    <div class="post-content" ng-if="post.content" ng-bind-html="post.content | linky:'_blank'" read-more="{{state.name}}"></div>
+    <div class="post-content" ng-class="{ 'has-results': post.results }" ng-if="post.content" ng-bind-html="post.content | linky:'_blank'" read-more="{{state.name}}"></div>
 
     <div ng-if="post.results" ng-init="exploration = post.results[0]; results = post.results[1]">
       <h3 class="results-title text-center">{{ exploration.name }} - My Results</h3>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div ng-if="!post.originalShared && post.sharedFrom">
+    <div ng-if="(!post.originalShared || !post.results) && post.sharedFrom">
       <p class="original-post-deleted">Original post has been deleted.</p>
     </div>
 

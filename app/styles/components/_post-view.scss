@@ -64,4 +64,8 @@
 .post-content {
   white-space: pre-line;
   position: relative;
+
+  &.has-results {
+    margin-bottom: 20px;
+  }
 }

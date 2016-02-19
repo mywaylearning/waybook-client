@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div ng-if="(!post.originalShared || !post.results) && post.sharedFrom">
+    <div ng-if="!post.originalShared && !post.results && post.sharedFrom">
       <p class="original-post-deleted">Original post has been deleted.</p>
     </div>
 

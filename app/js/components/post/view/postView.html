@@ -22,10 +22,22 @@
   <div class="item item-body">
     <div class="post-content" ng-if="post.content" ng-bind-html="post.content | linky:'_blank'" read-more="{{state.name}}"></div>
 
-    <div ng-if="post.results">
-      <h3 class="results-title text-center">{{ post.results[0].name }} - My Results</h3>
-      <way-big5-result ng-if="post.results[0].resultDisplayType == 'bars'" exploration="post.results[0]" results="post.results[1]" from-post="true"></way-big5-result>
-      <way-asq-result ng-if="post.results[0].resultDisplayType == 'pie'" exploration="post.results[0]" results="post.results[1]" from-post="true"></way-asq-result>
+    <div ng-if="post.results" ng-init="exploration = post.results[0]; results = post.results[1]">
+      <h3 class="results-title text-center">{{ exploration.name }} - My Results</h3>
+      <way-big5-result ng-if="exploration.resultDisplayType == 'bars'" exploration="exploration" results="results" from-post="true"></way-big5-result>
+      <way-asq-result ng-if="exploration.resultDisplayType == 'pie'" exploration="exploration" results="results" from-post="true"></way-asq-result>
+      <div ng-if="exploration.pattern === 'heatmap'" class="heatmap-result">
+        <div class="list">
+          <div ng-repeat="(category, answers) in results">
+            <div class="item item-divider">{{ category }}</div>
+            <div class="item item-body">
+              <ol>
+                <li ng-repeat="answer in answers">{{ answer }}<span ng-if="!$last"> - </span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div ng-if="!post.originalShared && post.sharedFrom">

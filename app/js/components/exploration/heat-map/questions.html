@@ -1,5 +1,6 @@
 <ion-content class="padding has-header">
   <div class="small-on-wide">
+    <button class="button button-positive button-block" ng-click="postResult()">Post your results</button>
     <div class="list">
       <way-exploration-question-heat-map ng-repeat="question in exploration.questions | orderBy: 'order'" exploration="exploration" question="question"></way-exploration-question-heat-map>
     </div>

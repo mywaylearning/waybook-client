@@ -53,7 +53,7 @@
   <div ng-if="post.postType === 'goal' && !hideShareButton" class="item item-body">
     <p>Status:
       <strong ng-if="user.id !== post.userId">{{post.gStatus}}</strong>
-      <button ng-if="user.id === post.userId" class="button button-small button-light icon-right ion-arrow-down-b button-status" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
+      <button ng-if="user.id === post.userId" class="button button-small button-light button-status" ng-class="{'icon-right ion-arrow-down-b': !viewMode}" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
     <p ng-if="post.gRecurringEnabled">
       Your goal is to do this <strong>{{post.occurrences}} times</strong> on a <strong>{{post.gRecurringRecurrence}}</strong> basis.
     </p>

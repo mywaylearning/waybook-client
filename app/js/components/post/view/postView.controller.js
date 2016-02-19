@@ -21,6 +21,9 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
 
 
   $scope.showPopoverStatus = function($event) {
+    if ($scope.viewMode) {
+      return;
+    }
     $ionicPopover.fromTemplateUrl('components/post/view/post-view-status.html', {
       scope: $scope
     }).then(function(popover) {

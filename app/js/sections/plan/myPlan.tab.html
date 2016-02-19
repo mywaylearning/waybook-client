@@ -9,27 +9,40 @@
         </div>
       </div>
 
-      <div ng-if="report.goals.length" ng-repeat="post in report.goals | orderBy: '-created'">
-        <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+      <div ng-if="report.discoveries.length">
+        <h4>Discoveries</h4>
+        <div ng-repeat="post in report.discoveries | orderBy: '-created'">
+          <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+        </div>
       </div>
 
-      <div ng-if="report.habits.length" ng-repeat="post in report.habits | orderBy: '-created'">
-        <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+      <div ng-if="report.goals.length">
+        <h4>Goals</h4>
+        <div ng-repeat="post in report.goals | orderBy: '-created'">
+          <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+        </div>
       </div>
 
-      <div ng-if="report.discoveries.length" ng-repeat="post in report.discoveries | orderBy: '-created'">
-        <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+      <div ng-if="report.habits.length">
+        <h4>Habits</h4>
+        <div ng-repeat="post in report.habits | orderBy: '-created'">
+          <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+        </div>
       </div>
 
-      <div ng-if="report.resources.length" ng-repeat="post in report.resources | orderBy: '-created'">
-        <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+      <div ng-if="report.contacts.length">
+        <h4>Supporters</h4>
+        <div class="list" ng-repeat="contact in report.contacts | orderBy: '-created'">
+          <way-contact-item contact="contact"></way-contact-item>
+        </div>
       </div>
 
-      <div class="list" ng-if="report.contacts.length" ng-repeat="contact in report.contacts | orderBy: '-created'">
-        <way-contact-item contact="contact"></way-contact-item>
+      <div ng-if="report.resources.length">
+        <h4>Resources</h4>
+        <div ng-repeat="post in report.resources | orderBy: '-created'">
+          <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+        </div>
       </div>
-
-
 
     </div>
   </ion-content>

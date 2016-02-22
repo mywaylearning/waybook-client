@@ -402,7 +402,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       'my-plan-tab': {
         templateUrl: 'sections/plan/myPlan.tab.html',
-        controller: function($scope, $cordovaPrinter, report) {
+        controller: function($scope, $cordovaPrinter, $state, report) {
           $scope.report = report.plain();
 
           $scope.now = new Date();
@@ -417,6 +417,28 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             } else {
               window.print();
             }
+          };
+
+          $scope.goTo = function(section, type) {
+            var state;
+            var params;
+
+            function backToMyPlan() {
+              $state.go('app.plan.my-plan');
+            }
+
+            params = {
+              onCreate: backToMyPlan,
+              onCancel: backToMyPlan
+            };
+
+            if (section === 'main') {
+              state = 'app.main.type';
+              params.type = type;
+            } else {
+              state = section;
+            }
+            $state.go(state, params);
           };
         }
       }

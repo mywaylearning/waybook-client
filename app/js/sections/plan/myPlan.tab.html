@@ -16,38 +16,58 @@
         </div>
       </div>
 
-      <div ng-if="report.discoveries.length">
+      <div ng-class="{'hide-on-print': !report.discoveries.length}">
         <h4 class="block-title"><span class="text">Discoveries</span></h4>
         <div ng-repeat="post in report.discoveries | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
         </div>
+        <div ng-if="!report.discoveries.length" class="text-center">
+          <p>No discoveries yet.</p>
+          <button class="button button-positive button-outline" ng-click="goTo('main', 'discovery')">+ Discovery</button>
+        </div>
       </div>
 
-      <div ng-if="report.goals.length">
+      <div ng-class="{'hide-on-print': !report.goals.length}">
         <h4 class="block-title"><span class="text">Goals</span></h4>
         <div ng-repeat="post in report.goals | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
         </div>
+        <div ng-if="!report.goals.length" class="text-center">
+          <p>No goals yet.</p>
+          <button class="button button-positive button-outline" ng-click="goTo('main', 'goal')">+ Goal</button>
+        </div>
       </div>
 
-      <div ng-if="report.habits.length">
+      <div ng-class="{'hide-on-print': !report.habits.length}">
         <h4 class="block-title"><span class="text">Habits</span></h4>
         <div ng-repeat="post in report.habits | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
         </div>
+        <div ng-if="!report.habits.length" class="text-center">
+          <p>No habits yet.</p>
+          <button class="button button-positive button-outline" ng-click="goTo('main', 'goal')">+ Habit</button>
+        </div>
       </div>
 
-      <div ng-if="report.contacts.length">
+      <div ng-class="{'hide-on-print': !report.contacts.length}">
         <h4 class="block-title"><span class="text">Supporters</span></h4>
         <div class="list" ng-repeat="contact in report.contacts | orderBy: '-created'">
           <way-contact-item contact="contact"></way-contact-item>
         </div>
+        <div ng-if="!report.contacts.length" class="text-center">
+          <p>No supporters yet.</p>
+          <button class="button button-positive button-outline" ng-click="goTo('app.unite.add')">+ Supporter</button>
+        </div>
       </div>
 
-      <div ng-if="report.resources.length">
+      <div ng-class="{'hide-on-print': !report.resources.length}">
         <h4 class="block-title"><span class="text">Resources</span></h4>
         <div ng-repeat="post in report.resources | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
+        </div>
+        <div ng-if="!report.resources.length" class="text-center">
+          <p>No resources yet.</p>
+          <button class="button button-positive button-outline" ng-click="goTo('main', 'resource')">+ Resource</button>
         </div>
       </div>
 

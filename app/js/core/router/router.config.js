@@ -427,16 +427,16 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
               $state.go('app.plan.my-plan');
             }
 
+            params = {
+              onCreate: backToMyPlan,
+              onCancel: backToMyPlan
+            };
+
             if (section === 'main') {
               state = 'app.main.type';
-              params = {
-                type: type,
-                onCreate: backToMyPlan,
-                onCancel: backToMyPlan
-              };
+              params.type = type;
             } else {
               state = section;
-              params = {};
             }
             $state.go(state, params);
           };

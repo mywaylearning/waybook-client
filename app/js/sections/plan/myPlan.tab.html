@@ -8,7 +8,7 @@
       <h3>Current plan - {{ now | date }}</h3>
     </div>
     <div class="small-on-wide">
-      <div class="card hide-on-print">
+      <div class="card my-plan-section hide-on-print">
         <div class="item item-body">
           <div class="text-center">
             <button class="button button-positive icon-left ion-document-text" ng-click="print()">Print / Save as PDF</button>
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div ng-class="{'hide-on-print': !report.discoveries.length}">
+      <div class="my-plan-section" ng-class="{'hide-on-print': !report.discoveries.length}">
         <h4 class="block-title"><span class="text">Discoveries</span></h4>
         <div ng-repeat="post in report.discoveries | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div ng-class="{'hide-on-print': !report.goals.length}">
+      <div class="my-plan-section" ng-class="{'hide-on-print': !report.goals.length}">
         <h4 class="block-title"><span class="text">Goals</span></h4>
         <div ng-repeat="post in report.goals | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <div ng-class="{'hide-on-print': !report.habits.length}">
+      <div class="my-plan-section" ng-class="{'hide-on-print': !report.habits.length}">
         <h4 class="block-title"><span class="text">Habits</span></h4>
         <div ng-repeat="post in report.habits | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div ng-class="{'hide-on-print': !report.contacts.length}">
+      <div class="my-plan-section" ng-class="{'hide-on-print': !report.contacts.length}">
         <h4 class="block-title"><span class="text">Supporters</span></h4>
         <div class="list" ng-repeat="contact in report.contacts | orderBy: '-created'">
           <way-contact-item contact="contact"></way-contact-item>
@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <div ng-class="{'hide-on-print': !report.resources.length}">
+      <div class="my-plan-section" ng-class="{'hide-on-print': !report.resources.length}">
         <h4 class="block-title"><span class="text">Resources</span></h4>
         <div ng-repeat="post in report.resources | orderBy: '-created'">
           <way-post-view post="post" user="app.user" owner="app.user" view-mode="true"></way-post-view>

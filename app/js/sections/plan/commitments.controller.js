@@ -43,7 +43,7 @@ function CommitmentsController($scope, $state, $stateParams, posts, tags, PostSe
       hideOnStateChange: true
     });
 
-    $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true });
+    $state.go('app.plan.commitments', { tag: $scope.selectedTag }, { reload: true });
   };
 
   $scope.createGoal = function(_date) {

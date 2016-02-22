@@ -16,17 +16,16 @@ function AppRun($rootScope, $ionicPlatform, $ionicLoading, QuotesService) {
     }
 
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
-      var template = '<ion-spinner icon="spiral" class="spinner-positive"></ion-spinner>';
+      var loadingOpts = {
+        hideOnStateChange: true
+      };
 
       if (fromState.name === 'public.login') {
-        template = '<div class="quotes"><div class="loading-text"><ion-spinner icon="spiral" class="spinner-positive"></ion-spinner></div><div class="quote">' + QuotesService.getQuote() + '</div></div>';
+        loadingOpts.template = '<div class="quotes"><div class="loading-text"><ion-spinner icon="spiral" class="spinner-positive"></ion-spinner></div><div class="quote">' + QuotesService.getQuote() + '</div></div>';
       }
 
       if (toState.loading) {
-        $ionicLoading.show({
-          template: template,
-          hideOnStateChange: true
-        });
+        $ionicLoading.show(loadingOpts);
       }
     });
   });

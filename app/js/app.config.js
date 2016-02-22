@@ -96,6 +96,10 @@ angular.module('app.config', [])
   'resource': 'Resource'
 })
 
+.constant('$ionicLoadingConfig', {
+  template: '<ion-spinner icon="spiral" class="spinner-positive"></ion-spinner>'
+})
+
 .constant('DEFAULT_PER_PAGE', 20)
 
 .config(AppConfig);

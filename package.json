@@ -110,8 +110,10 @@
     "build:staging": "npm run build:lodash && NODE_ENV=staging APP_ENV=web gulp prod",
     "build:production": "npm run build:lodash && NODE_ENV=production APP_ENV=web gulp prod",
     "start": "npm run build:lodash && APP_ENV=web gulp dev",
-    "android:staging": "npm run build:hybrid:staging && ionic run android",
-    "android:production": "npm run build:hybrid:production && ionic run android"
+    "emulate:android:staging": "npm run build:hybrid:staging && ionic run android",
+    "emulate:android:production": "npm run build:hybrid:production && ionic run android",
+    "build:android:staging": "npm run build:hybrid:staging && ionic build android",
+    "build:android:production": "npm run build:hybrid:production && ionic build android"
   },
   "cordovaPlugins": [
     {

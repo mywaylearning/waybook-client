@@ -1,4 +1,4 @@
-<div class="item item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})">
+<div class="item item-avatar" ng-class="{'item-as-link': !readOnly}" ng-click="openContact(contact.id)">
   <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
   <h2>{{contact.firstName}} {{contact.lastName}}</h2>
   <div class="tags-on-block">

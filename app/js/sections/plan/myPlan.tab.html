@@ -51,8 +51,8 @@
 
       <div class="my-plan-section" ng-class="{'hide-on-print': !report.contacts.length}">
         <h4 class="block-title"><span class="text">Supporters</span></h4>
-        <div class="list" ng-repeat="contact in report.contacts | orderBy: '-created'">
-          <way-contact-item contact="contact"></way-contact-item>
+        <div class="list" ng-repeat="contact in report.contacts | orderBy: '-createdAt'">
+          <way-contact-item contact="contact" read-only="true"></way-contact-item>
         </div>
         <div ng-if="!report.contacts.length" class="text-center">
           <p>No supporters yet.</p>

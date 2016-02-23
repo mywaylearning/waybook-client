@@ -129,6 +129,7 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
+    "cordova-plugin-inappbrowser",
     {
       "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
       "id": "cordova-plugin-googleplus"

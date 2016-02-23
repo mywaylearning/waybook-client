@@ -53,7 +53,7 @@
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inappbrowser"
+            "id": "cordova-plugin-inappbrowser@~1.2.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -65,9 +65,7 @@
             "subdir": "."
         },
         "is_top_level": true,
-        "variables": {
-            "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
-        }
+        "variables": {}
     },
     "de.appplant.cordova.plugin.printer": {
         "source": {

@@ -53,7 +53,6 @@ angular.module('waybook', [
 .factory('app', require('./app.service.js'))
 .run(require('./app.run.js'));
 
-
 require('./core');
 require('./components');
 require('./sections');

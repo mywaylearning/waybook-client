@@ -1,14 +1,23 @@
 'use strict';
 
-import gulp        from 'gulp';
+import gulp from 'gulp';
 import runSequence from 'run-sequence';
 
-gulp.task('prod', ['clean'], function(cb) {
+/**
+ * Gulp task to manage production build
+ */
+gulp.task('prod', ['clean'], function(callback) {
 
-  cb = cb || function() {};
+    callback = callback || function() {};
 
-  global.isProd = true;
+    global.isProd = true;
 
-  runSequence('views', ['styles', 'images', 'fonts', 'browserify'], 'revision', 'revreplace', 'favicon', 'gzip', cb);
-
+    runSequence(
+        'views', ['styles', 'images', 'fonts', 'browserify'],
+        'revision',
+        'revreplace',
+        'favicon',
+        // 'gzip',
+        callback
+    );
 });

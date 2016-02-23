@@ -4,7 +4,13 @@ function linkPreview() {
     scope: {
       link: '='
     },
-    templateUrl: 'components/common/linkPreview.html'
+    templateUrl: 'components/common/linkPreview.html',
+    controller: function($scope) {
+      'ngInject';
+      $scope.openExternalUrl = function(url) {
+        window.open(url, '_blank');
+      };
+    }
   };
 }
 

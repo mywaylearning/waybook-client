@@ -49,6 +49,10 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
     }
   };
 
+  $scope.openExternalUrl = function(url) {
+    window.open(url, '_blank');
+  };
+
 
   $scope.editStatus = function(post, status) {
     var previousStatus = $scope.post.gStatus;

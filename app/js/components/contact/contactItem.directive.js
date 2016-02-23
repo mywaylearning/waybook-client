@@ -7,6 +7,7 @@ function contactItem() {
     },
     templateUrl: 'components/contact/contactItem.html',
     controller: function($scope, $state) {
+      'ngInject';
       $scope.openContact = function(id) {
         if ($scope.readOnly) {
           return;

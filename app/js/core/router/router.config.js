@@ -402,17 +402,20 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
     views: {
       'my-plan-tab': {
         templateUrl: 'sections/plan/myPlan.tab.html',
-        controller: function($scope, $cordovaPrinter, $state, report) {
+        controller: function($scope, $cordovaPrinter, $state, $ionicPopup, report) {
           $scope.report = report.plain();
 
           $scope.now = new Date();
 
           $scope.print = function() {
-            var page = location.href;
-
             if (ionic.Platform.isWebView()) {
               if ($cordovaPrinter.isAvailable()) {
-                $cordovaPrinter.print(page);
+                $cordovaPrinter.print(angular.element(document).find('html').html());
+              } else {
+                $ionicPopup.alert({
+                  title: 'Unable to save/print!',
+                  template: 'There\'s no printing service available in your device'
+                });
               }
             } else {
               window.print();

@@ -32,6 +32,9 @@ function AppConfig($sceDelegateProvider, $ionicConfigProvider, gravatarServicePr
   // Ionic configuration
   $ionicConfigProvider.views.transition(transitionType);
   $ionicConfigProvider.navBar.alignTitle('center');
+
+  // Tabs position
+  $ionicConfigProvider.tabs.position('bottom');
 }
 
 angular.module('app.config', [])

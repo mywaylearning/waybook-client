@@ -60,4 +60,6 @@ require('./core');
 require('./components');
 require('./sections');
 
-angular.bootstrap(document, ['waybook']);
+angular.bootstrap(document, ['waybook'], {
+  strictDi: true
+});

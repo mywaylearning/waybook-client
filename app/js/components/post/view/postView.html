@@ -77,7 +77,7 @@
       Files
     </div>
     <div class="list">
-      <a href="{{file.url}}" target="_blank" class="item" ng-repeat="file in post.files">
+      <a ng-href="#" ng-click="openExternalUrl(file.url) class="item" ng-repeat="file in post.files">
           <h2>{{file.filename}}</h2>
           <p>{{file.mimetype}} | {{file.size / 1000 | number:2}} kB</p>
       </a>

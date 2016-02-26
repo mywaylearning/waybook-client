@@ -24,6 +24,7 @@
 
     <div ng-if="post.results" ng-init="exploration = post.results[0]; results = post.results[1]">
       <h3 class="results-title text-center">{{ exploration.name }} - My Results</h3>
+      <p>{{ exploration.description }}</p>
       <way-big5-result ng-if="exploration.resultDisplayType == 'bars'" exploration="exploration" results="results" from-post="true"></way-big5-result>
       <way-asq-result ng-if="exploration.resultDisplayType == 'pie'" exploration="exploration" results="results" from-post="true"></way-asq-result>
       <div ng-if="exploration.pattern === 'heatmap'" class="heatmap-result">

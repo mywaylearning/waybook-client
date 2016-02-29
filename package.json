@@ -92,7 +92,7 @@
   "scripts": {
     "DEPLOY-PRODUCTION": "-----------------------------------------------------",
     "deploy:production:gzip:css": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip'  --cache-control 'max-age 86400' --exclude '*' --include '*.css.gz'",
-    "deploy:production:gzip:html": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.html.gz'",
+    "deploy:production:gzip:html": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'no-cache' --exclude '*' --include '*.html'",
     "deploy:production:gzip:js": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.js.gz'",
     "deploy:production:all": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --exclude '.gz*'",
     "deploy:production:delete": "aws s3 sync www/ s3://way.me --delete --region us-west-2",
@@ -115,7 +115,7 @@
     "emulate:android:staging": "npm run build:hybrid:staging && ionic run android",
     "emulate:android:production": "npm run build:hybrid:production && ionic run android",
     "build:android:staging": "npm run build:hybrid:staging && ionic build android",
-    "build:android:production": "npm run build:hybrid:production && ionic build android"
+    "build:android:production": "npm run build:hybrid:production && ionic build android --release && ./distribute.sh"
   },
   "cordovaPlugins": [
     {

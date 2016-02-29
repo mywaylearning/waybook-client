@@ -21,6 +21,7 @@
 // Import components styles
 @import "components/post-form";
 @import "components/post-view";
+@import "components/post-view-compact";
 @import "components/post-reshared";
 @import "components/feed";
 @import "components/link-preview";
@@ -34,6 +35,7 @@
 @import "components/help-overlay";
 @import "components/results";
 @import "components/quotes";
+@import "components/heatmap-result";
 
 // Import section styles
 @import "sections/unite";
@@ -46,3 +48,6 @@
 @import "sections/sponsors";
 @import "sections/guideme";
 @import "sections/search";
+@import "sections/my-plan";
+
+@import "print";

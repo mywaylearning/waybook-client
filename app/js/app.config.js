@@ -32,6 +32,9 @@ function AppConfig($sceDelegateProvider, $ionicConfigProvider, gravatarServicePr
   // Ionic configuration
   $ionicConfigProvider.views.transition(transitionType);
   $ionicConfigProvider.navBar.alignTitle('center');
+
+  // Tabs position
+  $ionicConfigProvider.tabs.position('bottom');
 }
 
 angular.module('app.config', [])
@@ -94,6 +97,10 @@ angular.module('app.config', [])
   'goal': 'Goal',
   'discovery': 'Discovery',
   'resource': 'Resource'
+})
+
+.constant('$ionicLoadingConfig', {
+  template: '<ion-spinner icon="spiral" class="spinner-positive"></ion-spinner>'
 })
 
 .constant('DEFAULT_PER_PAGE', 20)

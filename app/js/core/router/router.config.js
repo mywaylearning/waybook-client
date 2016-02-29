@@ -363,12 +363,27 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
   })
 
   .state('app.plan', {
-    loading: true,
-    cache: false,
-    url: '/plan?tag',
+    abstract: true,
+    url: '/plan',
     views: {
       'bodyContent': {
-        controller: 'PlanController'
+        templateUrl: 'sections/plan/plan.bodyContent.html',
+        controller: function($scope, $state) {
+          $scope.goTab = function(tab) {
+            $state.go('app.plan.' + tab);
+          };
+        }
+      }
+    }
+  })
+
+  .state('app.plan.commitments', {
+    loading: true,
+    cache: false,
+    url: '/commitments?tag',
+    views: {
+      'commitments-tab': {
+        controller: 'CommitmentsController'
       }
     },
     resolve: {
@@ -377,6 +392,63 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
       },
       posts: function(PostService, $stateParams) {
         return PostService.timelineByTag($stateParams.tag);
+      }
+    }
+  })
+
+  .state('app.plan.my-plan', {
+    loading: true,
+    url: '/my-plan',
+    views: {
+      'my-plan-tab': {
+        templateUrl: 'sections/plan/myPlan.tab.html',
+        controller: function($scope, $cordovaPrinter, $state, $ionicPopup, report) {
+          $scope.report = report.plain();
+
+          $scope.now = new Date();
+
+          $scope.print = function() {
+            if (ionic.Platform.isWebView()) {
+              if ($cordovaPrinter.isAvailable()) {
+                $cordovaPrinter.print(angular.element(document).find('html').html());
+              } else {
+                $ionicPopup.alert({
+                  title: 'Unable to save/print!',
+                  template: 'There\'s no printing service available in your device'
+                });
+              }
+            } else {
+              window.print();
+            }
+          };
+
+          $scope.goTo = function(section, type) {
+            var state;
+            var params;
+
+            function backToMyPlan() {
+              $state.go('app.plan.my-plan');
+            }
+
+            params = {
+              onCreate: backToMyPlan,
+              onCancel: backToMyPlan
+            };
+
+            if (section === 'main') {
+              state = 'app.main.type';
+              params.type = type;
+            } else {
+              state = section;
+            }
+            $state.go(state, params);
+          };
+        }
+      }
+    },
+    resolve: {
+      report: function(ReportService) {
+        return ReportService.collection();
       }
     }
   })

@@ -1,4 +1,4 @@
-function PlanController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
+function CommitmentsController($scope, $state, $stateParams, posts, tags, PostService, $ionicLoading, $ionicHistory) {
   'ngInject';
 
   var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -43,7 +43,7 @@ function PlanController($scope, $state, $stateParams, posts, tags, PostService, 
       hideOnStateChange: true
     });
 
-    $state.go('app.plan', { tag: $scope.selectedTag }, { reload: true });
+    $state.go('app.plan.commitments', { tag: $scope.selectedTag }, { reload: true });
   };
 
   $scope.createGoal = function(_date) {
@@ -55,4 +55,4 @@ function PlanController($scope, $state, $stateParams, posts, tags, PostService, 
   };
 }
 
-module.exports = PlanController;
+module.exports = CommitmentsController;

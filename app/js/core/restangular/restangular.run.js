@@ -33,6 +33,7 @@ function RestangularRun($rootScope, $state, $http, Restangular, auth, authStore,
 
     case 400:
     case 409:
+    case 422:
       handleKnownErrors(response, deferred);
       stopErrorPropagation = false;
       break;

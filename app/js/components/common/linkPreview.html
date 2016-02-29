@@ -1,4 +1,4 @@
-<a href="{{link.url}}" target="_blank" class="link-preview-link" ng-class="{'link-preview-image-landscape': link.landscape}">
+<a ng-href="#" ng-click="openExternalUrl(link.url)" class="link-preview-link" ng-class="{'link-preview-image-landscape': link.landscape}">
   <span ng-if="link.image" ng-class="{'link-preview-image-container': link.imageType == 'image', 'link-preview-icon-container': link.imageType == 'icon'}">
     <img ng-src="{{link.image}}" class="link-preview-image" border="0" />
   </span>

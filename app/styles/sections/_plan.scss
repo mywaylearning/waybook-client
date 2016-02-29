@@ -67,4 +67,14 @@
       z-index: -1;
     }
   }
+
+  .post-image {
+    float: left;
+    width: 100px;
+    margin-right: 15px;
+
+    img {
+      max-width: 100%;
+    }
+  }
 }

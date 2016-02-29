@@ -27,6 +27,7 @@ require('highcharts-solidgauge');
 require('highcharts-ng');
 require('state-nav-back-button');
 require('angular-recaptcha');
+require('ngCordova');
 
 angular.module('waybook', [
   'ionic',
@@ -46,16 +47,18 @@ angular.module('waybook', [
   'segmentio',
   'highcharts-ng',
   'stateBackButtonIonic',
-  'vcRecaptcha'
+  'vcRecaptcha',
+  'ngCordova'
 ])
 
 .controller('AppController', require('./app.controller.js'))
 .factory('app', require('./app.service.js'))
 .run(require('./app.run.js'));
 
-
 require('./core');
 require('./components');
 require('./sections');
 
-angular.bootstrap(document, ['waybook']);
+angular.bootstrap(document, ['waybook'], {
+  strictDi: true
+});

@@ -90,52 +90,71 @@
     "watchify": "^3.2.3"
   },
   "scripts": {
+    "DEPLOY-PRODUCTION": "-----------------------------------------------------",
     "deploy:production:gzip:css": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip'  --cache-control 'max-age 86400' --exclude '*' --include '*.css.gz'",
-    "deploy:production:gzip:html": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.html.gz'",
+    "deploy:production:gzip:html": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'no-cache' --exclude '*' --include '*.html'",
     "deploy:production:gzip:js": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.js.gz'",
     "deploy:production:all": "aws s3 sync www/ s3://way.me --acl public-read --region us-west-2 --exclude '.gz*'",
     "deploy:production:delete": "aws s3 sync www/ s3://way.me --delete --region us-west-2",
     "deploy:production": "npm run deploy:production:all && npm run deploy:production:gzip:css && npm run deploy:production:gzip:js && npm run deploy:production:gzip:html && npm run deploy:production:delete",
+    "DEPLOY-STAGING": "--------------------------------------------------------",
     "deploy:uidev:gzip:css": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --content-encoding 'gzip'  --cache-control 'max-age 86400' --exclude '*' --include '*.css.gz'",
-    "deploy:uidev:gzip:html": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.html.gz'",
+    "deploy:uidev:gzip:html": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --cache-control 'no-cache' --exclude '*' --include '*.html'",
     "deploy:uidev:gzip:js": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --content-encoding 'gzip' --cache-control 'max-age 86400' --exclude '*' --include '*.js.gz'",
     "deploy:uidev:all": "aws s3 sync www/ s3://uidev.way.me --acl public-read --region us-west-2 --exclude '*.gz'",
     "deploy:uidev:delete": "aws s3 sync www/ s3://uidev.way.me --delete --region us-west-2",
     "deploy:staging": "npm run deploy:uidev:all && npm run deploy:uidev:gzip:css && npm run deploy:uidev:gzip:js && npm run deploy:uidev:gzip:html && npm run deploy:uidev:delete",
-    "build:lodash": "grep -o -C 0 '_\\.[^(]*' node_modules/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o app/js/components/lodash.custom.min.js -p include={}",
     "preflight": "./scripts/flight-check",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "BUILDS": "----------------------------------------------------------------",
+    "build:lodash": "grep -o -C 0 '_\\.[^(]*' node_modules/restangular/dist/restangular.js | sort -u | sed -e 's/_\\.//' | paste -d, -s - | xargs -I\"{}\" -t lodash -s -o app/js/components/lodash.custom.min.js -p include={}",
     "build:hybrid:staging": "npm run build:lodash && NODE_ENV=staging gulp hybrid",
     "build:hybrid:production": "npm run build:lodash && NODE_ENV=production gulp hybrid",
     "build:staging": "npm run build:lodash && NODE_ENV=staging APP_ENV=web gulp prod",
     "build:production": "npm run build:lodash && NODE_ENV=production APP_ENV=web gulp prod",
     "start": "npm run build:lodash && APP_ENV=web gulp dev",
-    "android:staging": "npm run build:hybrid:staging && ionic run android"
+    "emulate:android:staging": "npm run build:hybrid:staging && ionic run android",
+    "emulate:android:production": "npm run build:hybrid:production && ionic run android",
+    "build:android:staging": "npm run build:hybrid:staging && ionic build android",
+    "build:android:production": "npm run build:hybrid:production && ionic build android --release && ./distribute.sh",
+    "TESTS": "----------------------------------------------------------------",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "cordovaPlugins": [
+    {
+      "id": "cordova-plugin-facebook4",
+      "locator": "cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "1514679575427350",
+        "APP_NAME": "Waybook"
+      }
+    },
     "cordova-plugin-device",
     "cordova-plugin-console",
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
+    "cordova-plugin-inappbrowser",
     {
-      "variables": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
-      },
       "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
       "id": "cordova-plugin-googleplus"
     },
     {
-      "variables": {
-        "APP_ID": "1514679575427350",
-        "APP_NAME": "Waybook"
-      },
-      "locator": "cordova-plugin-facebook4",
-      "id": "cordova-plugin-facebook4"
+      "locator": "https://github.com/katzer/cordova-plugin-printer.git",
+      "id": "de.appplant.cordova.plugin.printer"
     }
   ],
   "cordovaPlatforms": [
     "android",
-    "ios"
+    "ios",
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ]
 }

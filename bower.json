@@ -15,6 +15,7 @@
     "ment.io": "~0.9.9",
     "ng-tags-input": "https://github.com/igorprado/ngTagsInput-bower/archive/v3.0.2.tar.gz",
     "hello": "~1.9.4",
-    "ng-segmentio": "https://github.com/igorprado/ng-segmentio/archive/improve-page-call.zip"
+    "ng-segmentio": "https://github.com/igorprado/ng-segmentio/archive/improve-page-call.zip",
+    "ngCordova": "~0.1.24-alpha"
   }
 }

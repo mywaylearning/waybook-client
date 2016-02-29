@@ -48,9 +48,24 @@
   .tab-item {
     font-size: 14px !important;
   }
+
+  .results-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .original-post-deleted {
+    font-style: italic;
+    color: $assertive;
+  }
 }
 
 .post-content {
   white-space: pre-line;
   position: relative;
+
+  &.has-results {
+    margin-bottom: 20px;
+  }
 }

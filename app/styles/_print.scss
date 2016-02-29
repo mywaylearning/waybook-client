@@ -1,0 +1,96 @@
+// All styles for a better printing
+@media print {
+
+  body {
+    overflow: auto;
+  }
+
+  .view-container {
+    position: relative;
+  }
+
+  .bar-header {
+    display: none !important;
+
+    .left-buttons {
+      display: none !important;
+    }
+  }
+
+  .my-plan-heading {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .has-subheader {
+    top: 0;
+  }
+
+  .pane, .view {
+    position: relative;
+  }
+
+  ion-side-menu {
+    display: none;
+  }
+
+  ion-side-menu-content {
+    transform: translate3d(0, 0, 0);
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  ion-content {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .scroll-content {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .overflow-scroll {
+    overflow: auto;
+  }
+
+  .block-title {
+    .text {
+      background-color: white !important;
+    }
+  }
+
+
+  way-post-view {
+    .share {
+      display: none;
+    }
+
+    .post-actions {
+      display: none;
+    }
+
+    .item-tags {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+
+    .list {
+      break-inside: avoid-page;
+      border: 1px solid #404040;
+      box-shadow: none;
+      padding: 0;
+    }
+  }
+
+  .hide-on-print {
+    display: none;
+  }
+
+  way-comment {
+    display: none;
+  }
+}

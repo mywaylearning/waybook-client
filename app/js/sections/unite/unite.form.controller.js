@@ -1,4 +1,4 @@
-function UniteDetailController($scope, $state, $q, $timeout, $stateParams, contact, $ionicHistory, ContactService, TagService) {
+function UniteDetailController($scope, $state, $q, $timeout, $stateParams, $ionicPopup, contact, $ionicHistory, ContactService, TagService) {
   'ngInject';
   var baseVoice = {
     number: ''
@@ -72,6 +72,11 @@ function UniteDetailController($scope, $state, $q, $timeout, $stateParams, conta
       } else {
         ContactService.create($scope.contact).then(function() {
           afterSave();
+        }).catch(function(err) {
+          $ionicPopup.alert({
+            title: err.name,
+            template: err.message
+          });
         });
       }
     }, 10);

@@ -1,6 +1,11 @@
 function PostViewController($scope, $state, $timeout, PostService, $ionicPopover, $ionicPopup, $ionicModal) {
   'ngInject';
   var _userIsOwner = $scope.user.id === $scope.post.userId;
+
+  if (!$scope.post.WaybookUser && $scope.owner) {
+    $scope.post.WaybookUser = $scope.owner;
+  }
+
   $scope.state = $state.current;
 
   $scope.posts = $scope.$parent.$parent.posts;
@@ -16,6 +21,9 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
 
 
   $scope.showPopoverStatus = function($event) {
+    if ($scope.viewMode) {
+      return;
+    }
     $ionicPopover.fromTemplateUrl('components/post/view/post-view-status.html', {
       scope: $scope
     }).then(function(popover) {
@@ -39,6 +47,10 @@ function PostViewController($scope, $state, $timeout, PostService, $ionicPopover
         $scope.post.save();
       }
     }
+  };
+
+  $scope.openExternalUrl = function(url) {
+    window.open(url, '_blank');
   };
 
 

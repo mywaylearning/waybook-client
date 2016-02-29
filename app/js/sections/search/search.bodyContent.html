@@ -49,31 +49,11 @@
   </form>
   <ion-content padding="true" class="has-subheader">
     <div class="small-on-wide">
-      <div class="list item-as-link" ng-repeat="post in viewData.results.posts" ng-if="viewData.results.posts.length" ui-sref="app.main.post({id: post.id})">
-        <div class="item item-avatar" ng-init="user = post.WaybookUser || app.user">
-          <img gravatar-src="'{{user.email}}'" gravatar-size="80" gravatar-default="mm">
-          <h2>{{user.firstName}} {{user.lastName}}</h2>
-          <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
-          <div class="tags-on-block">
-            <div class="item-tag" ng-repeat="tag in post.systemTags">#{{tag}}</div><!--
-            --><div class="item-tag" ng-repeat="tag in post.tags">#{{tag}}</div>
-          </div>
-        </div>
-        <div class="item item-body">
-          <p class="post-dates">{{post.gStartDate | date: 'MMM yyyy'}}<span ng-if="post.gStartDate"> - </span>{{post.gEndDate | date: 'MMM yyyy'}}</p>
-          <div ng-bind-html="post.content"></div>
-        </div>
-      </div>
+
+      <div class="list item-as-link" way-post-view-compact ng-repeat="post in viewData.results.posts | orderBy: '-created'" post="post" user="app.user" ng-if="viewData.results.posts.length" ui-sref="app.main.post({id: post.id})"></div>
 
       <div class="list" ng-repeat="contact in viewData.results.contacts track by contact.id | orderBy: 'firstName'" ng-if="viewData.results.contacts.length">
-        <div class="item item-avatar item-as-link" ui-sref="app.unite.contact({contactId:contact.id})" on-hold="showMenu(contact)">
-          <img gravatar-src="'{{contact.email}}'" gravatar-size="80" gravatar-default="mm">
-          <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-          <div class="tags-on-block">
-            <div class="item-tag" ng-repeat="tag in contact.tags">#{{tag.text}}</div>
-          </div>
-          <p>{{contact.email}}</p>
-        </div>
+        <way-contact-item contact="contact"></way-contact-item>
       </div>
 
       <!-- No results  -->

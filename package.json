@@ -115,7 +115,9 @@
     "emulate:android:staging": "npm run build:hybrid:staging && ionic run android",
     "emulate:android:production": "npm run build:hybrid:production && ionic run android",
     "build:android:staging": "npm run build:hybrid:staging && ionic build android",
-    "build:android:production": "npm run build:hybrid:production && ionic build android --release && ./distribute.sh"
+    "build:android:production": "npm run build:hybrid:production && ionic build android --release && ./distribute.sh",
+    "TESTS": "----------------------------------------------------------------",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "cordovaPlugins": [
     {

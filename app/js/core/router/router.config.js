@@ -422,7 +422,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             }
           };
 
-          $scope.goTo = function(section, type) {
+          $scope.goToRoute = function(section, type) {
             var state;
             var params;
 

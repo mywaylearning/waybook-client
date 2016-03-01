@@ -23,7 +23,7 @@
         </div>
         <div ng-if="!report.discoveries.length" class="text-center">
           <p>No discoveries yet.</p>
-          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'discovery')">+ Discovery</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('app.main.type', 'discovery')">+ Discovery</button>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
         </div>
         <div ng-if="!report.goals.length" class="text-center">
           <p>No goals yet.</p>
-          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'goal')">+ Goal</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('app.main.type', 'goal')">+ Goal</button>
         </div>
       </div>
 
@@ -45,7 +45,7 @@
         </div>
         <div ng-if="!report.habits.length" class="text-center">
           <p>No goals for habit formation as of yet.</p>
-          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'goal')">+ Habit</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('app.main.type', 'goal')">+ Habit</button>
         </div>
       </div>
 
@@ -67,7 +67,7 @@
         </div>
         <div ng-if="!report.resources.length" class="text-center">
           <p>No resources yet.</p>
-          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'resource')">+ Resource</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('app.main.type', 'resource')">+ Resource</button>
         </div>
       </div>
 

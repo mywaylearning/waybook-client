@@ -422,8 +422,7 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
             }
           };
 
-          $scope.goToRoute = function(section, type) {
-            var state;
+          $scope.goToRoute = function(state, type) {
             var params;
 
             function backToMyPlan() {
@@ -435,12 +434,10 @@ function RouterConfig($stateProvider, $urlRouterProvider, $urlMatcherFactoryProv
               onCancel: backToMyPlan
             };
 
-            if (section === 'main') {
-              state = 'app.main.type';
+            if (state === 'app.main.type') {
               params.type = type;
-            } else {
-              state = section;
             }
+
             $state.go(state, params);
           };
         }

@@ -23,7 +23,7 @@
         </div>
         <div ng-if="!report.discoveries.length" class="text-center">
           <p>No discoveries yet.</p>
-          <button class="button button-positive button-outline" ng-click="goTo('main', 'discovery')">+ Discovery</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'discovery')">+ Discovery</button>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
         </div>
         <div ng-if="!report.goals.length" class="text-center">
           <p>No goals yet.</p>
-          <button class="button button-positive button-outline" ng-click="goTo('main', 'goal')">+ Goal</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'goal')">+ Goal</button>
         </div>
       </div>
 
@@ -45,7 +45,7 @@
         </div>
         <div ng-if="!report.habits.length" class="text-center">
           <p>No goals for habit formation as of yet.</p>
-          <button class="button button-positive button-outline" ng-click="goTo('main', 'goal')">+ Habit</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'goal')">+ Habit</button>
         </div>
       </div>
 
@@ -56,7 +56,7 @@
         </div>
         <div ng-if="!report.contacts.length" class="text-center">
           <p>No supporters yet.</p>
-          <button class="button button-positive button-outline" ng-click="goTo('app.unite.add')">+ Supporter</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('app.unite.add')">+ Supporter</button>
         </div>
       </div>
 
@@ -67,7 +67,7 @@
         </div>
         <div ng-if="!report.resources.length" class="text-center">
           <p>No resources yet.</p>
-          <button class="button button-positive button-outline" ng-click="goTo('main', 'resource')">+ Resource</button>
+          <button class="button button-positive button-outline" ng-click="goToRoute('main', 'resource')">+ Resource</button>
         </div>
       </div>
 

@@ -88,5 +88,5 @@
     <button class="button button-stable icon ion-share" ng-click="reshare()"></i></button>
   </div>
 
-  <way-comment ng-if="!viewMode" post="post" user="user" ng-if="!reshared"></way-comment>
+  <way-comment ng-if="!reshared && !viewMode" post="post" user="user"></way-comment>
 </div>

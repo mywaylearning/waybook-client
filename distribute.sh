@@ -8,10 +8,11 @@ fi
 
 APK_UNSIGNED_PATH="platforms/android/build/outputs/apk"
 APK_UNSIGNED_NAME="/android-release-unsigned.apk"
-APK_SIGNED_NAME="Waybook.apk"
+APK_VERSION=$(awk '/widget/ {print $4}' FS='"' config.xml)
+CURRENT_APK="ANDROID_Waybook"-"$APK_VERSION".apk
 
+rm ./$CURRENT_APK
 cp $APK_UNSIGNED_PATH/$APK_UNSIGNED_NAME ./
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mywaylearning.keystore ./$APK_UNSIGNED_NAME waybook
-zipalign -v 4 ./$APK_UNSIGNED_NAME ./$APK_SIGNED_NAME
-
+zipalign -v 4 ./$APK_UNSIGNED_NAME ./$CURRENT_APK
 rm ./$APK_UNSIGNED_NAME

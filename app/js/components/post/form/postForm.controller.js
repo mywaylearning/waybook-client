@@ -293,7 +293,7 @@ function PostFormController($scope, $state, $timeout, PostService, TagService, C
       }
     }
 
-    if (ctrl.sharedPost || $state.current.name === 'app.plan') {
+    if (ctrl.sharedPost) {
       ctrl.modalInstance.hide();
     } else if (!ctrl.model.id) {
       $state.go('app.main.home');

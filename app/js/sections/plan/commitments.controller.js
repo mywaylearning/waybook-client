@@ -6,7 +6,7 @@ function CommitmentsController($scope, $state, $stateParams, posts, tags, PostSe
   var date = monthNames[todayDate.getMonth()].toLowerCase() + '-' + todayDate.getFullYear();
 
   var onCreateGoal = function() {
-    $state.go('app.plan');
+    $state.go('app.plan.commitments');
     PostService.timelineByTag().then(function(response) {
       $scope.months = response[1].plain();
       $scope.posts = response[0].plain();

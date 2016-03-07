@@ -136,7 +136,10 @@
     "cordova-plugin-inappbrowser",
     {
       "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
-      "id": "cordova-plugin-googleplus"
+      "id": "cordova-plugin-googleplus",
+      "variables": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1080703321681-pvtbobibveam2hr9h9rj77ta0ec9rt73"
+      }
     },
     {
       "locator": "https://github.com/katzer/cordova-plugin-printer.git",

@@ -61,7 +61,8 @@ npm-debug.log*
 # --------------------
 # Ionic files
 # --------------------
-platforms
-plugins
+platforms/
+plugins/
+plugins/*
 mywaylearning.keystore
-Waybook.apk
+ANDROID_Waybook*

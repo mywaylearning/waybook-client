@@ -1,7 +1,7 @@
 <div class="post-view-compact">
-  <div class="item item-avatar" ng-init="user = post.WaybookUser || user">
-    <img gravatar-src="'{{user.email}}'" gravatar-size="80" gravatar-default="mm">
-    <h2>{{user.firstName}} {{user.lastName}}</h2>
+  <div class="item item-avatar" ng-init="owner = post.WaybookUser || user">
+    <img gravatar-src="'{{owner.email}}'" gravatar-size="80" gravatar-default="mm">
+    <h2>{{owner.firstName}} {{owner.lastName}}</h2>
     <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
     <div class="tags-on-block">
       <div class="item-tag" ng-repeat="tag in post.systemTags">#{{tag}}</div><!--

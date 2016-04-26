@@ -83,7 +83,9 @@ function ScoreChart($timeout, $window) {
         }]
       };
 
-      new Highcharts.Chart(config);
+      $timeout(function() {
+        new Highcharts.Chart(config);
+      });
     }
   };
 }

@@ -134,6 +134,7 @@ function ScoreChart($timeout, $window) {
 
       $timeout(function() {
         new Highcharts.Chart(config);
+        window.dispatchEvent(new Event('resize'));
       });
     }
   };

@@ -1,92 +1,94 @@
 <button class="button button-full button-calm muted-post" ng-if="post.mute" ng-click="mutePost(post, false)"><i class="icon ion-volume-high"></i> Unmute this post.</button>
 <way-post-form ng-if="post.editMode" post="post"></way-post-form>
-<div ng-if="!post.mute" class="list post-view" ng-if="(post.originalShared ? post.originalShared.canShare : true) && !post.editMode" ng-class="{'just-edited': post.justEdited, 'post-reshared': reshared}">
-  <div class="item item-avatar">
-    <img gravatar-src="'{{post.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
-    <h2>{{post.WaybookUser.firstName}} {{post.WaybookUser.lastName}}</h2>
-    <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
-    <div class="post-actions" ng-if="!viewMode">
-      <ionic-datepicker ng-if="post.systemTags.indexOf('habit') > -1 && !hideShareButton" input-obj="habitCalendarConfig">
-        <button class="button button-icon ion-calendar"></button>
-      </ionic-datepicker>
-      <button class="button button-icon ion-chevron-down" ng-if="!reshared" ng-click="showPopoverActions($event)"></button>
+<div ng-if="!post.editMode">
+  <div class="list post-view" ng-if="!post.mute" ng-class="{'just-edited': post.justEdited, 'post-reshared': reshared}">
+    <div class="item item-avatar">
+      <img gravatar-src="'{{post.WaybookUser.email}}'" gravatar-size="80" gravatar-default="mm">
+      <h2>{{post.WaybookUser.firstName}} {{post.WaybookUser.lastName}}</h2>
+      <p><span title="{{post.created | date: 'medium'}}">{{post.created | date: 'MMM d, y'}}</span></p>
+      <div class="post-actions" ng-if="!viewMode">
+        <ionic-datepicker ng-if="post.systemTags.indexOf('habit') > -1 && !hideShareButton" input-obj="habitCalendarConfig">
+          <button class="button button-icon ion-calendar"></button>
+        </ionic-datepicker>
+        <button class="button button-icon ion-chevron-down" ng-if="!reshared" ng-click="showPopoverActions($event)"></button>
+      </div>
+      <div class="item-tags">
+        <span class="item-tag item-system-tag" ng-repeat="tag in post.systemTags track by $index">#{{tag}}</span>
+        <span class="item-tag" ng-repeat="tag in post.tags track by $index">#{{tag}}</span>
+      </div>
     </div>
-    <div class="item-tags">
-      <span class="item-tag item-system-tag" ng-repeat="tag in post.systemTags track by $index">#{{tag}}</span>
-      <span class="item-tag" ng-repeat="tag in post.tags track by $index">#{{tag}}</span>
+    <div ng-if="post.image" class="item item-image">
+      <img ng-src="{{post.image}}" />
     </div>
-  </div>
-  <div ng-if="post.image" class="item item-image">
-    <img ng-src="{{post.image}}" />
-  </div>
-  <div class="item item-body">
-    <div class="post-content" ng-class="{ 'has-results': post.results }" ng-if="post.content" ng-bind-html="post.content | linky:'_blank'" read-more="{{state.name}}"></div>
+    <div class="item item-body">
+      <div class="post-content" ng-class="{ 'has-results': post.results }" ng-if="post.content" ng-bind-html="post.content | linky:'_blank'" read-more="{{state.name}}"></div>
 
-    <div ng-if="post.results" ng-init="exploration = post.results[0]; results = post.results[1]">
-      <h3 class="results-title text-center">{{ exploration.name }} - My Results</h3>
-      <p>{{ exploration.description }}</p>
-      <way-big5-result ng-if="exploration.resultDisplayType == 'bars'" exploration="exploration" results="results" from-post="true"></way-big5-result>
-      <way-asq-result ng-if="exploration.resultDisplayType == 'pie'" exploration="exploration" results="results" from-post="true"></way-asq-result>
-      <div ng-if="exploration.pattern === 'heatmap'" class="heatmap-result">
-        <div class="list">
-          <div ng-repeat="(category, answers) in results">
-            <div class="item item-divider">{{ category }}</div>
-            <div class="item item-body">
-              <ol>
-                <li ng-repeat="answer in answers">{{ answer }}<span ng-if="!$last">; </span></li>
-              </ol>
+      <div ng-if="post.results" ng-init="exploration = post.results[0]; results = post.results[1]">
+        <h3 class="results-title text-center">{{ exploration.name }} - My Results</h3>
+        <p>{{ exploration.description }}</p>
+        <way-big5-result ng-if="exploration.resultDisplayType == 'bars'" exploration="exploration" results="results" from-post="true"></way-big5-result>
+        <way-asq-result ng-if="exploration.resultDisplayType == 'pie'" exploration="exploration" results="results" from-post="true"></way-asq-result>
+        <div ng-if="exploration.pattern === 'heatmap'" class="heatmap-result">
+          <div class="list">
+            <div ng-repeat="(category, answers) in results">
+              <div class="item item-divider">{{ category }}</div>
+              <div class="item item-body">
+                <ol>
+                  <li ng-repeat="answer in answers">{{ answer }}<span ng-if="!$last">; </span></li>
+                </ol>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div ng-if="!post.originalShared && !post.results && post.sharedFrom">
-      <p class="original-post-deleted">Original post has been deleted.</p>
-    </div>
+      <div ng-if="!post.originalShared && !post.results && post.sharedFrom">
+        <p class="original-post-deleted">Original post has been deleted.</p>
+      </div>
 
-    <div ng-if="post.originalShared">
-      <p style="margin-bottom: 5px;">Originally shared by:</p>
-      <way-post-view post="post.originalShared" reshared="true" user="user"></way-post-view>
-    </div>
+      <div ng-if="post.originalShared">
+        <p style="margin-bottom: 5px;">Originally shared by:</p>
+        <way-post-view post="post.originalShared" reshared="true" user="user"></way-post-view>
+      </div>
 
-  </div>
-  <div ng-if="post.postType === 'goal' && !hideShareButton" class="item item-body">
-    <p>Status:
-      <strong ng-if="user.id !== post.userId">{{post.gStatus}}</strong>
-      <button ng-if="user.id === post.userId" class="button button-small button-light button-status" ng-class="{'icon-right ion-arrow-down-b': !viewMode}" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
-    <p ng-if="post.gRecurringEnabled">
-      Your goal is to do this <strong>{{post.occurrences}} times</strong> on a <strong>{{post.gRecurringRecurrence}}</strong> basis.
-    </p>
-    <p ng-if="post.cues || post.rewards">
-      All habits follow the pattern cue - routine - reward. <span ng-if="post.cues">Your targeted cue for this habit is <strong>{{post.cues}}</strong>.</span> <span ng-if="post.rewards">Your targeted reward is <strong>{{post.rewards}}</strong></span>.
-    </p>
-    <p>This goal is a <strong>{{post.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{post.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{post.gEndDate | date: 'longDate'}}</strong>.</p>
-  </div>
-  <div class="item" ng-if="(post.link || post.files.length) && !hideShareButton">
-    <div ng-if="post.link" class="row responsive-sm">
-      <div class="col col-80 col-offset-10">
-        <link-preview link="post.link"></link-preview>
+    </div>
+    <div ng-if="post.postType === 'goal' && !hideShareButton" class="item item-body">
+      <p>Status:
+        <strong ng-if="user.id !== post.userId">{{post.gStatus}}</strong>
+        <button ng-if="user.id === post.userId" class="button button-small button-light button-status" ng-class="{'icon-right ion-arrow-down-b': !viewMode}" ng-click="showPopoverStatus($event, item)">{{post.gStatus}}</button></p>
+      <p ng-if="post.gRecurringEnabled">
+        Your goal is to do this <strong>{{post.occurrences}} times</strong> on a <strong>{{post.gRecurringRecurrence}}</strong> basis.
+      </p>
+      <p ng-if="post.cues || post.rewards">
+        All habits follow the pattern cue - routine - reward. <span ng-if="post.cues">Your targeted cue for this habit is <strong>{{post.cues}}</strong>.</span> <span ng-if="post.rewards">Your targeted reward is <strong>{{post.rewards}}</strong></span>.
+      </p>
+      <p>This goal is a <strong>{{post.gImportance}}</strong>. You’ve committed to start working on it on <strong>{{post.gStartDate | date: 'longDate'}}</strong> and complete it by <strong>{{post.gEndDate | date: 'longDate'}}</strong>.</p>
+    </div>
+    <div class="item" ng-if="(post.link || post.files.length) && !hideShareButton">
+      <div ng-if="post.link" class="row responsive-sm">
+        <div class="col col-80 col-offset-10">
+          <link-preview link="post.link"></link-preview>
+        </div>
+      </div>
+      <p>
+        <strong ng-if="post.files.length" ng-click="post.showFiles = ! post.showFiles" class="subdued"><span ng-bind="post.showFiles ? 'Hide' : 'Show'"></span> {{post.files.length}} files attached</strong>
+      </p>
+    </div>
+    <div ng-if="post.showFiles && !hideShareButton">
+      <div class="item item-divider">
+        Files
+      </div>
+      <div class="list">
+        <a ng-href="#" ng-click="openExternalUrl(file.url)" class="item" ng-repeat="file in post.files">
+            <h2>{{file.filename}}</h2>
+            <p>{{file.mimetype}} | {{file.size / 1000 | number:2}} kB</p>
+        </a>
       </div>
     </div>
-    <p>
-      <strong ng-if="post.files.length" ng-click="post.showFiles = ! post.showFiles" class="subdued"><span ng-bind="post.showFiles ? 'Hide' : 'Show'"></span> {{post.files.length}} files attached</strong>
-    </p>
-  </div>
-  <div ng-if="post.showFiles && !hideShareButton">
-    <div class="item item-divider">
-      Files
+    <div class="item share" ng-if="(post.originalShared ? post.originalShared.canShare : post.canShare) && !hideShareButton && !reshared && !viewMode">
+      <button class="button button-stable icon ion-share" ng-click="reshare()"></i></button>
     </div>
-    <div class="list">
-      <a ng-href="#" ng-click="openExternalUrl(file.url) class="item" ng-repeat="file in post.files">
-          <h2>{{file.filename}}</h2>
-          <p>{{file.mimetype}} | {{file.size / 1000 | number:2}} kB</p>
-      </a>
-    </div>
-  </div>
-  <div class="item share" ng-if="(post.originalShared ? post.originalShared.canShare : post.canShare) && !hideShareButton && !reshared && !viewMode">
-    <button class="button button-stable icon ion-share" ng-click="reshare()"></i></button>
-  </div>
 
-  <way-comment ng-if="!reshared && !viewMode" post="post" user="user"></way-comment>
+    <way-comment ng-if="!reshared && !viewMode" post="post" user="user"></way-comment>
+  </div>
 </div>

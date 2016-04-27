@@ -2,8 +2,15 @@ function Big5Controller($scope, $state, ExplorationService) {
   'ngInject';
 
   var _results = $scope.results.fromServer ? $scope.results.plain() : $scope.results;
+  var series;
 
-  var series = Object.keys(_results).map(function(category) {
+  delete _results.pattern;
+  delete _results.description;
+  delete _results.slug;
+  delete _results.name;
+  delete _results.resultDisplayType;
+
+  series = Object.keys(_results).map(function(category) {
     return {
       name: category,
       data: [{
